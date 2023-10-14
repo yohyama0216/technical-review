@@ -8,10 +8,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/admin/questions">質問管理</a>
+          <a class="nav-link" href="{{ route('questions.index') }}">質問管理</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/tags">タグ管理</a>
+          <a class="nav-link" href="{{ route('tags.index') }}">タグ管理</a>
         </li>
       </ul>
     </div>
