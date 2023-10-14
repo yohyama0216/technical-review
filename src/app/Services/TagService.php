@@ -16,12 +16,12 @@ class TagService
     {
         $query = Tag::query();
 
-        if ($condition->searchName) {
-            $query->where('name', 'LIKE', '%' . $condition->searchName . '%');
+        if ($condition->searchQuestion) {
+            $query->where('name', 'LIKE', '%' . $condition->searchQuestion . '%');
         }
 
-        if ($condition->searchPrice) {
-            $query->where('price', '=', $condition->searchPrice);
+        if ($condition->searchAnswer) {
+            $query->where('price', '=', $condition->searchAnswer);
         }
 
         return $query->paginate();

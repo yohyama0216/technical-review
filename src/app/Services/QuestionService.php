@@ -16,14 +16,13 @@ class QuestionService
     {
         $query = Question::query();
 
-        if ($condition->searchName) {
-            $query->where('name', 'LIKE', '%' . $condition->searchName . '%');
+        if ($condition->searchQuestion) {
+            $query->where('question', 'LIKE', '%' . $condition->searchQuestion . '%');
         }
 
-        if ($condition->searchPrice) {
-            $query->where('price', '=', $condition->searchPrice);
+        if ($condition->searchAnswer) {
+            $query->where('answer', 'LIKE', '%' . $condition->searchAnswer . '%');
         }
-
         return $query->paginate();
     }
 }

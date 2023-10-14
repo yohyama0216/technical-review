@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class SearchCondition
 {
-    public $searchName;
-    public $searchPrice;
+    public $searchQuestion;
+    public $searchAnswer;
 
     // コンストラクタはprivateとして、外部からの直接のインスタンス化を制限
     private function __construct()
@@ -18,8 +18,8 @@ class SearchCondition
     public static function fromRequest(Request $request): self
     {
         $condition = new self();
-        $condition->searchName = $request->input('searchName');
-        $condition->searchPrice = $request->input('searchPrice');
+        $condition->searchQuestion = $request->input('searchQuestion');
+        $condition->searchAnswer = $request->input('searchAnswer');
         // 今後の条件追加もここで行う
         return $condition;
     }

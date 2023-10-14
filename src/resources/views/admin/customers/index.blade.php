@@ -7,7 +7,7 @@
     
     <!-- 検索フォーム -->
     <form class="d-flex" method="GET" action="{{ route('admin.customers.index') }}">
-        <input class="form-control me-2" type="search" placeholder="顧客名で検索" name="searchName" value="{{ request('searchName') }}">
+        <input class="form-control me-2" type="search" placeholder="顧客名で検索" name="searchQuestion" value="{{ request('searchQuestion') }}">
         <input class="form-control me-2" type="search" placeholder="メールアドレスで検索" name="searchEmail" value="{{ request('searchEmail') }}">
         <button class="btn btn-outline-primary" type="submit">検索</button>
     </form>
