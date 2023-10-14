@@ -2,19 +2,19 @@
 
 namespace App\Services;
 
-use App\Models\Product;
+use App\Models\Question;
 use App\Services\Conditions\SearchCondition;
 
-class ProductService
+class QuestionService
 {
-    public function getAllProducts($paginate = 10)
+    public function getAllQuestions($paginate = 10)
     {
-        return Product::paginate($paginate);
+        //return Question::paginate($paginate);
     }
 
-    public function searchProducts(SearchCondition $condition)
+    public function searchQuestions(SearchCondition $condition)
     {
-        $query = Product::query();
+        $query = Question::query();
 
         if ($condition->searchName) {
             $query->where('name', 'LIKE', '%' . $condition->searchName . '%');

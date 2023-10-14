@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Services\ProductService;
+use App\Services\QuestionService;
 use App\Services\Conditions\SearchCondition;
 
-class ProductController extends Controller
+class QuestionController extends Controller
 {
-    protected $productService;
+    protected $questionService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(QuestionService $questionService)
     {
-        $this->productService = $productService;
+        $this->questionService = $questionService;
     }
 
     /**
@@ -25,9 +25,9 @@ class ProductController extends Controller
     public function index(Request $request)
     {
          $condition = SearchCondition::fromRequest($request);
-         $products = $this->productService->searchProducts($condition);
+         $questions = $this->questionService->searchQuestions($condition);
  
-         return view('admin.products.index', compact('products'));
+         return view('admin.questions.index', compact('questions'));
     }
 
     
