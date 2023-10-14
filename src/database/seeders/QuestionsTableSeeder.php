@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class QuestionsTableSeeder extends Seeder
 {
@@ -21,19 +22,19 @@ class QuestionsTableSeeder extends Seeder
         DB::statement('SET foreign_key_checks=1;');
 
         DB::table('questions')->insert([
-            ['question' => '質問1', 'answer' => '回答1'], 
-            ['question' => '質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問2質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1', 'answer' => '回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1'], 
+            ['question' => '質問1', 'answer' => '回答1','updated_at' => Carbon::now(), 'created_at' => Carbon::now()], 
+            ['question' => '質問2', 'answer' => '回答2','updated_at' => Carbon::now(), 'created_at' => Carbon::now()], 
         ]);
 
         DB::table('tags')->insert([
-            ['name' => 'タグ1',], 
-            ['name' => 'タグ2'], 
+            ['name' => 'タグ1','updated_at' => Carbon::now(), 'created_at' => Carbon::now()], 
+            ['name' => 'タグ2','updated_at' => Carbon::now(), 'created_at' => Carbon::now()], 
         ]);
 
         DB::table('question_tag')->insert([
-            ['question_id' => '1','tag_id' => '1'], 
-            ['question_id' => '2','tag_id' => '1'],
-            ['question_id' => '2','tag_id' => '2'], 
+            ['question_id' => '1','tag_id' => '1','updated_at' => Carbon::now(), 'created_at' => Carbon::now()],  
+            ['question_id' => '2','tag_id' => '1','updated_at' => Carbon::now(), 'created_at' => Carbon::now()], 
+            ['question_id' => '2','tag_id' => '2','updated_at' => Carbon::now(), 'created_at' => Carbon::now()],  
         ]);
     }
 }
