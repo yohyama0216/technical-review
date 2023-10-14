@@ -8,14 +8,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/admin/customers">質問管理</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="/admin/products">タグ管理</a>
+          <a class="nav-link" href="/admin/questions">質問管理</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/orders">受注管理</a>
-        </li> -->
+          <a class="nav-link" href="/admin/tags">タグ管理</a>
+        </li>
       </ul>
     </div>
   </div>

@@ -6,7 +6,7 @@
     <h2>質問管理</h2>
     
     <!-- 検索フォーム -->
-    <form class="d-flex" method="GET" action="{{ route('admin.questions.index') }}">
+    <form class="d-flex" method="GET" action="{{ route('questions.index') }}">
         <input class="form-control me-2" type="search" placeholder="質問内容で検索" name="searchQuestion" value="{{ request('searchQuestion') }}">
         <button class="btn btn-outline-primary" type="submit">検索</button>
     </form>
@@ -44,7 +44,7 @@
             @endif
             </td>
             <td>
-                <a href="{{ route('admin.questions.edit', $question) }}" class="btn btn-sm btn-warning">編集</a>
+                <a href="{{ route('questions.edit', $question) }}" class="btn btn-sm btn-warning">編集</a>
                 <!-- 削除ボタンや他の操作ボタンもここに追加 -->
             </td>
             <td>{{ mb_strlen($question->question) > 40 ? mb_substr($question->question, 0, 40) . '...' : $question->question }}</td>
