@@ -20,14 +20,16 @@
         <col style="width: 5%;">
         <col style="width: 7.5%;">
         <col style="width: 7.5%;">
+        <col style="width: 7.5%;">
         <col style="width: 40%;">
-        <col style="width: 40%;">
+        <col style="width: 32.5%;">
     </colgroup>
     <thead>
         <tr>
             <th>ID</th>
             <th>状態</th>
             <th>操作</th>
+            <th>難易度</th>
             <th>質問内容</th>
             <th>回答</th>
         </tr>
@@ -47,6 +49,7 @@
                 <a href="{{ route('questions.edit', $question) }}" class="btn btn-sm btn-warning">編集</a>
                 <!-- 削除ボタンや他の操作ボタンもここに追加 -->
             </td>
+            <td>{{ $question->difficulty == 0 ? 'ー' : $question->difficulty }}</td>
             <td>{{ mb_strlen($question->question) > 40 ? mb_substr($question->question, 0, 40) . '...' : $question->question }}</td>
             <td>{{ mb_strlen($question->answer) > 40 ? mb_substr($question->answer, 0, 40) . '...' : $question->answer }}</td>
         </tr>

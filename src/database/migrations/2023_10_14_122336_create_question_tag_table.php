@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateQuestionTagTable extends Migration
 {
@@ -29,6 +30,8 @@ class CreateQuestionTagTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET foreign_key_checks=0;');
         Schema::dropIfExists('question_tag');
+        DB::statement('SET foreign_key_checks=1;');
     }
 }
