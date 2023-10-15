@@ -60,7 +60,9 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $question = $this->questionService->getQuestionById($id);
+
+        return view('admin.questions.show', compact('question'));
     }
 
     /**

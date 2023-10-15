@@ -25,4 +25,9 @@ class QuestionService
         }
         return $query->paginate();
     }
+
+    public function getQuestionById($id)
+    {
+        return Question::find($id);
+    }
 }
