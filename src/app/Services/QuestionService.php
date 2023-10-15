@@ -30,4 +30,20 @@ class QuestionService
     {
         return Question::find($id);
     }
+
+    public function update($id, $data)
+    {
+        $question = $this->getQuestionById($id);
+        $question->update($data);
+    }
+
+    public function createQuestion($data)
+    {
+        return Question::create($data);
+    }
+
+    public function delete(Question $question)
+    {
+        $question->delete();
+    }
 }

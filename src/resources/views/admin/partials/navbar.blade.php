@@ -11,6 +11,9 @@
           <a class="nav-link" href="{{ route('questions.index') }}">質問管理</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{{ route('questions.create') }}">質問新規登録</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{{ route('tags.index') }}">タグ管理</a>
         </li>
       </ul>

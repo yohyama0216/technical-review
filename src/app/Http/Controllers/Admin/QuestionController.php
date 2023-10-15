@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Services\QuestionService;
 use App\Services\Conditions\SearchCondition;
 
+use App\Models\Question;
+
 class QuestionController extends Controller
 {
     protected $questionService;
@@ -38,7 +40,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.questions.create');
     }
 
     /**
@@ -49,7 +51,14 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'question' => 'required|max:255',
+            'answer' => 'nullable',
+        ]);
+
+        $this->questionService->createQuestion($request->all());
+
+        return redirect()->route('admin.questions.index')->with('success', '質問が登録されました。');
     }
 
     /**
@@ -73,7 +82,8 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = $this->questionService->getQuestionById($id);
+        return view('admin.questions.edit', ['question' => $question]);
     }
 
     /**
@@ -85,7 +95,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->questionService->update($id, $request->all());
+        return redirect()->route('questions.index')->with('status', '質問を更新しました。');
     }
 
     /**
@@ -94,8 +105,10 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question)
     {
-        //
+        $this->questionService->delete($question);
+    
+        return redirect()->route('admin.questions.index')->with('status', '質問を削除しました。');
     }
 }
