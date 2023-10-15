@@ -12,7 +12,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('question');   // 質問の内容
-            $table->text('answer');     // 質問の回答
+            $table->text('answer')->nullable();     // 質問の回答
             $table->tinyInteger('difficulty')->default(0);     // 質問の回答
             $table->boolean('is_hidden')->default(false);  // 非表示フラグ
             $table->timestamps();       // created_at と updated_at

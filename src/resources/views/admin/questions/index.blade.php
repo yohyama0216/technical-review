@@ -29,8 +29,8 @@
         <col style="width: 10%;">   
         <col style="width: 10%;">
         <col>
-        <col style="width: 25%;">
-        <col style="width: 25%;">
+        <col style="width: 20%;">
+        <col style="width: 20%;">
     </colgroup>
     <thead>
         <tr>
