@@ -65,11 +65,13 @@
             @endauth
             <!-- <td>{{ $question->difficulty == 0 ? 'ー' : $question->difficulty }}</td> -->
             <td>
+                @auth
                 @if($question->is_hidden)
                     <span class="badge bg-danger">非表示</span>
                 @else
                     <span class="badge bg-success">表示</span>
                 @endif
+                @endauth
                 <a href="{{ route('questions.show', $question) }}">{{ mb_strlen($question->question) > 40 ? mb_substr($question->question, 0, 40) . '...' : $question->question }}</a>
             </td>
             <td>{{ $question->created_at->format('Y-m-d H:i:s') }}</td>
