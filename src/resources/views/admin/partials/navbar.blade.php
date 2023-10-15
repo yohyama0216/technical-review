@@ -10,12 +10,21 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ route('questions.index') }}">質問管理</a>
         </li>
+        @auth
         <li class="nav-item">
           <a class="nav-link" href="{{ route('questions.create') }}">質問新規登録</a>
         </li>
+        @endauth
         <li class="nav-item">
           <a class="nav-link" href="{{ route('tags.index') }}">タグ管理</a>
         </li>
+        <li class="nav-item">
+        @auth
+        <a class="btn btn-sm btn-danger" href="{{ route('logout') }}">ログアウト</a>
+        @else
+        <a class="btn btn-sm btn-info" href="{{ route('login.form') }}">ログイン</a>
+        @endauth
+      </li>
       </ul>
     </div>
   </div>
