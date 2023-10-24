@@ -13,9 +13,8 @@
 </div>
 <!-- タグ一覧 -->
 <div class="mb-3">
-    <a href="/questions?searchQuestion=アルゴリズム" class="btn btn-sm btn-info me-2">アルゴリズム</a>
-    <a href="/questions?searchQuestion=キャッシュ" class="btn btn-sm btn-info me-2">キャッシュ</a>
-    <a href="/questions?searchQuestion=木" class="btn btn-sm btn-info">木</a>
+    <a href="/questions?searchQuestion=ガソリン" class="btn btn-sm btn-info me-2">ガソリン</a>
+    <a href="/questions?searchQuestion=引火" class="btn btn-sm btn-info me-2">引火</a>
 </div>
 @if (session('status'))
     <div class="alert alert-success">
@@ -29,23 +28,27 @@
     <colgroup>
         <col style="width: 5%;">
         @auth
-        <col style="width: 10%;">   
+        <col style="width: 10%;">
+        <col style="width: 5%;"> 
         @endauth
-        <!-- <col style="width: 10%;"> -->
+        <col style="width: 20%;">
+        @auth
         <col>
-        <col style="width: 20%;">
-        <col style="width: 20%;">
+        <col style="width: 15%;">
+        @endauth
     </colgroup>
     <thead>
         <tr>
             <th>ID</th>
             @auth
             <th>編集</th>
+            <th>状態</th>
             @endauth
-            <!-- <th>難易度</th> -->
+            <th>科目</th>
             <th>質問内容</th>
+            @auth
             <th>更新日</th>
-            <th>追加日</th>
+            @endauth
         </tr>
     </thead>
     <tbody>
@@ -63,19 +66,22 @@
                 <a href="{{ route('questions.edit', $question) }}" class="btn btn-sm btn-warning">編集</a>
             </td>
             @endauth
-            <!-- <td>{{ $question->difficulty == 0 ? 'ー' : $question->difficulty }}</td> -->
+            @auth
             <td>
-                @auth
                 @if($question->is_hidden)
                     <span class="badge bg-danger">非表示</span>
                 @else
                     <span class="badge bg-success">表示</span>
                 @endif
                 @endauth
+            </td>
+            <td>{{ $question->category }}</td>
+            <td>
                 <a href="{{ route('questions.show', $question) }}">{{ mb_strlen($question->question) > 40 ? mb_substr($question->question, 0, 40) . '...' : $question->question }}</a>
             </td>
-            <td>{{ $question->created_at->format('Y-m-d H:i:s') }}</td>
+            @auth
             <td>{{ $question->updated_at->format('Y-m-d H:i:s') }}</td>
+            @endauth
         </tr>
         @endforeach
     </tbody>

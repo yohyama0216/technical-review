@@ -16,9 +16,6 @@
         </li>
         @endauth
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('tags.index') }}">タグ管理</a>
-        </li>
-        <li class="nav-item">
         @auth
         <a class="btn btn-sm btn-danger" href="{{ route('logout') }}">ログアウト</a>
         @else

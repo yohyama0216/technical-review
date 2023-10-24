@@ -6,8 +6,19 @@
     
     <div class="card mt-4">
         <div class="card-body">
-            <h4 class="card-title">回答:</h4>
-            <p class="card-text">{{ $question->answer }}</p>
+            <h4 class="card-title">選択肢:</h4>
+            <ul>
+            @foreach($question->getAnswers() as $answer)
+
+                <p class="card-text">
+                    @if($answer['value'])
+                        <strong>正答：{{ $answer['label'] }} {{ $answer['value'] }}</strong>
+                    @else
+                        誤答：{{ $answer['label'] }} {{ $answer['value'] }}
+                    @endif
+                </p>
+            @endforeach
+            </ul>
         </div>
     </div>
                 <!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample-{{ $question->id }}" aria-expanded="false" aria-controls="collapseExample">

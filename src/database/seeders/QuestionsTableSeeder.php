@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Services\TagService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
@@ -17,21 +18,20 @@ class QuestionsTableSeeder extends Seeder
     {
         DB::statement('SET foreign_key_checks=0;');
         DB::table('question_tag')->truncate();
-        DB::table('questions')->truncate();
-        DB::table('tags')->truncate();
         DB::statement('SET foreign_key_checks=1;');
 
-        $this->import();
-
-        DB::table('tags')->insert([
-            ['name' => 'タグ1','updated_at' => Carbon::now(), 'created_at' => Carbon::now()], 
-            ['name' => 'タグ2','updated_at' => Carbon::now(), 'created_at' => Carbon::now()], 
-        ]);
-
-        DB::table('question_tag')->insert([
-            ['question_id' => '1','tag_id' => '1','updated_at' => Carbon::now(), 'created_at' => Carbon::now()],  
-            ['question_id' => '2','tag_id' => '1','updated_at' => Carbon::now(), 'created_at' => Carbon::now()], 
-            ['question_id' => '2','tag_id' => '2','updated_at' => Carbon::now(), 'created_at' => Carbon::now()],  
+        //$this->import();
+        DB::table('questions')->insert([
+            [
+                //'id' => 1, 
+                'question' => '質問'.uniqid(),
+                'correct_answer' => '正答',
+                'wrong_answer1' => '誤答1',
+                'wrong_answer2' => '誤答2',
+                'wrong_answer3' => '誤答3',
+                'wrong_answer4' => '誤答4',
+                'updated_at' => Carbon::now(), 
+                'created_at' => Carbon::now()],  
         ]);
     }
 
@@ -47,11 +47,24 @@ class QuestionsTableSeeder extends Seeder
 
         // ファイルを行ごとに読み取る
         $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($lines as $line) {
+        foreach ($lines as $key => $line) {
             // それぞれの行を質問としてデータベースに保存
-            DB::table('questions')->insert([
-                ['question' => $line,'updated_at' => Carbon::now(), 'created_at' => Carbon::now()],  
-            ]);
+            $id = $key + 1;
+            // DB::table('questions')->insert([
+            //     [
+            //         'id' => $id, 
+            //         'question' => $line,
+            //         'correct_answer' => '正答',
+            //         ''
+            //         'updated_at' => Carbon::now(), 
+            //         'created_at' => Carbon::now()],  
+            // ]);
+            // TagService::createTags($line);
+            // foreach($tags as $tag) {
+            //     DB::table('question_tags')->insert([
+            //         ['question_id' => $id, ''updated_at' => Carbon::now(), 'created_at' => Carbon::now()],  
+            //     ]);
+            // }
         }
     }
 }

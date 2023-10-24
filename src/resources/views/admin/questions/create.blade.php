@@ -13,10 +13,16 @@
         </div>
         
         <div class="mb-3">
-            <label for="answer" class="form-label">回答 (オプション)</label>
-            <textarea id="answer" name="answer" class="form-control" rows="3">{{ old('answer') }}</textarea>
+            <label for="correct_answer" class="form-label">正答</label>
+            <input type="text" id="correct_answer" name="correct_answer" class="form-control" value="{{ old('correct_answer') }}">
         </div>
 
+        @foreach(range(1,4) as $num)
+        <div class="mb-3">
+            <label for="wrong_answer{{ $num }}" class="form-label">誤答{{ $num }}</label>
+            <input type="text" id="wrong_answer{{ $num }}" name="wrong_answer{{ $num }}" class="form-control" value="{{ old('wrong_answer'.$num) }}">
+        </div>
+        @endforeach
         <button type="submit" class="btn btn-primary">登録</button>
     </form>
 
@@ -25,3 +31,4 @@
     </div>
 </div>
 @endsection
+ 

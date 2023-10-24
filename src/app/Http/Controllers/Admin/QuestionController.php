@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Services\QuestionService;
 use App\Services\Conditions\SearchCondition;
 
+use Illuminate\Support\Facades\Route;
+
 use App\Models\Question;
 
 class QuestionController extends Controller
@@ -25,8 +27,8 @@ class QuestionController extends Controller
      */
 
     public function index(Request $request)
-    {
-         $condition = SearchCondition::fromRequest($request);
+    {                
+        $condition = SearchCondition::fromRequest($request);
          $questions = $this->questionService->searchQuestions($condition);
  
          return view('admin.questions.index', compact('questions'));
@@ -109,6 +111,6 @@ class QuestionController extends Controller
     {
         $this->questionService->delete($question);
     
-        return redirect()->route('admin.questions.index')->with('status', '質問を削除しました。');
+        return redirect()->route('questions.index')->with('status', '質問を削除しました。');
     }
 }

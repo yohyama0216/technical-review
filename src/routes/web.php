@@ -14,6 +14,3 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/questions/{question}/edit', [QuestionController::class, 'edit'])->middleware('auth')->name('questions.edit');
 Route::get('/questions/create', [QuestionController::class, 'create'])->middleware('auth')->name('questions.create');
 Route::resource('/questions', QuestionController::class)->except(['edit', 'create']);
-
-// タグ
-Route::resource('/tags', TagController::class);
