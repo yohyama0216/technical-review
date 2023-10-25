@@ -17,10 +17,9 @@ class QuestionsTableSeeder extends Seeder
     public function run()
     {
         DB::statement('SET foreign_key_checks=0;');
-        DB::table('question_tag')->truncate();
+        DB::table('questions')->truncate();
         DB::statement('SET foreign_key_checks=1;');
 
-        //$this->import();
         DB::table('questions')->insert([
             [
                 'question' => '質問'.uniqid(),

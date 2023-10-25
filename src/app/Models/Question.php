@@ -34,4 +34,10 @@ class Question extends Model
         shuffle($answers);
         return $answers;
     }
+
+    // この質問に関する学習履歴を取得
+    public function answerHistories()
+    {
+        return $this->hasMany(LearningHistory::class);
+    }
 }

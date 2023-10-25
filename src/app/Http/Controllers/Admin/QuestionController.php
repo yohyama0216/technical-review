@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use App\Services\QuestionService;
 use App\Services\Conditions\SearchCondition;
 
-use Illuminate\Support\Facades\Route;
-
 use App\Models\Question;
 
 class QuestionController extends Controller
