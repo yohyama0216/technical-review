@@ -68,10 +68,10 @@
             @endauth
             @auth
             <td>
-                @if($question->is_hidden)
-                    <span class="badge bg-danger">非表示</span>
-                @else
+                @if($question->visible)
                     <span class="badge bg-success">表示</span>
+                @else
+                    <span class="badge bg-danger">非表示</span>
                 @endif
                 @endauth
             </td>

@@ -23,15 +23,16 @@ class QuestionsTableSeeder extends Seeder
         //$this->import();
         DB::table('questions')->insert([
             [
-                //'id' => 1, 
                 'question' => '質問'.uniqid(),
                 'correct_answer' => '正答',
                 'wrong_answer1' => '誤答1',
                 'wrong_answer2' => '誤答2',
                 'wrong_answer3' => '誤答3',
                 'wrong_answer4' => '誤答4',
+                'visible' => true,
                 'updated_at' => Carbon::now(), 
-                'created_at' => Carbon::now()],  
+                'created_at' => Carbon::now()
+            ],  
         ]);
     }
 

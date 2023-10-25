@@ -9,7 +9,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['question', 'answer', 'is_hidden'];
+    protected $fillable = ['question', 'answer', 'visible'];
 
     public function tags()
     {

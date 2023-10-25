@@ -40,13 +40,13 @@
         </div>
 
         <div class="mb-3">
-            <label for="is_hidden" class="form-label">公開 / 非公開</label>
+            <label for="visible" class="form-label">公開 / 非公開</label>
             <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="is_hidden" value="0" class="custom-control-input" {{ $question->is_hidden == '0' ? 'checked' : '' }}>
+                <input type="radio" id="customRadio1" name="visible" value="1" class="custom-control-input" {{ $question->visible == '1' ? 'checked' : '' }}>
                 <label class="custom-control-label" for="customRadio1">公開</label>
             </div>
             <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="is_hidden" value="1" class="custom-control-input" {{ $question->is_hidden == '1' ? 'checked' : '' }}>
+                <input type="radio" id="customRadio2" name="visible" value="0" class="custom-control-input" {{ $question->visible == '0' ? 'checked' : '' }}>
                 <label class="custom-control-label" for="customRadio2">非公開</label>
             </div>
         </div>
