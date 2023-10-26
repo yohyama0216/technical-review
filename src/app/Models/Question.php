@@ -19,11 +19,11 @@ class Question extends Model
     public function getAnswers()
     {
         $answers = [
-            ['label' => $this->correct_answer,'value' => true],
-            ['label' => $this->wrong_answer1,'value' => false],
-            ['label' => $this->wrong_answer2,'value' => false],
-            ['label' => $this->wrong_answer3,'value' => false],
-            ['label' => $this->wrong_answer4,'value' => false],
+            ['label' => $this->correct_answer,'value' => 1],
+            ['label' => $this->wrong_answer1,'value' => 0],
+            ['label' => $this->wrong_answer2,'value' => 0],
+            ['label' => $this->wrong_answer3,'value' => 0],
+            ['label' => $this->wrong_answer4,'value' => 0],
         ];
         return $answers;
     }

@@ -3,13 +3,17 @@
 namespace App\Services;
 
 use App\Models\Question;
+use App\Models\QuestionSetting;
 use App\Services\Conditions\SearchCondition;
 
 class QuestionService
 {
-    public function getAllQuestions($paginate = 10)
+    public function getQuestionsForLearning()
     {
-        //return Question::paginate($paginate);
+        $setting = QuestionSetting::where('user_id', 1)->first(); 
+        $questions = Question::limit($setting->question_limit)->get();
+        //dd($questions);
+        return $questions;
     }
 
     public function searchQuestions(SearchCondition $condition)
