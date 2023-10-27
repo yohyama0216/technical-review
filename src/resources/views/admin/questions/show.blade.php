@@ -12,9 +12,9 @@
 
                 <p class="card-text">
                     @if($answer['value'])
-                        <strong>正答：{{ $answer['label'] }} {{ $answer['value'] }}</strong>
+                        <strong>正答：{{ $answer['label'] }}</strong>
                     @else
-                        誤答：{{ $answer['label'] }} {{ $answer['value'] }}
+                        誤答：{{ $answer['label'] }}
                     @endif
                 </p>
             @endforeach
