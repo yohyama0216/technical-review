@@ -5,7 +5,10 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\LearningHistoryController;
 use App\Http\Controllers\LearningController;
 use App\Http\Controllers\QuestionSettingController;
+use App\Http\Controllers\TopController;
 use App\Http\Controllers\Admin\AuthController;
+
+Route::get('/', [TopController::class, 'index'])->name('top.index');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
