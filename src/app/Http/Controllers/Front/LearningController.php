@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use App\Services\LearningHistoryService;
 use App\Services\QuestionService;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class LearningController extends Controller
     public function index(Request $request)
     {
         $questions = $this->questionService->getQuestionsForLearning();
-        return view('learning.index', compact('questions'));
+        return view('front.learning.index', compact('questions'));
     }
 
     public function checkAnswer(Request $request)

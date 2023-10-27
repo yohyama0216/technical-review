@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use App\Services\LearningHistoryService;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,6 @@ class LearningHistoryController extends Controller
         $id = auth()->id();
         $id = 1;
         $histories = $this->learningHistoryService->getHistoriesForUser($id);
-        return view('learning-history.index', compact('histories'));
+        return view('front.learning-history.index', compact('histories'));
     }
 }

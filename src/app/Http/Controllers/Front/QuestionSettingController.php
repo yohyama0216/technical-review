@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\QuestionSetting;
 
@@ -13,7 +14,7 @@ class QuestionSettingController extends Controller
         $setting = QuestionSetting::where('user_id', 1)->get();
         $setting = $setting[0];
         // dd($setting);
-        return view('settings.edit', compact('setting'));
+        return view('front.settings.edit', compact('setting'));
     }
 
     public function update(Request $request)
