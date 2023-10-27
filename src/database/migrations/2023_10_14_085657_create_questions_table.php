@@ -17,7 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->text('wrong_answer2');     // 質問の誤答2
             $table->text('wrong_answer3');     // 質問の誤答3
             $table->text('wrong_answer4');     // 質問の誤答4
-            $table->enum('category', ['危険物に関する法令問題', '基礎物理学及び基礎化学', '危険物の性質並びに火災予防及び消火の方法']);     // 質問のカテゴリ　1:法令,2:
+            $table->tinyInteger('category'); // 分野
             $table->boolean('visible')->default(true);  // 非表示フラグ
             $table->timestamps();       // created_at と updated_at
         });

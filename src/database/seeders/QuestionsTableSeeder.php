@@ -29,6 +29,7 @@ class QuestionsTableSeeder extends Seeder
                 'wrong_answer2' => '誤答2',
                 'wrong_answer3' => '誤答3',
                 'wrong_answer4' => '誤答4',
+                'category' => ($num % 4),
                 'visible' => ($num % 5 !== 0),
                 'updated_at' => Carbon::now(), 
                 'created_at' => Carbon::now()

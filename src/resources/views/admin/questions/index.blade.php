@@ -75,7 +75,7 @@
                 @endif
                 @endauth
             </td>
-            <td>{{ $question->category }}</td>
+            <td>{{ $question->getCategoryLabel() }}</td>
             <td>
                 <a href="{{ route('questions.show', $question) }}">{{ mb_strlen($question->question) > 40 ? mb_substr($question->question, 0, 40) . '...' : $question->question }}</a>
             </td>

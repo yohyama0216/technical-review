@@ -10,6 +10,13 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = ['question', 'answer', 'visible'];
+    private $categoryLabels = [
+        '0' => 'その他',
+        '1' => '危険物に関する法令問題', 
+        '2' => '基礎物理学及び基礎化学',
+        '3' => '危険物の性質並びに火災予防及び消火の方法'
+    ];
+
 
     public function tags()
     {
@@ -39,5 +46,13 @@ class Question extends Model
     public function answerHistories()
     {
         return $this->hasMany(LearningHistory::class);
+    }
+
+    public function getCategoryLabel()
+    {
+        if (array_key_exists($this->category,$this->categoryLabels)) {
+            return $this->categoryLabels[$this->category];
+        }
+        return 'なし';
     }
 }
