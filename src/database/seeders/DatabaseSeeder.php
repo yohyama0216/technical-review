@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             QuestionsTableSeeder::class,
             AnswerHistoriesTableSeeder::class,
-            QuestionSettingSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Question;
-use App\Models\QuestionSetting;
+use App\Models\Setting;
 use App\Services\Conditions\QuestionFilterCondition;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +13,8 @@ class QuestionService
 {
     public function getQuestionsForLearning()
     {
-        $setting = QuestionSetting::where('user_id', 1)->first(); 
+        $setting = Setting::where('user_id', 1)->first(); 
+        // setting無い場合は？
         $questions = Question::limit($setting->question_limit)->get();
         //dd($questions);
         return $questions;

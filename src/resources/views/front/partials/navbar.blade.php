@@ -17,7 +17,7 @@
           <a class="nav-link" href="{{ route('learning-history.index') }}">学習履歴</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('settings.edit') }}">学習設定</a>
+          <a class="nav-link" href="{{ route('setting.edit') }}">学習設定</a>
         </li>
         @auth
         <li class="nav-item">

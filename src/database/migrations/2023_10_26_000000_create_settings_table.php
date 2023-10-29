@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionSettingsTable extends Migration
+class CreateSettingsTable extends Migration
 {
     public function up()
     {
-        Schema::create('question_settings', function (Blueprint $table) {
+        Schema::dropIfExists('question_settings');
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -21,6 +22,6 @@ class CreateQuestionSettingsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('question_settings');
+        Schema::dropIfExists('settings');
     }
 }

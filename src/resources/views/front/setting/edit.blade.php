@@ -3,7 +3,7 @@
 @section('content')
     <h1>出題設定</h1>
 
-    <form action="{{ route('settings.update') }}" method="post">
+    <form action="{{ route('setting.update') }}" method="post">
         @csrf
         @method('PUT')
 

@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\QuestionSetting;
+use App\Models\Setting;
 use App\Models\User;
 
-class QuestionSettingSeeder extends Seeder
+class SettingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class QuestionSettingSeeder extends Seeder
         // すべてのユーザーに対してデフォルトの出題設定を作成
         $users = User::all();
         foreach ($users as $user) {
-            QuestionSetting::create([
+            Setting::create([
                 'user_id' => $user->id,
                 'question_limit' => 10, // 例: デフォルトでの出題数を10問とする
                 'order_type' => 1, // 出題タイプ
