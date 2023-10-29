@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Question;
 use App\Models\QuestionSetting;
-use App\Services\Conditions\SearchCondition;
+use App\Services\Conditions\QuestionFilterCondition;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -19,7 +19,7 @@ class QuestionService
         return $questions;
     }
 
-    public function searchQuestions(SearchCondition $condition)
+    public function searchQuestions(QuestionFilterCondition $condition)
     {
         $query = Question::query();
 

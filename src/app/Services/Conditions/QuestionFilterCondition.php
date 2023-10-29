@@ -4,7 +4,7 @@ namespace App\Services\Conditions;
 
 use Illuminate\Http\Request;
 
-class SearchCondition
+class QuestionFilterCondition
 {
     public $searchQuestion;
     public $searchAnswer;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\QuestionService;
-use App\Services\Conditions\SearchCondition;
+use App\Services\Conditions\QuestionFilterCondition;
 
 use App\Models\Question;
 
@@ -26,7 +26,7 @@ class QuestionController extends Controller
 
     public function index(Request $request)
     {                
-        $condition = SearchCondition::fromRequest($request);
+        $condition = QuestionFilterCondition::fromRequest($request);
          $questions = $this->questionService->searchQuestions($condition);
  
          return view('admin.questions.index', compact('questions'));
