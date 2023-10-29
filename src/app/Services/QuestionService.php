@@ -19,16 +19,16 @@ class QuestionService
         return $questions;
     }
 
-    public function searchQuestions(QuestionFilterCondition $condition)
+    public function filterQuestions(QuestionFilterCondition $condition)
     {
         $query = Question::query();
 
-        if ($condition->searchQuestion) {
-            $query->where('question', 'LIKE', '%' . $condition->searchQuestion . '%');
+        if ($condition->filterQuestion) {
+            $query->where('question', 'LIKE', '%' . $condition->filterQuestion . '%');
         }
 
-        if ($condition->searchAnswer) {
-            $query->where('answer', 'LIKE', '%' . $condition->searchAnswer . '%');
+        if ($condition->filterAnswer) {
+            $query->where('answer', 'LIKE', '%' . $condition->filterAnswer . '%');
         }
         return $query->paginate();
     }

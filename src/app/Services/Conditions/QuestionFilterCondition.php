@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class QuestionFilterCondition
 {
-    public $searchQuestion;
-    public $searchAnswer;
+    public $filterQuestion;
+    public $filterAnswer;
 
     // コンストラクタはprivateとして、外部からの直接のインスタンス化を制限
     private function __construct()
@@ -18,8 +18,8 @@ class QuestionFilterCondition
     public static function fromRequest(Request $request): self
     {
         $condition = new self();
-        $condition->searchQuestion = $request->input('searchQuestion');
-        $condition->searchAnswer = $request->input('searchAnswer');
+        $condition->filterQuestion = $request->input('filterQuestion');
+        $condition->filterAnswer = $request->input('filterAnswer');
         // 今後の条件追加もここで行う
         return $condition;
     }

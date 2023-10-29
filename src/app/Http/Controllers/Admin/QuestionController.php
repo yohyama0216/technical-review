@@ -27,7 +27,7 @@ class QuestionController extends Controller
     public function index(Request $request)
     {                
         $condition = QuestionFilterCondition::fromRequest($request);
-         $questions = $this->questionService->searchQuestions($condition);
+         $questions = $this->questionService->filterQuestions($condition);
  
          return view('admin.questions.index', compact('questions'));
     }

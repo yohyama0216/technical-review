@@ -7,14 +7,14 @@
     
     <!-- 検索フォーム -->
     <form class="d-flex" method="GET" action="{{ route('questions.index') }}">
-        <input class="form-control me-2" type="search" placeholder="質問内容で検索" name="searchQuestion" value="{{ request('searchQuestion') }}">
+        <input class="form-control me-2" type="search" placeholder="質問内容で検索" name="filterQuestion" value="{{ request('filterQuestion') }}">
         <button class="btn btn-outline-primary" type="submit">検索</button>
     </form>
 </div>
 <!-- タグ一覧 -->
 <div class="mb-3">
-    <a href="/questions?searchQuestion=ガソリン" class="btn btn-sm btn-info me-2">ガソリン</a>
-    <a href="/questions?searchQuestion=引火" class="btn btn-sm btn-info me-2">引火</a>
+    <a href="/questions?filterQuestion=ガソリン" class="btn btn-sm btn-info me-2">ガソリン</a>
+    <a href="/questions?filterQuestion=引火" class="btn btn-sm btn-info me-2">引火</a>
 </div>
 @if (session('status'))
     <div class="alert alert-success">
