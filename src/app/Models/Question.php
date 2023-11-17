@@ -9,7 +9,14 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['question', 'answer', 'visible'];
+    protected $fillable = ['question', 'visible'];
+
+    // Answerモデルへのリレーション
+    public function answers()
+    {
+        return $this->hasMany(Answer::class, 'question_id');
+    }
+
     private $categoryLabels = [
         '0' => 'その他',
         '1' => '危険物に関する法令問題', 

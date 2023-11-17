@@ -17,6 +17,7 @@ class QuestionService
         // setting無い場合は？
         $questions = Question::limit($setting->question_limit)->get();
         //dd($questions);
+        // そのままだと正答と誤答の選択肢が一つの配列になっていないため、bladeで整形処理が必要になる。
         return $questions;
     }
 
@@ -67,39 +68,32 @@ class QuestionService
         $file = fopen($filePath, 'r');
         //$header = fgetcsv($file);  // Assuming first row contains header
 
-        $questions = [];
+        $line = 1;
         while ($row = fgetcsv($file)) {
-            $question = [
-                'question' => $row[0]
-            ];
-            $tmp = [];
+            $line++;
+            if (count($row) != 7) {
+                echo $line++ . '行目　データ異常：いずれかの項目が空です。'.PHP_EOL;
+                continue;
+            }
+
+
+            $question = Question::create([
+                'question' => $row[0],
+                'category' => $this->getCategory($row[0]),
+                // 'created_at' => Carbon::now();
+                // 'updated_at' = Carbon::now();
+            ]);
+
+            // 正答と誤答を追加
             foreach(range(1,5) as $num) {
-                if ($num == $row[6]) {
-                    $question['correct_answer'] = $row[$num];
-                } else {
-                    $tmp[] = $row[$num]; 
-                }
+                $question->answers()->create([
+                    'content' => $row[$num],
+                    'is_correct' => ($num == $row[6]),
+                ]);
             }
-            foreach($tmp as $key => $item){
-                $label = 'wrong_answer'.($key + 1);
-                $question[$label] = $item;
-            }
-            $question['category'] = $this->getCategory($row[0]);
-            $question['created_at'] = Carbon::now();
-            $question['updated_at'] = Carbon::now();
-            $questions[] = $question;;
         }
     
         fclose($file);
-
-        DB::beginTransaction();
-        try {
-            Question::insertOrIgnore($questions);
-            DB::commit();
-        } catch (Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
     }
 
     public function getCategory($text)
