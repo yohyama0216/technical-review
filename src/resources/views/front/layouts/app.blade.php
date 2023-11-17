@@ -5,8 +5,10 @@
 
 @include('front.partials.navbar')
 
-<div class="container mt-5">
-    @yield('content')
+<div class="content">
+    <div class="container-fluid">
+        @yield('content')
+    </div>
 </div>
 
 @include('front.partials.footer')
