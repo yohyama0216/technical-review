@@ -15,8 +15,9 @@ class QuestionService
     {
         $setting = Setting::where('user_id', 1)->first(); 
         // setting無い場合は？
-        $questions = Question::limit($setting->question_limit)->get();
+        $questions = Question::with('answers')->limit($setting->question_limit)->get();
         //dd($questions);
+        //var_dump($questions);
         // そのままだと正答と誤答の選択肢が一つの配列になっていないため、bladeで整形処理が必要になる。
         return $questions;
     }
@@ -76,12 +77,10 @@ class QuestionService
                 continue;
             }
 
-
+            
             $question = Question::create([
                 'question' => $row[0],
                 'category' => $this->getCategory($row[0]),
-                // 'created_at' => Carbon::now();
-                // 'updated_at' = Carbon::now();
             ]);
 
             // 正答と誤答を追加

@@ -17,7 +17,7 @@
             <tr>
                 <td>{{ $history->question->question }}</td>
                 <td>{{ $history->is_correct ? '正解' : '不正解' }}</td>
-                <td>{{ $history->answered_at }}</td>
+                <td>{{ $history->date }}</td>
             </tr>
             @endforeach
         </tbody>
