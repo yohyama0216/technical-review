@@ -7,13 +7,19 @@ use App\Models\LearningStatistics;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\Collection\LearningHistoryCollection;
+use App\Models\Question;
 
 class LearningHistoryService
-{
-    public function getStatistics($userId)
+{    
+    public function getStartDateForUser($userId)
     {
-        return new LearningStatistics($this->getHistoriesForUser($userId));
+        return LearningHistory::select('answered_at')->where('user_id', $userId)->orderBy('answered_at', 'desc')->first();
     }
+
+    public function getLatestDateForUser($userId)
+    {
+        return LearningHistory::select('answered_at')->where('user_id', $userId)->orderBy('answered_at', 'asc')->first();
+    }    
     
     public function getHistoriesForUser($userId)
     {
