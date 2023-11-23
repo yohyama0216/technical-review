@@ -4,6 +4,7 @@
 <div class="row">
     <div class="col-12">
         <h2>学習統計</h2>
+
         <table class="table table-bordered">
             <thead>
                 @foreach($stats as $key => $value)
