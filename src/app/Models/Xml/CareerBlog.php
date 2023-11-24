@@ -76,26 +76,28 @@ class CareerBlog
 
     private function createPosts()
     {
-        $data = [
-            [
-                'title' => '簿記は何級まで取ればいい？',
-                'description' => '簿記は何級まで取ればいい？疑問に答えます',
-                'heads' => [
-                        '未経験者は資格を取るべし',
-                        '簿記は3級はより、2級を取ろう',
-                        //'まずは簿記の派遣でチャンスをつかむことが大事'
-                        // '簿記の1級はコスパ悪い'
-                ],
-            ]
-        ];
-
+        // ファイルの内容を取得
+        $contents = Storage::get('public/bokiBlog.txt');
+        $data = [];
+        // 改行で分割して各行に対して処理
+        $lines = explode(PHP_EOL, $contents);
+        foreach ($lines as $line) {
+            // ここで各行に対する処理を行う
+            $items = explode(PHP_EOL,$line);
+            foreach($items as $item) {
+                $data[] = $this->setData($item);
+            }
+        }
         foreach($data as $item) {
             $title = $item['title'];
             $description = '';
-            $contentText = '';
-            foreach($item['heads'] as $head) {
-                $contentText .= $this->getHead($head);
-                $contentText .= $this->getContentFromHead($head);
+            $contentText = $this->getImagefilepath().PHP_EOL;
+            foreach($item['heads'] as $key => $head) {
+                $contentText .= $this->getHead($key,$head);
+                if($key == 2) {
+                    $head = $item['heads'][0]."。".$item['heads'][1];
+                } 
+                $contentText .= $this->getContentFromHead($title,$head);
             }
             $categoryJa = '簿記';
             $categoryEn = 'boki';
@@ -104,8 +106,24 @@ class CareerBlog
         return $posts;
     }
 
-    private function getHead($head)
+    private function setData($item)
     {
+        return [
+            'title' => $item[0],
+            'description' => '簿記は何級まで取ればいい？疑問に答えます',
+            'heads' => [
+                    $item[1],
+                    $item[2],
+                    'まとめ',
+            ],
+        ];
+    }
+
+    private function getHead($key,$head)
+    {
+        if ($key == 2) {
+            $head = 'まとめ';
+        }
         return 
             '<!-- wp:heading -->'.PHP_EOL.
             '<h2 class="wp-block-heading {"level":2}">'.PHP_EOL.
@@ -114,10 +132,11 @@ class CareerBlog
             '<!-- /wp:heading -->'.PHP_EOL;
     }
 
-    private function getContentFromHead($head)
+    private function getContentFromHead($title,$head)
     {
-        $content = $this->sendApi($head);
-        Storage::disk('public')->put('example.txt', $content);        
+        
+        $content = $this->sendApi($title,$head);
+        //Storage::disk('public')->put('example.txt', $content);        
         return 
             '<!-- wp:paragraph -->'.PHP_EOL.
             '<p>'.PHP_EOL.
@@ -127,7 +146,7 @@ class CareerBlog
             '<!-- /wp:paragraph -->'.PHP_EOL;
     }
 
-    private function sendApi($head)
+    private function sendApi($title,$head)
     {
         $ch = curl_init();
         $url = 'https://api.openai.com/v1/chat/completions';
@@ -140,12 +159,12 @@ class CareerBlog
             'model' => 'gpt-3.5-turbo',
             'messages' => [
               [
-              "role" => "system",
-              "content" => "日本語で応答してください"
+                "role" => "system",
+                "content" => "簿記、会計に詳しい転職アドバイザーとして、日本語で応答してください"
               ],
               [
-              "role" => "user",
-              "content" => '「'.$head.'」というタイトルでブログ用の記事を書いて。1000字程度で日本語で解説して。適度に文章の意味の区切りで改行タグ<br/>を入れて。',
+                "role" => "user",
+                "content" => '「'.$title.'」というブログ記事のを書いています。その記事の中の「'.$head.'」という見出し用の記事を書いて。1000字程度で解説して。',
               ]
             ],
         ];
@@ -173,7 +192,7 @@ class CareerBlog
         return sprintf(
             '<img class="%s" src="%s" alt="" width="%s" height="%s" />',
             $this->class,
-            $this->baseBlogUrl.'/wp-content/uploads/2023/11/'.random_int(1,100).'.jpg',
+            $this->baseBlogUrl.'/wp-content/uploads/2023/11/blog-image-'.random_int(10,45).'.jpg',
             $this->width,
             $this->height
         );

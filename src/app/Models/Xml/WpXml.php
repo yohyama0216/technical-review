@@ -2,10 +2,7 @@
 
 namespace App\Models\Xml;
 
-use DateTime;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Xml\BlogInfo;
-use App\Models\Xml\Post;
 
 class WpXml
 {

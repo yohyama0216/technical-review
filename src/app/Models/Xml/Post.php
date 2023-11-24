@@ -58,11 +58,6 @@ class Post
 
     public function getThumbnailId()
     {
-        return random_int(180,246);
-    }
-
-    private function createContent()
-    {
-
+        return random_int(321,369);
     }
 }

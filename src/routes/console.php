@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Xml\WpXml;
+use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Artisan::command('mycommand:auto-wordpress', function () {
+    $this->info(Carbon::now().' Start Generating...');
+    $wpxml = new WpXml('career');
+    $wpxml->createContent();
+    $wpxml->save();
+    $path = $wpxml->getPutFilePath();
+    $this->info(Carbon::now().' Complete. '.$path);
+})->describe('This is a custom command for demonstration purposes');

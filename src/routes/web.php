@@ -31,6 +31,3 @@ Route::resource('/learning-history', LearningHistoryController::class);
 // 学習設定の編集画面
 Route::get('/setting/edit', [SettingController::class, 'edit'])->name('setting.edit');
 Route::put('/setting/update', [SettingController::class, 'update'])->name('setting.update');
-
-// Wp
-Route::get('/wordpress/generate', [WordPressController::class, 'generate']);

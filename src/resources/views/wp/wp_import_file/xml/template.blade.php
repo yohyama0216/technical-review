@@ -55,7 +55,7 @@
         <wp:comment_status><![CDATA[close]]></wp:comment_status>
         <wp:ping_status><![CDATA[open]]></wp:ping_status>
         <wp:post_name><![CDATA[]]></wp:post_name>
-        <wp:status><![CDATA[publish]]></wp:status>
+        <wp:status><![CDATA[draft]]></wp:status>
         <wp:post_parent>0</wp:post_parent>
         <wp:menu_order>0</wp:menu_order>
         <wp:post_type><![CDATA[post]]></wp:post_type>
