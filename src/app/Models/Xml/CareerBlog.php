@@ -15,6 +15,9 @@ class CareerBlog
     private $baseSiteUrl = '';
     private $baseBlogUrl = '';
     private $posts = [];
+    private $class = '';
+    private $width = '';
+    private $height = '';
     private $rawPostTextFilePath = '';
 
     public function __construct()
@@ -80,6 +83,7 @@ class CareerBlog
                 'heads' => [
                         '未経験者は資格を取るべし',
                         '簿記は3級はより、2級を取ろう',
+                        //'まずは簿記の派遣でチャンスをつかむことが大事'
                         // '簿記の1級はコスパ悪い'
                 ],
             ]
@@ -90,22 +94,37 @@ class CareerBlog
             $description = '';
             $contentText = '';
             foreach($item['heads'] as $head) {
-                $contentText .= '<h2 class="wp-block-heading {"level":2}">'.$head.'</h2><!-- /wp:heading -->'.PHP_EOL;
-                $contentText .= '<p>'.$this->getContentFromHead($head).'</p>';
+                $contentText .= $this->getHead($head);
+                $contentText .= $this->getContentFromHead($head);
             }
             $categoryJa = '簿記';
             $categoryEn = 'boki';
             $posts[] = new Post($title,$description,$contentText,$categoryJa,$categoryEn);
-        }   
-        //$this->moveFiles();     
+        }       
         return $posts;
     }
 
-    public function getContentFromHead($head)
+    private function getHead($head)
+    {
+        return 
+            '<!-- wp:heading -->'.PHP_EOL.
+            '<h2 class="wp-block-heading {"level":2}">'.PHP_EOL.
+            $head.PHP_EOL.
+            '</h2>'.PHP_EOL.
+            '<!-- /wp:heading -->'.PHP_EOL;
+    }
+
+    private function getContentFromHead($head)
     {
         $content = $this->sendApi($head);
         Storage::disk('public')->put('example.txt', $content);        
-        return $content.PHP_EOL;
+        return 
+            '<!-- wp:paragraph -->'.PHP_EOL.
+            '<p>'.PHP_EOL.
+            $content.PHP_EOL.
+            '</p>'.PHP_EOL.
+            $this->getImagefilepath().PHP_EOL.
+            '<!-- /wp:paragraph -->'.PHP_EOL;
     }
 
     private function sendApi($head)
@@ -126,7 +145,7 @@ class CareerBlog
               ],
               [
               "role" => "user",
-              "content" => '「'.$head.'」というタイトルでブログ用の記事を書いて。1000字程度で日本語で解説して',
+              "content" => '「'.$head.'」というタイトルでブログ用の記事を書いて。1000字程度で日本語で解説して。適度に文章の意味の区切りで改行タグ<br/>を入れて。',
               ]
             ],
         ];
@@ -146,7 +165,17 @@ class CareerBlog
 
         $json_response = json_decode($response, true);
         $generated_text = $json_response['choices'][0]['message']['content'];
-        //dd($response);
-        return $generated_text;
+        return str_replace(PHP_EOL.PHP_EOL,PHP_EOL.'</p><!-- /wp:paragraph -->'.PHP_EOL.'<!-- wp:paragraph --><p>'.PHP_EOL,$generated_text);
+    }
+
+    private function getImagefilepath()
+    {
+        return sprintf(
+            '<img class="%s" src="%s" alt="" width="%s" height="%s" />',
+            $this->class,
+            $this->baseBlogUrl.'/wp-content/uploads/2023/11/'.random_int(1,100).'.jpg',
+            $this->width,
+            $this->height
+        );
     }
 }
