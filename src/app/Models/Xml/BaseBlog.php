@@ -4,29 +4,25 @@ namespace App\Models\Xml;
 
 use Illuminate\Support\Facades\Storage;
 
-class CareerBlog
+class BaseBlog
 {
-    private $blogTitle = '簿記で転職';
-    private $domain = 'todo.com';
-    private $description = '$description';
-    private $pubDate = 'Wed, 02 Aug 2023 05:22:18 +0000';
-    private $language = 'ja';
-    private $wxrVersion = 1.2;
-    private $baseSiteUrl = '';
-    private $baseBlogUrl = '';
+    private $blogTitle = '';
+    private $domain = '';
+    private $description = '';
+    private $postSource = '';
     private $posts = [];
-    private $class = '';
-    private $width = '';
-    private $height = '';
-    private $rawPostTextFilePath = '';
 
-    public function __construct()
+    const PUB_DATE = 'Wed, 02 Aug 2023 05:22:18 +0000';
+    const LANGUAGE = 'ja';
+    const WXR_VERSION = 1.2;
+
+    public function __construct($blogTitle,$domain,$description,$postSource)
     {
-        // ファイルリーダークラスに任せる？
-        $this->rawPostTextFilePath = Storage::path('public/furo/ai.xml');
-        $this->posts = $this->createPosts();
-        $this->baseSiteUrl = 'https://'.$this->domain;
-        $this->baseBlogUrl = 'https://'.$this->domain;
+        $this->blogTitle = $blogTitle;
+        $this->domain = $domain;
+        $this->description = $description;
+        $this->postSource = $postSource;
+        $this->posts = $this->createPostsFromApi();
     }
 
     public function getBlogTitle()
@@ -46,27 +42,27 @@ class CareerBlog
 
     public function getPubDate()
     {
-        return $this->pubDate;
+        return self::PUB_DATE;
     }
 
     public function getLanguage()
     {
-        return $this->language;
+        return self::LANGUAGE;
     }
 
     public function getWxrVersion()
     {
-        return $this->wxrVersion;
+        return self::WXR_VERSION;
     }
 
     public function getBaseSiteUrl()
     {
-        return $this->baseSiteUrl;
+        return 'https://'.$this->domain;
     }
 
     public function getBaseBlogUrl()
     {
-        return $this->baseBlogUrl;
+        return $this->domain;
     }
 
     public function getPosts()
@@ -74,24 +70,29 @@ class CareerBlog
         return $this->posts;
     }
 
-    private function createPosts()
+    private function createPostsFromApi()
     {
         // ファイルの内容を取得
-        $contents = Storage::get('public/bokiBlog.txt');
+        $contents = Storage::get('public/'.$this->postSource);
         $data = [];
         // 改行で分割して各行に対して処理
-        $lines = explode(PHP_EOL, $contents);
+        // $lines = explode(PHP_EOL, $contents);
+        // foreach ($lines as $line) {
+        //     // ここで各行に対する処理を行う
+        //     $items = explode(PHP_EOL,$line);
+        // }
+        //$lines = explode(PHP_EOL, $contents);
         //dd($lines);
-        // $lines = [
-        //         '「フリーランスのための簡単経理ガイド」,個人事業主のための基本会計,フリーランスの税務管理のポイント'
-        // ];
+        $lines = [
+            'フリーランスのための簡単経理ガイド,個人事業主のための基本会計,フリーランスの税務管理のポイント'
+        ];
         foreach($lines as $line) {
             $data[] = $this->setData($line); 
         }
         foreach($data as $item) {
             $title = $item['title'];
             $description = '';
-            $contentText = '';
+            $contentText = $this->getImagefilepath().PHP_EOL;
             foreach($item['heads'] as $key => $head) {
                 $contentText .= $this->getHead($key,$head);
                 if($key == 2) {
@@ -135,7 +136,6 @@ class CareerBlog
 
     private function getContentFromHead($title,$head)
     {
-        
         $content = $this->sendApi($title,$head);
         //Storage::disk('public')->put('example.txt', $content);        
         return 
@@ -191,14 +191,11 @@ class CareerBlog
         return str_replace(PHP_EOL.PHP_EOL,PHP_EOL.'</p><!-- /wp:paragraph -->'.PHP_EOL.'<!-- wp:paragraph --><p>'.PHP_EOL,$generated_text);
     }
 
-    private function getImagefilepath()
+    private function getImagefilepath($class = '', $width = 'auto', $height = 'auto')
     {
-        return sprintf(
-            '<img class="%s" src="%s" alt="" width="%s" height="%s" />',
-            $this->class,
-            $this->baseBlogUrl.'/wp-content/uploads/2023/11/blog-image-'.random_int(10,45).'.jpg',
-            $this->width,
-            $this->height
-        );
+        $imageUrl = $this->getBaseBlogUrl() . '/wp-content/uploads/2023/11/blog-image-' . random_int(10, 45) . '.jpg';
+        return <<<HTML
+    <img class="{$class}" src="{$imageUrl}" alt="" width="{$width}" height="{$height}" />
+    HTML;
     }
 }
