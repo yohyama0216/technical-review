@@ -2,6 +2,31 @@
 
 @section('content')
 <div class="row">
+    <div class="col-2">
+        <h4>統計</h4>
+        <ul>
+            <li>総例文数:3000</li>
+            <li>未着手  :2000</li>
+            <li>暗記中  :290</li>
+            <li>暗記完了:100</li>
+        </ul>
+    </div>
+    <div class="col-2">
+        <h4>学習ペース</h4>
+        <ul>
+            <li>新規:2.5</li>
+            <li>復習:2.5</li>
+            <li>完了:1.2</li>
+        </ul>
+    </div>
+    <div class="col-2">
+        <h4>学習ポイント</h4>
+        <ul>
+            <li>合計:1200</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
     <div class="col-12">
         <h2>学習統計</h2>
 
