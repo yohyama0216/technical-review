@@ -10,7 +10,6 @@ class Post
     private $content = '';
     private $categoryJa = '';
     private $categoryEn = '';
-    private $thumbnailId = '';
 
     public function __construct($title,$description,$content,$categoryJa,$categoryEn)
     {
@@ -20,7 +19,6 @@ class Post
         $this->content = $content;
         $this->categoryJa = $categoryJa;
         $this->categoryEn = $categoryEn;
-        $this->thumbnailId = '';
     }
 
     public function getTitle($urlEncode=false)
