@@ -76,16 +76,16 @@ class BaseBlog
         $contents = Storage::get('public/'.$this->postSource);
         $data = [];
         // 改行で分割して各行に対して処理
-        // $lines = explode(PHP_EOL, $contents);
+        $lines = explode(PHP_EOL, $contents);
         // foreach ($lines as $line) {
         //     // ここで各行に対する処理を行う
         //     $items = explode(PHP_EOL,$line);
         // }
-        //$lines = explode(PHP_EOL, $contents);
+        // $lines = explode(PHP_EOL, $contents);
         //dd($lines);
-        $lines = [
-            'フリーランスのための簡単経理ガイド,個人事業主のための基本会計,フリーランスの税務管理のポイント'
-        ];
+        // $lines = [
+        //     'フリーランスのための簡単経理ガイド,個人事業主のための基本会計,フリーランスの税務管理のポイント'
+        // ];
         foreach($lines as $line) {
             $data[] = $this->setData($line); 
         }
@@ -137,7 +137,12 @@ class BaseBlog
     private function getContentFromHead($title,$head)
     {
         $content = $this->sendApi($title,$head);
-        //Storage::disk('public')->put('example.txt', $content);        
+        Storage::disk('public')->append('content.txt', 
+            'タイトル: '.$title.PHP_EOL.
+            '--------------------------------'.PHP_EOL.
+            $content.PHP_EOL.
+            '●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●'.PHP_EOL
+        );        
         return 
             '<!-- wp:paragraph -->'.PHP_EOL.
             '<p>'.PHP_EOL.
