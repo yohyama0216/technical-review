@@ -26,17 +26,19 @@ import { ref } from 'vue';
 import axios from 'axios';
 
 export default {
-  setup() {
+  props: {
+    questions: Array
+  },
+  setup(props) {
     const currentQuestion = ref(0);
     const userAnswer = ref(null);
     const learningResults = ref([]);
     const complete = ref(false);
-    const questions = ref(questionData || []); // JSONデータを格納
 
     function getCollectAnswer() {
-      let answers = questions.value[currentQuestion.value].answers;
-      let correct = answers.filter(item => item.is_correct === 1);
-      return correct[0];
+      let answers = props.questions[currentQuestion.value].answers;
+      let correct = answers.find(item => item.is_correct === 1);
+      return correct;
     }
 
     function checkAnswer() {
@@ -50,11 +52,11 @@ export default {
         alert('不正解 正解は' + correct.content);
       }
       learningResults.value.push({
-        'question_id': questions.value[currentQuestion.value].id,
+        'question_id': props.questions[currentQuestion.value].id,
         'result': result
       });
 
-      if (currentQuestion.value == (questions.value.length - 1)) {
+      if (currentQuestion.value == (props.questions.length - 1)) {
         submitResult();
       } else {
         currentQuestion.value++;
@@ -64,6 +66,7 @@ export default {
 
     function submitResult() {
       const url = '/api/learning-history/create';
+      console.log('レスポンス:', learningResults.value);
       axios.post(url, { 'data': learningResults.value })
         .then(response => {
           complete.value = true;
@@ -75,7 +78,6 @@ export default {
     }
 
     return {
-      questions,
       currentQuestion,
       userAnswer,
       learningResults,
@@ -87,5 +89,5 @@ export default {
 </script>
 
 <style>
-/* 必要に応じてCSSをここに追加 */
+/* CSSスタイル */
 </style>

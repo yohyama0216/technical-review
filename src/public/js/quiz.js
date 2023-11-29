@@ -15187,19 +15187,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  setup: function setup() {
+  props: {
+    questions: Array
+  },
+  setup: function setup(props) {
     var currentQuestion = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(0);
     var userAnswer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var learningResults = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     var complete = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
-    var questions = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(questionData || []); // JSONデータを格納
-
     function getCollectAnswer() {
-      var answers = questions.value[currentQuestion.value].answers;
-      var correct = answers.filter(function (item) {
+      var answers = props.questions[currentQuestion.value].answers;
+      var correct = answers.find(function (item) {
         return item.is_correct === 1;
       });
-      return correct[0];
+      return correct;
     }
     function checkAnswer() {
       var correct = getCollectAnswer();
@@ -15212,10 +15213,10 @@ __webpack_require__.r(__webpack_exports__);
         alert('不正解 正解は' + correct.content);
       }
       learningResults.value.push({
-        'question_id': questions.value[currentQuestion.value].id,
+        'question_id': props.questions[currentQuestion.value].id,
         'result': result
       });
-      if (currentQuestion.value == questions.value.length - 1) {
+      if (currentQuestion.value == props.questions.length - 1) {
         submitResult();
       } else {
         currentQuestion.value++;
@@ -15224,6 +15225,7 @@ __webpack_require__.r(__webpack_exports__);
     }
     function submitResult() {
       var url = '/api/learning-history/create';
+      console.log('レスポンス:', learningResults.value);
       axios__WEBPACK_IMPORTED_MODULE_1___default().post(url, {
         'data': learningResults.value
       }).then(function (response) {
@@ -15234,7 +15236,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
     return {
-      questions: questions,
       currentQuestion: currentQuestion,
       userAnswer: userAnswer,
       learningResults: learningResults,
@@ -15294,7 +15295,7 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 }, "もう一度学習する", -1 /* HOISTED */);
 var _hoisted_11 = [_hoisted_9, _hoisted_10];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return !$setup.complete ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.questions[$setup.currentQuestion].question), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.questions[$setup.currentQuestion].answers, function (answer, index) {
+  return !$setup.complete ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.questions[$setup.currentQuestion].question), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.questions[$setup.currentQuestion].answers, function (answer, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
       "class": "list-group-item",
       key: answer.id
@@ -15352,7 +15353,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* 必要に応じてCSSをここに追加 */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* CSSスタイル */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

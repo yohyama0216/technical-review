@@ -28,8 +28,8 @@ class LearningHistoryController extends Controller
             'stats' => [
                 'start_date' => $this->learningHistoryService->getStartDateForUser($id),
                 'latest_date' => $this->learningHistoryService->getLatestDateForUser($id),
-                'average_study_per_day' => $this->learningHistoryService->calcAverageStudyPerDayForUser($id), //todo
-                'total_questions_count' => $this->questionService->getTotalCount(), //todo
+                'average_study_per_day' => '',//$this->learningHistoryService->calcAverageStudyPerDayForUser($id), //todo
+                'total_questions_count' => '' //$this->questionService->getTotalCount(), //todo
             ],
             'histories' => $this->learningHistoryService->getHistoriesForUser($id),
         ];

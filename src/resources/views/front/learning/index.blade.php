@@ -3,11 +3,8 @@
 @section('content')
 <div class="row">
     <div class="col-12" id="app">
-            <quiz-component></quiz-component>
+        <quiz-component :questions="{{ json_encode($questions, JSON_UNESCAPED_UNICODE) }}"></quiz-component>
     </div>
 </div>
-<script>
-    const questionData = @json($questions,JSON_UNESCAPED_UNICODE)
-</script>
 <script src="{{ mix('js/quiz.js') }}"></script>
 @endsection

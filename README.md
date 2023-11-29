@@ -8,6 +8,8 @@ sudo apt install nodejs
 sudo apt install npm
 Vue3の導入
 npm install vue@next vue-loader@next @vue/compiler-sfc
+ビルドは
+npm run dev
 
 
 

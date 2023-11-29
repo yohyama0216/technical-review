@@ -13,12 +13,12 @@ class LearningHistoryService
 {    
     public function getStartDateForUser($userId)
     {
-        return LearningHistory::select('answered_at')->where('user_id', $userId)->orderBy('answered_at', 'desc')->first();
+        return LearningHistory::select('answered_at')->where('user_id', $userId)->orderBy('answered_at', 'asc')->first();
     }
 
     public function getLatestDateForUser($userId)
     {
-        return LearningHistory::select('answered_at')->where('user_id', $userId)->orderBy('answered_at', 'asc')->first();
+        return LearningHistory::select('answered_at')->where('user_id', $userId)->orderBy('answered_at', 'desc')->first();
     }    
     
     public function getHistoriesForUser($userId)
