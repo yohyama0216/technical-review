@@ -1,35 +1,13 @@
 # 危険物乙４問題集システム
 
-## メモ
-10/24 
-方針変更して危険物乙４の問題集対策システムを作ることにした。
-なのでプログラムを改修する。
 
-todo
-is_hiddenを買える
-もっとデータ入れる
-問題画面と問題の回答と答え合わせ画面作る？
-1問ずつ出題？5問ずつ？
-
-質問画面と学習履歴画面
-
-デザイン変える？
-
-top画面作成
-
-
-
-→
-
-#Vueを使う
-問題の出題画面 /learning
-管理画面の検索画面 /
-
-answerを別テーブルに分割
-学習画面を直す
-
-フロントは適当にする
-Pythonに時間を充てる
+# npm導入
+あとでdockerに統合する
+sudo apt update
+sudo apt install nodejs
+sudo apt install npm
+Vue3の導入
+npm install vue@next vue-loader@next @vue/compiler-sfc
 
 
 
