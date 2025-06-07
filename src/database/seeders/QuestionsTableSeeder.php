@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Services\QuestionService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class QuestionsTableSeeder extends Seeder
 {
@@ -14,24 +16,19 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('question_tag')->truncate();
-        // DB::table('questions')->truncate();
-        // DB::table('tags')->truncate();
+        DB::statement('SET foreign_key_checks=0;');
+        DB::table('answers')->truncate();
+        DB::table('questions')->truncate();
+        DB::statement('SET foreign_key_checks=1;');
 
-        DB::table('questions')->insert([
-            ['question' => '質問1', 'answer' => '回答1'], 
-            ['question' => '質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1質問1', 'answer' => '回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1回答1'], 
-        ]);
+        $this->import();
+    }
 
-        DB::table('tags')->insert([
-            ['name' => 'タグ1',], 
-            ['name' => 'タグ2'], 
-        ]);
+    private function import()
+    {
+        $filePath = storage_path('app/public/questions.csv');
 
-        DB::table('question_tag')->insert([
-            ['question_id' => '1','tag_id' => '1'], 
-            ['question_id' => '2','tag_id' => '1'],
-            ['question_id' => '2','tag_id' => '2'], 
-        ]);
+        $questionService = new QuestionService();
+        $questionService->importCsv($filePath);
     }
 }
