@@ -10,7 +10,7 @@ class TopController extends Controller
 {
     public function index()
     {
-        $setting = ''; // todo
-        return view('front.top.index', compact('setting'));
+        $helloWorld = 'helloWorld';
+        return view('front.top.index', compact('helloWorld'));
     }
 }

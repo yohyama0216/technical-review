@@ -8,6 +8,7 @@ use App\Http\Controllers\Front\SettingController;
 use App\Http\Controllers\Front\TopController;
 use App\Http\Controllers\Front\WordPressController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Front\ArticleController;
 
 Route::get('/', [TopController::class, 'index'])->name('top.index');
 
@@ -31,3 +32,14 @@ Route::resource('/learning-history', LearningHistoryController::class);
 // 学習設定の編集画面
 Route::get('/setting/edit', [SettingController::class, 'edit'])->name('setting.edit');
 Route::put('/setting/update', [SettingController::class, 'update'])->name('setting.update');
+
+// ブログ記事関連
+Route::get('/blog', [ArticleController::class, 'index'])->name('article.index');
+Route::get('/blog/{id}', [ArticleController::class, 'show'])->name('article.show');
+Route::get('/category/{category}', [ArticleController::class, 'category'])->name('article.category');
+Route::get('/blog/create', [ArticleController::class, 'create'])->name('article.create');
+Route::get('/blog/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit');
+Route::get('/profile', [ArticleController::class, 'profile'])->name('article.profile');
+Route::get('/contact', [ArticleController::class, 'contact'])->name('article.contact');
+Route::post('/blog', [ArticleController::class, 'store'])->name('article.store');
+Route::patch('/blog/{id}', [ArticleController::class, 'update'])->name('article.update');

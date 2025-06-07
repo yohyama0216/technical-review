@@ -109,7 +109,7 @@ class QuestionTest extends TestCase
 
     public function testQuestionsIndex()
     {
-        $this->testPathAndNameRoute('questions','questions.index');
+        $this->testPathAndNameRoute('questions','questions.index','delete');
     }
 
     public function testQuestionsEdit()
@@ -180,10 +180,17 @@ class QuestionTest extends TestCase
 
     
 
-    private function testPathAndNameRoute($path,$nameRoute)
+    private function testPathAndNameRoute($path,$nameRoute,$httpMethod)
     {
         $response = $this->get(route($nameRoute));
         $this->assertEquals($path, request()->path());
         $response->assertSuccessful();
+        //$response = $this->$httpMethod('/sample-endpoint');
+        $response->assertStatus(405);  // 405 Method Not Allowed を期待
     }
+
+    // 特定のメソッド名だけを許可しているかのテスト。URLがかぶる？
+    // POSTのテスト
+    
+
 }

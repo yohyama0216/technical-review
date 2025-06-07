@@ -20,7 +20,7 @@ use App\Models\Xml\BaseBlog;
 Artisan::command('mycommand:auto-wordpress', function () {
     $this->info(Carbon::now().' Start Generating...');
     $generator = new WpXmlGenerator(
-        new BaseBlog('簿記で転職','','','bokiBlog2.txt')
+        new BaseBlog('南アフリカの今後の見通し','','','southafrica3.txt')
     );
     $generator->execute();
     $path = $generator->getPutFilePath();
