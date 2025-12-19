@@ -701,19 +701,7 @@ function displayQuestionList(questions) {
                         <span class="badge bg-success">${escapeHtml(question.minorCategory)}</span>
                     </div>
                 </div>
-                <p class="card-text question-text mb-3">${escapeHtml(question.question)}</p>
-                <div class="answers-preview">
-                    ${question.answers.map((answer, i) => `
-                        <div class="answer-preview ${i === question.correct ? 'correct-answer-preview' : ''}">
-                            <span class="answer-number">${i + 1}.</span> ${escapeHtml(answer)}
-                            ${i === question.correct ? '<i class="bi bi-check-circle-fill text-success ms-2"></i>' : ''}
-                        </div>
-                    `).join('')}
-                </div>
-                <div class="mt-3 pt-3 border-top">
-                    <strong><i class="bi bi-lightbulb me-1"></i>解説:</strong>
-                    <p class="mb-0 mt-2">${escapeHtml(question.explanation)}</p>
-                </div>
+                <p class="card-text question-text mb-0">${escapeHtml(question.question)}</p>
             </div>
         `;
         
