@@ -58,6 +58,7 @@ const minorCategoryTitle = document.getElementById('minorCategoryTitle');
 
 const backBtn = document.getElementById('backBtn');
 const submitBtn = document.getElementById('submitBtn');
+const nextQuestionBtn = document.getElementById('nextQuestionBtn');
 const reviewBtn = document.getElementById('reviewBtn');
 const homeBtn = document.getElementById('homeBtn');
 const reviewBackBtn = document.getElementById('reviewBackBtn');
@@ -103,6 +104,7 @@ function setupEventListeners() {
     });
     reviewBtn.addEventListener('click', showReview);
     reviewBackBtn.addEventListener('click', showResultScreen);
+    nextQuestionBtn.addEventListener('click', goToNextQuestion);
     
     // Question list filter event listeners
     majorCategoryFilter.addEventListener('change', () => {
@@ -314,6 +316,7 @@ function loadQuestion() {
     });
     
     submitBtn.classList.add('d-none');
+    nextQuestionBtn.classList.add('d-none');
 }
 
 function selectAnswer(index, btn) {
@@ -350,17 +353,11 @@ function selectAnswer(index, btn) {
     // Save to daily history
     saveDailyHistory(isCorrect);
     
-    // Auto-advance
-    setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < currentQuestions.length) {
-            loadQuestion();
-        } else {
-            // Save results and return to home
-            saveQuizResults();
-            showMajorCategoryScreen();
-        }
-    }, 3000);
+    // Increment answer count for this question
+    incrementQuestionAnswerCount(question);
+    
+    // Show next question button
+    nextQuestionBtn.classList.remove('d-none');
 }
 
 function showExplanation(question, isCorrect) {
@@ -463,6 +460,57 @@ function showReview() {
     });
     
     showScreen(reviewScreen);
+}
+
+// ==================== QUESTION ANSWER TRACKING ====================
+
+function getQuestionId(question) {
+    // Create a unique ID for each question based on its content
+    return `${question.majorCategory}::${question.middleCategory}::${question.minorCategory}::${question.question}`;
+}
+
+function incrementQuestionAnswerCount(question) {
+    const questionId = getQuestionId(question);
+    const answerCounts = JSON.parse(localStorage.getItem('questionAnswerCounts') || '{}');
+    
+    if (!answerCounts[questionId]) {
+        answerCounts[questionId] = 0;
+    }
+    answerCounts[questionId]++;
+    
+    localStorage.setItem('questionAnswerCounts', JSON.stringify(answerCounts));
+}
+
+function getQuestionAnswerCount(question) {
+    const questionId = getQuestionId(question);
+    const answerCounts = JSON.parse(localStorage.getItem('questionAnswerCounts') || '{}');
+    return answerCounts[questionId] || 0;
+}
+
+function selectNextRandomQuestion() {
+    // Get answer counts for all questions
+    const questionsWithCounts = quizData.map(question => ({
+        question: question,
+        count: getQuestionAnswerCount(question)
+    }));
+    
+    // Find the minimum count
+    const minCount = Math.min(...questionsWithCounts.map(q => q.count));
+    
+    // Filter questions with the minimum count
+    const questionsWithMinCount = questionsWithCounts.filter(q => q.count === minCount);
+    
+    // Select a random question from those with minimum count
+    const randomIndex = Math.floor(Math.random() * questionsWithMinCount.length);
+    return questionsWithMinCount[randomIndex].question;
+}
+
+function goToNextQuestion() {
+    // Select next question randomly from questions with fewer answers
+    const nextQuestion = selectNextRandomQuestion();
+    
+    // Start a new quiz with the selected question
+    startQuizFromQuestion(nextQuestion);
 }
 
 // ==================== STATISTICS FUNCTIONS ====================
