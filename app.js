@@ -685,8 +685,6 @@ const homeBtn = document.getElementById('homeBtn');
 const reviewBackBtn = document.getElementById('reviewBackBtn');
 
 const progressFill = document.getElementById('progressFill');
-const currentQuestionEl = document.getElementById('currentQuestion');
-const totalQuestionsEl = document.getElementById('totalQuestions');
 const categoryTitle = document.getElementById('categoryTitle');
 const categoryBreadcrumb = document.getElementById('categoryBreadcrumb');
 const questionText = document.getElementById('questionText');
@@ -784,7 +782,6 @@ function startQuiz(majorCat, middleCat, minorCat) {
     showScreen('quiz');
     categoryTitle.textContent = majorCat;
     categoryBreadcrumb.textContent = `${majorCat} > ${middleCat} > ${minorCat}`;
-    totalQuestionsEl.textContent = questions.length;
     
     loadQuestion();
 }
@@ -803,7 +800,6 @@ function loadQuestion() {
         explanationBox.style.display = 'none';
     }
     
-    currentQuestionEl.textContent = currentQuestionIndex + 1;
     questionText.textContent = question.question;
     
     // Update progress
