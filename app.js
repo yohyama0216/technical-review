@@ -598,6 +598,12 @@ function displayCategoryStats(results) {
 
 // ==================== QUESTION LIST FUNCTIONS ====================
 
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 function showQuestionListScreen() {
     showScreen(questionListScreen);
     initializeQuestionListFilters();
@@ -658,18 +664,13 @@ function updateQuestionList() {
     const selectedMiddle = middleCategoryFilter.value;
     const selectedMinor = minorCategoryFilter.value;
     
-    // Filter questions
-    let filteredQuestions = quizData;
-    
-    if (selectedMajor) {
-        filteredQuestions = filteredQuestions.filter(q => q.majorCategory === selectedMajor);
-    }
-    if (selectedMiddle) {
-        filteredQuestions = filteredQuestions.filter(q => q.middleCategory === selectedMiddle);
-    }
-    if (selectedMinor) {
-        filteredQuestions = filteredQuestions.filter(q => q.minorCategory === selectedMinor);
-    }
+    // Filter questions with combined conditions for better performance
+    let filteredQuestions = quizData.filter(q => {
+        if (selectedMajor && q.majorCategory !== selectedMajor) return false;
+        if (selectedMiddle && q.middleCategory !== selectedMiddle) return false;
+        if (selectedMinor && q.minorCategory !== selectedMinor) return false;
+        return true;
+    });
     
     // Update question count
     questionCount.textContent = `${filteredQuestions.length}問`;
@@ -695,23 +696,23 @@ function displayQuestionList(questions) {
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <h5 class="card-title mb-0">問題 ${index + 1}</h5>
                     <div>
-                        <span class="badge bg-primary me-1">${question.majorCategory}</span>
-                        <span class="badge bg-info me-1">${question.middleCategory}</span>
-                        <span class="badge bg-success">${question.minorCategory}</span>
+                        <span class="badge bg-primary me-1">${escapeHtml(question.majorCategory)}</span>
+                        <span class="badge bg-info me-1">${escapeHtml(question.middleCategory)}</span>
+                        <span class="badge bg-success">${escapeHtml(question.minorCategory)}</span>
                     </div>
                 </div>
-                <p class="card-text question-text mb-3">${question.question}</p>
+                <p class="card-text question-text mb-3">${escapeHtml(question.question)}</p>
                 <div class="answers-preview">
                     ${question.answers.map((answer, i) => `
                         <div class="answer-preview ${i === question.correct ? 'correct-answer-preview' : ''}">
-                            <span class="answer-number">${i + 1}.</span> ${answer}
+                            <span class="answer-number">${i + 1}.</span> ${escapeHtml(answer)}
                             ${i === question.correct ? '<i class="bi bi-check-circle-fill text-success ms-2"></i>' : ''}
                         </div>
                     `).join('')}
                 </div>
                 <div class="mt-3 pt-3 border-top">
                     <strong><i class="bi bi-lightbulb me-1"></i>解説:</strong>
-                    <p class="mb-0 mt-2">${question.explanation}</p>
+                    <p class="mb-0 mt-2">${escapeHtml(question.explanation)}</p>
                 </div>
             </div>
         `;
