@@ -362,7 +362,13 @@ function showResultScreen() {
     const total = quizResults.length;
     const percentage = Math.round((correct / total) * 100);
     
-    const cardBody = resultContent.querySelector('.card-body') || resultContent;
+    // Target the card-body element directly
+    const cardBody = resultContent.querySelector('.card-body');
+    if (!cardBody) {
+        console.error('Result card body not found');
+        return;
+    }
+    
     cardBody.innerHTML = `
         <div class="text-center result-summary">
             <h2 class="mb-4">クイズ完了！</h2>

@@ -184,7 +184,7 @@ body {
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-    content: "›";
+    content: "\203A";
 }
 
 /* Responsive adjustments */
