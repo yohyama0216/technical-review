@@ -882,16 +882,16 @@ function selectAnswer(index, btn) {
 
 // Show Explanation
 function showExplanation(question, isCorrect) {
-    const explanationDiv = document.getElementById('explanationBox');
-    if (!explanationDiv) {
+    let explanationBox = document.getElementById('explanationBox');
+    
+    if (!explanationBox) {
         // Create explanation box if it doesn't exist
-        const box = document.createElement('div');
-        box.id = 'explanationBox';
-        box.className = 'explanation-box';
-        document.querySelector('.quiz-content').appendChild(box);
+        explanationBox = document.createElement('div');
+        explanationBox.id = 'explanationBox';
+        explanationBox.className = 'explanation-box';
+        document.querySelector('.quiz-content').appendChild(explanationBox);
     }
     
-    const explanationBox = document.getElementById('explanationBox');
     explanationBox.innerHTML = `
         <div class="explanation-result ${isCorrect ? 'correct-result' : 'incorrect-result'}">
             ${isCorrect ? '✓ 正解！' : '✗ 不正解'}
@@ -904,11 +904,6 @@ function showExplanation(question, isCorrect) {
         </div>
     `;
     explanationBox.style.display = 'block';
-}
-
-// Submit Answer (kept for compatibility but hidden)
-function submitAnswer() {
-    // This function is no longer used as answers are checked immediately
 }
 
 // Finish Quiz
