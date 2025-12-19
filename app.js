@@ -795,7 +795,13 @@ function loadQuestion() {
     const question = questions[currentQuestionIndex];
     
     selectedAnswer = null;
-    submitBtn.disabled = true;
+    submitBtn.style.display = 'none'; // Hide submit button
+    
+    // Hide explanation box
+    const explanationBox = document.getElementById('explanationBox');
+    if (explanationBox) {
+        explanationBox.style.display = 'none';
+    }
     
     currentQuestionEl.textContent = currentQuestionIndex + 1;
     questionText.textContent = question.question;
@@ -829,43 +835,40 @@ function loadQuestion() {
 
 // Select Answer
 function selectAnswer(index, btn) {
-    document.querySelectorAll('.answer-btn').forEach(b => {
-        b.classList.remove('selected');
-    });
+    // Prevent selecting another answer if already answered
+    if (selectedAnswer !== null) return;
     
-    btn.classList.add('selected');
     selectedAnswer = index;
-    submitBtn.disabled = false;
-}
-
-// Submit Answer
-function submitAnswer() {
-    if (selectedAnswer === null) return;
     
     const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
     const question = questions[currentQuestionIndex];
     const isCorrect = selectedAnswer === question.correct;
     
+    // Record result
     quizResults.push({
         questionIndex: currentQuestionIndex,
         selectedAnswer: selectedAnswer,
         correct: isCorrect
     });
     
+    // Show correct/incorrect immediately
     const answerButtons = document.querySelectorAll('.answer-btn');
-    answerButtons.forEach((btn, displayIndex) => {
-        btn.classList.add('disabled');
+    answerButtons.forEach((button, displayIndex) => {
+        button.classList.add('disabled');
         const originalIndex = shuffledAnswers[displayIndex].originalIndex;
         
         if (originalIndex === question.correct) {
-            btn.classList.add('correct');
+            button.classList.add('correct');
         } else if (originalIndex === selectedAnswer && !isCorrect) {
-            btn.classList.add('incorrect');
+            button.classList.add('incorrect');
         }
     });
     
-    submitBtn.disabled = true;
+    // Hide submit button and show explanation
+    submitBtn.style.display = 'none';
+    showExplanation(question, isCorrect);
     
+    // Auto-advance to next question after delay
     setTimeout(() => {
         currentQuestionIndex++;
         
@@ -874,7 +877,38 @@ function submitAnswer() {
         } else {
             finishQuiz();
         }
-    }, 1500);
+    }, 3000);
+}
+
+// Show Explanation
+function showExplanation(question, isCorrect) {
+    const explanationDiv = document.getElementById('explanationBox');
+    if (!explanationDiv) {
+        // Create explanation box if it doesn't exist
+        const box = document.createElement('div');
+        box.id = 'explanationBox';
+        box.className = 'explanation-box';
+        document.querySelector('.quiz-content').appendChild(box);
+    }
+    
+    const explanationBox = document.getElementById('explanationBox');
+    explanationBox.innerHTML = `
+        <div class="explanation-result ${isCorrect ? 'correct-result' : 'incorrect-result'}">
+            ${isCorrect ? '✓ 正解！' : '✗ 不正解'}
+        </div>
+        <div class="explanation-text">
+            <strong>解説:</strong> ${question.explanation}
+        </div>
+        <div class="explanation-correct-answer">
+            <strong>正解:</strong> ${question.answers[question.correct]}
+        </div>
+    `;
+    explanationBox.style.display = 'block';
+}
+
+// Submit Answer (kept for compatibility but hidden)
+function submitAnswer() {
+    // This function is no longer used as answers are checked immediately
 }
 
 // Finish Quiz
