@@ -49,6 +49,7 @@ let statsScreen = null;
 let quizScreen = null;
 let resultScreen = null;
 let reviewScreen = null;
+let achievementsScreen = null;
 
 let majorCategoryButtons = null;
 let middleCategoryButtons = null;
@@ -91,6 +92,163 @@ let questionCount = null;
 let answerStatusFilter = null;
 let questionSearch = null;
 
+// ==================== NEW FEATURES DATA ====================
+
+// Favorites
+function getFavorites() {
+    return JSON.parse(localStorage.getItem('favorites') || '[]');
+}
+
+function toggleFavorite(question) {
+    const questionId = getQuestionId(question);
+    const favorites = getFavorites();
+    const index = favorites.indexOf(questionId);
+    
+    if (index > -1) {
+        favorites.splice(index, 1);
+    } else {
+        favorites.push(questionId);
+    }
+    
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    return favorites.includes(questionId);
+}
+
+function isFavorite(question) {
+    const questionId = getQuestionId(question);
+    return getFavorites().includes(questionId);
+}
+
+// Daily Goal
+function getDailyGoal() {
+    return parseInt(localStorage.getItem('dailyGoal') || '10');
+}
+
+function setDailyGoal(goal) {
+    localStorage.setItem('dailyGoal', goal.toString());
+}
+
+function getTodayProgress() {
+    const today = new Date().toISOString().split('T')[0];
+    const history = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    return history[today]?.total || 0;
+}
+
+// Learning Streak
+function calculateStreak() {
+    const history = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    const dates = Object.keys(history).sort().reverse();
+    
+    if (dates.length === 0) return 0;
+    
+    let streak = 0;
+    const today = new Date();
+    let currentDate = new Date(today);
+    
+    for (let i = 0; i < dates.length; i++) {
+        const dateStr = currentDate.toISOString().split('T')[0];
+        if (history[dateStr]) {
+            streak++;
+            currentDate.setDate(currentDate.getDate() - 1);
+        } else if (i === 0 && dateStr === today.toISOString().split('T')[0]) {
+            // Today hasn't been studied yet, check yesterday
+            currentDate.setDate(currentDate.getDate() - 1);
+            continue;
+        } else {
+            break;
+        }
+    }
+    
+    return streak;
+}
+
+// Achievements/Badges
+const BADGES = [
+    { id: 'first_answer', name: '初めの一歩', icon: '🎯', description: '最初の問題に回答', condition: (stats) => stats.totalAnswers >= 1 },
+    { id: 'ten_correct', name: '10問正解', icon: '✨', description: '10問正解を達成', condition: (stats) => stats.totalCorrect >= 10 },
+    { id: 'fifty_correct', name: '50問正解', icon: '⭐', description: '50問正解を達成', condition: (stats) => stats.totalCorrect >= 50 },
+    { id: 'hundred_correct', name: '100問正解', icon: '🌟', description: '100問正解を達成', condition: (stats) => stats.totalCorrect >= 100 },
+    { id: 'perfect_score', name: 'パーフェクト', icon: '🏆', description: 'カテゴリで全問正解', condition: (stats) => stats.hasPerfectCategory },
+    { id: 'streak_3', name: '3日連続', icon: '🔥', description: '3日連続で学習', condition: (stats) => stats.streak >= 3 },
+    { id: 'streak_7', name: '1週間連続', icon: '💪', description: '7日連続で学習', condition: (stats) => stats.streak >= 7 },
+    { id: 'complete_10', name: '10問完了', icon: '🎓', description: '10問を完了状態に', condition: (stats) => stats.completedQuestions >= 10 },
+    { id: 'favorite_5', name: 'お気に入り5', icon: '💖', description: '5問をお気に入り登録', condition: (stats) => stats.favoriteCount >= 5 },
+    { id: 'daily_goal', name: '目標達成', icon: '🎯', description: '1日の目標を達成', condition: (stats) => stats.dailyGoalAchieved }
+];
+
+function getEarnedBadges() {
+    return JSON.parse(localStorage.getItem('earnedBadges') || '[]');
+}
+
+function checkAndAwardBadges() {
+    const earnedBadges = getEarnedBadges();
+    const newBadges = [];
+    
+    // Calculate stats
+    const dailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    let totalCorrect = 0;
+    let totalAnswers = 0;
+    
+    Object.values(dailyHistory).forEach(day => {
+        totalCorrect += day.correct || 0;
+        totalAnswers += day.total || 0;
+    });
+    
+    const completedQuestions = quizData.filter(q => isQuestionCompleted(q)).length;
+    const favoriteCount = getFavorites().length;
+    const streak = calculateStreak();
+    const dailyGoal = getDailyGoal();
+    const todayProgress = getTodayProgress();
+    const dailyGoalAchieved = todayProgress >= dailyGoal;
+    
+    // Check for perfect category (placeholder - would need category-specific tracking)
+    const hasPerfectCategory = false;
+    
+    const stats = {
+        totalCorrect,
+        totalAnswers,
+        completedQuestions,
+        favoriteCount,
+        streak,
+        dailyGoalAchieved,
+        hasPerfectCategory
+    };
+    
+    BADGES.forEach(badge => {
+        if (!earnedBadges.includes(badge.id) && badge.condition(stats)) {
+            earnedBadges.push(badge.id);
+            newBadges.push(badge);
+        }
+    });
+    
+    localStorage.setItem('earnedBadges', JSON.stringify(earnedBadges));
+    
+    return newBadges;
+}
+
+// Dark Mode
+function initDarkMode() {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    if (darkMode) {
+        document.body.classList.add('dark-mode');
+        const icon = document.getElementById('darkModeIcon');
+        if (icon) {
+            icon.className = 'bi bi-sun-fill';
+        }
+    }
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    
+    const icon = document.getElementById('darkModeIcon');
+    if (icon) {
+        icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+    }
+}
+
 // ==================== INITIALIZATION ====================
 
 function migrateOldData() {
@@ -121,6 +279,7 @@ function initializeDOM() {
     quizScreen = document.getElementById('quizScreen');
     resultScreen = document.getElementById('resultScreen');
     reviewScreen = document.getElementById('reviewScreen');
+    achievementsScreen = document.getElementById('achievementsScreen');
     
     majorCategoryButtons = document.getElementById('majorCategoryButtons');
     middleCategoryButtons = document.getElementById('middleCategoryButtons');
@@ -164,6 +323,7 @@ function initializeDOM() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeDOM();
+    initDarkMode();
     setupEventListeners();
     migrateOldData();
     
@@ -174,11 +334,19 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (pathname.includes('question-list.html')) {
         initializeQuestionListFilters();
         updateQuestionList();
+    } else if (pathname.includes('index.html') || pathname.endsWith('/')) {
+        updateHomeScreen();
     }
 });
 
 function setupEventListeners() {
     document.getElementById('randomQuestionBtn')?.addEventListener('click', startRandomQuestion);
+    document.getElementById('weakPointModeBtn')?.addEventListener('click', startWeakPointMode);
+    document.getElementById('favoriteModeBtn')?.addEventListener('click', startFavoriteMode);
+    document.getElementById('achievementsBtn')?.addEventListener('click', showAchievementsScreen);
+    document.getElementById('backFromAchievementsBtn')?.addEventListener('click', showMajorCategoryScreen);
+    document.getElementById('darkModeToggle')?.addEventListener('click', toggleDarkMode);
+    
     document.getElementById('backToMajorBtn')?.addEventListener('click', showMajorCategoryScreen);
     document.getElementById('backToMiddleBtn')?.addEventListener('click', () => showMiddleCategories(currentMajorCategory));
     document.getElementById('backToHomeBtn')?.addEventListener('click', showMajorCategoryScreen);
@@ -209,7 +377,7 @@ function setupEventListeners() {
 
 function showScreen(screenToShow) {
     const screens = [majorCategoryScreen, middleCategoryScreen, minorCategoryScreen, 
-     questionListScreen, statsScreen, quizScreen, resultScreen, reviewScreen];
+     questionListScreen, statsScreen, quizScreen, resultScreen, reviewScreen, achievementsScreen];
     
     screens.forEach(screen => {
         if (screen) {
@@ -243,6 +411,126 @@ function startRandomQuestion() {
     const randomQuestion = quizData[randomIndex];
     
     startQuizFromQuestion(randomQuestion);
+}
+
+// ==================== NEW MODES ====================
+
+function startWeakPointMode() {
+    // Get questions with more incorrect than correct answers
+    const weakQuestions = quizData.filter(q => {
+        const stats = getQuestionAnswerStats(q);
+        return stats.incorrect > stats.correct && (stats.correct + stats.incorrect) > 0;
+    });
+    
+    if (weakQuestions.length === 0) {
+        alert('弱点となる問題がありません！素晴らしいです！');
+        return;
+    }
+    
+    // Pick a random weak question
+    const randomIndex = Math.floor(Math.random() * weakQuestions.length);
+    startQuizFromQuestion(weakQuestions[randomIndex]);
+}
+
+function startFavoriteMode() {
+    const favorites = getFavorites();
+    
+    if (favorites.length === 0) {
+        alert('お気に入りの問題がありません。問題画面で⭐ボタンを押してお気に入りに追加してください。');
+        return;
+    }
+    
+    // Get favorite questions
+    const favoriteQuestions = quizData.filter(q => isFavorite(q));
+    
+    if (favoriteQuestions.length === 0) {
+        alert('お気に入りの問題が見つかりませんでした。');
+        return;
+    }
+    
+    // Pick a random favorite question
+    const randomIndex = Math.floor(Math.random() * favoriteQuestions.length);
+    startQuizFromQuestion(favoriteQuestions[randomIndex]);
+}
+
+function showAchievementsScreen() {
+    if (!achievementsScreen) return;
+    
+    const badgeContainer = document.getElementById('badgeContainer');
+    if (!badgeContainer) return;
+    
+    badgeContainer.innerHTML = '';
+    const earnedBadges = getEarnedBadges();
+    
+    BADGES.forEach(badge => {
+        const isEarned = earnedBadges.includes(badge.id);
+        const badgeDiv = document.createElement('div');
+        badgeDiv.className = `achievement-badge ${isEarned ? 'earned' : 'locked'}`;
+        
+        badgeDiv.innerHTML = `
+            <div class="badge-icon">${badge.icon}</div>
+            <div class="badge-name">${badge.name}</div>
+            <div class="badge-description">${badge.description}</div>
+        `;
+        
+        badgeContainer.appendChild(badgeDiv);
+    });
+    
+    showScreen(achievementsScreen);
+}
+
+function updateHomeScreen() {
+    // Update quick stats
+    const dailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    let totalCorrect = 0;
+    
+    Object.values(dailyHistory).forEach(day => {
+        totalCorrect += day.correct || 0;
+    });
+    
+    const completedCount = quizData.filter(q => isQuestionCompleted(q)).length;
+    const favoriteCount = getFavorites().length;
+    const streak = calculateStreak();
+    const todayProgress = getTodayProgress();
+    const dailyGoal = getDailyGoal();
+    
+    // Update home stats cards
+    const homeCorrectCount = document.getElementById('homeCorrectCount');
+    const homeCompletedCount = document.getElementById('homeCompletedCount');
+    const homeFavoriteCount = document.getElementById('homeFavoriteCount');
+    
+    if (homeCorrectCount) homeCorrectCount.textContent = totalCorrect;
+    if (homeCompletedCount) homeCompletedCount.textContent = completedCount;
+    if (homeFavoriteCount) homeFavoriteCount.textContent = favoriteCount;
+    
+    // Update daily goal
+    const dailyGoalCard = document.getElementById('dailyGoalCard');
+    const goalText = document.getElementById('goalText');
+    const goalProgressFill = document.getElementById('goalProgressFill');
+    
+    if (dailyGoalCard && goalText && goalProgressFill) {
+        dailyGoalCard.style.display = 'block';
+        goalText.textContent = `${todayProgress}/${dailyGoal} 問`;
+        const goalPercentage = Math.min(100, Math.round((todayProgress / dailyGoal) * 100));
+        goalProgressFill.style.width = `${goalPercentage}%`;
+        goalProgressFill.textContent = `${goalPercentage}%`;
+    }
+    
+    // Update streak
+    const streakCard = document.getElementById('streakCard');
+    const streakNumber = document.getElementById('streakNumber');
+    
+    if (streak > 0 && streakCard && streakNumber) {
+        streakCard.style.display = 'flex';
+        streakNumber.textContent = streak;
+    }
+    
+    // Check for new badges
+    const newBadges = checkAndAwardBadges();
+    if (newBadges.length > 0) {
+        // Could show a notification here
+        console.log('New badges earned:', newBadges);
+    }
 }
 
 function showQuestionListScreen() {
@@ -394,13 +682,31 @@ function loadQuestion() {
     const question = currentQuestions[currentQuestionIndex];
     selectedAnswer = null;
     
-    // Update breadcrumb
+    // Update breadcrumb with favorite button
     if (categoryBreadcrumb) {
+        const isFav = isFavorite(question);
         categoryBreadcrumb.innerHTML = `
             <li class="breadcrumb-item">${currentMajorCategory}</li>
             <li class="breadcrumb-item">${currentMiddleCategory}</li>
             <li class="breadcrumb-item active">${currentMinorCategory}</li>
         `;
+        
+        // Add favorite button
+        const favoriteBtn = document.createElement('button');
+        favoriteBtn.className = `favorite-btn ${isFav ? 'favorited' : ''}`;
+        favoriteBtn.innerHTML = isFav ? '<i class="bi bi-star-fill"></i>' : '<i class="bi bi-star"></i>';
+        favoriteBtn.title = 'お気に入りに追加';
+        favoriteBtn.addEventListener('click', () => {
+            const nowFavorited = toggleFavorite(question);
+            favoriteBtn.className = `favorite-btn ${nowFavorited ? 'favorited' : ''}`;
+            favoriteBtn.innerHTML = nowFavorited ? '<i class="bi bi-star-fill"></i>' : '<i class="bi bi-star"></i>';
+        });
+        
+        const cardBody = document.querySelector('#quizScreen .card-body');
+        if (cardBody) {
+            cardBody.style.position = 'relative';
+            cardBody.insertBefore(favoriteBtn, cardBody.firstChild);
+        }
     }
     
     // Update progress
@@ -1137,8 +1443,14 @@ function displayQuestionList(questions) {
             statsHtml = '<div class="text-muted small">未回答</div>';
         }
         
+        const isFav = isFavorite(question);
+        const favIcon = isFav ? '<i class="bi bi-star-fill"></i>' : '<i class="bi bi-star"></i>';
+        
         card.innerHTML = `
-            <div class="card-body">
+            <div class="card-body" style="position: relative;">
+                <button class="favorite-btn ${isFav ? 'favorited' : ''}" data-question-index="${quizData.indexOf(question)}">
+                    ${favIcon}
+                </button>
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <h5 class="card-title mb-0">問題 ${index + 1}</h5>
                     <div>
@@ -1151,6 +1463,15 @@ function displayQuestionList(questions) {
                 ${statsHtml}
             </div>
         `;
+        
+        // Add favorite button event
+        const favoriteBtn = card.querySelector('.favorite-btn');
+        favoriteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const nowFavorited = toggleFavorite(question);
+            favoriteBtn.className = `favorite-btn ${nowFavorited ? 'favorited' : ''}`;
+            favoriteBtn.innerHTML = nowFavorited ? '<i class="bi bi-star-fill"></i>' : '<i class="bi bi-star"></i>';
+        });
         
         // Add click event to navigate to this question
         // Store the question object directly to avoid inefficient lookup
