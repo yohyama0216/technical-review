@@ -356,7 +356,13 @@ function selectAnswer(index, btn) {
         if (currentQuestionIndex < currentQuestions.length) {
             loadQuestion();
         } else {
-            finishQuiz();
+            // Save results and return to home
+            if (quizResults.length > 0) {
+                const correct = quizResults.filter(r => r.correct).length;
+                const total = quizResults.length;
+                saveQuizResult(currentMajorCategory, currentMiddleCategory, currentMinorCategory, correct, total);
+            }
+            showMajorCategoryScreen();
         }
     }, 3000);
 }
