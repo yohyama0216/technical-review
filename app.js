@@ -63,7 +63,6 @@ const homeBtn = document.getElementById('homeBtn');
 const reviewBackBtn = document.getElementById('reviewBackBtn');
 
 const progressFill = document.getElementById('progressFill');
-const categoryTitle = document.getElementById('categoryTitle');
 const categoryBreadcrumb = document.getElementById('categoryBreadcrumb');
 const questionText = document.getElementById('questionText');
 const answersContainer = document.getElementById('answersContainer');
@@ -88,16 +87,16 @@ const questionCount = document.getElementById('questionCount');
 // ==================== INITIALIZATION ====================
 
 document.addEventListener('DOMContentLoaded', () => {
-    setupMajorCategories();
     setupEventListeners();
 });
 
 function setupEventListeners() {
+    document.getElementById('randomQuestionBtn').addEventListener('click', startRandomQuestion);
     document.getElementById('backToMajorBtn').addEventListener('click', showMajorCategoryScreen);
     document.getElementById('backToMiddleBtn').addEventListener('click', () => showMiddleCategories(currentMajorCategory));
     document.getElementById('backToHomeBtn').addEventListener('click', showMajorCategoryScreen);
     document.getElementById('backToHomeFromListBtn').addEventListener('click', showMajorCategoryScreen);
-    backBtn.addEventListener('click', () => showMinorCategories(currentMajorCategory, currentMiddleCategory));
+    backBtn.addEventListener('click', showMajorCategoryScreen);
     homeBtn.addEventListener('click', () => {
         showMajorCategoryScreen();
         finishQuiz();
@@ -129,7 +128,16 @@ function showScreen(screenToShow) {
 
 function showMajorCategoryScreen() {
     showScreen(majorCategoryScreen);
-    setupMajorCategories();
+}
+
+// ==================== RANDOM QUESTION ====================
+
+function startRandomQuestion() {
+    // Get a random question from all available questions
+    const randomIndex = Math.floor(Math.random() * quizData.length);
+    const randomQuestion = quizData[randomIndex];
+    
+    startQuizFromQuestion(randomQuestion);
 }
 
 function showStatsScreen() {
@@ -225,26 +233,42 @@ function showMinorCategories(majorCat, middleCat) {
 
 // ==================== QUIZ FUNCTIONS ====================
 
+let currentQuestions = [];
+let isSingleQuestionMode = false;
+
 function startQuiz(majorCat, middleCat, minorCat) {
     currentMajorCategory = majorCat;
     currentMiddleCategory = middleCat;
     currentMinorCategory = minorCat;
     currentQuestionIndex = 0;
     quizResults = [];
+    isSingleQuestionMode = false;
+    currentQuestions = getQuestionsByCategory(majorCat, middleCat, minorCat);
+    
+    showScreen(quizScreen);
+    loadQuestion();
+}
+
+function startQuizFromQuestion(question) {
+    currentMajorCategory = question.majorCategory;
+    currentMiddleCategory = question.middleCategory;
+    currentMinorCategory = question.minorCategory;
+    currentQuestionIndex = 0;
+    quizResults = [];
+    isSingleQuestionMode = true;
+    currentQuestions = [question];
     
     showScreen(quizScreen);
     loadQuestion();
 }
 
 function loadQuestion() {
-    const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
-    
-    if (currentQuestionIndex >= questions.length) {
+    if (currentQuestionIndex >= currentQuestions.length) {
         finishQuiz();
         return;
     }
     
-    const question = questions[currentQuestionIndex];
+    const question = currentQuestions[currentQuestionIndex];
     selectedAnswer = null;
     
     // Update breadcrumb
@@ -255,12 +279,11 @@ function loadQuestion() {
     `;
     
     // Update progress
-    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
     progressFill.style.width = `${progress}%`;
     progressFill.setAttribute('aria-valuenow', progress);
     
     // Show question
-    categoryTitle.textContent = currentMinorCategory;
     questionText.textContent = question.question;
     
     // Clear and hide explanation
@@ -297,8 +320,7 @@ function selectAnswer(index, btn) {
     if (selectedAnswer !== null) return;
     
     selectedAnswer = index;
-    const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
-    const question = questions[currentQuestionIndex];
+    const question = currentQuestions[currentQuestionIndex];
     const isCorrect = selectedAnswer === question.correct;
     
     quizResults.push({
@@ -331,7 +353,7 @@ function selectAnswer(index, btn) {
     // Auto-advance
     setTimeout(() => {
         currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
+        if (currentQuestionIndex < currentQuestions.length) {
             loadQuestion();
         } else {
             finishQuiz();
@@ -415,12 +437,11 @@ function showResultScreen() {
 }
 
 function showReview() {
-    const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
     reviewCategoryTitle.textContent = `復習: ${currentMinorCategory}`;
     reviewContent.innerHTML = '';
     
     quizResults.forEach((result, index) => {
-        const question = questions[result.questionIndex];
+        const question = currentQuestions[result.questionIndex];
         const div = document.createElement('div');
         div.className = `card mb-3 review-item ${result.correct ? 'correct-answer' : 'incorrect-answer'}`;
         
@@ -690,6 +711,7 @@ function displayQuestionList(questions) {
     questions.forEach((question, index) => {
         const card = document.createElement('div');
         card.className = 'card mb-3 question-list-item shadow-sm';
+        card.style.cursor = 'pointer';
         
         card.innerHTML = `
             <div class="card-body">
@@ -704,6 +726,12 @@ function displayQuestionList(questions) {
                 <p class="card-text question-text mb-0">${escapeHtml(question.question)}</p>
             </div>
         `;
+        
+        // Add click event to navigate to this question
+        // Store the question object directly to avoid inefficient lookup
+        card.addEventListener('click', () => {
+            startQuizFromQuestion(question);
+        });
         
         questionListContainer.appendChild(card);
     });
