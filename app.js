@@ -1,0 +1,577 @@
+// ==================== CATEGORY & QUESTION FUNCTIONS ====================
+
+function getCategories() {
+    const categories = {};
+    quizData.forEach(q => {
+        if (!categories[q.majorCategory]) {
+            categories[q.majorCategory] = {};
+        }
+        if (!categories[q.majorCategory][q.middleCategory]) {
+            categories[q.majorCategory][q.middleCategory] = new Set();
+        }
+        categories[q.majorCategory][q.middleCategory].add(q.minorCategory);
+    });
+    
+    Object.keys(categories).forEach(majorKey => {
+        Object.keys(categories[majorKey]).forEach(middleKey => {
+            categories[majorKey][middleKey] = Array.from(categories[majorKey][middleKey]);
+        });
+    });
+    
+    return categories;
+}
+
+function getQuestionsByCategory(majorCat, middleCat, minorCat) {
+    return quizData.filter(q => 
+        q.majorCategory === majorCat && 
+        q.middleCategory === middleCat && 
+        q.minorCategory === minorCat
+    );
+}
+
+// ==================== APP STATE ====================
+
+let currentMajorCategory = '';
+let currentMiddleCategory = '';
+let currentMinorCategory = '';
+let currentQuestionIndex = 0;
+let selectedAnswer = null;
+let quizResults = [];
+let shuffledAnswers = [];
+
+// ==================== DOM ELEMENTS ====================
+
+const majorCategoryScreen = document.getElementById('majorCategoryScreen');
+const middleCategoryScreen = document.getElementById('middleCategoryScreen');
+const minorCategoryScreen = document.getElementById('minorCategoryScreen');
+const statsScreen = document.getElementById('statsScreen');
+const quizScreen = document.getElementById('quizScreen');
+const resultScreen = document.getElementById('resultScreen');
+const reviewScreen = document.getElementById('reviewScreen');
+
+const majorCategoryButtons = document.getElementById('majorCategoryButtons');
+const middleCategoryButtons = document.getElementById('middleCategoryButtons');
+const middleCategoryTitle = document.getElementById('middleCategoryTitle');
+const minorCategoryButtons = document.getElementById('minorCategoryButtons');
+const minorCategoryTitle = document.getElementById('minorCategoryTitle');
+
+const backBtn = document.getElementById('backBtn');
+const submitBtn = document.getElementById('submitBtn');
+const reviewBtn = document.getElementById('reviewBtn');
+const homeBtn = document.getElementById('homeBtn');
+const reviewBackBtn = document.getElementById('reviewBackBtn');
+
+const progressFill = document.getElementById('progressFill');
+const categoryTitle = document.getElementById('categoryTitle');
+const categoryBreadcrumb = document.getElementById('categoryBreadcrumb');
+const questionText = document.getElementById('questionText');
+const answersContainer = document.getElementById('answersContainer');
+const resultContent = document.getElementById('resultContent');
+const reviewContent = document.getElementById('reviewContent');
+const reviewCategoryTitle = document.getElementById('reviewCategoryTitle');
+
+// Stats elements
+const totalCorrectEl = document.getElementById('totalCorrect');
+const totalIncorrectEl = document.getElementById('totalIncorrect');
+const totalQuestionsEl = document.getElementById('totalQuestions');
+const dailyStatsDisplay = document.getElementById('dailyStatsDisplay');
+const categoryStatsDisplay = document.getElementById('categoryStatsDisplay');
+
+// ==================== INITIALIZATION ====================
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupMajorCategories();
+    setupEventListeners();
+});
+
+function setupEventListeners() {
+    document.getElementById('backToMajorBtn').addEventListener('click', showMajorCategoryScreen);
+    document.getElementById('backToMiddleBtn').addEventListener('click', () => showMiddleCategories(currentMajorCategory));
+    document.getElementById('backToHomeBtn').addEventListener('click', showMajorCategoryScreen);
+    backBtn.addEventListener('click', () => showMinorCategories(currentMajorCategory, currentMiddleCategory));
+    homeBtn.addEventListener('click', () => {
+        showMajorCategoryScreen();
+        finishQuiz();
+    });
+    reviewBtn.addEventListener('click', showReview);
+    reviewBackBtn.addEventListener('click', showResultScreen);
+}
+
+// ==================== SCREEN NAVIGATION ====================
+
+function showScreen(screenToShow) {
+    [majorCategoryScreen, middleCategoryScreen, minorCategoryScreen, 
+     statsScreen, quizScreen, resultScreen, reviewScreen].forEach(screen => {
+        screen.classList.remove('active');
+    });
+    screenToShow.classList.add('active');
+}
+
+function showMajorCategoryScreen() {
+    showScreen(majorCategoryScreen);
+    setupMajorCategories();
+}
+
+function showStatsScreen() {
+    showScreen(statsScreen);
+    loadStatistics();
+}
+
+// ==================== MAJOR CATEGORY ====================
+
+function setupMajorCategories() {
+    const categories = getCategories();
+    majorCategoryButtons.innerHTML = '';
+    
+    const majorCats = Object.keys(categories);
+    majorCats.forEach((category, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-4';
+        
+        const card = document.createElement('div');
+        card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
+        
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body text-center';
+        cardBody.innerHTML = `<h5 class="mb-0">${category}</h5>`;
+        
+        card.appendChild(cardBody);
+        col.appendChild(card);
+        card.addEventListener('click', () => showMiddleCategories(category));
+        majorCategoryButtons.appendChild(col);
+    });
+}
+
+// ==================== MIDDLE CATEGORY ====================
+
+function showMiddleCategories(majorCat) {
+    currentMajorCategory = majorCat;
+    const categories = getCategories();
+    const middleCats = Object.keys(categories[majorCat]);
+    
+    middleCategoryTitle.textContent = `${majorCat} - 中カテゴリを選択`;
+    middleCategoryButtons.innerHTML = '';
+    
+    middleCats.forEach((middleCat, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-4';
+        
+        const card = document.createElement('div');
+        card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
+        
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body text-center';
+        cardBody.innerHTML = `<h5 class="mb-0">${middleCat}</h5>`;
+        
+        card.appendChild(cardBody);
+        col.appendChild(card);
+        card.addEventListener('click', () => showMinorCategories(majorCat, middleCat));
+        middleCategoryButtons.appendChild(col);
+    });
+    
+    showScreen(middleCategoryScreen);
+}
+
+// ==================== MINOR CATEGORY ====================
+
+function showMinorCategories(majorCat, middleCat) {
+    currentMajorCategory = majorCat;
+    currentMiddleCategory = middleCat;
+    const categories = getCategories();
+    const minorCats = categories[majorCat][middleCat];
+    
+    minorCategoryTitle.textContent = `${middleCat} - 小カテゴリを選択`;
+    minorCategoryButtons.innerHTML = '';
+    
+    minorCats.forEach((minorCat, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6';
+        
+        const card = document.createElement('div');
+        card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
+        
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body text-center';
+        cardBody.innerHTML = `<h5 class="mb-0">${minorCat}</h5>`;
+        
+        card.appendChild(cardBody);
+        col.appendChild(card);
+        card.addEventListener('click', () => startQuiz(majorCat, middleCat, minorCat));
+        minorCategoryButtons.appendChild(col);
+    });
+    
+    showScreen(minorCategoryScreen);
+}
+
+// ==================== QUIZ FUNCTIONS ====================
+
+function startQuiz(majorCat, middleCat, minorCat) {
+    currentMajorCategory = majorCat;
+    currentMiddleCategory = middleCat;
+    currentMinorCategory = minorCat;
+    currentQuestionIndex = 0;
+    quizResults = [];
+    
+    showScreen(quizScreen);
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
+    
+    if (currentQuestionIndex >= questions.length) {
+        finishQuiz();
+        return;
+    }
+    
+    const question = questions[currentQuestionIndex];
+    selectedAnswer = null;
+    
+    // Update breadcrumb
+    categoryBreadcrumb.innerHTML = `
+        <li class="breadcrumb-item">${currentMajorCategory}</li>
+        <li class="breadcrumb-item">${currentMiddleCategory}</li>
+        <li class="breadcrumb-item active">${currentMinorCategory}</li>
+    `;
+    
+    // Update progress
+    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    progressFill.style.width = `${progress}%`;
+    progressFill.setAttribute('aria-valuenow', progress);
+    
+    // Show question
+    categoryTitle.textContent = currentMinorCategory;
+    questionText.textContent = question.question;
+    
+    // Clear and hide explanation
+    const existingExplanation = document.getElementById('explanationBox');
+    if (existingExplanation) {
+        existingExplanation.remove();
+    }
+    
+    // Shuffle answers
+    shuffledAnswers = question.answers.map((text, index) => ({
+        text: text,
+        originalIndex: index
+    }));
+    
+    for (let i = shuffledAnswers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledAnswers[i], shuffledAnswers[j]] = [shuffledAnswers[j], shuffledAnswers[i]];
+    }
+    
+    // Display answers
+    answersContainer.innerHTML = '';
+    shuffledAnswers.forEach((answerObj) => {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-outline-primary answer-btn';
+        btn.textContent = answerObj.text;
+        btn.addEventListener('click', () => selectAnswer(answerObj.originalIndex, btn));
+        answersContainer.appendChild(btn);
+    });
+    
+    submitBtn.classList.add('d-none');
+}
+
+function selectAnswer(index, btn) {
+    if (selectedAnswer !== null) return;
+    
+    selectedAnswer = index;
+    const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
+    const question = questions[currentQuestionIndex];
+    const isCorrect = selectedAnswer === question.correct;
+    
+    quizResults.push({
+        questionIndex: currentQuestionIndex,
+        selectedAnswer: selectedAnswer,
+        correct: isCorrect
+    });
+    
+    // Show correct/incorrect
+    const answerButtons = document.querySelectorAll('.answer-btn');
+    answerButtons.forEach((button, displayIndex) => {
+        button.classList.add('disabled');
+        const originalIndex = shuffledAnswers[displayIndex].originalIndex;
+        
+        if (originalIndex === question.correct) {
+            button.classList.remove('btn-outline-primary');
+            button.classList.add('correct');
+        } else if (originalIndex === selectedAnswer && !isCorrect) {
+            button.classList.remove('btn-outline-primary');
+            button.classList.add('incorrect');
+        }
+    });
+    
+    submitBtn.classList.add('d-none');
+    showExplanation(question, isCorrect);
+    
+    // Save to daily history
+    saveDailyHistory(isCorrect);
+    
+    // Auto-advance
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            finishQuiz();
+        }
+    }, 3000);
+}
+
+function showExplanation(question, isCorrect) {
+    let explanationBox = document.getElementById('explanationBox');
+    
+    if (!explanationBox) {
+        explanationBox = document.createElement('div');
+        explanationBox.id = 'explanationBox';
+        explanationBox.className = 'alert ' + (isCorrect ? 'alert-success' : 'alert-danger') + ' mt-3';
+        document.querySelector('.quiz-content').appendChild(explanationBox);
+    }
+    
+    explanationBox.innerHTML = `
+        <div class="explanation-result ${isCorrect ? 'correct-result' : 'incorrect-result'}">
+            ${isCorrect ? '✓ 正解！' : '✗ 不正解'}
+        </div>
+        <div class="explanation-text">
+            <strong>解説:</strong> ${question.explanation}
+        </div>
+        <div class="explanation-correct-answer">
+            <strong>正解:</strong> ${question.answers[question.correct]}
+        </div>
+    `;
+    explanationBox.style.display = 'block';
+}
+
+//  ==================== RESULT & REVIEW ====================
+
+function finishQuiz() {
+    if (quizResults.length === 0) return;
+    
+    const correct = quizResults.filter(r => r.correct).length;
+    const total = quizResults.length;
+    
+    // Save results
+    saveQuizResult(currentMajorCategory, currentMiddleCategory, currentMinorCategory, correct, total);
+    
+    showResultScreen();
+}
+
+function showResultScreen() {
+    const correct = quizResults.filter(r => r.correct).length;
+    const total = quizResults.length;
+    const percentage = Math.round((correct / total) * 100);
+    
+    // Target the card-body element directly
+    const cardBody = resultContent.querySelector('.card-body');
+    if (!cardBody) {
+        console.error('Result card body not found');
+        return;
+    }
+    
+    cardBody.innerHTML = `
+        <div class="text-center result-summary">
+            <h2 class="mb-4">クイズ完了！</h2>
+            <div class="result-score mb-4">${correct} / ${total}</div>
+            <div class="fs-4 mb-4">正解率: ${percentage}%</div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="text-success">
+                        <i class="bi bi-check-circle-fill fs-1"></i>
+                        <div class="fs-5 mt-2">正解: ${correct}</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="text-danger">
+                        <i class="bi bi-x-circle-fill fs-1"></i>
+                        <div class="fs-5 mt-2">不正解: ${total - correct}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    showScreen(resultScreen);
+}
+
+function showReview() {
+    const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
+    reviewCategoryTitle.textContent = `復習: ${currentMinorCategory}`;
+    reviewContent.innerHTML = '';
+    
+    quizResults.forEach((result, index) => {
+        const question = questions[result.questionIndex];
+        const div = document.createElement('div');
+        div.className = `card mb-3 review-item ${result.correct ? 'correct-answer' : 'incorrect-answer'}`;
+        
+        div.innerHTML = `
+            <div class="card-body">
+                <h5 class="card-title">問題 ${index + 1}</h5>
+                <p class="card-text"><strong>Q:</strong> ${question.question}</p>
+                <p class="card-text"><strong>あなたの回答:</strong> ${question.answers[result.selectedAnswer]}</p>
+                ${!result.correct ? `<p class="card-text"><strong>正解:</strong> ${question.answers[question.correct]}</p>` : ''}
+                <p class="card-text"><strong>解説:</strong> ${question.explanation}</p>
+                <span class="badge ${result.correct ? 'bg-success' : 'bg-danger'}">${result.correct ? '正解' : '不正解'}</span>
+            </div>
+        `;
+        
+        reviewContent.appendChild(div);
+    });
+    
+    showScreen(reviewScreen);
+}
+
+// ==================== STATISTICS FUNCTIONS ====================
+
+function saveQuizResult(majorCat, middleCat, minorCat, correct, total) {
+    const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
+    const key = `${majorCat}::${middleCat}::${minorCat}`;
+    
+    if (!results[key]) {
+        results[key] = {
+            majorCategory: majorCat,
+            middleCategory: middleCat,
+            minorCategory: minorCat,
+            attempts: 0,
+            totalCorrect: 0,
+            totalQuestions: 0
+        };
+    }
+    
+    results[key].attempts++;
+    results[key].totalCorrect += correct;
+    results[key].totalQuestions += total;
+    
+    localStorage.setItem('quizResults', JSON.stringify(results));
+}
+
+function saveDailyHistory(isCorrect) {
+    const today = new Date().toISOString().split('T')[0];
+    const history = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    
+    if (!history[today]) {
+        history[today] = { correct: 0, incorrect: 0, total: 0 };
+    }
+    
+    history[today].total++;
+    if (isCorrect) {
+        history[today].correct++;
+    } else {
+        history[today].incorrect++;
+    }
+    
+    localStorage.setItem('dailyHistory', JSON.stringify(history));
+}
+
+function loadStatistics() {
+    const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
+    const dailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    
+    // Calculate totals
+    let totalCorrect = 0;
+    let totalIncorrect = 0;
+    let totalQuestions = 0;
+    
+    Object.values(results).forEach(result => {
+        totalCorrect += result.totalCorrect;
+        totalQuestions += result.totalQuestions;
+    });
+    totalIncorrect = totalQuestions - totalCorrect;
+    
+    // Update summary cards
+    totalCorrectEl.textContent = totalCorrect;
+    totalIncorrectEl.textContent = totalIncorrect;
+    totalQuestionsEl.textContent = totalQuestions;
+    
+    // Display daily stats
+    displayDailyStats(dailyHistory);
+    
+    // Display category stats
+    displayCategoryStats(results);
+}
+
+function displayDailyStats(dailyHistory) {
+    const dates = Object.keys(dailyHistory).sort().reverse().slice(0, 7);
+    
+    if (dates.length === 0) {
+        dailyStatsDisplay.innerHTML = '<p class="text-muted">まだ学習履歴がありません</p>';
+        return;
+    }
+    
+    let html = '<div class="list-group">';
+    dates.forEach(date => {
+        const stats = dailyHistory[date];
+        const percentage = Math.round((stats.correct / stats.total) * 100);
+        
+        html += `
+            <div class="daily-stats-item mb-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>${date}</strong>
+                        <div class="small text-muted">${stats.total}問 / 正解率 ${percentage}%</div>
+                    </div>
+                    <div class="text-end">
+                        <span class="badge bg-success me-1">${stats.correct}</span>
+                        <span class="badge bg-danger">${stats.incorrect}</span>
+                    </div>
+                </div>
+                <div class="progress mt-2" style="height: 6px;">
+                    <div class="progress-bar bg-success" style="width: ${percentage}%"></div>
+                </div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    
+    dailyStatsDisplay.innerHTML = html;
+}
+
+function displayCategoryStats(results) {
+    if (Object.keys(results).length === 0) {
+        categoryStatsDisplay.innerHTML = '<p class="text-muted">まだ統計情報がありません</p>';
+        return;
+    }
+    
+    const grouped = {};
+    Object.values(results).forEach(result => {
+        if (!grouped[result.majorCategory]) {
+            grouped[result.majorCategory] = {};
+        }
+        if (!grouped[result.majorCategory][result.middleCategory]) {
+            grouped[result.majorCategory][result.middleCategory] = [];
+        }
+        grouped[result.majorCategory][result.middleCategory].push(result);
+    });
+    
+    let html = '';
+    Object.keys(grouped).forEach(majorCat => {
+        html += `<div class="mb-4">
+            <h6 class="fw-bold text-primary">${majorCat}</h6>`;
+        
+        Object.keys(grouped[majorCat]).forEach(middleCat => {
+            html += `<div class="ms-3 mb-2"><strong>${middleCat}</strong>`;
+            
+            grouped[majorCat][middleCat].forEach(result => {
+                const percentage = Math.round((result.totalCorrect / result.totalQuestions) * 100);
+                html += `
+                    <div class="category-stat-item ms-3 mb-2">
+                        <div class="d-flex justify-content-between">
+                            <span>${result.minorCategory}</span>
+                            <span>
+                                <span class="badge bg-primary">${result.totalCorrect}/${result.totalQuestions}</span>
+                                <span class="badge bg-info">${percentage}%</span>
+                            </span>
+                        </div>
+                        <div class="progress mt-1" style="height: 4px;">
+                            <div class="progress-bar" style="width: ${percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+        });
+        html += '</div>';
+    });
+    
+    categoryStatsDisplay.innerHTML = html;
+}

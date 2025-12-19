@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技術面接クイズアプリ</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#" onclick="showMajorCategoryScreen(); return false;">
+                <i class="bi bi-mortarboard-fill me-2"></i>技術面接クイズアプリ
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showStatsScreen(); return false;">
+                            <i class="bi bi-graph-up me-1"></i>統計
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <!-- Major Category Selection Screen -->
+        <div id="majorCategoryScreen" class="screen active">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">大カテゴリを選択してください</h2>
+                <p class="text-muted">学習したいカテゴリを選んでください</p>
+            </div>
+            <div id="majorCategoryButtons" class="row g-3"></div>
+        </div>
+
+        <!-- Middle Category Selection Screen -->
+        <div id="middleCategoryScreen" class="screen">
+            <button id="backToMajorBtn" class="btn btn-outline-secondary mb-3">
+                <i class="bi bi-arrow-left me-1"></i>戻る
+            </button>
+            <div class="text-center mb-4">
+                <h2 id="middleCategoryTitle" class="fw-bold"></h2>
+            </div>
+            <div id="middleCategoryButtons" class="row g-3"></div>
+        </div>
+
+        <!-- Minor Category Selection Screen -->
+        <div id="minorCategoryScreen" class="screen">
+            <button id="backToMiddleBtn" class="btn btn-outline-secondary mb-3">
+                <i class="bi bi-arrow-left me-1"></i>戻る
+            </button>
+            <div class="text-center mb-4">
+                <h2 id="minorCategoryTitle" class="fw-bold"></h2>
+            </div>
+            <div id="minorCategoryButtons" class="row g-3"></div>
+        </div>
+
+        <!-- Statistics Screen -->
+        <div id="statsScreen" class="screen">
+            <button id="backToHomeBtn" class="btn btn-outline-secondary mb-3">
+                <i class="bi bi-arrow-left me-1"></i>ホームへ
+            </button>
+            <div class="text-center mb-4">
+                <h2 class="fw-bold"><i class="bi bi-graph-up me-2"></i>学習統計</h2>
+            </div>
+            
+            <!-- Summary Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="card text-white bg-success shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="bi bi-check-circle-fill fs-1"></i>
+                            <h3 class="mt-2 mb-0" id="totalCorrect">0</h3>
+                            <p class="mb-0">正解数</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-danger shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="bi bi-x-circle-fill fs-1"></i>
+                            <h3 class="mt-2 mb-0" id="totalIncorrect">0</h3>
+                            <p class="mb-0">不正解数</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-primary shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="bi bi-journal-check fs-1"></i>
+                            <h3 class="mt-2 mb-0" id="totalQuestions">0</h3>
+                            <p class="mb-0">総問題数</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Study Chart -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0"><i class="bi bi-calendar3 me-2"></i>日ごとの学習状況</h5>
+                </div>
+                <div class="card-body">
+                    <div id="dailyStatsDisplay"></div>
+                </div>
+            </div>
+
+            <!-- Category Stats -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0"><i class="bi bi-pie-chart me-2"></i>カテゴリ別統計</h5>
+                </div>
+                <div class="card-body">
+                    <div id="categoryStatsDisplay"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="screen">
+            <button id="backBtn" class="btn btn-outline-secondary mb-3">
+                <i class="bi bi-arrow-left me-1"></i>戻る
+            </button>
+            
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0" id="categoryBreadcrumb"></ol>
+                        </nav>
+                    </div>
+                    <div class="progress mb-4" style="height: 8px;">
+                        <div id="progressFill" class="progress-bar" role="progressbar"></div>
+                    </div>
+
+                    <div class="quiz-content">
+                        <h5 id="questionText" class="mb-4"></h5>
+                        <div id="answersContainer" class="d-grid gap-2"></div>
+                        <button id="submitBtn" class="btn btn-lg btn-primary mt-4 d-none">回答する</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="resultScreen" class="screen">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">結果</h2>
+            </div>
+            <div id="resultContent" class="card shadow-sm">
+                <div class="card-body"></div>
+            </div>
+            <div class="text-center mt-4">
+                <button id="reviewBtn" class="btn btn-primary btn-lg me-2">
+                    <i class="bi bi-book me-1"></i>復習する
+                </button>
+                <button id="homeBtn" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-house me-1"></i>ホームに戻る
+                </button>
+            </div>
+        </div>
+
+        <!-- Review Screen -->
+        <div id="reviewScreen" class="screen">
+            <button id="reviewBackBtn" class="btn btn-outline-secondary mb-3">
+                <i class="bi bi-arrow-left me-1"></i>戻る
+            </button>
+            <div class="text-center mb-4">
+                <h2 id="reviewCategoryTitle" class="fw-bold">復習</h2>
+            </div>
+            <div id="reviewContent"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
