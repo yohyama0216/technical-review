@@ -358,9 +358,7 @@ function selectAnswer(index, btn) {
         } else {
             // Save results and return to home
             if (quizResults.length > 0) {
-                const correct = quizResults.filter(r => r.correct).length;
-                const total = quizResults.length;
-                saveQuizResult(currentMajorCategory, currentMiddleCategory, currentMinorCategory, correct, total);
+                saveQuizResults();
             }
             showMajorCategoryScreen();
         }
@@ -393,15 +391,16 @@ function showExplanation(question, isCorrect) {
 
 //  ==================== RESULT & REVIEW ====================
 
-function finishQuiz() {
+function saveQuizResults() {
     if (quizResults.length === 0) return;
     
     const correct = quizResults.filter(r => r.correct).length;
     const total = quizResults.length;
-    
-    // Save results
     saveQuizResult(currentMajorCategory, currentMiddleCategory, currentMinorCategory, correct, total);
-    
+}
+
+function finishQuiz() {
+    saveQuizResults();
     showResultScreen();
 }
 
