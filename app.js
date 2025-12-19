@@ -583,8 +583,6 @@ function showMinorCategories(majorCat) {
         minorCategoryButtons.appendChild(btn);
     });
     
-    backToMajorBtn.addEventListener('click', returnToMajorCategories, { once: true });
-    
     showScreen('minor');
 }
 
@@ -879,7 +877,14 @@ function showScreen(screen) {
 }
 
 // Event Listeners
-backBtn.addEventListener('click', () => showMinorCategories(currentMajorCategory));
+backToMajorBtn.addEventListener('click', returnToMajorCategories);
+backBtn.addEventListener('click', () => {
+    if (currentMajorCategory) {
+        showMinorCategories(currentMajorCategory);
+    } else {
+        returnToCategories();
+    }
+});
 submitBtn.addEventListener('click', submitAnswer);
 reviewBtn.addEventListener('click', showReview);
 homeBtn.addEventListener('click', returnToCategories);
