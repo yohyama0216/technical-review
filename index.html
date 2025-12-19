@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技術面接クイズアプリ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>技術面接クイズアプリ</h1>
+        </header>
+
+        <!-- Category Selection Screen -->
+        <div id="categoryScreen" class="screen active">
+            <h2>カテゴリを選択してください</h2>
+            <div class="category-buttons">
+                <button class="category-btn" data-category="web-basics">Web基礎</button>
+                <button class="category-btn" data-category="web-advanced">Web応用</button>
+                <button class="category-btn" data-category="web-security">Webセキュリティ</button>
+                <button class="category-btn" data-category="aws">AWS</button>
+            </div>
+            <div class="stats">
+                <h3>統計情報</h3>
+                <div id="statsDisplay"></div>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="screen">
+            <div class="quiz-header">
+                <button id="backBtn" class="back-btn">← 戻る</button>
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <div class="question-counter">
+                    <span id="currentQuestion">1</span> / <span id="totalQuestions">10</span>
+                </div>
+            </div>
+
+            <div class="quiz-content">
+                <h2 id="categoryTitle"></h2>
+                <div class="question-card">
+                    <h3 id="questionText"></h3>
+                    <div id="answersContainer" class="answers"></div>
+                </div>
+            </div>
+
+            <div class="quiz-footer">
+                <button id="submitBtn" class="submit-btn" disabled>回答する</button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="resultScreen" class="screen">
+            <h2>結果</h2>
+            <div id="resultContent" class="result-content"></div>
+            <div class="result-actions">
+                <button id="reviewBtn" class="action-btn">復習する</button>
+                <button id="homeBtn" class="action-btn">ホームに戻る</button>
+            </div>
+        </div>
+
+        <!-- Review Screen -->
+        <div id="reviewScreen" class="screen">
+            <div class="review-header">
+                <button id="reviewBackBtn" class="back-btn">← 戻る</button>
+                <h2 id="reviewCategoryTitle">復習</h2>
+            </div>
+            <div id="reviewContent" class="review-content"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
