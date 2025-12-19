@@ -357,9 +357,7 @@ function selectAnswer(index, btn) {
             loadQuestion();
         } else {
             // Save results and return to home
-            if (quizResults.length > 0) {
-                saveQuizResults();
-            }
+            saveQuizResults();
             showMajorCategoryScreen();
         }
     }, 3000);
