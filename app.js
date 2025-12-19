@@ -563,9 +563,6 @@ function submitAnswer() {
     submitBtn.disabled = true;
     
     // Move to next question after delay
-    submitBtn.disabled = true;
-    
-    // Move to next question after delay
     setTimeout(() => {
         currentQuestionIndex++;
         
