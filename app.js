@@ -612,9 +612,9 @@ function displayDailyStats(dailyHistory) {
         
         // Prepare data for chart (show last 14 days or all if less)
         const chartDates = dates.slice(-14);
-        const totalData = chartDates.map(date => dailyHistory[date].total);
-        const correctData = chartDates.map(date => dailyHistory[date].correct);
-        const incorrectData = chartDates.map(date => dailyHistory[date].incorrect);
+        const totalData = chartDates.map(date => dailyHistory[date]?.total || 0);
+        const correctData = chartDates.map(date => dailyHistory[date]?.correct || 0);
+        const incorrectData = chartDates.map(date => dailyHistory[date]?.incorrect || 0);
         
         // Format dates for display (MM/DD)
         const formattedDates = chartDates.map(date => {
@@ -701,6 +701,7 @@ function displayDailyStats(dailyHistory) {
     let html = '<div class="list-group">';
     recentDates.forEach(date => {
         const stats = dailyHistory[date];
+        if (!stats) return; // Skip if no data for this date
         const percentage = Math.round((stats.correct / stats.total) * 100);
         
         html += `
