@@ -515,8 +515,15 @@ function goToNextQuestion() {
     // Select next question randomly from questions with fewer answers
     const nextQuestion = selectNextRandomQuestion();
     
-    // Start a new quiz with the selected question
-    startQuizFromQuestion(nextQuestion);
+    // Add the new question to the current session instead of resetting
+    currentMajorCategory = nextQuestion.majorCategory;
+    currentMiddleCategory = nextQuestion.middleCategory;
+    currentMinorCategory = nextQuestion.minorCategory;
+    currentQuestions.push(nextQuestion);
+    currentQuestionIndex++;
+    
+    // Load the next question without resetting results
+    loadQuestion();
 }
 
 // ==================== STATISTICS FUNCTIONS ====================
