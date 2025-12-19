@@ -80,9 +80,9 @@ const quizData = [
         explanation: 'デッドロックの4つの条件は、相互排除、保持と待機、ノンプリエンプション、循環待機です。シングルスレッド実行では発生しません。'
     },
     
-    // Web Performance Category
+    // App Performance Category
     {
-        majorCategory: 'Webパフォーマンス',
+        majorCategory: 'アプリパフォーマンス',
         minorCategory: 'フロントエンド最適化',
         question: 'Critical Rendering Pathの最適化手法として正しいものはどれですか？',
         answers: [
@@ -95,7 +95,7 @@ const quizData = [
         explanation: 'Critical Rendering Pathを最適化するには、初期表示に必要なCSSをインライン化し、その他のCSSは非同期で読み込むことが効果的です。'
     },
     {
-        majorCategory: 'Webパフォーマンス',
+        majorCategory: 'アプリパフォーマンス',
         minorCategory: 'フロントエンド最適化',
         question: 'Lazy Loadingの主な目的はどれですか？',
         answers: [
@@ -108,8 +108,77 @@ const quizData = [
         explanation: 'Lazy Loadingは、ビューポート外のコンテンツの読み込みを遅延させ、初期ページロード時間を短縮する技術です。'
     },
     {
-        majorCategory: 'Webパフォーマンス',
-        minorCategory: 'キャッシング戦略',
+        majorCategory: 'アプリパフォーマンス',
+        minorCategory: 'バンドル最適化',
+        question: 'Tree Shakingの主な目的はどれですか？',
+        answers: [
+            'CSSの最適化',
+            '未使用コードの削除によるバンドルサイズ削減',
+            'HTMLの圧縮',
+            '画像の最適化'
+        ],
+        correct: 1,
+        explanation: 'Tree Shakingは、使用されていないコードを削除し、最終的なバンドルサイズを削減する最適化手法です。'
+    },
+    {
+        majorCategory: 'アプリパフォーマンス',
+        minorCategory: 'レンダリング最適化',
+        question: 'リフローを避けるための最適な方法はどれですか？',
+        answers: [
+            'DOMを頻繁に個別に更新する',
+            'DocumentFragmentを使用してバッチ更新する',
+            'インラインスタイルを多用する',
+            '全てのスタイルをJavaScriptで設定する'
+        ],
+        correct: 1,
+        explanation: 'DocumentFragmentを使用することで、DOM操作をバッチ化し、リフロー回数を最小限に抑えることができます。'
+    },
+    
+    // DB Performance Category
+    {
+        majorCategory: 'DBパフォーマンス',
+        minorCategory: 'クエリ最適化',
+        question: 'データベースのスロークエリを特定する最適な方法はどれですか？',
+        answers: [
+            'すべてのクエリを手動で確認',
+            'スロークエリログを有効にして分析',
+            'データベースを再起動',
+            'インデックスを全て削除'
+        ],
+        correct: 1,
+        explanation: 'スロークエリログを有効にすることで、実行時間が閾値を超えるクエリを自動的に記録し、パフォーマンス問題を特定できます。'
+    },
+    {
+        majorCategory: 'DBパフォーマンス',
+        minorCategory: 'インデックス最適化',
+        question: 'カバリングインデックスの主な利点はどれですか？',
+        answers: [
+            'ディスク容量の削減',
+            'テーブルアクセスなしでクエリを完結できる',
+            'データの整合性向上',
+            '更新処理の高速化'
+        ],
+        correct: 1,
+        explanation: 'カバリングインデックスは、クエリに必要な全てのカラムをインデックスに含むため、テーブルへのアクセスが不要になり、パフォーマンスが向上します。'
+    },
+    {
+        majorCategory: 'DBパフォーマンス',
+        minorCategory: '接続管理',
+        question: 'データベース接続プーリングの主な目的はどれですか？',
+        answers: [
+            'セキュリティの向上',
+            '接続の再利用によるオーバーヘッド削減',
+            'データの暗号化',
+            'バックアップの自動化'
+        ],
+        correct: 1,
+        explanation: '接続プーリングは、データベース接続を再利用することで、接続確立のオーバーヘッドを削減し、アプリケーションのパフォーマンスを向上させます。'
+    },
+
+    // Cache Category
+    {
+        majorCategory: 'キャッシュ',
+        minorCategory: 'HTTP キャッシング',
         question: 'Cache-Control: max-age=3600 の意味はどれですか？',
         answers: [
             '3600バイトまでキャッシュ可能',
@@ -121,8 +190,8 @@ const quizData = [
         explanation: 'max-age=3600は、リソースを3600秒（1時間）キャッシュすることを指示します。'
     },
     {
-        majorCategory: 'Webパフォーマンス',
-        minorCategory: 'キャッシング戦略',
+        majorCategory: 'キャッシュ',
+        minorCategory: 'アプリケーションキャッシュ',
         question: 'Service Workerのキャッシュ戦略で、ネットワークが利用できない場合にキャッシュを返す戦略はどれですか？',
         answers: [
             'Cache First',
@@ -134,17 +203,43 @@ const quizData = [
         explanation: 'Network First戦略は、まずネットワークを試み、失敗した場合にキャッシュにフォールバックします。'
     },
     {
-        majorCategory: 'Webパフォーマンス',
-        minorCategory: 'バンドル最適化',
-        question: 'Tree Shakingの主な目的はどれですか？',
+        majorCategory: 'キャッシュ',
+        minorCategory: 'CDN',
+        question: 'CDNの主な役割はどれですか？',
         answers: [
-            'CSSの最適化',
-            '未使用コードの削除によるバンドルサイズ削減',
-            'HTMLの圧縮',
-            '画像の最適化'
+            'データベースの最適化',
+            '地理的に分散されたサーバーからコンテンツ配信',
+            'コードのコンパイル',
+            'セキュリティスキャン'
         ],
         correct: 1,
-        explanation: 'Tree Shakingは、使用されていないコードを削除し、最終的なバンドルサイズを削減する最適化手法です。'
+        explanation: 'CDN（Content Delivery Network）は、地理的に分散されたエッジサーバーからコンテンツを配信し、レイテンシを削減します。'
+    },
+    {
+        majorCategory: 'キャッシュ',
+        minorCategory: 'データベースキャッシュ',
+        question: 'Redisなどのインメモリキャッシュの主な利点はどれですか？',
+        answers: [
+            '永続的なデータ保存',
+            '高速なデータアクセス',
+            '大容量データの保存',
+            'トランザクションの保証'
+        ],
+        correct: 1,
+        explanation: 'Redisなどのインメモリキャッシュは、メモリ上にデータを保持するため、ディスクベースのストレージよりも高速なアクセスが可能です。'
+    },
+    {
+        majorCategory: 'キャッシュ',
+        minorCategory: 'キャッシュ戦略',
+        question: 'Write-Through キャッシュ戦略の特徴はどれですか？',
+        answers: [
+            'データはキャッシュにのみ書き込まれる',
+            'データはキャッシュとデータストアに同時に書き込まれる',
+            '読み取り時にのみキャッシュを更新',
+            'キャッシュは常に空'
+        ],
+        correct: 1,
+        explanation: 'Write-Throughは、データをキャッシュとデータストアに同時に書き込むため、データの整合性が保たれますが、書き込み遅延が発生します。'
     },
 
     // API Design Category
@@ -403,16 +498,16 @@ const quizData = [
     },
     {
         majorCategory: 'システム設計',
-        minorCategory: 'キャッシュ戦略',
-        question: 'Write-Through キャッシュ戦略の特徴はどれですか？',
+        minorCategory: '可用性設計',
+        question: 'フェイルオーバーとフェイルバックの説明として正しいものはどれですか？',
         answers: [
-            'データはキャッシュにのみ書き込まれる',
-            'データはキャッシュとデータストアに同時に書き込まれる',
-            '読み取り時にのみキャッシュを更新',
-            'キャッシュは常に空'
+            'フェイルオーバー: 障害時に予備系に切り替え、フェイルバック: 主系復旧後に戻す',
+            'フェイルオーバー: バックアップ作成、フェイルバック: リストア',
+            'フェイルオーバー: スケールアウト、フェイルバック: スケールイン',
+            'フェイルオーバー: 負荷分散、フェイルバック: 負荷集約'
         ],
-        correct: 1,
-        explanation: 'Write-Throughは、データをキャッシュとデータストアに同時に書き込むため、データの整合性が保たれますが、書き込み遅延が発生します。'
+        correct: 0,
+        explanation: 'フェイルオーバーは障害発生時に予備系（スタンバイ）に自動切り替えすること、フェイルバックは主系復旧後に元に戻すことです。'
     },
 
     // Frontend Architecture Category
