@@ -423,6 +423,7 @@ let currentQuestionIndex = 0;
 let selectedAnswer = null;
 let quizResults = [];
 let answeredQuestions = [];
+let shuffledAnswers = []; // Store shuffled answers with original indices
 
 // DOM Elements
 const categoryScreen = document.getElementById('categoryScreen');
@@ -495,13 +496,25 @@ function loadQuestion() {
     const progress = ((currentQuestionIndex) / quizData[currentCategory].questions.length) * 100;
     progressFill.style.width = progress + '%';
     
+    // Shuffle answers
+    shuffledAnswers = question.answers.map((answer, index) => ({
+        text: answer,
+        originalIndex: index
+    }));
+    
+    // Fisher-Yates shuffle algorithm
+    for (let i = shuffledAnswers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledAnswers[i], shuffledAnswers[j]] = [shuffledAnswers[j], shuffledAnswers[i]];
+    }
+    
     // Render answers
     answersContainer.innerHTML = '';
-    question.answers.forEach((answer, index) => {
+    shuffledAnswers.forEach((answerObj, index) => {
         const btn = document.createElement('button');
         btn.className = 'answer-btn';
-        btn.textContent = answer;
-        btn.addEventListener('click', () => selectAnswer(index, btn));
+        btn.textContent = answerObj.text;
+        btn.addEventListener('click', () => selectAnswer(answerObj.originalIndex, btn));
         answersContainer.appendChild(btn);
     });
 }
@@ -535,16 +548,21 @@ function submitAnswer() {
     
     // Show correct/incorrect feedback
     const answerButtons = document.querySelectorAll('.answer-btn');
-    answerButtons.forEach((btn, index) => {
+    answerButtons.forEach((btn, displayIndex) => {
         btn.classList.add('disabled');
-        if (index === question.correct) {
+        const originalIndex = shuffledAnswers[displayIndex].originalIndex;
+        
+        if (originalIndex === question.correct) {
             btn.classList.add('correct');
-        } else if (index === selectedAnswer && !isCorrect) {
+        } else if (originalIndex === selectedAnswer && !isCorrect) {
             btn.classList.add('incorrect');
         }
     });
     
     // Disable submit button
+    submitBtn.disabled = true;
+    
+    // Move to next question after delay
     submitBtn.disabled = true;
     
     // Move to next question after delay
