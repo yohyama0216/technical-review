@@ -49,10 +49,82 @@
                 <h2 class="fw-bold">技術面接クイズアプリ</h2>
                 <p class="text-muted">ランダムに出題された問題に挑戦しましょう</p>
             </div>
-            <div class="text-center">
-                <button id="randomQuestionBtn" class="btn btn-primary btn-lg px-5 py-3">
-                    <i class="bi bi-shuffle me-2"></i>ランダム出題
-                </button>
+
+            <!-- Daily Goal Progress -->
+            <div id="dailyGoalCard" class="goal-progress-card mb-4" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0"><i class="bi bi-target me-2"></i>今日の目標</h5>
+                    <span id="goalText">0/10 問</span>
+                </div>
+                <div class="goal-progress-bar">
+                    <div id="goalProgressFill" class="goal-progress-fill" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <!-- Learning Streak -->
+            <div id="streakCard" class="streak-display mb-4" style="display: none;">
+                <i class="bi bi-fire streak-icon"></i>
+                <div>
+                    <div class="streak-number" id="streakNumber">0</div>
+                    <div>日間連続学習中！</div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="row g-3 mb-4" id="homeStatsCards">
+                <div class="col-md-4">
+                    <div class="card home-stats-card shadow">
+                        <div class="card-body text-center">
+                            <i class="bi bi-check-circle-fill fs-1"></i>
+                            <h3 class="mt-2 mb-0" id="homeCorrectCount">0</h3>
+                            <p class="mb-0">正解数</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card home-stats-card shadow" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="card-body text-center">
+                            <i class="bi bi-trophy-fill fs-1"></i>
+                            <h3 class="mt-2 mb-0" id="homeCompletedCount">0</h3>
+                            <p class="mb-0">完了問題</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card home-stats-card shadow" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div class="card-body text-center">
+                            <i class="bi bi-star-fill fs-1"></i>
+                            <h3 class="mt-2 mb-0" id="homeFavoriteCount">0</h3>
+                            <p class="mb-0">お気に入り</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <button id="randomQuestionBtn" class="btn btn-primary btn-lg w-100 py-3">
+                        <i class="bi bi-shuffle me-2"></i>ランダム出題
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <button id="weakPointModeBtn" class="btn btn-danger btn-lg w-100 py-3">
+                        <i class="bi bi-exclamation-triangle me-2"></i>弱点克服モード
+                    </button>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <button id="favoriteModeBtn" class="btn btn-warning btn-lg w-100 py-3">
+                        <i class="bi bi-star me-2"></i>お気に入り問題
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <button id="achievementsBtn" class="btn btn-info btn-lg w-100 py-3">
+                        <i class="bi bi-trophy me-2"></i>達成バッジ
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -135,7 +207,24 @@
             </div>
             <div id="reviewContent"></div>
         </div>
+
+        <!-- Achievements Screen -->
+        <div id="achievementsScreen" class="screen">
+            <button id="backFromAchievementsBtn" class="btn btn-outline-secondary mb-3">
+                <i class="bi bi-arrow-left me-1"></i>戻る
+            </button>
+            <div class="text-center mb-4">
+                <h2 class="fw-bold"><i class="bi bi-trophy me-2"></i>達成バッジ</h2>
+                <p class="text-muted">学習の成果を確認しましょう</p>
+            </div>
+            <div id="badgeContainer" class="badge-display"></div>
+        </div>
     </div>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle" id="darkModeToggle" title="ダークモード切り替え">
+        <i class="bi bi-moon-stars-fill" id="darkModeIcon"></i>
+    </button>
 
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

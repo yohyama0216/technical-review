@@ -4,6 +4,118 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #1a1a2e !important;
+    color: #e0e0e0;
+}
+
+body.dark-mode .bg-light {
+    background-color: #16213e !important;
+}
+
+body.dark-mode .card {
+    background-color: #0f3460;
+    border-color: #1a4d7a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .card-header {
+    background-color: #16213e !important;
+    border-color: #1a4d7a;
+}
+
+body.dark-mode .navbar-dark {
+    background-color: #0f3460 !important;
+}
+
+body.dark-mode .text-muted {
+    color: #a0a0a0 !important;
+}
+
+body.dark-mode .list-group-item {
+    background-color: #16213e;
+    border-color: #1a4d7a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+    background-color: #16213e;
+    border-color: #1a4d7a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+    background-color: #1a1a2e;
+    border-color: #0d6efd;
+    color: #e0e0e0;
+}
+
+body.dark-mode .answer-btn {
+    background-color: #16213e;
+    border-color: #1a4d7a;
+    color: #e0e0e0;
+}
+
+body.dark-mode .answer-btn:hover:not(.disabled) {
+    background-color: #1a4d7a;
+}
+
+body.dark-mode .daily-stats-item,
+body.dark-mode .category-stat-item {
+    background-color: #16213e;
+    border-left-color: #0d6efd;
+}
+
+body.dark-mode .question-list-item {
+    background-color: #0f3460;
+    border-left-color: #0d6efd;
+}
+
+body.dark-mode .alert-info {
+    background-color: #16213e;
+    border-color: #0d6efd;
+    color: #9ec5fe;
+}
+
+body.dark-mode .breadcrumb-item,
+body.dark-mode .breadcrumb-item.active {
+    color: #e0e0e0;
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .dark-mode-toggle {
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
 }
 
 /* Screen Management */
@@ -306,4 +418,183 @@ body {
 .form-select:focus {
     border-color: #0d6efd;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Favorite Button */
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #ffc107;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 5px;
+    z-index: 10;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.2);
+}
+
+.favorite-btn.favorited {
+    color: #ffc107;
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+.favorite-btn:not(.favorited) {
+    color: #dee2e6;
+}
+
+body.dark-mode .favorite-btn:not(.favorited) {
+    color: #4a5568;
+}
+
+/* Badges System */
+.badge-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.achievement-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.achievement-badge.earned {
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    animation: badgeEarned 0.6s ease-out;
+}
+
+@keyframes badgeEarned {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.achievement-badge.locked {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+.achievement-badge:hover:not(.locked) {
+    transform: translateY(-5px);
+}
+
+.badge-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.badge-name {
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.badge-description {
+    font-size: 0.75rem;
+    text-align: center;
+    color: #6c757d;
+}
+
+body.dark-mode .achievement-badge {
+    background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+}
+
+body.dark-mode .achievement-badge.earned {
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+}
+
+/* Home Screen Stats */
+.home-stats-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.home-stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.streak-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.streak-number {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.streak-icon {
+    font-size: 2rem;
+}
+
+/* Weak Point Mode */
+.weak-point-indicator {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+}
+
+/* Goal Progress */
+.goal-progress-card {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    border: none;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.goal-progress-bar {
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.goal-progress-fill {
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #38f9d7;
 }
