@@ -137,7 +137,7 @@ function startRandomQuestion() {
     const randomIndex = Math.floor(Math.random() * quizData.length);
     const randomQuestion = quizData[randomIndex];
     
-    startQuizFromQuestion(randomQuestion, randomIndex);
+    startQuizFromQuestion(randomQuestion);
 }
 
 function showStatsScreen() {
@@ -249,7 +249,7 @@ function startQuiz(majorCat, middleCat, minorCat) {
     loadQuestion();
 }
 
-function startQuizFromQuestion(question, questionIndex) {
+function startQuizFromQuestion(question) {
     currentMajorCategory = question.majorCategory;
     currentMiddleCategory = question.middleCategory;
     currentMinorCategory = question.minorCategory;
@@ -728,14 +728,9 @@ function displayQuestionList(questions) {
         `;
         
         // Add click event to navigate to this question
+        // Store the question object directly to avoid inefficient lookup
         card.addEventListener('click', () => {
-            const questionIndex = quizData.findIndex(q => 
-                q.question === question.question && 
-                q.majorCategory === question.majorCategory &&
-                q.middleCategory === question.middleCategory &&
-                q.minorCategory === question.minorCategory
-            );
-            startQuizFromQuestion(question, questionIndex);
+            startQuizFromQuestion(question);
         });
         
         questionListContainer.appendChild(card);
