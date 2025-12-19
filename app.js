@@ -1,8 +1,9 @@
-// Quiz Data with Major and Minor Categories
+// Quiz Data with Major, Middle, and Minor Categories
 const quizData = [
-    // Database Category
+    // Backend Technology -> Database Category
     {
-        majorCategory: 'データベース',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
         minorCategory: 'インデックス設計',
         question: 'B-Treeインデックスの特徴として正しいものはどれですか？',
         answers: [
@@ -15,7 +16,8 @@ const quizData = [
         explanation: 'B-Treeインデックスは範囲検索、完全一致検索の両方に適しており、データベースで最も一般的に使用されるインデックスタイプです。'
     },
     {
-        majorCategory: 'データベース',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
         minorCategory: 'インデックス設計',
         question: 'カーディナリティが高いカラムにインデックスを作成する理由はどれですか？',
         answers: [
@@ -28,7 +30,8 @@ const quizData = [
         explanation: 'カーディナリティが高い（ユニークな値が多い）カラムにインデックスを作成すると、検索時に絞り込みが効率的に行えます。'
     },
     {
-        majorCategory: 'データベース',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
         minorCategory: 'クエリ最適化',
         question: 'EXPLAINコマンドの主な用途はどれですか？',
         answers: [
@@ -41,7 +44,8 @@ const quizData = [
         explanation: 'EXPLAINコマンドは、SQLクエリの実行計画を表示し、インデックスの使用状況やパフォーマンスの分析に使用されます。'
     },
     {
-        majorCategory: 'データベース',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
         minorCategory: 'クエリ最適化',
         question: 'N+1問題が発生する主な原因はどれですか？',
         answers: [
@@ -54,7 +58,8 @@ const quizData = [
         explanation: 'N+1問題は、親レコードを取得後、各親に対して関連レコードを個別にクエリすることで発生します。JOINやeager loadingで解決できます。'
     },
     {
-        majorCategory: 'データベース',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
         minorCategory: 'トランザクション',
         question: 'ACID特性の「I」が表すものはどれですか？',
         answers: [
@@ -67,7 +72,8 @@ const quizData = [
         explanation: 'ACIDのIはIsolation（分離性）を表し、複数のトランザクションが並行実行されても互いに影響を与えないことを保証します。'
     },
     {
-        majorCategory: 'データベース',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
         minorCategory: 'トランザクション',
         question: 'デッドロックが発生する条件として正しくないものはどれですか？',
         answers: [
@@ -80,9 +86,10 @@ const quizData = [
         explanation: 'デッドロックの4つの条件は、相互排除、保持と待機、ノンプリエンプション、循環待機です。シングルスレッド実行では発生しません。'
     },
     
-    // App Performance Category
+    // Frontend Technology -> App Performance Category
     {
-        majorCategory: 'アプリパフォーマンス',
+        majorCategory: 'フロントエンド技術',
+        middleCategory: 'アプリパフォーマンス',
         minorCategory: 'フロントエンド最適化',
         question: 'Critical Rendering Pathの最適化手法として正しいものはどれですか？',
         answers: [
@@ -95,7 +102,8 @@ const quizData = [
         explanation: 'Critical Rendering Pathを最適化するには、初期表示に必要なCSSをインライン化し、その他のCSSは非同期で読み込むことが効果的です。'
     },
     {
-        majorCategory: 'アプリパフォーマンス',
+        majorCategory: 'フロントエンド技術',
+        middleCategory: 'アプリパフォーマンス',
         minorCategory: 'フロントエンド最適化',
         question: 'Lazy Loadingの主な目的はどれですか？',
         answers: [
@@ -108,7 +116,8 @@ const quizData = [
         explanation: 'Lazy Loadingは、ビューポート外のコンテンツの読み込みを遅延させ、初期ページロード時間を短縮する技術です。'
     },
     {
-        majorCategory: 'アプリパフォーマンス',
+        majorCategory: 'フロントエンド技術',
+        middleCategory: 'アプリパフォーマンス',
         minorCategory: 'バンドル最適化',
         question: 'Tree Shakingの主な目的はどれですか？',
         answers: [
@@ -121,7 +130,8 @@ const quizData = [
         explanation: 'Tree Shakingは、使用されていないコードを削除し、最終的なバンドルサイズを削減する最適化手法です。'
     },
     {
-        majorCategory: 'アプリパフォーマンス',
+        majorCategory: 'フロントエンド技術',
+        middleCategory: 'アプリパフォーマンス',
         minorCategory: 'レンダリング最適化',
         question: 'リフローを避けるための最適な方法はどれですか？',
         answers: [
@@ -136,7 +146,8 @@ const quizData = [
     
     // DB Performance Category
     {
-        majorCategory: 'DBパフォーマンス',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'DBパフォーマンス',
         minorCategory: 'クエリ最適化',
         question: 'データベースのスロークエリを特定する最適な方法はどれですか？',
         answers: [
@@ -149,7 +160,8 @@ const quizData = [
         explanation: 'スロークエリログを有効にすることで、実行時間が閾値を超えるクエリを自動的に記録し、パフォーマンス問題を特定できます。'
     },
     {
-        majorCategory: 'DBパフォーマンス',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'DBパフォーマンス',
         minorCategory: 'インデックス最適化',
         question: 'カバリングインデックスの主な利点はどれですか？',
         answers: [
@@ -162,7 +174,8 @@ const quizData = [
         explanation: 'カバリングインデックスは、クエリに必要な全てのカラムをインデックスに含むため、テーブルへのアクセスが不要になり、パフォーマンスが向上します。'
     },
     {
-        majorCategory: 'DBパフォーマンス',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'DBパフォーマンス',
         minorCategory: '接続管理',
         question: 'データベース接続プーリングの主な目的はどれですか？',
         answers: [
@@ -177,7 +190,8 @@ const quizData = [
 
     // Cache Category
     {
-        majorCategory: 'キャッシュ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'キャッシュ',
         minorCategory: 'HTTP キャッシング',
         question: 'Cache-Control: max-age=3600 の意味はどれですか？',
         answers: [
@@ -190,7 +204,8 @@ const quizData = [
         explanation: 'max-age=3600は、リソースを3600秒（1時間）キャッシュすることを指示します。'
     },
     {
-        majorCategory: 'キャッシュ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'キャッシュ',
         minorCategory: 'アプリケーションキャッシュ',
         question: 'Service Workerのキャッシュ戦略で、ネットワークが利用できない場合にキャッシュを返す戦略はどれですか？',
         answers: [
@@ -203,7 +218,8 @@ const quizData = [
         explanation: 'Network First戦略は、まずネットワークを試み、失敗した場合にキャッシュにフォールバックします。'
     },
     {
-        majorCategory: 'キャッシュ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'キャッシュ',
         minorCategory: 'CDN',
         question: 'CDNの主な役割はどれですか？',
         answers: [
@@ -216,7 +232,8 @@ const quizData = [
         explanation: 'CDN（Content Delivery Network）は、地理的に分散されたエッジサーバーからコンテンツを配信し、レイテンシを削減します。'
     },
     {
-        majorCategory: 'キャッシュ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'キャッシュ',
         minorCategory: 'データベースキャッシュ',
         question: 'Redisなどのインメモリキャッシュの主な利点はどれですか？',
         answers: [
@@ -229,7 +246,8 @@ const quizData = [
         explanation: 'Redisなどのインメモリキャッシュは、メモリ上にデータを保持するため、ディスクベースのストレージよりも高速なアクセスが可能です。'
     },
     {
-        majorCategory: 'キャッシュ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'キャッシュ',
         minorCategory: 'キャッシュ戦略',
         question: 'Write-Through キャッシュ戦略の特徴はどれですか？',
         answers: [
@@ -244,7 +262,8 @@ const quizData = [
 
     // API Design Category
     {
-        majorCategory: 'API設計',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
         minorCategory: 'RESTful設計',
         question: 'RESTful APIで、リソースの部分更新に適したHTTPメソッドはどれですか？',
         answers: [
@@ -257,7 +276,8 @@ const quizData = [
         explanation: 'PATCHメソッドはリソースの部分更新に使用されます。PUTは全体の置き換えに使用されます。'
     },
     {
-        majorCategory: 'API設計',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
         minorCategory: 'RESTful設計',
         question: 'RESTful APIのエンドポイント設計で推奨されるのはどれですか？',
         answers: [
@@ -270,7 +290,8 @@ const quizData = [
         explanation: 'RESTful APIでは、リソースを名詞で表現し、HTTPメソッドで操作を示します。/usersが適切です。'
     },
     {
-        majorCategory: 'API設計',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
         minorCategory: 'エラーハンドリング',
         question: 'API認証エラーに適したHTTPステータスコードはどれですか？',
         answers: [
@@ -283,7 +304,8 @@ const quizData = [
         explanation: '401 Unauthorizedは認証が必要、または認証に失敗したことを示します。403は認証されているが権限がない場合です。'
     },
     {
-        majorCategory: 'API設計',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
         minorCategory: 'エラーハンドリング',
         question: 'サーバー内部エラーを示すHTTPステータスコードはどれですか？',
         answers: [
@@ -296,7 +318,8 @@ const quizData = [
         explanation: '500 Internal Server Errorは、サーバー側で予期しないエラーが発生したことを示します。'
     },
     {
-        majorCategory: 'API設計',
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
         minorCategory: 'バージョニング',
         question: 'API バージョニングの方法として一般的でないものはどれですか？',
         answers: [
@@ -311,7 +334,8 @@ const quizData = [
 
     // Security Category
     {
-        majorCategory: 'セキュリティ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'セキュリティ',
         minorCategory: '認証・認可',
         question: 'JWTトークンの構成要素として正しくないものはどれですか？',
         answers: [
@@ -324,7 +348,8 @@ const quizData = [
         explanation: 'JWTはHeader、Payload、Signatureの3つの部分から構成されます。JWTは署名されますが、暗号化はオプションです。'
     },
     {
-        majorCategory: 'セキュリティ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'セキュリティ',
         minorCategory: '認証・認可',
         question: 'OAuth 2.0で、サードパーティアプリがユーザーの代わりにリソースにアクセスするために使用するものはどれですか？',
         answers: [
@@ -337,7 +362,8 @@ const quizData = [
         explanation: 'OAuth 2.0では、アクセストークンを使用してリソースサーバーにアクセスします。'
     },
     {
-        majorCategory: 'セキュリティ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'セキュリティ',
         minorCategory: '脆弱性対策',
         question: 'XSS攻撃の対策として適切でないものはどれですか？',
         answers: [
@@ -350,7 +376,8 @@ const quizData = [
         explanation: 'SQLプリペアドステートメントはSQLインジェクション対策です。XSS対策には入力サニタイゼーション、出力エスケープ、CSPが有効です。'
     },
     {
-        majorCategory: 'セキュリティ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'セキュリティ',
         minorCategory: '脆弱性対策',
         question: 'OWASP Top 10に含まれていない脆弱性はどれですか？',
         answers: [
@@ -363,7 +390,8 @@ const quizData = [
         explanation: 'タイポスクワッティングはドメイン名の悪用で、OWASP Top 10には含まれません。SQLインジェクション、XSS、パストラバーサルは含まれます。'
     },
     {
-        majorCategory: 'セキュリティ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'セキュリティ',
         minorCategory: '暗号化',
         question: 'ハッシュ関数として推奨されないものはどれですか？',
         answers: [
@@ -378,7 +406,8 @@ const quizData = [
 
     // Cloud Infrastructure Category
     {
-        majorCategory: 'クラウドインフラ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'クラウドインフラ',
         minorCategory: 'コンテナ技術',
         question: 'Dockerのマルチステージビルドの主な利点はどれですか？',
         answers: [
@@ -391,7 +420,8 @@ const quizData = [
         explanation: 'マルチステージビルドは、ビルド依存関係を最終イメージに含めないため、イメージサイズを大幅に削減できます。'
     },
     {
-        majorCategory: 'クラウドインフラ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'クラウドインフラ',
         minorCategory: 'コンテナ技術',
         question: 'Kubernetesのリソースで、コンテナのグループを管理するものはどれですか？',
         answers: [
@@ -404,7 +434,8 @@ const quizData = [
         explanation: 'Podは1つ以上のコンテナをグループ化し、同じネットワークとストレージを共有する最小のデプロイ単位です。'
     },
     {
-        majorCategory: 'クラウドインフラ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'クラウドインフラ',
         minorCategory: 'CI/CD',
         question: 'ブルーグリーンデプロイメントの特徴はどれですか？',
         answers: [
@@ -417,7 +448,8 @@ const quizData = [
         explanation: 'ブルーグリーンデプロイメントは、本番環境（ブルー）と同一の環境（グリーン）を用意し、検証後に一度に切り替える手法です。'
     },
     {
-        majorCategory: 'クラウドインフラ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'クラウドインフラ',
         minorCategory: 'CI/CD',
         question: 'カナリアリリースの主な目的はどれですか？',
         answers: [
@@ -430,7 +462,8 @@ const quizData = [
         explanation: 'カナリアリリースは、新バージョンを一部のユーザーに先行公開し、問題がないか検証してから全体に展開する手法です。'
     },
     {
-        majorCategory: 'クラウドインフラ',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'クラウドインフラ',
         minorCategory: 'モニタリング',
         question: 'Prometheusの主な用途はどれですか？',
         answers: [
@@ -445,7 +478,8 @@ const quizData = [
 
     // System Design Category
     {
-        majorCategory: 'システム設計',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'システム設計',
         minorCategory: 'スケーラビリティ',
         question: '水平スケーリング（スケールアウト）の説明として正しいものはどれですか？',
         answers: [
@@ -458,7 +492,8 @@ const quizData = [
         explanation: '水平スケーリングは、サーバーの台数を増やして負荷を分散する手法です。垂直スケーリングはサーバーのスペックを上げる手法です。'
     },
     {
-        majorCategory: 'システム設計',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'システム設計',
         minorCategory: 'スケーラビリティ',
         question: 'ロードバランサーの主な役割はどれですか？',
         answers: [
@@ -471,7 +506,8 @@ const quizData = [
         explanation: 'ロードバランサーは、複数のサーバーにリクエストを分散し、負荷を均等化する役割を持ちます。'
     },
     {
-        majorCategory: 'システム設計',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'システム設計',
         minorCategory: 'マイクロサービス',
         question: 'マイクロサービスアーキテクチャの利点として正しくないものはどれですか？',
         answers: [
@@ -484,7 +520,8 @@ const quizData = [
         explanation: 'マイクロサービスはサービス間通信のオーバーヘッドが増加します。しかし、独立性、柔軟性、障害の分離などの利点があります。'
     },
     {
-        majorCategory: 'システム設計',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'システム設計',
         minorCategory: 'マイクロサービス',
         question: 'サービス間通信パターンで、サービスが他のサービスを直接呼び出す方式はどれですか？',
         answers: [
@@ -497,7 +534,8 @@ const quizData = [
         explanation: '同期的リクエスト/レスポンスは、REST APIやgRPCを使用してサービス間で直接通信する方式です。'
     },
     {
-        majorCategory: 'システム設計',
+        majorCategory: 'インフラ・運用',
+        middleCategory: 'システム設計',
         minorCategory: '可用性設計',
         question: 'フェイルオーバーとフェイルバックの説明として正しいものはどれですか？',
         answers: [
@@ -512,7 +550,8 @@ const quizData = [
 
     // Frontend Architecture Category
     {
-        majorCategory: 'フロントエンド設計',
+        majorCategory: 'フロントエンド技術',
+        middleCategory: 'フロントエンド設計',
         minorCategory: '状態管理',
         question: 'Reduxの3原則に含まれないものはどれですか？',
         answers: [
@@ -525,7 +564,8 @@ const quizData = [
         explanation: 'Reduxの3原則は、単一のストア、読み取り専用の状態、純粋関数による変更です。コンポーネントの実装方法は制約されません。'
     },
     {
-        majorCategory: 'フロントエンド設計',
+        majorCategory: 'フロントエンド技術',
+        middleCategory: 'フロントエンド設計',
         minorCategory: '状態管理',
         question: 'React Context APIの主な用途はどれですか？',
         answers: [
@@ -538,7 +578,8 @@ const quizData = [
         explanation: 'Context APIは、コンポーネントツリー全体でデータを共有し、深いネストでのprops渡し（prop drilling）を回避するために使用されます。'
     },
     {
-        majorCategory: 'フロントエンド設計',
+        majorCategory: 'フロントエンド技術',
+        middleCategory: 'フロントエンド設計',
         minorCategory: 'コンポーネント設計',
         question: 'Atomic Designのコンポーネント階層で最も小さい単位はどれですか？',
         answers: [
@@ -551,7 +592,8 @@ const quizData = [
         explanation: 'Atomic Designの階層は、Atoms（原子）が最小単位で、Molecules（分子）、Organisms（有機体）、Templates、Pagesと続きます。'
     },
     {
-        majorCategory: 'フロントエンド設計',
+        majorCategory: 'フロントエンド技術',
+        middleCategory: 'フロントエンド設計',
         minorCategory: 'コンポーネント設計',
         question: 'Presentational ComponentとContainer Componentの違いはどれですか？',
         answers: [
@@ -564,7 +606,8 @@ const quizData = [
         explanation: 'Presentational Componentは見た目に集中し、Container Componentはロジックやデータ取得を担当する設計パターンです。'
     },
     {
-        majorCategory: 'フロントエンド設計',
+        majorCategory: 'フロントエンド技術',
+        middleCategory: 'フロントエンド設計',
         minorCategory: 'パフォーマンス',
         question: 'React.memoの主な目的はどれですか？',
         answers: [
@@ -578,33 +621,41 @@ const quizData = [
     }
 ];
 
-// Get unique major categories
-function getMajorCategories() {
+// Get unique categories with three levels
+function getCategories() {
     const categories = {};
     quizData.forEach(q => {
         if (!categories[q.majorCategory]) {
-            categories[q.majorCategory] = new Set();
+            categories[q.majorCategory] = {};
         }
-        categories[q.majorCategory].add(q.minorCategory);
+        if (!categories[q.majorCategory][q.middleCategory]) {
+            categories[q.majorCategory][q.middleCategory] = new Set();
+        }
+        categories[q.majorCategory][q.middleCategory].add(q.minorCategory);
     });
     
     // Convert Sets to Arrays
-    Object.keys(categories).forEach(key => {
-        categories[key] = Array.from(categories[key]);
+    Object.keys(categories).forEach(majorKey => {
+        Object.keys(categories[majorKey]).forEach(middleKey => {
+            categories[majorKey][middleKey] = Array.from(categories[majorKey][middleKey]);
+        });
     });
     
     return categories;
 }
 
-// Get questions by categories
-function getQuestionsByCategory(majorCat, minorCat) {
+// Get questions by all three categories
+function getQuestionsByCategory(majorCat, middleCat, minorCat) {
     return quizData.filter(q => 
-        q.majorCategory === majorCat && q.minorCategory === minorCat
+        q.majorCategory === majorCat && 
+        q.middleCategory === middleCat && 
+        q.minorCategory === minorCat
     );
 }
 
 // App State
 let currentMajorCategory = '';
+let currentMiddleCategory = '';
 let currentMinorCategory = '';
 let currentQuestionIndex = 0;
 let selectedAnswer = null;
@@ -613,15 +664,19 @@ let shuffledAnswers = [];
 
 // DOM Elements
 const majorCategoryScreen = document.getElementById('majorCategoryScreen');
+const middleCategoryScreen = document.getElementById('middleCategoryScreen');
 const minorCategoryScreen = document.getElementById('minorCategoryScreen');
 const quizScreen = document.getElementById('quizScreen');
 const resultScreen = document.getElementById('resultScreen');
 const reviewScreen = document.getElementById('reviewScreen');
 
 const majorCategoryButtons = document.getElementById('majorCategoryButtons');
+const middleCategoryButtons = document.getElementById('middleCategoryButtons');
+const middleCategoryTitle = document.getElementById('middleCategoryTitle');
 const minorCategoryButtons = document.getElementById('minorCategoryButtons');
 const minorCategoryTitle = document.getElementById('minorCategoryTitle');
 const backToMajorBtn = document.getElementById('backToMajorBtn');
+const backToMiddleBtn = document.getElementById('backToMiddleBtn');
 
 const backBtn = document.getElementById('backBtn');
 const submitBtn = document.getElementById('submitBtn');
@@ -649,32 +704,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Setup Major Categories
 function setupMajorCategories() {
-    const categories = getMajorCategories();
+    const categories = getCategories();
     majorCategoryButtons.innerHTML = '';
     
     Object.keys(categories).forEach((category, index) => {
         const btn = document.createElement('button');
         btn.className = 'category-btn';
         btn.textContent = category;
-        btn.addEventListener('click', () => showMinorCategories(category));
+        btn.addEventListener('click', () => showMiddleCategories(category));
         majorCategoryButtons.appendChild(btn);
     });
 }
 
-// Show Minor Categories
-function showMinorCategories(majorCat) {
+// Show Middle Categories
+function showMiddleCategories(majorCat) {
     currentMajorCategory = majorCat;
-    const categories = getMajorCategories();
-    const minorCats = categories[majorCat];
+    const categories = getCategories();
+    const middleCats = Object.keys(categories[majorCat]);
     
-    minorCategoryTitle.textContent = `${majorCat} - 小カテゴリを選択`;
+    middleCategoryTitle.textContent = `${majorCat} - 中カテゴリを選択`;
+    middleCategoryButtons.innerHTML = '';
+    
+    middleCats.forEach(middleCat => {
+        const btn = document.createElement('button');
+        btn.className = 'category-btn';
+        btn.textContent = middleCat;
+        btn.addEventListener('click', () => showMinorCategories(majorCat, middleCat));
+        middleCategoryButtons.appendChild(btn);
+    });
+    
+    showScreen('middle');
+}
+
+// Show Minor Categories
+function showMinorCategories(majorCat, middleCat) {
+    currentMajorCategory = majorCat;
+    currentMiddleCategory = middleCat;
+    const categories = getCategories();
+    const minorCats = categories[majorCat][middleCat];
+    
+    minorCategoryTitle.textContent = `${middleCat} - 小カテゴリを選択`;
     minorCategoryButtons.innerHTML = '';
     
     minorCats.forEach(minorCat => {
         const btn = document.createElement('button');
         btn.className = 'category-btn';
         btn.textContent = minorCat;
-        btn.addEventListener('click', () => startQuiz(majorCat, minorCat));
+        btn.addEventListener('click', () => startQuiz(majorCat, middleCat, minorCat));
         minorCategoryButtons.appendChild(btn);
     });
     
@@ -686,18 +762,28 @@ function returnToMajorCategories() {
     showScreen('major');
 }
 
+// Return to Middle Categories
+function returnToMiddleCategories() {
+    if (currentMajorCategory) {
+        showMiddleCategories(currentMajorCategory);
+    } else {
+        returnToMajorCategories();
+    }
+}
+
 // Start Quiz
-function startQuiz(majorCat, minorCat) {
+function startQuiz(majorCat, middleCat, minorCat) {
     currentMajorCategory = majorCat;
+    currentMiddleCategory = middleCat;
     currentMinorCategory = minorCat;
     currentQuestionIndex = 0;
     quizResults = [];
 
-    const questions = getQuestionsByCategory(majorCat, minorCat);
+    const questions = getQuestionsByCategory(majorCat, middleCat, minorCat);
     
     showScreen('quiz');
     categoryTitle.textContent = majorCat;
-    categoryBreadcrumb.textContent = `${majorCat} > ${minorCat}`;
+    categoryBreadcrumb.textContent = `${majorCat} > ${middleCat} > ${minorCat}`;
     totalQuestionsEl.textContent = questions.length;
     
     loadQuestion();
@@ -705,7 +791,7 @@ function startQuiz(majorCat, minorCat) {
 
 // Load Question
 function loadQuestion() {
-    const questions = getQuestionsByCategory(currentMajorCategory, currentMinorCategory);
+    const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
     const question = questions[currentQuestionIndex];
     
     selectedAnswer = null;
@@ -756,7 +842,7 @@ function selectAnswer(index, btn) {
 function submitAnswer() {
     if (selectedAnswer === null) return;
     
-    const questions = getQuestionsByCategory(currentMajorCategory, currentMinorCategory);
+    const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
     const question = questions[currentQuestionIndex];
     const isCorrect = selectedAnswer === question.correct;
     
@@ -797,7 +883,7 @@ function finishQuiz() {
     const totalCount = quizResults.length;
     const percentage = Math.round((correctCount / totalCount) * 100);
     
-    saveQuizResult(currentMajorCategory, currentMinorCategory, correctCount, totalCount);
+    saveQuizResult(currentMajorCategory, currentMiddleCategory, currentMinorCategory, correctCount, totalCount);
     
     showScreen('result');
     
@@ -817,7 +903,7 @@ function finishQuiz() {
         <div class="result-message">${message}</div>
         <div class="result-details">
             <h3>正解率: ${percentage}%</h3>
-            <p>${currentMajorCategory} > ${currentMinorCategory}</p>
+            <p>${currentMajorCategory} > ${currentMiddleCategory} > ${currentMinorCategory}</p>
         </div>
     `;
 }
@@ -825,9 +911,9 @@ function finishQuiz() {
 // Show Review
 function showReview() {
     showScreen('review');
-    reviewCategoryTitle.textContent = `${currentMajorCategory} > ${currentMinorCategory} - 復習`;
+    reviewCategoryTitle.textContent = `${currentMajorCategory} > ${currentMiddleCategory} > ${currentMinorCategory} - 復習`;
     
-    const questions = getQuestionsByCategory(currentMajorCategory, currentMinorCategory);
+    const questions = getQuestionsByCategory(currentMajorCategory, currentMiddleCategory, currentMinorCategory);
     
     reviewContent.innerHTML = '';
     questions.forEach((question, index) => {
@@ -878,13 +964,14 @@ function returnToCategories() {
 }
 
 // Save Quiz Result to localStorage
-function saveQuizResult(majorCat, minorCat, correct, total) {
+function saveQuizResult(majorCat, middleCat, minorCat, correct, total) {
     const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
-    const key = `${majorCat}::${minorCat}`;
+    const key = `${majorCat}::${middleCat}::${minorCat}`;
     
     if (!results[key]) {
         results[key] = {
             majorCategory: majorCat,
+            middleCategory: middleCat,
             minorCategory: minorCat,
             attempts: 0,
             totalCorrect: 0,
@@ -910,34 +997,48 @@ function loadStats() {
     
     statsDisplay.innerHTML = '';
     
-    // Group by major category
+    // Group by major category, then middle category
     const grouped = {};
     Object.values(results).forEach(result => {
         if (!grouped[result.majorCategory]) {
-            grouped[result.majorCategory] = [];
+            grouped[result.majorCategory] = {};
         }
-        grouped[result.majorCategory].push(result);
+        if (!grouped[result.majorCategory][result.middleCategory]) {
+            grouped[result.majorCategory][result.middleCategory] = [];
+        }
+        grouped[result.majorCategory][result.middleCategory].push(result);
     });
     
     Object.keys(grouped).forEach(majorCat => {
         const majorItem = document.createElement('div');
-        majorItem.style.marginBottom = '15px';
+        majorItem.style.marginBottom = '20px';
         
         const majorTitle = document.createElement('h4');
         majorTitle.textContent = majorCat;
-        majorTitle.style.marginBottom = '8px';
+        majorTitle.style.marginBottom = '10px';
         majorTitle.style.color = '#667eea';
+        majorTitle.style.fontWeight = 'bold';
         majorItem.appendChild(majorTitle);
         
-        grouped[majorCat].forEach(result => {
-            const avgPercentage = Math.round((result.totalCorrect / result.totalQuestions) * 100);
-            const statItem = document.createElement('div');
-            statItem.className = 'stat-item';
-            statItem.innerHTML = `
-                <span class="category-name">${result.minorCategory}</span>
-                <span class="score">平均正解率: ${avgPercentage}% (${result.attempts}回挑戦)</span>
-            `;
-            majorItem.appendChild(statItem);
+        Object.keys(grouped[majorCat]).forEach(middleCat => {
+            const middleTitle = document.createElement('h5');
+            middleTitle.textContent = `　${middleCat}`;
+            middleTitle.style.marginBottom = '5px';
+            middleTitle.style.marginLeft = '10px';
+            middleTitle.style.color = '#764ba2';
+            majorItem.appendChild(middleTitle);
+            
+            grouped[majorCat][middleCat].forEach(result => {
+                const avgPercentage = Math.round((result.totalCorrect / result.totalQuestions) * 100);
+                const statItem = document.createElement('div');
+                statItem.className = 'stat-item';
+                statItem.style.marginLeft = '20px';
+                statItem.innerHTML = `
+                    <span class="category-name">${result.minorCategory}</span>
+                    <span class="score">平均正解率: ${avgPercentage}% (${result.attempts}回挑戦)</span>
+                `;
+                majorItem.appendChild(statItem);
+            });
         });
         
         statsDisplay.appendChild(majorItem);
@@ -947,6 +1048,7 @@ function loadStats() {
 // Show Screen
 function showScreen(screen) {
     majorCategoryScreen.classList.remove('active');
+    middleCategoryScreen.classList.remove('active');
     minorCategoryScreen.classList.remove('active');
     quizScreen.classList.remove('active');
     resultScreen.classList.remove('active');
@@ -955,6 +1057,9 @@ function showScreen(screen) {
     switch (screen) {
         case 'major':
             majorCategoryScreen.classList.add('active');
+            break;
+        case 'middle':
+            middleCategoryScreen.classList.add('active');
             break;
         case 'minor':
             minorCategoryScreen.classList.add('active');
@@ -973,9 +1078,12 @@ function showScreen(screen) {
 
 // Event Listeners
 backToMajorBtn.addEventListener('click', returnToMajorCategories);
+backToMiddleBtn.addEventListener('click', returnToMiddleCategories);
 backBtn.addEventListener('click', () => {
-    if (currentMajorCategory) {
-        showMinorCategories(currentMajorCategory);
+    if (currentMiddleCategory && currentMinorCategory) {
+        showMinorCategories(currentMajorCategory, currentMiddleCategory);
+    } else if (currentMajorCategory) {
+        showMiddleCategories(currentMajorCategory);
     } else {
         returnToCategories();
     }
