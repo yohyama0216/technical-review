@@ -23,6 +23,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showQuestionListScreen(); return false;">
+                            <i class="bi bi-list-ul me-1"></i>問題一覧
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#" onclick="showStatsScreen(); return false;">
                             <i class="bi bi-graph-up me-1"></i>統計
                         </a>
@@ -62,6 +67,51 @@
                 <h2 id="minorCategoryTitle" class="fw-bold"></h2>
             </div>
             <div id="minorCategoryButtons" class="row g-3"></div>
+        </div>
+
+        <!-- Question List Screen -->
+        <div id="questionListScreen" class="screen">
+            <button id="backToHomeFromListBtn" class="btn btn-outline-secondary mb-3">
+                <i class="bi bi-arrow-left me-1"></i>ホームへ
+            </button>
+            <div class="text-center mb-4">
+                <h2 class="fw-bold"><i class="bi bi-list-ul me-2"></i>問題一覧</h2>
+                <p class="text-muted">カテゴリを選択して問題を絞り込めます</p>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="majorCategoryFilter" class="form-label">大カテゴリ</label>
+                            <select id="majorCategoryFilter" class="form-select">
+                                <option value="">すべて</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="middleCategoryFilter" class="form-label">中カテゴリ</label>
+                            <select id="middleCategoryFilter" class="form-select">
+                                <option value="">すべて</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="minorCategoryFilter" class="form-label">小カテゴリ</label>
+                            <select id="minorCategoryFilter" class="form-select">
+                                <option value="">すべて</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question Count -->
+            <div class="mb-3">
+                <span class="badge bg-primary" id="questionCount">0問</span>
+            </div>
+            
+            <!-- Question List -->
+            <div id="questionListContainer"></div>
         </div>
 
         <!-- Statistics Screen -->
