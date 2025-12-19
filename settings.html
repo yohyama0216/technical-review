@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設定 - 技術面接クイズアプリ</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-mortarboard-fill me-2"></i>技術面接クイズアプリ
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="question-list.html">
+                            <i class="bi bi-list-ul me-1"></i>問題一覧
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="stats.html">
+                            <i class="bi bi-graph-up me-1"></i>統計
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="settings.html">
+                            <i class="bi bi-gear me-1"></i>設定
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <a href="index.html" class="btn btn-outline-secondary mb-3">
+            <i class="bi bi-arrow-left me-1"></i>ホームへ
+        </a>
+        
+        <div class="text-center mb-4">
+            <h2 class="fw-bold"><i class="bi bi-gear me-2"></i>設定</h2>
+        </div>
+
+        <!-- Storage Info Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-database me-2"></i>ローカルストレージ情報</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">回答統計</h6>
+                                <h3 id="statsCount">0</h3>
+                                <small class="text-muted">問題</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">学習履歴</h6>
+                                <h3 id="historyCount">0</h3>
+                                <small class="text-muted">日分</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-center bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title text-muted">カテゴリ統計</h6>
+                                <h3 id="categoryCount">0</h3>
+                                <small class="text-muted">件</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    データはブラウザのローカルストレージに保存されています。
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Management Card -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-trash me-2"></i>データ管理</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <h6>個別にデータをクリア</h6>
+                    <p class="text-muted small">特定のデータのみを削除できます</p>
+                    <div class="d-grid gap-2">
+                        <button id="clearStatsBtn" class="btn btn-outline-warning">
+                            <i class="bi bi-eraser me-2"></i>回答統計をクリア
+                        </button>
+                        <button id="clearHistoryBtn" class="btn btn-outline-warning">
+                            <i class="bi bi-eraser me-2"></i>学習履歴をクリア
+                        </button>
+                        <button id="clearCategoryBtn" class="btn btn-outline-warning">
+                            <i class="bi bi-eraser me-2"></i>カテゴリ統計をクリア
+                        </button>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div>
+                    <h6>すべてのデータをクリア</h6>
+                    <p class="text-muted small">すべての学習データが削除されます。この操作は取り消せません。</p>
+                    <button id="clearAllBtn" class="btn btn-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i>すべてのデータをクリア
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStorageInfo();
+            setupSettingsEventListeners();
+        });
+
+        function updateStorageInfo() {
+            const answerStats = JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
+            const dailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+            const quizResults = JSON.parse(localStorage.getItem('quizResults') || '{}');
+
+            document.getElementById('statsCount').textContent = Object.keys(answerStats).length;
+            document.getElementById('historyCount').textContent = Object.keys(dailyHistory).length;
+            document.getElementById('categoryCount').textContent = Object.keys(quizResults).length;
+        }
+
+        function setupSettingsEventListeners() {
+            // Clear individual data
+            document.getElementById('clearStatsBtn').addEventListener('click', () => {
+                if (confirm('回答統計をクリアしてもよろしいですか？')) {
+                    localStorage.removeItem('questionAnswerStats');
+                    localStorage.removeItem('questionAnswerCounts'); // Remove old format too
+                    updateStorageInfo();
+                    showToast('回答統計をクリアしました');
+                }
+            });
+
+            document.getElementById('clearHistoryBtn').addEventListener('click', () => {
+                if (confirm('学習履歴をクリアしてもよろしいですか？')) {
+                    localStorage.removeItem('dailyHistory');
+                    updateStorageInfo();
+                    showToast('学習履歴をクリアしました');
+                }
+            });
+
+            document.getElementById('clearCategoryBtn').addEventListener('click', () => {
+                if (confirm('カテゴリ統計をクリアしてもよろしいですか？')) {
+                    localStorage.removeItem('quizResults');
+                    updateStorageInfo();
+                    showToast('カテゴリ統計をクリアしました');
+                }
+            });
+
+            // Clear all data
+            document.getElementById('clearAllBtn').addEventListener('click', () => {
+                if (confirm('すべてのデータをクリアしてもよろしいですか？\nこの操作は取り消せません。')) {
+                    localStorage.removeItem('questionAnswerStats');
+                    localStorage.removeItem('questionAnswerCounts');
+                    localStorage.removeItem('dailyHistory');
+                    localStorage.removeItem('quizResults');
+                    updateStorageInfo();
+                    showToast('すべてのデータをクリアしました');
+                }
+            });
+        }
+
+        function showToast(message) {
+            // Simple toast notification
+            const toast = document.createElement('div');
+            toast.className = 'position-fixed top-0 start-50 translate-middle-x mt-3 alert alert-success alert-dismissible fade show';
+            toast.style.zIndex = '9999';
+            toast.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
