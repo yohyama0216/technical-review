@@ -465,8 +465,13 @@ function showReview() {
 // ==================== QUESTION ANSWER TRACKING ====================
 
 function getQuestionId(question) {
-    // Create a unique ID for each question based on its content
-    return `${question.majorCategory}::${question.middleCategory}::${question.minorCategory}::${question.question}`;
+    // Use the question's index in quizData array for a stable identifier
+    const index = quizData.indexOf(question);
+    if (index === -1) {
+        // Fallback to content-based ID if question is not in quizData
+        return `${question.majorCategory}::${question.middleCategory}::${question.minorCategory}::${question.question}`;
+    }
+    return `q_${index}`;
 }
 
 function incrementQuestionAnswerCount(question) {
@@ -488,14 +493,15 @@ function getQuestionAnswerCount(question) {
 }
 
 function selectNextRandomQuestion() {
-    // Get answer counts for all questions
-    const questionsWithCounts = quizData.map(question => ({
-        question: question,
-        count: getQuestionAnswerCount(question)
-    }));
-    
-    // Find the minimum count
-    const minCount = Math.min(...questionsWithCounts.map(q => q.count));
+    // Get answer counts for all questions and find minimum count in a single pass
+    let minCount = Infinity;
+    const questionsWithCounts = quizData.map(question => {
+        const count = getQuestionAnswerCount(question);
+        if (count < minCount) {
+            minCount = count;
+        }
+        return { question, count };
+    });
     
     // Filter questions with the minimum count
     const questionsWithMinCount = questionsWithCounts.filter(q => q.count === minCount);
