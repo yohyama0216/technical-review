@@ -356,7 +356,9 @@ function selectAnswer(index, btn) {
         if (currentQuestionIndex < currentQuestions.length) {
             loadQuestion();
         } else {
-            finishQuiz();
+            // Save results and return to home
+            saveQuizResults();
+            showMajorCategoryScreen();
         }
     }, 3000);
 }
@@ -387,15 +389,16 @@ function showExplanation(question, isCorrect) {
 
 //  ==================== RESULT & REVIEW ====================
 
-function finishQuiz() {
+function saveQuizResults() {
     if (quizResults.length === 0) return;
     
     const correct = quizResults.filter(r => r.correct).length;
     const total = quizResults.length;
-    
-    // Save results
     saveQuizResult(currentMajorCategory, currentMiddleCategory, currentMinorCategory, correct, total);
-    
+}
+
+function finishQuiz() {
+    saveQuizResults();
     showResultScreen();
 }
 
