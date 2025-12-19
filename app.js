@@ -137,23 +137,27 @@ function getTodayProgress() {
 // Learning Streak
 function calculateStreak() {
     const history = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
-    const dates = Object.keys(history).sort().reverse();
     
-    if (dates.length === 0) return 0;
+    if (Object.keys(history).length === 0) return 0;
     
     let streak = 0;
     const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize to start of day
+    
     let currentDate = new Date(today);
     
-    for (let i = 0; i < dates.length; i++) {
+    // Check if today has activity, if not start from yesterday
+    const todayStr = currentDate.toISOString().split('T')[0];
+    if (!history[todayStr]) {
+        currentDate.setDate(currentDate.getDate() - 1);
+    }
+    
+    // Count consecutive days backwards
+    while (true) {
         const dateStr = currentDate.toISOString().split('T')[0];
         if (history[dateStr]) {
             streak++;
             currentDate.setDate(currentDate.getDate() - 1);
-        } else if (i === 0 && dateStr === today.toISOString().split('T')[0]) {
-            // Today hasn't been studied yet, check yesterday
-            currentDate.setDate(currentDate.getDate() - 1);
-            continue;
         } else {
             break;
         }
@@ -247,6 +251,23 @@ function toggleDarkMode() {
     if (icon) {
         icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
     }
+}
+
+// Global toast notification function
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    const bgClass = type === 'success' ? 'alert-success' : type === 'warning' ? 'alert-warning' : 'alert-info';
+    toast.className = `position-fixed top-0 start-50 translate-middle-x mt-3 alert ${bgClass} alert-dismissible fade show`;
+    toast.style.zIndex = '9999';
+    toast.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
 }
 
 // ==================== INITIALIZATION ====================
@@ -423,7 +444,7 @@ function startWeakPointMode() {
     });
     
     if (weakQuestions.length === 0) {
-        alert('弱点となる問題がありません！素晴らしいです！');
+        showToast('弱点となる問題がありません！素晴らしいです！', 'info');
         return;
     }
     
@@ -436,7 +457,7 @@ function startFavoriteMode() {
     const favorites = getFavorites();
     
     if (favorites.length === 0) {
-        alert('お気に入りの問題がありません。問題画面で⭐ボタンを押してお気に入りに追加してください。');
+        showToast('お気に入りの問題がありません。問題画面で⭐ボタンを押してお気に入りに追加してください。', 'info');
         return;
     }
     
@@ -444,7 +465,7 @@ function startFavoriteMode() {
     const favoriteQuestions = quizData.filter(q => isFavorite(q));
     
     if (favoriteQuestions.length === 0) {
-        alert('お気に入りの問題が見つかりませんでした。');
+        showToast('お気に入りの問題が見つかりませんでした。', 'warning');
         return;
     }
     
