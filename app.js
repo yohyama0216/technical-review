@@ -1022,9 +1022,9 @@ function loadStats() {
         
         Object.keys(grouped[majorCat]).forEach(middleCat => {
             const middleTitle = document.createElement('h5');
-            middleTitle.textContent = `　${middleCat}`;
+            middleTitle.textContent = middleCat;
             middleTitle.style.marginBottom = '5px';
-            middleTitle.style.marginLeft = '10px';
+            middleTitle.style.marginLeft = '15px';
             middleTitle.style.color = '#764ba2';
             majorItem.appendChild(middleTitle);
             
