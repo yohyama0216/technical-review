@@ -568,18 +568,19 @@ function loadStatistics() {
     // Calculate totals
     let totalCorrect = 0;
     let totalIncorrect = 0;
-    let totalQuestions = 0;
+    let totalAnswered = 0;
     
     Object.values(results).forEach(result => {
         totalCorrect += result.totalCorrect;
-        totalQuestions += result.totalQuestions;
+        totalAnswered += result.totalQuestions;
     });
-    totalIncorrect = totalQuestions - totalCorrect;
+    totalIncorrect = totalAnswered - totalCorrect;
     
     // Update summary cards
     totalCorrectEl.textContent = totalCorrect;
     totalIncorrectEl.textContent = totalIncorrect;
-    totalQuestionsEl.textContent = totalQuestions;
+    // Display total available questions in database
+    totalQuestionsEl.textContent = quizData.length;
     
     // Display daily stats
     displayDailyStats(dailyHistory);
@@ -588,17 +589,119 @@ function loadStatistics() {
     displayCategoryStats(results);
 }
 
+// Global variable to store the chart instance
+let dailyStatsChartInstance = null;
+
 function displayDailyStats(dailyHistory) {
-    const dates = Object.keys(dailyHistory).sort().reverse().slice(0, 7);
+    const dates = Object.keys(dailyHistory).sort();
     
     if (dates.length === 0) {
+        // Hide chart if no data
+        const chartElement = document.getElementById('dailyStatsChart');
+        if (chartElement) {
+            chartElement.style.display = 'none';
+        }
         dailyStatsDisplay.innerHTML = '<p class="text-muted">まだ学習履歴がありません</p>';
         return;
     }
     
+    // Check if Chart.js is available
+    if (typeof Chart !== 'undefined') {
+        // Show chart
+        document.getElementById('dailyStatsChart').style.display = 'block';
+        
+        // Prepare data for chart (show last 14 days or all if less)
+        const chartDates = dates.slice(-14);
+        const totalData = chartDates.map(date => dailyHistory[date]?.total || 0);
+        const correctData = chartDates.map(date => dailyHistory[date]?.correct || 0);
+        const incorrectData = chartDates.map(date => dailyHistory[date]?.incorrect || 0);
+        
+        // Format dates for display (MM/DD)
+        const formattedDates = chartDates.map(date => {
+            const d = new Date(date);
+            return `${d.getMonth() + 1}/${d.getDate()}`;
+        });
+        
+        // Destroy existing chart if it exists
+        if (dailyStatsChartInstance) {
+            dailyStatsChartInstance.destroy();
+        }
+        
+        // Create line chart
+        const ctx = document.getElementById('dailyStatsChart').getContext('2d');
+        dailyStatsChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: formattedDates,
+                datasets: [
+                    {
+                        label: '学習数',
+                        data: totalData,
+                        borderColor: 'rgb(13, 110, 253)',
+                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: '正解数',
+                        data: correctData,
+                        borderColor: 'rgb(25, 135, 84)',
+                        backgroundColor: 'rgba(25, 135, 84, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    },
+                    {
+                        label: '不正解数',
+                        data: incorrectData,
+                        borderColor: 'rgb(220, 53, 69)',
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                }
+            }
+        });
+    } else {
+        // If Chart.js is not available, hide the chart canvas
+        const chartElement = document.getElementById('dailyStatsChart');
+        if (chartElement) {
+            chartElement.style.display = 'none';
+        }
+    }
+    
+    // Display recent stats list (last 7 days)
+    const recentDates = dates.slice(-7).reverse();
     let html = '<div class="list-group">';
-    dates.forEach(date => {
+    recentDates.forEach(date => {
         const stats = dailyHistory[date];
+        if (!stats) return; // Skip if no data for this date
         const percentage = Math.round((stats.correct / stats.total) * 100);
         
         html += `
