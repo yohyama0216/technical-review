@@ -12,19 +12,21 @@
             <h1>技術面接クイズアプリ</h1>
         </header>
 
-        <!-- Category Selection Screen -->
-        <div id="categoryScreen" class="screen active">
-            <h2>カテゴリを選択してください</h2>
-            <div class="category-buttons">
-                <button class="category-btn" data-category="web-basics">Web基礎</button>
-                <button class="category-btn" data-category="web-advanced">Web応用</button>
-                <button class="category-btn" data-category="web-security">Webセキュリティ</button>
-                <button class="category-btn" data-category="aws">AWS</button>
-            </div>
+        <!-- Major Category Selection Screen -->
+        <div id="majorCategoryScreen" class="screen active">
+            <h2>大カテゴリを選択してください</h2>
+            <div id="majorCategoryButtons" class="category-buttons"></div>
             <div class="stats">
                 <h3>統計情報</h3>
                 <div id="statsDisplay"></div>
             </div>
+        </div>
+
+        <!-- Minor Category Selection Screen -->
+        <div id="minorCategoryScreen" class="screen">
+            <button id="backToMajorBtn" class="back-btn">← 戻る</button>
+            <h2 id="minorCategoryTitle"></h2>
+            <div id="minorCategoryButtons" class="category-buttons"></div>
         </div>
 
         <!-- Quiz Screen -->
@@ -41,6 +43,7 @@
 
             <div class="quiz-content">
                 <h2 id="categoryTitle"></h2>
+                <div class="category-breadcrumb" id="categoryBreadcrumb"></div>
                 <div class="question-card">
                     <h3 id="questionText"></h3>
                     <div id="answersContainer" class="answers"></div>
