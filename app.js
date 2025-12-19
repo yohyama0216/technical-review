@@ -44,6 +44,7 @@ let shuffledAnswers = [];
 const majorCategoryScreen = document.getElementById('majorCategoryScreen');
 const middleCategoryScreen = document.getElementById('middleCategoryScreen');
 const minorCategoryScreen = document.getElementById('minorCategoryScreen');
+const questionListScreen = document.getElementById('questionListScreen');
 const statsScreen = document.getElementById('statsScreen');
 const quizScreen = document.getElementById('quizScreen');
 const resultScreen = document.getElementById('resultScreen');
@@ -77,6 +78,13 @@ const totalQuestionsEl = document.getElementById('totalQuestions');
 const dailyStatsDisplay = document.getElementById('dailyStatsDisplay');
 const categoryStatsDisplay = document.getElementById('categoryStatsDisplay');
 
+// Question list elements
+const majorCategoryFilter = document.getElementById('majorCategoryFilter');
+const middleCategoryFilter = document.getElementById('middleCategoryFilter');
+const minorCategoryFilter = document.getElementById('minorCategoryFilter');
+const questionListContainer = document.getElementById('questionListContainer');
+const questionCount = document.getElementById('questionCount');
+
 // ==================== INITIALIZATION ====================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -88,6 +96,7 @@ function setupEventListeners() {
     document.getElementById('backToMajorBtn').addEventListener('click', showMajorCategoryScreen);
     document.getElementById('backToMiddleBtn').addEventListener('click', () => showMiddleCategories(currentMajorCategory));
     document.getElementById('backToHomeBtn').addEventListener('click', showMajorCategoryScreen);
+    document.getElementById('backToHomeFromListBtn').addEventListener('click', showMajorCategoryScreen);
     backBtn.addEventListener('click', () => showMinorCategories(currentMajorCategory, currentMiddleCategory));
     homeBtn.addEventListener('click', () => {
         showMajorCategoryScreen();
@@ -95,13 +104,24 @@ function setupEventListeners() {
     });
     reviewBtn.addEventListener('click', showReview);
     reviewBackBtn.addEventListener('click', showResultScreen);
+    
+    // Question list filter event listeners
+    majorCategoryFilter.addEventListener('change', () => {
+        updateMiddleCategoryFilter();
+        updateQuestionList();
+    });
+    middleCategoryFilter.addEventListener('change', () => {
+        updateMinorCategoryFilter();
+        updateQuestionList();
+    });
+    minorCategoryFilter.addEventListener('change', updateQuestionList);
 }
 
 // ==================== SCREEN NAVIGATION ====================
 
 function showScreen(screenToShow) {
     [majorCategoryScreen, middleCategoryScreen, minorCategoryScreen, 
-     statsScreen, quizScreen, resultScreen, reviewScreen].forEach(screen => {
+     questionListScreen, statsScreen, quizScreen, resultScreen, reviewScreen].forEach(screen => {
         screen.classList.remove('active');
     });
     screenToShow.classList.add('active');
@@ -574,4 +594,129 @@ function displayCategoryStats(results) {
     });
     
     categoryStatsDisplay.innerHTML = html;
+}
+
+// ==================== QUESTION LIST FUNCTIONS ====================
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function showQuestionListScreen() {
+    showScreen(questionListScreen);
+    initializeQuestionListFilters();
+    updateQuestionList();
+}
+
+function initializeQuestionListFilters() {
+    const categories = getCategories();
+    
+    // Populate major category filter
+    majorCategoryFilter.innerHTML = '<option value="">すべて</option>';
+    Object.keys(categories).forEach(majorCat => {
+        const option = document.createElement('option');
+        option.value = majorCat;
+        option.textContent = majorCat;
+        majorCategoryFilter.appendChild(option);
+    });
+    
+    // Reset other filters
+    middleCategoryFilter.innerHTML = '<option value="">すべて</option>';
+    minorCategoryFilter.innerHTML = '<option value="">すべて</option>';
+}
+
+function updateMiddleCategoryFilter() {
+    const categories = getCategories();
+    const selectedMajor = majorCategoryFilter.value;
+    middleCategoryFilter.innerHTML = '<option value="">すべて</option>';
+    minorCategoryFilter.innerHTML = '<option value="">すべて</option>';
+    
+    if (selectedMajor) {
+        Object.keys(categories[selectedMajor]).forEach(middleCat => {
+            const option = document.createElement('option');
+            option.value = middleCat;
+            option.textContent = middleCat;
+            middleCategoryFilter.appendChild(option);
+        });
+    }
+}
+
+function updateMinorCategoryFilter() {
+    const categories = getCategories();
+    const selectedMajor = majorCategoryFilter.value;
+    const selectedMiddle = middleCategoryFilter.value;
+    minorCategoryFilter.innerHTML = '<option value="">すべて</option>';
+    
+    if (selectedMajor && selectedMiddle) {
+        categories[selectedMajor][selectedMiddle].forEach(minorCat => {
+            const option = document.createElement('option');
+            option.value = minorCat;
+            option.textContent = minorCat;
+            minorCategoryFilter.appendChild(option);
+        });
+    }
+}
+
+function updateQuestionList() {
+    const selectedMajor = majorCategoryFilter.value;
+    const selectedMiddle = middleCategoryFilter.value;
+    const selectedMinor = minorCategoryFilter.value;
+    
+    // Filter questions with combined conditions for better performance
+    let filteredQuestions = quizData.filter(q => {
+        if (selectedMajor && q.majorCategory !== selectedMajor) return false;
+        if (selectedMiddle && q.middleCategory !== selectedMiddle) return false;
+        if (selectedMinor && q.minorCategory !== selectedMinor) return false;
+        return true;
+    });
+    
+    // Update question count
+    questionCount.textContent = `${filteredQuestions.length}問`;
+    
+    // Display questions
+    displayQuestionList(filteredQuestions);
+}
+
+function displayQuestionList(questions) {
+    questionListContainer.innerHTML = '';
+    
+    if (questions.length === 0) {
+        questionListContainer.innerHTML = '<div class="alert alert-info">問題が見つかりませんでした</div>';
+        return;
+    }
+    
+    questions.forEach((question, index) => {
+        const card = document.createElement('div');
+        card.className = 'card mb-3 question-list-item shadow-sm';
+        
+        card.innerHTML = `
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title mb-0">問題 ${index + 1}</h5>
+                    <div>
+                        <span class="badge bg-primary me-1">${escapeHtml(question.majorCategory)}</span>
+                        <span class="badge bg-info me-1">${escapeHtml(question.middleCategory)}</span>
+                        <span class="badge bg-success">${escapeHtml(question.minorCategory)}</span>
+                    </div>
+                </div>
+                <p class="card-text question-text mb-3">${escapeHtml(question.question)}</p>
+                <div class="answers-preview">
+                    ${question.answers.map((answer, i) => `
+                        <div class="answer-preview ${i === question.correct ? 'correct-answer-preview' : ''}">
+                            <span class="answer-number">${i + 1}.</span> ${escapeHtml(answer)}
+                            ${i === question.correct ? '<i class="bi bi-check-circle-fill text-success ms-2"></i>' : ''}
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="mt-3 pt-3 border-top">
+                    <strong><i class="bi bi-lightbulb me-1"></i>解説:</strong>
+                    <p class="mb-0 mt-2">${escapeHtml(question.explanation)}</p>
+                </div>
+            </div>
+        `;
+        
+        questionListContainer.appendChild(card);
+    });
 }
