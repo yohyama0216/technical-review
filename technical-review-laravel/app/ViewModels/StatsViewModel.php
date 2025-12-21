@@ -30,7 +30,7 @@ class StatsViewModel extends ViewModel
         int $totalQuestions
     ) {
         $this->pageTitle = '統計';
-        $this->appName = '技術面接クイズアプリ';
+        $this->appName = '資格対策アプリ';
         
         $this->totalCorrect = $cumulativeStats['totalCorrect'];
         $this->totalIncorrect = $cumulativeStats['totalIncorrect'];

@@ -10,6 +10,6 @@ class SettingsViewModel extends ViewModel
     public function __construct()
     {
         $this->pageTitle = '設定';
-        $this->appName = '技術面接クイズアプリ';
+        $this->appName = '資格対策アプリ';
     }
 }

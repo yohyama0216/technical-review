@@ -142,4 +142,28 @@ class QuestionService
     {
         return $this->questions->count();
     }
+
+    /**
+     * Get keyword search counts
+     */
+    public function getKeywordCounts(array $keywords): array
+    {
+        $counts = [];
+        
+        foreach ($keywords as $keyword) {
+            $count = $this->questions->filter(function ($question) use ($keyword) {
+                return stripos($question['question'], $keyword) !== false ||
+                       stripos($question['explanation'] ?? '', $keyword) !== false ||
+                       collect($question['answers'] ?? [])->contains(function ($answer) use ($keyword) {
+                           return stripos($answer, $keyword) !== false;
+                       });
+            })->count();
+            
+            if ($count > 0) {
+                $counts[$keyword] = $count;
+            }
+        }
+        
+        return $counts;
+    }
 }

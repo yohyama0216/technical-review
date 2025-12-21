@@ -11,6 +11,7 @@ use App\ViewModels\SettingsViewModel;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Cache;
 
 class QuizController extends Controller
 {
@@ -52,21 +53,13 @@ class QuizController extends Controller
 
         // Apply filters
         $searchText = $request->query('search', '');
-        $majorFilter = $request->query('major', '');
-        $middleFilter = $request->query('middle', '');
-        $minorFilter = $request->query('minor', '');
         $statusFilter = $request->query('status', 'all');
 
-        $filteredQuestions = $questionsWithStats->filter(function ($question) use ($searchText, $majorFilter, $middleFilter, $minorFilter, $statusFilter) {
+        $filteredQuestions = $questionsWithStats->filter(function ($question) use ($searchText, $statusFilter) {
             // Search filter
             if ($searchText && stripos($question['question'], $searchText) === false) {
                 return false;
             }
-
-            // Category filters
-            if ($majorFilter && $question['majorCategory'] !== $majorFilter) return false;
-            if ($middleFilter && $question['middleCategory'] !== $middleFilter) return false;
-            if ($minorFilter && $question['minorCategory'] !== $minorFilter) return false;
 
             // Status filter
             if ($statusFilter !== 'all') {
@@ -81,21 +74,27 @@ class QuizController extends Controller
             return true;
         })->values()->toArray();
 
-        // Get all categories for dropdowns
-        $majorCategories = $this->questionService->getMajorCategories();
-        $middleCategories = $majorFilter ? $this->questionService->getMiddleCategories($majorFilter) : [];
-        $minorCategories = ($majorFilter && $middleFilter) ? $this->questionService->getMinorCategories($majorFilter, $middleFilter) : [];
+        // Get keyword search counts (cached for 1 hour)
+        $keywordCounts = Cache::remember('keyword_search_counts', 3600, function () {
+            $keywords = [
+                'API', 'REST', 'HTTP', 'HTTPS', 'JSON', 'XML',
+                'SQL', 'データベース', 'インデックス', 'トランザクション', '正規化',
+                'セキュリティ', '認証', '認可', 'OAuth', 'JWT', 'Cookie', 'Session',
+                'CORS', 'CSRF', 'XSS', 'インジェクション', '暗号化', 'SSL',
+                'キャッシュ', 'パフォーマンス', 'スケーリング', 'ロードバランサ',
+                'テスト', '単体テスト', '結合テスト', 'CI/CD',
+                'Git', 'Docker', 'デプロイ', 'バックアップ',
+                '非同期', 'マイクロサービス', 'ログ', 'モニタリング',
+                'エラー', 'バリデーション', 'リファクタリング', 'レビュー'
+            ];
+            return $this->questionService->getKeywordCounts($keywords);
+        });
 
         $viewModel = new QuestionListViewModel(
             $filteredQuestions,
-            $majorCategories,
-            $middleCategories,
-            $minorCategories,
             $searchText,
-            $majorFilter,
-            $middleFilter,
-            $minorFilter,
-            $statusFilter
+            $statusFilter,
+            $keywordCounts
         );
         return view('quiz.question-list', $viewModel->toArray());
     }

@@ -61,10 +61,14 @@ class StatisticsService
 
         if ($isCorrect) {
             $stats['questionStats'][$questionId]['correctCount']++;
-            $stats['questionStats'][$questionId]['completed'] = true;
         } else {
             $stats['questionStats'][$questionId]['incorrectCount']++;
         }
+
+        // 正解数が3回以上かつ不正解数を上回っている場合のみ完了
+        $correctCount = $stats['questionStats'][$questionId]['correctCount'];
+        $incorrectCount = $stats['questionStats'][$questionId]['incorrectCount'];
+        $stats['questionStats'][$questionId]['completed'] = ($correctCount > 2) && (($correctCount - $incorrectCount) > 0);
 
         // Update daily history
         if (!isset($stats['dailyHistory'][$today])) {

@@ -4,7 +4,7 @@
     <!-- Major Category Selection Screen (TOP Page) -->
     <div id="majorCategoryScreen" class="screen active">
         <div class="text-center mb-4">
-            <h2 class="fw-bold">技術面接クイズアプリ</h2>
+            <h2 class="fw-bold">資格対策アプリ</h2>
             <p class="text-muted">ランダムに出題された問題に挑戦しましょう</p>
         </div>
         <div class="text-center">

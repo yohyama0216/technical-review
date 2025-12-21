@@ -11,50 +11,31 @@
             <p class="text-muted">カテゴリを選択して問題を絞り込めます</p>
         </div>
         
+        <!-- Quick Keyword Search -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h6 class="mb-3"><i class="bi bi-tags me-2"></i>よく検索されるキーワード</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    @foreach($keywordCounts as $keyword => $count)
+                        <a href="{{ route('quiz.question-list', ['search' => $keyword]) }}" 
+                           class="btn btn-sm {{ $searchText === $keyword ? 'btn-primary' : 'btn-outline-primary' }}">
+                            <i class="bi bi-search me-1"></i>{{ $keyword }}
+                            <span class="badge {{ $searchText === $keyword ? 'bg-light text-dark' : 'bg-primary' }} ms-1">{{ $count }}</span>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        
         <!-- Search and Filter -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <form method="GET" action="{{ route('quiz.question-list') }}" id="filterForm">
                     <div class="row g-3 mb-3">
-                        <div class="col-12">
+                        <div class="col-md-9">
                             <label for="questionSearch" class="form-label">問題文検索</label>
                             <input type="text" id="questionSearch" name="search" class="form-control" 
                                    placeholder="問題文を入力して検索..." value="{{ $searchText }}">
-                        </div>
-                    </div>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-3">
-                            <label for="majorCategoryFilter" class="form-label">大カテゴリ</label>
-                            <select id="majorCategoryFilter" name="major" class="form-select" onchange="this.form.submit()">
-                                <option value="">すべて</option>
-                                @foreach($majorCategories as $category)
-                                    <option value="{{ $category }}" {{ $majorFilter === $category ? 'selected' : '' }}>
-                                        {{ $category }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="middleCategoryFilter" class="form-label">中カテゴリ</label>
-                            <select id="middleCategoryFilter" name="middle" class="form-select" onchange="this.form.submit()">
-                                <option value="">すべて</option>
-                                @foreach($middleCategories as $category)
-                                    <option value="{{ $category }}" {{ $middleFilter === $category ? 'selected' : '' }}>
-                                        {{ $category }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="minorCategoryFilter" class="form-label">小カテゴリ</label>
-                            <select id="minorCategoryFilter" name="minor" class="form-select" onchange="this.form.submit()">
-                                <option value="">すべて</option>
-                                @foreach($minorCategories as $category)
-                                    <option value="{{ $category }}" {{ $minorFilter === $category ? 'selected' : '' }}>
-                                        {{ $category }}
-                                    </option>
-                                @endforeach
-                            </select>
                         </div>
                         <div class="col-md-3">
                             <label for="answerStatusFilter" class="form-label">回答状態</label>

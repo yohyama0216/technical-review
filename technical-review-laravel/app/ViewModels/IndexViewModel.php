@@ -10,6 +10,6 @@ class IndexViewModel extends ViewModel
     public function __construct()
     {
         $this->pageTitle = 'ホーム';
-        $this->appName = '技術面接クイズアプリ';
+        $this->appName = '資格対策アプリ';
     }
 }

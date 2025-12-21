@@ -103,7 +103,7 @@
         <div class="card-body">
             <dl class="row mb-0">
                 <dt class="col-sm-4">アプリ名</dt>
-                <dd class="col-sm-8">技術面接クイズアプリ</dd>
+                <dd class="col-sm-8">資格対策アプリ</dd>
                 
                 <dt class="col-sm-4">バージョン</dt>
                 <dd class="col-sm-8">1.0.0</dd>
