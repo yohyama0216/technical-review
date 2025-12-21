@@ -18,6 +18,11 @@
 /public/storage
 /storage/*.key
 /storage/pail
+# Ignore all storage/app files except learningLog.json
+/storage/app/*
+!/storage/app/private/
+/storage/app/private/*
+!/storage/app/private/learningLog.json
 /vendor
 Homestead.json
 Homestead.yaml
