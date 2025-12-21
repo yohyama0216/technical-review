@@ -1,0 +1,18 @@
+<?php
+
+namespace App\ViewModels;
+
+use Illuminate\Contracts\Support\Arrayable;
+
+abstract class ViewModel implements Arrayable
+{
+    /**
+     * Convert the view model to an array.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return get_object_vars($this);
+    }
+}

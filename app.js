@@ -79,8 +79,6 @@ let completedQuestionsEl = null;
 let unansweredQuestionsEl = null;
 let completedPercentageEl = null;
 let unansweredPercentageEl = null;
-let dailyStatsDisplay = null;
-let categoryStatsDisplay = null;
 
 // Question list elements
 let majorCategoryFilter = null;
@@ -150,8 +148,6 @@ function initializeDOM() {
     unansweredQuestionsEl = document.getElementById('unansweredQuestions');
     completedPercentageEl = document.getElementById('completedPercentage');
     unansweredPercentageEl = document.getElementById('unansweredPercentage');
-    dailyStatsDisplay = document.getElementById('dailyStatsDisplay');
-    categoryStatsDisplay = document.getElementById('categoryStatsDisplay');
     
     majorCategoryFilter = document.getElementById('majorCategoryFilter');
     middleCategoryFilter = document.getElementById('middleCategoryFilter');
@@ -732,16 +728,18 @@ function saveDailyHistory(isCorrect) {
 
 function loadStatistics() {
     const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
-    const dailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
-    
-    // Calculate totals from daily history
+    // Calculate cumulative totals from question answer stats
     let totalCorrect = 0;
     let totalIncorrect = 0;
     
-    Object.values(dailyHistory).forEach(day => {
-        totalCorrect += day.correct || 0;
-        totalIncorrect += day.incorrect || 0;
+    quizData.forEach(question => {
+        const stats = getQuestionAnswerStats(question);
+        totalCorrect += stats.correct;
+        totalIncorrect += stats.incorrect;
     });
+    
+    // Get daily history for charts
+    const dailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
     
     // Calculate question statistics
     let completedCount = 0;
@@ -752,16 +750,20 @@ function loadStatistics() {
         const stats = getQuestionAnswerStats(question);
         const total = stats.correct + stats.incorrect;
         
-        if (isQuestionCompleted(question)) {
-            completedCount++;
-        } else if (total > 0) {
+        if (total > 0) {
             answeredCount++;
         } else {
             unansweredCount++;
         }
+        
+        if (isQuestionCompleted(question)) {
+            completedCount++;
+        }
     });
     
     const totalQuestions = quizData.length;
+    const totalStudied = totalCorrect + totalIncorrect; // 累計学習数（全回答数の合計）
+    const studiedPercentage = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
     const completedPercentage = totalQuestions > 0 ? Math.round((completedCount / totalQuestions) * 100) : 0;
     const unansweredPercentage = totalQuestions > 0 ? Math.round((unansweredCount / totalQuestions) * 100) : 0;
     const answeredPercentage = totalQuestions > 0 ? Math.round((answeredCount / totalQuestions) * 100) : 0;
@@ -769,9 +771,9 @@ function loadStatistics() {
     // Update summary cards
     if (totalCorrectEl) totalCorrectEl.textContent = totalCorrect;
     if (totalIncorrectEl) totalIncorrectEl.textContent = totalIncorrect;
-    if (completedQuestionsEl) completedQuestionsEl.textContent = completedCount;
+    if (completedQuestionsEl) completedQuestionsEl.textContent = totalStudied; // 累計学習数として全回答数を表示
     if (unansweredQuestionsEl) unansweredQuestionsEl.textContent = unansweredCount;
-    if (completedPercentageEl) completedPercentageEl.textContent = `${completedPercentage}%`;
+    if (completedPercentageEl) completedPercentageEl.textContent = `${studiedPercentage}%`; // 回答済み問題の割合
     if (unansweredPercentageEl) unansweredPercentageEl.textContent = `${unansweredPercentage}%`;
     
     // Update progress overview
@@ -808,9 +810,6 @@ function loadStatistics() {
     
     // Display daily stats
     displayDailyStats(dailyHistory);
-    
-    // Display category stats
-    displayCategoryStats(results);
 }
 
 // Global variable to store the chart instance
@@ -825,7 +824,6 @@ function displayDailyStats(dailyHistory) {
         if (chartElement) {
             chartElement.style.display = 'none';
         }
-        dailyStatsDisplay.innerHTML = '<p class="text-muted">まだ学習履歴がありません</p>';
         return;
     }
     
@@ -839,6 +837,41 @@ function displayDailyStats(dailyHistory) {
         const totalData = chartDates.map(date => dailyHistory[date]?.total || 0);
         const correctData = chartDates.map(date => dailyHistory[date]?.correct || 0);
         const incorrectData = chartDates.map(date => dailyHistory[date]?.incorrect || 0);
+        
+        // Calculate cumulative data
+        let cumulativeTotal = 0;
+        let cumulativeCorrect = 0;
+        let cumulativeIncorrect = 0;
+        
+        // Get cumulative values up to the start of chart dates
+        dates.forEach(date => {
+            const stats = dailyHistory[date];
+            if (stats) {
+                if (!chartDates.includes(date)) {
+                    // Before the chart range - just accumulate
+                    cumulativeTotal += stats.total || 0;
+                    cumulativeCorrect += stats.correct || 0;
+                    cumulativeIncorrect += stats.incorrect || 0;
+                }
+            }
+        });
+        
+        // Build cumulative data for chart dates
+        const cumulativeTotalData = [];
+        const cumulativeCorrectData = [];
+        const cumulativeIncorrectData = [];
+        
+        chartDates.forEach(date => {
+            const stats = dailyHistory[date];
+            if (stats) {
+                cumulativeTotal += stats.total || 0;
+                cumulativeCorrect += stats.correct || 0;
+                cumulativeIncorrect += stats.incorrect || 0;
+            }
+            cumulativeTotalData.push(cumulativeTotal);
+            cumulativeCorrectData.push(cumulativeCorrect);
+            cumulativeIncorrectData.push(cumulativeIncorrect);
+        });
         
         // Format dates for display (MM/DD)
         const formattedDates = chartDates.map(date => {
@@ -859,28 +892,31 @@ function displayDailyStats(dailyHistory) {
                 labels: formattedDates,
                 datasets: [
                     {
-                        label: '学習数',
-                        data: totalData,
+                        label: '累計学習数',
+                        data: cumulativeTotalData,
                         borderColor: 'rgb(13, 110, 253)',
                         backgroundColor: 'rgba(13, 110, 253, 0.1)',
                         tension: 0.3,
-                        fill: true
+                        fill: true,
+                        borderWidth: 2
                     },
                     {
-                        label: '正解数',
-                        data: correctData,
+                        label: '累計正解数',
+                        data: cumulativeCorrectData,
                         borderColor: 'rgb(25, 135, 84)',
                         backgroundColor: 'rgba(25, 135, 84, 0.1)',
                         tension: 0.3,
-                        fill: true
+                        fill: true,
+                        borderWidth: 2
                     },
                     {
-                        label: '不正解数',
-                        data: incorrectData,
+                        label: '累計不正解数',
+                        data: cumulativeIncorrectData,
                         borderColor: 'rgb(220, 53, 69)',
                         backgroundColor: 'rgba(220, 53, 69, 0.1)',
                         tension: 0.3,
-                        fill: true
+                        fill: true,
+                        borderWidth: 2
                     }
                 ]
             },
@@ -894,7 +930,22 @@ function displayDailyStats(dailyHistory) {
                     },
                     tooltip: {
                         mode: 'index',
-                        intersect: false
+                        intersect: false,
+                        callbacks: {
+                            afterBody: function(context) {
+                                const index = context[0].dataIndex;
+                                const dailyTotal = totalData[index];
+                                const dailyCorrect = correctData[index];
+                                const dailyIncorrect = incorrectData[index];
+                                return [
+                                    '',
+                                    '━━━━━━━━━━━━',
+                                    `当日学習数: ${dailyTotal}問`,
+                                    `当日正解数: ${dailyCorrect}問`,
+                                    `当日不正解数: ${dailyIncorrect}問`
+                                ];
+                            }
+                        }
                     }
                 },
                 scales: {
@@ -919,86 +970,6 @@ function displayDailyStats(dailyHistory) {
             chartElement.style.display = 'none';
         }
     }
-    
-    // Display recent stats list (last 7 days)
-    const recentDates = dates.slice(-7).reverse();
-    let html = '<div class="list-group">';
-    recentDates.forEach(date => {
-        const stats = dailyHistory[date];
-        if (!stats) return; // Skip if no data for this date
-        const percentage = Math.round((stats.correct / stats.total) * 100);
-        
-        html += `
-            <div class="daily-stats-item mb-2">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong>${date}</strong>
-                        <div class="small text-muted">${stats.total}問 / 正解率 ${percentage}%</div>
-                    </div>
-                    <div class="text-end">
-                        <span class="badge bg-success me-1">${stats.correct}</span>
-                        <span class="badge bg-danger">${stats.incorrect}</span>
-                    </div>
-                </div>
-                <div class="progress mt-2" style="height: 6px;">
-                    <div class="progress-bar bg-success" style="width: ${percentage}%"></div>
-                </div>
-            </div>
-        `;
-    });
-    html += '</div>';
-    
-    dailyStatsDisplay.innerHTML = html;
-}
-
-function displayCategoryStats(results) {
-    if (Object.keys(results).length === 0) {
-        categoryStatsDisplay.innerHTML = '<p class="text-muted">まだ統計情報がありません</p>';
-        return;
-    }
-    
-    const grouped = {};
-    Object.values(results).forEach(result => {
-        if (!grouped[result.majorCategory]) {
-            grouped[result.majorCategory] = {};
-        }
-        if (!grouped[result.majorCategory][result.middleCategory]) {
-            grouped[result.majorCategory][result.middleCategory] = [];
-        }
-        grouped[result.majorCategory][result.middleCategory].push(result);
-    });
-    
-    let html = '';
-    Object.keys(grouped).forEach(majorCat => {
-        html += `<div class="mb-4">
-            <h6 class="fw-bold text-primary">${majorCat}</h6>`;
-        
-        Object.keys(grouped[majorCat]).forEach(middleCat => {
-            html += `<div class="ms-3 mb-2"><strong>${middleCat}</strong>`;
-            
-            grouped[majorCat][middleCat].forEach(result => {
-                const percentage = Math.round((result.totalCorrect / result.totalQuestions) * 100);
-                html += `
-                    <div class="category-stat-item ms-3 mb-2">
-                        <div class="d-flex justify-content-between">
-                            <span>${result.minorCategory}</span>
-                            <span>
-                                <span class="badge bg-primary">${result.totalCorrect}/${result.totalQuestions}</span>
-                                <span class="badge bg-info">${percentage}%</span>
-                            </span>
-                        </div>
-                        <div class="progress mt-1" style="height: 4px;">
-                            <div class="progress-bar" style="width: ${percentage}%"></div>
-                        </div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-        });
-        html += '</div>';
-    });
-    
-    categoryStatsDisplay.innerHTML = html;
 }
 
 // ==================== QUESTION LIST FUNCTIONS ====================
