@@ -48,6 +48,5 @@ jobs:
       - name: Run Prettier check
         run: npm run format:check
 
-      - name: Run tests (if exists)
+      - name: Run tests
         run: npm run test --if-present
-        continue-on-error: true
