@@ -1,0 +1,4 @@
+node_modules
+technical-review-laravel
+*.min.js
+*.min.css

@@ -115,7 +115,8 @@ body {
     color: #dc3545;
 }
 
-.explanation-text, .explanation-correct-answer {
+.explanation-text,
+.explanation-correct-answer {
     margin-bottom: 0.75rem;
     line-height: 1.6;
 }
@@ -184,7 +185,7 @@ body {
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-    content: "\203A";
+    content: '\203A';
 }
 
 /* Responsive adjustments */
@@ -192,12 +193,12 @@ body {
     .category-card .card-body {
         padding: 1.5rem;
     }
-    
+
     .answer-btn {
         font-size: 1rem;
         padding: 0.75rem;
     }
-    
+
     .result-score {
         font-size: 2rem;
     }

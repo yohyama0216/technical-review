@@ -1,954 +1,884 @@
 [
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "B-Treeインデックスの特徴として正しいものはどれですか？",
-    "answers": [
-      "範囲検索に適している",
-      "完全一致検索のみサポート",
-      "メモリを使用しない",
-      "更新時のオーバーヘッドがない"
-    ],
-    "correct": 0,
-    "explanation": "B-Treeインデックスは範囲検索、完全一致検索の両方に適しており、データベースで最も一般的に使用されるインデックスタイプです。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "カーディナリティが高いカラムにインデックスを作成する理由はどれですか？",
-    "answers": [
-      "データの重複が多いため",
-      "ユニークな値が多く、検索効率が上がるため",
-      "ディスク容量を節約するため",
-      "更新処理が速くなるため"
-    ],
-    "correct": 1,
-    "explanation": "カーディナリティが高い（ユニークな値が多い）カラムにインデックスを作成すると、検索時に絞り込みが効率的に行えます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "クエリ最適化",
-    "question": "EXPLAINコマンドの主な用途はどれですか？",
-    "answers": [
-      "データベースのバックアップ",
-      "クエリの実行計画を確認",
-      "テーブルの作成",
-      "データの暗号化"
-    ],
-    "correct": 1,
-    "explanation": "EXPLAINコマンドは、SQLクエリの実行計画を表示し、インデックスの使用状況やパフォーマンスの分析に使用されます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "クエリ最適化",
-    "question": "N+1問題が発生する主な原因はどれですか？",
-    "answers": [
-      "インデックスの不足",
-      "関連データを個別にクエリで取得",
-      "トランザクション分離レベルの設定ミス",
-      "データベース接続の切断"
-    ],
-    "correct": 1,
-    "explanation": "N+1問題は、親レコードを取得後、各親に対して関連レコードを個別にクエリすることで発生します。JOINやeager loadingで解決できます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "トランザクション",
-    "question": "ACID特性の「I」が表すものはどれですか？",
-    "answers": [
-      "Integrity（整合性）",
-      "Isolation（分離性）",
-      "Identity（識別性）",
-      "Indexing（索引）"
-    ],
-    "correct": 1,
-    "explanation": "ACIDのIはIsolation（分離性）を表し、複数のトランザクションが並行実行されても互いに影響を与えないことを保証します。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "トランザクション",
-    "question": "デッドロックが発生する条件として正しくないものはどれですか？",
-    "answers": [
-      "相互排除",
-      "保持と待機",
-      "ノンプリエンプション",
-      "シングルスレッド実行"
-    ],
-    "correct": 3,
-    "explanation": "デッドロックの4つの条件は、相互排除、保持と待機、ノンプリエンプション、循環待機です。シングルスレッド実行では発生しません。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "クエリのパフォーマンスチューニングで最初に確認すべきことはどれですか？",
-    "answers": [
-      "サーバーのメモリ増設",
-      "インデックスの有無と実行計画",
-      "データベースの再起動",
-      "ハードウェアの交換"
-    ],
-    "correct": 1,
-    "explanation": "クエリチューニングでは、まずEXPLAINでインデックスが使用されているか、実行計画が適切かを確認することが重要です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "インデックス最適化",
-    "question": "複合インデックスで効率的な検索を行うための原則はどれですか？",
-    "answers": [
-      "検索条件の順序は関係ない",
-      "カーディナリティが低い列を先頭にする",
-      "カーディナリティが高い列を先頭にする",
-      "常にすべての列にインデックスを作成"
-    ],
-    "correct": 2,
-    "explanation": "複合インデックスでは、カーディナリティが高い（選択性が高い）列を先頭に配置すると、効率的に絞り込めます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "カバリングインデックス（Covering Index）の利点はどれですか？",
-    "answers": [
-      "インデックスサイズを小さくできる",
-      "テーブルへのアクセスなしでクエリを完結できる",
-      "更新処理が高速化される",
-      "ディスク容量を節約できる"
-    ],
-    "correct": 1,
-    "explanation": "カバリングインデックスは、クエリで必要なすべての列をインデックスに含めることで、テーブル本体へのアクセスを回避し、パフォーマンスを向上させます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "ハッシュインデックスの特徴として正しいものはどれですか？",
-    "answers": [
-      "範囲検索に最適",
-      "完全一致検索に特化し、非常に高速",
-      "ソート操作が高速",
-      "データ圧縮に優れている"
-    ],
-    "correct": 1,
-    "explanation": "ハッシュインデックスは完全一致検索に特化しており、O(1)の時間複雑度で非常に高速ですが、範囲検索やソートには使用できません。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "パーシャルインデックス（部分インデックス）を使用する主な理由はどれですか？",
-    "answers": [
-      "全データにインデックスを作成するため",
-      "特定の条件を満たす行のみをインデックス化してストレージを節約",
-      "インデックスの作成速度を上げるため",
-      "セキュリティを向上させるため"
-    ],
-    "correct": 1,
-    "explanation": "パーシャルインデックスは、WHERE条件で指定した特定の行のみをインデックス化することで、ストレージ効率とパフォーマンスを向上させます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "インデックス最適化",
-    "question": "インデックスのフラグメンテーション（断片化）が発生した場合の対処法はどれですか？",
-    "answers": [
-      "インデックスを削除する",
-      "インデックスを再構築またはリオーガナイズする",
-      "データベースを再起動する",
-      "テーブルをドロップする"
-    ],
-    "correct": 1,
-    "explanation": "インデックスのフラグメンテーションは、REBUILD（再構築）やREORGANIZE（リオーガナイズ）によって解消でき、検索パフォーマンスを回復できます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "インデックス最適化",
-    "question": "複合インデックス(A, B, C)が存在する場合、効率的に利用できるクエリ条件はどれですか？",
-    "answers": [
-      "WHERE B = ? AND C = ?",
-      "WHERE C = ?",
-      "WHERE A = ? AND B = ?",
-      "WHERE B = ?"
-    ],
-    "correct": 2,
-    "explanation": "複合インデックスは左端の列から順に利用されます。(A, B, C)のインデックスは、A単独、AとB、AとBとCの検索に有効ですが、BやCから始まる条件では効率的に使えません。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "接続管理",
-    "question": "データベース接続プールの主な利点はどれですか？",
-    "answers": [
-      "接続数を無制限に増やせる",
-      "接続の作成・破棄のオーバーヘッドを削減",
-      "セキュリティの向上",
-      "ストレージ容量の削減"
-    ],
-    "correct": 1,
-    "explanation": "接続プールは接続を再利用することで、接続の作成・破棄に伴うオーバーヘッドを削減し、パフォーマンスを向上させます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "API設計",
-    "minorCategory": "RESTful設計",
-    "question": "RESTful APIでリソースの一覧を取得するHTTPメソッドはどれですか？",
-    "answers": [
-      "POST",
-      "GET",
-      "PUT",
-      "DELETE"
-    ],
-    "correct": 1,
-    "explanation": "GETメソッドはリソースの取得に使用され、副作用がなく冪等性があります。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "API設計",
-    "minorCategory": "RESTful設計",
-    "question": "RESTful APIでユーザー一覧を取得するエンドポイントとして適切なものはどれですか？",
-    "answers": [
-      "/getUsers",
-      "/users",
-      "/fetchAllUsers",
-      "/retrieveUserList"
-    ],
-    "correct": 1,
-    "explanation": "RESTful APIでは、リソースを名詞で表現し、HTTPメソッドで操作を示します。/usersが適切です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "API設計",
-    "minorCategory": "エラーハンドリング",
-    "question": "API認証エラーに適したHTTPステータスコードはどれですか？",
-    "answers": [
-      "400 Bad Request",
-      "401 Unauthorized",
-      "403 Forbidden",
-      "404 Not Found"
-    ],
-    "correct": 1,
-    "explanation": "401 Unauthorizedは認証が必要、または認証に失敗したことを示します。403は認証されているが権限がない場合です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "API設計",
-    "minorCategory": "エラーハンドリング",
-    "question": "サーバー内部エラーを示すHTTPステータスコードはどれですか？",
-    "answers": [
-      "400",
-      "404",
-      "500",
-      "503"
-    ],
-    "correct": 2,
-    "explanation": "500 Internal Server Errorは、サーバー側で予期しないエラーが発生したことを示します。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "API設計",
-    "minorCategory": "バージョニング",
-    "question": "API バージョニングの方法として一般的でないものはどれですか？",
-    "answers": [
-      "URLパスにバージョンを含める（/v1/users）",
-      "HTTPヘッダーでバージョンを指定",
-      "クエリパラメータでバージョンを指定",
-      "リクエストボディに必ずバージョンを含める"
-    ],
-    "correct": 3,
-    "explanation": "リクエストボディにバージョンを含める方法は一般的ではありません。URLパス、ヘッダー、クエリパラメータが主流です。"
-  },
-  {
-    "majorCategory": "フロントエンド技術",
-    "middleCategory": "アプリパフォーマンス",
-    "minorCategory": "フロントエンド最適化",
-    "question": "Critical Rendering Pathの最適化手法として正しいものはどれですか？",
-    "answers": [
-      "すべてのJavaScriptをheadタグ内で読み込む",
-      "重要なCSSをインライン化し、非同期でCSSを読み込む",
-      "全ての画像を高解像度にする",
-      "すべてのリソースを同期的に読み込む"
-    ],
-    "correct": 1,
-    "explanation": "Critical CSSをインライン化し、非クリティカルなCSSを非同期で読み込むことで、First Paintを高速化できます。"
-  },
-  {
-    "majorCategory": "フロントエンド技術",
-    "middleCategory": "アプリパフォーマンス",
-    "minorCategory": "バンドル最適化",
-    "question": "Webpackのコード分割（Code Splitting）の主な目的はどれですか？",
-    "answers": [
-      "ビルド時間の短縮",
-      "初期読み込みサイズの削減",
-      "デバッグの簡易化",
-      "コードの暗号化"
-    ],
-    "correct": 1,
-    "explanation": "コード分割により、必要なコードのみを初期読み込みし、その他は必要に応じて遅延読み込みすることで、初期表示を高速化します。"
-  },
-  {
-    "majorCategory": "フロントエンド技術",
-    "middleCategory": "アプリパフォーマンス",
-    "minorCategory": "バンドル最適化",
-    "question": "Tree Shakingの説明として正しいものはどれですか？",
-    "answers": [
-      "使用されていないコードをバンドルから除外",
-      "ファイルサイズを増やす処理",
-      "コードを難読化する処理",
-      "テストコードの自動生成"
-    ],
-    "correct": 0,
-    "explanation": "Tree Shakingは、ESモジュールの静的解析により、使用されていないコード（Dead Code）をバンドルから除外する最適化手法です。"
-  },
-  {
-    "majorCategory": "フロントエンド技術",
-    "middleCategory": "アプリパフォーマンス",
-    "minorCategory": "レンダリング最適化",
-    "question": "Virtual DOMの主な利点はどれですか？",
-    "answers": [
-      "常に実DOMより遅い",
-      "差分のみを実DOMに反映し、パフォーマンス向上",
-      "メモリ使用量が実DOMより多い",
-      "SEOに不利"
-    ],
-    "correct": 1,
-    "explanation": "Virtual DOMは変更箇所を効率的に検出し、必要な部分のみを実DOMに反映することで、レンダリングパフォーマンスを向上させます。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "キャッシュ",
-    "minorCategory": "HTTPキャッシング",
-    "question": "Cache-Control: max-age=3600の意味はどれですか？",
-    "answers": [
-      "3600バイトまでキャッシュ可能",
-      "3600秒（1時間）キャッシュを保持",
-      "3600個のリソースをキャッシュ",
-      "3600回アクセスまでキャッシュ有効"
-    ],
-    "correct": 1,
-    "explanation": "max-ageディレクティブは、リソースがキャッシュされる最大時間を秒単位で指定します。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "キャッシュ",
-    "minorCategory": "アプリケーションキャッシュ",
-    "question": "Redisのデータ構造でないものはどれですか？",
-    "answers": [
-      "String",
-      "List",
-      "Set",
-      "Tree"
-    ],
-    "correct": 3,
-    "explanation": "Redisは、String、List、Set、Sorted Set、Hashなどをサポートしますが、Treeは基本データ構造に含まれません。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "キャッシュ",
-    "minorCategory": "CDN",
-    "question": "CDN（Content Delivery Network）の主な目的はどれですか？",
-    "answers": [
-      "データベースのバックアップ",
-      "静的コンテンツを地理的に分散して配信",
-      "アプリケーションのデプロイ",
-      "ユーザー認証"
-    ],
-    "correct": 1,
-    "explanation": "CDNは、静的コンテンツを地理的に分散したサーバーから配信し、ユーザーに近い場所から高速に提供します。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "キャッシュ",
-    "minorCategory": "データベースキャッシュ",
-    "question": "クエリ結果キャッシュの無効化が必要なタイミングはどれですか？",
-    "answers": [
-      "データが更新された時",
-      "サーバーを再起動した時のみ",
-      "ユーザーがログアウトした時",
-      "決して無効化しない"
-    ],
-    "correct": 0,
-    "explanation": "データが更新された場合、古いキャッシュを無効化しないと、ユーザーに古い情報が表示されてしまいます。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "キャッシュ",
-    "minorCategory": "キャッシュ戦略",
-    "question": "Write-Throughキャッシュ戦略の特徴はどれですか？",
-    "answers": [
-      "キャッシュとデータベースを同時に更新",
-      "キャッシュのみ更新し、データベースは更新しない",
-      "読み取り時のみキャッシュを使用",
-      "キャッシュを使用しない"
-    ],
-    "correct": 0,
-    "explanation": "Write-Throughは、データ書き込み時にキャッシュとデータベースの両方を同時に更新する戦略で、データの一貫性が保たれます。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "セキュリティ",
-    "minorCategory": "認証・認可",
-    "question": "JWTトークンの構成要素として正しくないものはどれですか？",
-    "answers": [
-      "Header",
-      "Payload",
-      "Signature",
-      "Encryption"
-    ],
-    "correct": 3,
-    "explanation": "JWTはHeader、Payload、Signatureの3つの部分から構成されます。JWTは署名されますが、暗号化はオプションです。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "セキュリティ",
-    "minorCategory": "認証・認可",
-    "question": "OAuth 2.0で、サードパーティアプリがユーザーの代わりにリソースにアクセスするために使用するものはどれですか？",
-    "answers": [
-      "パスワード",
-      "アクセストークン",
-      "Cookie",
-      "セッションID"
-    ],
-    "correct": 1,
-    "explanation": "OAuth 2.0では、アクセストークンを使用してリソースサーバーにアクセスします。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "セキュリティ",
-    "minorCategory": "脆弱性対策",
-    "question": "XSS攻撃の対策として適切でないものはどれですか？",
-    "answers": [
-      "入力値のサニタイゼーション",
-      "出力時のエスケープ処理",
-      "Content Security Policyの設定",
-      "SQLプリペアドステートメントの使用"
-    ],
-    "correct": 3,
-    "explanation": "SQLプリペアドステートメントはSQLインジェクション対策です。XSS対策には入力サニタイゼーション、出力エスケープ、CSPが有効です。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "セキュリティ",
-    "minorCategory": "脆弱性対策",
-    "question": "OWASP Top 10に含まれていない脆弱性はどれですか？",
-    "answers": [
-      "SQLインジェクション",
-      "クロスサイトスクリプティング（XSS）",
-      "ディレクトリトラバーサル",
-      "タイポスクワッティング"
-    ],
-    "correct": 3,
-    "explanation": "タイポスクワッティングはドメイン名の悪用で、OWASP Top 10には含まれません。SQLインジェクション、XSS、パストラバーサルは含まれます。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "セキュリティ",
-    "minorCategory": "暗号化",
-    "question": "ハッシュ関数として推奨されないものはどれですか？",
-    "answers": [
-      "bcrypt",
-      "SHA-256",
-      "MD5",
-      "Argon2"
-    ],
-    "correct": 2,
-    "explanation": "MD5は脆弱性が発見されており、パスワードハッシュには推奨されません。bcrypt、Argon2などを使用すべきです。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "クラウドインフラ",
-    "minorCategory": "コンテナ技術",
-    "question": "Dockerのマルチステージビルドの主な利点はどれですか？",
-    "answers": [
-      "ビルド速度の低下",
-      "最終イメージサイズの削減",
-      "セキュリティの低下",
-      "メモリ使用量の増加"
-    ],
-    "correct": 1,
-    "explanation": "マルチステージビルドは、ビルド依存関係を最終イメージに含めないため、イメージサイズを大幅に削減できます。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "クラウドインフラ",
-    "minorCategory": "コンテナ技術",
-    "question": "Kubernetesのリソースで、コンテナのグループを管理するものはどれですか？",
-    "answers": [
-      "Node",
-      "Pod",
-      "Service",
-      "Namespace"
-    ],
-    "correct": 1,
-    "explanation": "Podは1つ以上のコンテナをグループ化し、同じネットワークとストレージを共有する最小のデプロイ単位です。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "クラウドインフラ",
-    "minorCategory": "CI/CD",
-    "question": "ブルーグリーンデプロイメントの特徴はどれですか？",
-    "answers": [
-      "段階的にトラフィックを新バージョンに移行",
-      "2つの環境を用意し、一度に切り替え",
-      "特定ユーザーのみに新機能を公開",
-      "コンテナを順次再起動"
-    ],
-    "correct": 1,
-    "explanation": "ブルーグリーンデプロイメントは、本番環境（ブルー）と同一の環境（グリーン）を用意し、検証後に一度に切り替える手法です。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "クラウドインフラ",
-    "minorCategory": "CI/CD",
-    "question": "カナリアリリースの主な目的はどれですか？",
-    "answers": [
-      "全ユーザーに即座に新機能を提供",
-      "一部のユーザーで新バージョンを検証",
-      "ダウンタイムの最大化",
-      "コストの増加"
-    ],
-    "correct": 1,
-    "explanation": "カナリアリリースは、新バージョンを一部のユーザーに先行公開し、問題がないか検証してから全体に展開する手法です。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "クラウドインフラ",
-    "minorCategory": "モニタリング",
-    "question": "Prometheusの主な用途はどれですか？",
-    "answers": [
-      "ログ管理",
-      "メトリクス収集と監視",
-      "トレーシング",
-      "デプロイ自動化"
-    ],
-    "correct": 1,
-    "explanation": "Prometheusは、時系列データベースベースのメトリクス収集・監視システムで、クラウドネイティブアプリケーションの監視に広く使用されます。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "システム設計",
-    "minorCategory": "スケーラビリティ",
-    "question": "水平スケーリング（スケールアウト）の説明として正しいものはどれですか？",
-    "answers": [
-      "サーバーのCPUやメモリを増強",
-      "サーバーの台数を増やす",
-      "データベースを1台の高性能サーバーに集約",
-      "ネットワーク帯域を削減"
-    ],
-    "correct": 1,
-    "explanation": "水平スケーリングは、サーバーの台数を増やして負荷を分散する手法です。垂直スケーリングはサーバーのスペックを上げる手法です。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "システム設計",
-    "minorCategory": "スケーラビリティ",
-    "question": "ロードバランサーの主な役割はどれですか？",
-    "answers": [
-      "データの暗号化",
-      "複数サーバーへのトラフィック分散",
-      "データベースのバックアップ",
-      "ログの集約"
-    ],
-    "correct": 1,
-    "explanation": "ロードバランサーは、複数のサーバーにリクエストを分散し、負荷を均等化する役割を持ちます。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "システム設計",
-    "minorCategory": "マイクロサービス",
-    "question": "マイクロサービスアーキテクチャの利点として正しくないものはどれですか？",
-    "answers": [
-      "独立したデプロイが可能",
-      "技術スタックの柔軟性",
-      "サービス間通信のオーバーヘッドがない",
-      "障害の影響範囲を限定できる"
-    ],
-    "correct": 2,
-    "explanation": "マイクロサービスはサービス間通信のオーバーヘッドが増加します。しかし、独立性、柔軟性、障害の分離などの利点があります。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "システム設計",
-    "minorCategory": "マイクロサービス",
-    "question": "サービス間通信パターンで、サービスが他のサービスを直接呼び出す方式はどれですか？",
-    "answers": [
-      "イベント駆動",
-      "同期的リクエスト/レスポンス",
-      "メッセージキュー",
-      "Pub/Sub"
-    ],
-    "correct": 1,
-    "explanation": "同期的リクエスト/レスポンスは、REST APIやgRPCを使用してサービス間で直接通信する方式です。"
-  },
-  {
-    "majorCategory": "インフラ・運用",
-    "middleCategory": "システム設計",
-    "minorCategory": "可用性設計",
-    "question": "フェイルオーバーとフェイルバックの説明として正しいものはどれですか？",
-    "answers": [
-      "フェイルオーバー: 障害時に予備系に切り替え、フェイルバック: 主系復旧後に戻す",
-      "フェイルオーバー: バックアップ作成、フェイルバック: リストア",
-      "フェイルオーバー: スケールアウト、フェイルバック: スケールイン",
-      "フェイルオーバー: 負荷分散、フェイルバック: 負荷集約"
-    ],
-    "correct": 0,
-    "explanation": "フェイルオーバーは障害発生時に予備系（スタンバイ）に自動切り替えすること、フェイルバックは主系復旧後に元に戻すことです。"
-  },
-  {
-    "majorCategory": "フロントエンド技術",
-    "middleCategory": "フロントエンド設計",
-    "minorCategory": "状態管理",
-    "question": "Reduxの3原則に含まれないものはどれですか？",
-    "answers": [
-      "Single source of truth",
-      "State is read-only",
-      "Changes are made with pure functions",
-      "Components must be class-based"
-    ],
-    "correct": 3,
-    "explanation": "Reduxの3原則は、単一のストア、読み取り専用の状態、純粋関数による変更です。コンポーネントの実装方法は制約されません。"
-  },
-  {
-    "majorCategory": "フロントエンド技術",
-    "middleCategory": "フロントエンド設計",
-    "minorCategory": "状態管理",
-    "question": "React Context APIの主な用途はどれですか？",
-    "answers": [
-      "コンポーネント間のスタイル共有",
-      "グローバル状態の管理とprop drillingの回避",
-      "HTTPリクエストの送信",
-      "ルーティングの管理"
-    ],
-    "correct": 1,
-    "explanation": "Context APIは、コンポーネントツリー全体でデータを共有し、深いネストでのprops渡し（prop drilling）を回避するために使用されます。"
-  },
-  {
-    "majorCategory": "フロントエンド技術",
-    "middleCategory": "フロントエンド設計",
-    "minorCategory": "コンポーネント設計",
-    "question": "Atomic Designのコンポーネント階層で最も小さい単位はどれですか？",
-    "answers": [
-      "Molecules",
-      "Atoms",
-      "Organisms",
-      "Templates"
-    ],
-    "correct": 1,
-    "explanation": "Atomic Designの階層は、Atoms（原子）が最小単位で、Molecules（分子）、Organisms（有機体）、Templates、Pagesと続きます。"
-  },
-  {
-    "majorCategory": "フロントエンド技術",
-    "middleCategory": "フロントエンド設計",
-    "minorCategory": "コンポーネント設計",
-    "question": "Presentational ComponentとContainer Componentの違いはどれですか？",
-    "answers": [
-      "Presentationalはロジック、Containerは見た目を担当",
-      "Presentationalは見た目、Containerはロジックとデータ取得を担当",
-      "両者に違いはない",
-      "Presentationalはクラス、Containerは関数コンポーネント"
-    ],
-    "correct": 1,
-    "explanation": "Presentational Componentは見た目に集中し、Container Componentはロジックやデータ取得を担当する設計パターンです。"
-  },
-  {
-    "majorCategory": "フロントエンド技術",
-    "middleCategory": "フロントエンド設計",
-    "minorCategory": "パフォーマンス",
-    "question": "React.memoの主な目的はどれですか？",
-    "answers": [
-      "コンポーネントのメモリ使用量削減",
-      "不要な再レンダリングの防止",
-      "ストレージへのデータ保存",
-      "HTTPキャッシュの管理"
-    ],
-    "correct": 1,
-    "explanation": "React.memoは、propsが変更されない限りコンポーネントの再レンダリングをスキップし、パフォーマンスを最適化します。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "ビットマップインデックスが最も効果的なケースはどれですか？",
-    "answers": [
-      "カーディナリティが非常に高い列",
-      "カーディナリティが低く、読み取り専用に近いデータ",
-      "頻繁に更新される列",
-      "主キー列"
-    ],
-    "correct": 1,
-    "explanation": "ビットマップインデックスは、性別や都道府県など値の種類が少ない（低カーディナリティ）列で、特にデータウェアハウスなど読み取り中心の環境で効果的です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "GINインデックス（Generalized Inverted Index）が適しているデータ型はどれですか？",
-    "answers": [
-      "整数型",
-      "配列型やJSONB型など複数の値を持つ型",
-      "日付型",
-      "文字列型（固定長）"
-    ],
-    "correct": 1,
-    "explanation": "GINインデックスは配列、JSONB、全文検索など、1つの行に複数の値や要素を持つデータ型に最適化されたインデックスです。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "インデックスのフィルファクター（Fill Factor）を100%未満に設定する理由はどれですか？",
-    "answers": [
-      "ストレージ容量を節約するため",
-      "将来の挿入・更新時のページ分割を減らすため",
-      "検索速度を向上させるため",
-      "インデックスのサイズを大きくするため"
-    ],
-    "correct": 1,
-    "explanation": "フィルファクターを100%未満（例：80%）にすることで、インデックスページに空き領域を確保し、データ挿入時のページ分割によるフラグメンテーションを減らせます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "インデックス最適化",
-    "question": "インデックスオンリースキャン（Index-Only Scan）が可能になる条件はどれですか？",
-    "answers": [
-      "テーブルにインデックスが1つだけ存在する",
-      "クエリで必要な全ての列がインデックスに含まれている",
-      "主キーインデックスを使用している",
-      "WHERE句がない"
-    ],
-    "correct": 1,
-    "explanation": "インデックスオンリースキャンは、クエリで参照する全ての列がインデックスに含まれている場合に可能で、テーブル本体へのアクセスを回避できます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "SELECT COUNT(*)のパフォーマンスを改善する方法として適切でないものはどれですか？",
-    "answers": [
-      "近似値で良ければ統計情報を使用",
-      "必要に応じてマテリアライズドビューやカウンターテーブルを使用",
-      "全てのテーブルをメモリに読み込む",
-      "インデックスオンリースキャンを活用"
-    ],
-    "correct": 2,
-    "explanation": "大きなテーブルを全てメモリに読み込むのは非現実的です。統計情報の利用、カウンターテーブル、インデックスオンリースキャンが実用的な最適化手法です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "サブクエリをJOINに書き換えることで得られる利点はどれですか？",
-    "answers": [
-      "常にクエリが遅くなる",
-      "オプティマイザによる最適化の機会が増える",
-      "コードの可読性が必ず低下する",
-      "メモリ使用量が必ず増加する"
-    ],
-    "correct": 1,
-    "explanation": "サブクエリをJOINに書き換えることで、オプティマイザがより効率的な実行計画を選択できる可能性が高まります。特に相関サブクエリの場合、パフォーマンス改善が顕著です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "クエリ最適化",
-    "question": "WHERE句でインデックス列に関数を適用した場合の影響はどれですか？",
-    "answers": [
-      "インデックスが使用されなくなる可能性が高い",
-      "クエリが高速化される",
-      "インデックスの効果が向上する",
-      "影響はない"
-    ],
-    "correct": 0,
-    "explanation": "WHERE UPPER(name) = 'JOHN'のように列に関数を適用すると、通常のインデックスは使用されません。関数ベースインデックスまたは計算列へのインデックスが必要です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "関数ベースインデックス（Function-Based Index）の用途はどれですか？",
-    "answers": [
-      "テーブルの容量削減",
-      "計算式や関数の結果に対する検索の高速化",
-      "データの暗号化",
-      "トランザクション分離レベルの向上"
-    ],
-    "correct": 1,
-    "explanation": "関数ベースインデックスは、UPPER(name)やDATE(created_at)など、列に関数や計算式を適用した結果にインデックスを作成し、そのような検索を高速化します。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "UNION ALLとUNIONの違いとして正しいものはどれですか？",
-    "answers": [
-      "UNION ALLは重複を除去し、UNIONは重複を許可",
-      "UNION ALLは重複を許可し、UNIONは重複を除去するためソートが発生",
-      "両者に違いはない",
-      "UNION ALLは使用できないSQL構文"
-    ],
-    "correct": 1,
-    "explanation": "UNION ALLは重複を許可し高速です。UNIONは重複除去のためソート処理が発生しコストが高くなります。重複がないことが分かっている場合はUNION ALLを使用すべきです。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "OR条件が多い検索クエリの最適化手法として適切なものはどれですか？",
-    "answers": [
-      "全てのOR条件列にインデックスを作成",
-      "UNION ALLで分割して個別にインデックスを利用",
-      "OR条件を増やす",
-      "インデックスを削除する"
-    ],
-    "correct": 1,
-    "explanation": "WHERE a = 1 OR b = 2のようなOR条件は、それぞれの条件をUNION ALLで分割することで、各条件が別々のインデックスを効率的に使用できます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "クラスタインデックス（Clustered Index）の特徴はどれですか？",
-    "answers": [
-      "テーブルに複数作成できる",
-      "テーブルに1つだけ作成でき、データの物理的な並び順を決定",
-      "インデックスとデータが別の場所に格納される",
-      "検索速度は非クラスタインデックスより常に遅い"
-    ],
-    "correct": 1,
-    "explanation": "クラスタインデックスはテーブルに1つだけ作成でき、データの物理的な配置順序を決定します。範囲検索で特に効果的ですが、更新時のコストは高くなります。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "EXISTS句とIN句の使い分けとして適切なものはどれですか？",
-    "answers": [
-      "常にINを使用すべき",
-      "サブクエリが大量の行を返す場合はEXISTSが効率的",
-      "EXISTSは廃止された構文",
-      "どちらも同じパフォーマンス"
-    ],
-    "correct": 1,
-    "explanation": "EXISTSは条件に一致する行が1つ見つかった時点で処理を終了します。サブクエリが多くの行を返す可能性がある場合、EXISTSの方が効率的です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "インデックスのセレクティビティ（選択性）が高いとはどういう状態ですか？",
-    "answers": [
-      "重複する値が多い状態",
-      "ユニークな値が多く、少数の行に絞り込める状態",
-      "インデックスのサイズが大きい状態",
-      "全ての値が同じ状態"
-    ],
-    "correct": 1,
-    "explanation": "セレクティビティが高いとは、カーディナリティが高く、検索条件で少数の行に絞り込める状態を指します。このような列へのインデックスは効果的です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "LIKE '%keyword%'のような前方一致でない検索のパフォーマンス問題を解決する方法はどれですか？",
-    "answers": [
-      "通常のB-Treeインデックスで解決できる",
-      "全文検索インデックス（Full-Text Search）を使用",
-      "インデックスを削除する",
-      "解決方法はない"
-    ],
-    "correct": 1,
-    "explanation": "LIKE '%keyword%'のような部分一致検索では通常のインデックスは使用できません。全文検索インデックス（PostgreSQLのGIN、MySQLのFULLTEXT）を使用することで効率的に検索できます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "クエリヒント（Query Hint）を使用する場合の注意点はどれですか？",
-    "answers": [
-      "常にヒントを使用すべき",
-      "データ量や分布が変わると最適でなくなる可能性があるため慎重に使用",
-      "ヒントは全てのDBMSで同じ構文",
-      "パフォーマンスに影響しない"
-    ],
-    "correct": 1,
-    "explanation": "クエリヒントでインデックスやJOIN方法を強制指定できますが、データの成長や分布変化で最適でなくなる可能性があります。オプティマイザに任せる方が長期的には良い場合が多いです。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "インデックス設計",
-    "question": "インクルードカラム（Included Columns）を持つインデックスの利点はどれですか？",
-    "answers": [
-      "インデックスのサイズが小さくなる",
-      "インデックスキーではないがSELECT句で必要な列を含めてカバリングインデックスを実現",
-      "更新性能が向上する",
-      "検索条件に使用できる"
-    ],
-    "correct": 1,
-    "explanation": "インクルードカラムは、インデックスキーには含めないが、インデックスリーフレベルに格納する列です。これによりテーブルアクセスなしでクエリを完結できます。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "ウィンドウ関数（Window Function）とGROUP BYの違いとして正しいものはどれですか？",
-    "answers": [
-      "ウィンドウ関数は行を集約せず、各行に集計結果を付加できる",
-      "GROUP BYの方が常に高速",
-      "ウィンドウ関数は使用できない",
-      "両者に違いはない"
-    ],
-    "correct": 0,
-    "explanation": "ウィンドウ関数（ROW_NUMBER、RANK、SUM() OVERなど）は各行に対して集計結果を計算できます。GROUP BYは行を集約しますが、ウィンドウ関数は元の行数を維持します。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "データベース",
-    "minorCategory": "クエリ最適化",
-    "question": "マテリアライズドビュー（Materialized View）の主な用途はどれですか？",
-    "answers": [
-      "リアルタイムデータの更新",
-      "複雑な集計クエリの結果を事前計算して保存",
-      "データの削除",
-      "トランザクション管理"
-    ],
-    "correct": 1,
-    "explanation": "マテリアライズドビューは、複雑なJOINや集計の結果を物理的に保存し、クエリパフォーマンスを向上させます。定期的なリフレッシュが必要です。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "インデックス最適化",
-    "question": "インデックススキャンとテーブルスキャンのコスト比較で考慮すべき要素はどれですか？",
-    "answers": [
-      "インデックスは常にテーブルスキャンより高速",
-      "取得する行の割合、インデックスの選択性、I/Oコスト",
-      "インデックスのサイズのみ",
-      "テーブル名の長さ"
-    ],
-    "correct": 1,
-    "explanation": "取得行が全体の10-15%を超える場合、インデックススキャンよりテーブルスキャンの方が効率的な場合があります。オプティマイザは選択性やI/Oコストを考慮して判断します。"
-  },
-  {
-    "majorCategory": "バックエンド技術",
-    "middleCategory": "DBパフォーマンス",
-    "minorCategory": "クエリ最適化",
-    "question": "クエリのバッファプール（Buffer Pool）ヒット率を改善する方法として適切でないものはどれですか？",
-    "answers": [
-      "頻繁にアクセスするデータのメモリ配分を増やす",
-      "不要なデータの読み込みを減らす（SELECT * を避ける）",
-      "全てのテーブルにインデックスを大量に作成",
-      "適切なインデックスでI/Oを削減"
-    ],
-    "correct": 2,
-    "explanation": "過剰なインデックスは更新時のオーバーヘッドを増やし、バッファプールを圧迫します。必要なデータのみを読み込み、適切なインデックスでI/Oを削減することが重要です。"
-  }
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "B-Treeインデックスの特徴として正しいものはどれですか？",
+        "answers": [
+            "範囲検索に適している",
+            "完全一致検索のみサポート",
+            "メモリを使用しない",
+            "更新時のオーバーヘッドがない"
+        ],
+        "correct": 0,
+        "explanation": "B-Treeインデックスは範囲検索、完全一致検索の両方に適しており、データベースで最も一般的に使用されるインデックスタイプです。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "カーディナリティが高いカラムにインデックスを作成する理由はどれですか？",
+        "answers": [
+            "データの重複が多いため",
+            "ユニークな値が多く、検索効率が上がるため",
+            "ディスク容量を節約するため",
+            "更新処理が速くなるため"
+        ],
+        "correct": 1,
+        "explanation": "カーディナリティが高い（ユニークな値が多い）カラムにインデックスを作成すると、検索時に絞り込みが効率的に行えます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "クエリ最適化",
+        "question": "EXPLAINコマンドの主な用途はどれですか？",
+        "answers": [
+            "データベースのバックアップ",
+            "クエリの実行計画を確認",
+            "テーブルの作成",
+            "データの暗号化"
+        ],
+        "correct": 1,
+        "explanation": "EXPLAINコマンドは、SQLクエリの実行計画を表示し、インデックスの使用状況やパフォーマンスの分析に使用されます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "クエリ最適化",
+        "question": "N+1問題が発生する主な原因はどれですか？",
+        "answers": [
+            "インデックスの不足",
+            "関連データを個別にクエリで取得",
+            "トランザクション分離レベルの設定ミス",
+            "データベース接続の切断"
+        ],
+        "correct": 1,
+        "explanation": "N+1問題は、親レコードを取得後、各親に対して関連レコードを個別にクエリすることで発生します。JOINやeager loadingで解決できます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "トランザクション",
+        "question": "ACID特性の「I」が表すものはどれですか？",
+        "answers": [
+            "Integrity（整合性）",
+            "Isolation（分離性）",
+            "Identity（識別性）",
+            "Indexing（索引）"
+        ],
+        "correct": 1,
+        "explanation": "ACIDのIはIsolation（分離性）を表し、複数のトランザクションが並行実行されても互いに影響を与えないことを保証します。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "トランザクション",
+        "question": "デッドロックが発生する条件として正しくないものはどれですか？",
+        "answers": ["相互排除", "保持と待機", "ノンプリエンプション", "シングルスレッド実行"],
+        "correct": 3,
+        "explanation": "デッドロックの4つの条件は、相互排除、保持と待機、ノンプリエンプション、循環待機です。シングルスレッド実行では発生しません。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "クエリのパフォーマンスチューニングで最初に確認すべきことはどれですか？",
+        "answers": [
+            "サーバーのメモリ増設",
+            "インデックスの有無と実行計画",
+            "データベースの再起動",
+            "ハードウェアの交換"
+        ],
+        "correct": 1,
+        "explanation": "クエリチューニングでは、まずEXPLAINでインデックスが使用されているか、実行計画が適切かを確認することが重要です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "インデックス最適化",
+        "question": "複合インデックスで効率的な検索を行うための原則はどれですか？",
+        "answers": [
+            "検索条件の順序は関係ない",
+            "カーディナリティが低い列を先頭にする",
+            "カーディナリティが高い列を先頭にする",
+            "常にすべての列にインデックスを作成"
+        ],
+        "correct": 2,
+        "explanation": "複合インデックスでは、カーディナリティが高い（選択性が高い）列を先頭に配置すると、効率的に絞り込めます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "カバリングインデックス（Covering Index）の利点はどれですか？",
+        "answers": [
+            "インデックスサイズを小さくできる",
+            "テーブルへのアクセスなしでクエリを完結できる",
+            "更新処理が高速化される",
+            "ディスク容量を節約できる"
+        ],
+        "correct": 1,
+        "explanation": "カバリングインデックスは、クエリで必要なすべての列をインデックスに含めることで、テーブル本体へのアクセスを回避し、パフォーマンスを向上させます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "ハッシュインデックスの特徴として正しいものはどれですか？",
+        "answers": [
+            "範囲検索に最適",
+            "完全一致検索に特化し、非常に高速",
+            "ソート操作が高速",
+            "データ圧縮に優れている"
+        ],
+        "correct": 1,
+        "explanation": "ハッシュインデックスは完全一致検索に特化しており、O(1)の時間複雑度で非常に高速ですが、範囲検索やソートには使用できません。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "パーシャルインデックス（部分インデックス）を使用する主な理由はどれですか？",
+        "answers": [
+            "全データにインデックスを作成するため",
+            "特定の条件を満たす行のみをインデックス化してストレージを節約",
+            "インデックスの作成速度を上げるため",
+            "セキュリティを向上させるため"
+        ],
+        "correct": 1,
+        "explanation": "パーシャルインデックスは、WHERE条件で指定した特定の行のみをインデックス化することで、ストレージ効率とパフォーマンスを向上させます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "インデックス最適化",
+        "question": "インデックスのフラグメンテーション（断片化）が発生した場合の対処法はどれですか？",
+        "answers": [
+            "インデックスを削除する",
+            "インデックスを再構築またはリオーガナイズする",
+            "データベースを再起動する",
+            "テーブルをドロップする"
+        ],
+        "correct": 1,
+        "explanation": "インデックスのフラグメンテーションは、REBUILD（再構築）やREORGANIZE（リオーガナイズ）によって解消でき、検索パフォーマンスを回復できます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "インデックス最適化",
+        "question": "複合インデックス(A, B, C)が存在する場合、効率的に利用できるクエリ条件はどれですか？",
+        "answers": ["WHERE B = ? AND C = ?", "WHERE C = ?", "WHERE A = ? AND B = ?", "WHERE B = ?"],
+        "correct": 2,
+        "explanation": "複合インデックスは左端の列から順に利用されます。(A, B, C)のインデックスは、A単独、AとB、AとBとCの検索に有効ですが、BやCから始まる条件では効率的に使えません。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "接続管理",
+        "question": "データベース接続プールの主な利点はどれですか？",
+        "answers": [
+            "接続数を無制限に増やせる",
+            "接続の作成・破棄のオーバーヘッドを削減",
+            "セキュリティの向上",
+            "ストレージ容量の削減"
+        ],
+        "correct": 1,
+        "explanation": "接続プールは接続を再利用することで、接続の作成・破棄に伴うオーバーヘッドを削減し、パフォーマンスを向上させます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "API設計",
+        "minorCategory": "RESTful設計",
+        "question": "RESTful APIでリソースの一覧を取得するHTTPメソッドはどれですか？",
+        "answers": ["POST", "GET", "PUT", "DELETE"],
+        "correct": 1,
+        "explanation": "GETメソッドはリソースの取得に使用され、副作用がなく冪等性があります。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "API設計",
+        "minorCategory": "RESTful設計",
+        "question": "RESTful APIでユーザー一覧を取得するエンドポイントとして適切なものはどれですか？",
+        "answers": ["/getUsers", "/users", "/fetchAllUsers", "/retrieveUserList"],
+        "correct": 1,
+        "explanation": "RESTful APIでは、リソースを名詞で表現し、HTTPメソッドで操作を示します。/usersが適切です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "API設計",
+        "minorCategory": "エラーハンドリング",
+        "question": "API認証エラーに適したHTTPステータスコードはどれですか？",
+        "answers": ["400 Bad Request", "401 Unauthorized", "403 Forbidden", "404 Not Found"],
+        "correct": 1,
+        "explanation": "401 Unauthorizedは認証が必要、または認証に失敗したことを示します。403は認証されているが権限がない場合です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "API設計",
+        "minorCategory": "エラーハンドリング",
+        "question": "サーバー内部エラーを示すHTTPステータスコードはどれですか？",
+        "answers": ["400", "404", "500", "503"],
+        "correct": 2,
+        "explanation": "500 Internal Server Errorは、サーバー側で予期しないエラーが発生したことを示します。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "API設計",
+        "minorCategory": "バージョニング",
+        "question": "API バージョニングの方法として一般的でないものはどれですか？",
+        "answers": [
+            "URLパスにバージョンを含める（/v1/users）",
+            "HTTPヘッダーでバージョンを指定",
+            "クエリパラメータでバージョンを指定",
+            "リクエストボディに必ずバージョンを含める"
+        ],
+        "correct": 3,
+        "explanation": "リクエストボディにバージョンを含める方法は一般的ではありません。URLパス、ヘッダー、クエリパラメータが主流です。"
+    },
+    {
+        "majorCategory": "フロントエンド技術",
+        "middleCategory": "アプリパフォーマンス",
+        "minorCategory": "フロントエンド最適化",
+        "question": "Critical Rendering Pathの最適化手法として正しいものはどれですか？",
+        "answers": [
+            "すべてのJavaScriptをheadタグ内で読み込む",
+            "重要なCSSをインライン化し、非同期でCSSを読み込む",
+            "全ての画像を高解像度にする",
+            "すべてのリソースを同期的に読み込む"
+        ],
+        "correct": 1,
+        "explanation": "Critical CSSをインライン化し、非クリティカルなCSSを非同期で読み込むことで、First Paintを高速化できます。"
+    },
+    {
+        "majorCategory": "フロントエンド技術",
+        "middleCategory": "アプリパフォーマンス",
+        "minorCategory": "バンドル最適化",
+        "question": "Webpackのコード分割（Code Splitting）の主な目的はどれですか？",
+        "answers": [
+            "ビルド時間の短縮",
+            "初期読み込みサイズの削減",
+            "デバッグの簡易化",
+            "コードの暗号化"
+        ],
+        "correct": 1,
+        "explanation": "コード分割により、必要なコードのみを初期読み込みし、その他は必要に応じて遅延読み込みすることで、初期表示を高速化します。"
+    },
+    {
+        "majorCategory": "フロントエンド技術",
+        "middleCategory": "アプリパフォーマンス",
+        "minorCategory": "バンドル最適化",
+        "question": "Tree Shakingの説明として正しいものはどれですか？",
+        "answers": [
+            "使用されていないコードをバンドルから除外",
+            "ファイルサイズを増やす処理",
+            "コードを難読化する処理",
+            "テストコードの自動生成"
+        ],
+        "correct": 0,
+        "explanation": "Tree Shakingは、ESモジュールの静的解析により、使用されていないコード（Dead Code）をバンドルから除外する最適化手法です。"
+    },
+    {
+        "majorCategory": "フロントエンド技術",
+        "middleCategory": "アプリパフォーマンス",
+        "minorCategory": "レンダリング最適化",
+        "question": "Virtual DOMの主な利点はどれですか？",
+        "answers": [
+            "常に実DOMより遅い",
+            "差分のみを実DOMに反映し、パフォーマンス向上",
+            "メモリ使用量が実DOMより多い",
+            "SEOに不利"
+        ],
+        "correct": 1,
+        "explanation": "Virtual DOMは変更箇所を効率的に検出し、必要な部分のみを実DOMに反映することで、レンダリングパフォーマンスを向上させます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "キャッシュ",
+        "minorCategory": "HTTPキャッシング",
+        "question": "Cache-Control: max-age=3600の意味はどれですか？",
+        "answers": [
+            "3600バイトまでキャッシュ可能",
+            "3600秒（1時間）キャッシュを保持",
+            "3600個のリソースをキャッシュ",
+            "3600回アクセスまでキャッシュ有効"
+        ],
+        "correct": 1,
+        "explanation": "max-ageディレクティブは、リソースがキャッシュされる最大時間を秒単位で指定します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "キャッシュ",
+        "minorCategory": "アプリケーションキャッシュ",
+        "question": "Redisのデータ構造でないものはどれですか？",
+        "answers": ["String", "List", "Set", "Tree"],
+        "correct": 3,
+        "explanation": "Redisは、String、List、Set、Sorted Set、Hashなどをサポートしますが、Treeは基本データ構造に含まれません。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "キャッシュ",
+        "minorCategory": "CDN",
+        "question": "CDN（Content Delivery Network）の主な目的はどれですか？",
+        "answers": [
+            "データベースのバックアップ",
+            "静的コンテンツを地理的に分散して配信",
+            "アプリケーションのデプロイ",
+            "ユーザー認証"
+        ],
+        "correct": 1,
+        "explanation": "CDNは、静的コンテンツを地理的に分散したサーバーから配信し、ユーザーに近い場所から高速に提供します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "キャッシュ",
+        "minorCategory": "データベースキャッシュ",
+        "question": "クエリ結果キャッシュの無効化が必要なタイミングはどれですか？",
+        "answers": [
+            "データが更新された時",
+            "サーバーを再起動した時のみ",
+            "ユーザーがログアウトした時",
+            "決して無効化しない"
+        ],
+        "correct": 0,
+        "explanation": "データが更新された場合、古いキャッシュを無効化しないと、ユーザーに古い情報が表示されてしまいます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "キャッシュ",
+        "minorCategory": "キャッシュ戦略",
+        "question": "Write-Throughキャッシュ戦略の特徴はどれですか？",
+        "answers": [
+            "キャッシュとデータベースを同時に更新",
+            "キャッシュのみ更新し、データベースは更新しない",
+            "読み取り時のみキャッシュを使用",
+            "キャッシュを使用しない"
+        ],
+        "correct": 0,
+        "explanation": "Write-Throughは、データ書き込み時にキャッシュとデータベースの両方を同時に更新する戦略で、データの一貫性が保たれます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "セキュリティ",
+        "minorCategory": "認証・認可",
+        "question": "JWTトークンの構成要素として正しくないものはどれですか？",
+        "answers": ["Header", "Payload", "Signature", "Encryption"],
+        "correct": 3,
+        "explanation": "JWTはHeader、Payload、Signatureの3つの部分から構成されます。JWTは署名されますが、暗号化はオプションです。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "セキュリティ",
+        "minorCategory": "認証・認可",
+        "question": "OAuth 2.0で、サードパーティアプリがユーザーの代わりにリソースにアクセスするために使用するものはどれですか？",
+        "answers": ["パスワード", "アクセストークン", "Cookie", "セッションID"],
+        "correct": 1,
+        "explanation": "OAuth 2.0では、アクセストークンを使用してリソースサーバーにアクセスします。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "セキュリティ",
+        "minorCategory": "脆弱性対策",
+        "question": "XSS攻撃の対策として適切でないものはどれですか？",
+        "answers": [
+            "入力値のサニタイゼーション",
+            "出力時のエスケープ処理",
+            "Content Security Policyの設定",
+            "SQLプリペアドステートメントの使用"
+        ],
+        "correct": 3,
+        "explanation": "SQLプリペアドステートメントはSQLインジェクション対策です。XSS対策には入力サニタイゼーション、出力エスケープ、CSPが有効です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "セキュリティ",
+        "minorCategory": "脆弱性対策",
+        "question": "OWASP Top 10に含まれていない脆弱性はどれですか？",
+        "answers": [
+            "SQLインジェクション",
+            "クロスサイトスクリプティング（XSS）",
+            "ディレクトリトラバーサル",
+            "タイポスクワッティング"
+        ],
+        "correct": 3,
+        "explanation": "タイポスクワッティングはドメイン名の悪用で、OWASP Top 10には含まれません。SQLインジェクション、XSS、パストラバーサルは含まれます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "セキュリティ",
+        "minorCategory": "暗号化",
+        "question": "ハッシュ関数として推奨されないものはどれですか？",
+        "answers": ["bcrypt", "SHA-256", "MD5", "Argon2"],
+        "correct": 2,
+        "explanation": "MD5は脆弱性が発見されており、パスワードハッシュには推奨されません。bcrypt、Argon2などを使用すべきです。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "クラウドインフラ",
+        "minorCategory": "コンテナ技術",
+        "question": "Dockerのマルチステージビルドの主な利点はどれですか？",
+        "answers": [
+            "ビルド速度の低下",
+            "最終イメージサイズの削減",
+            "セキュリティの低下",
+            "メモリ使用量の増加"
+        ],
+        "correct": 1,
+        "explanation": "マルチステージビルドは、ビルド依存関係を最終イメージに含めないため、イメージサイズを大幅に削減できます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "クラウドインフラ",
+        "minorCategory": "コンテナ技術",
+        "question": "Kubernetesのリソースで、コンテナのグループを管理するものはどれですか？",
+        "answers": ["Node", "Pod", "Service", "Namespace"],
+        "correct": 1,
+        "explanation": "Podは1つ以上のコンテナをグループ化し、同じネットワークとストレージを共有する最小のデプロイ単位です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "クラウドインフラ",
+        "minorCategory": "CI/CD",
+        "question": "ブルーグリーンデプロイメントの特徴はどれですか？",
+        "answers": [
+            "段階的にトラフィックを新バージョンに移行",
+            "2つの環境を用意し、一度に切り替え",
+            "特定ユーザーのみに新機能を公開",
+            "コンテナを順次再起動"
+        ],
+        "correct": 1,
+        "explanation": "ブルーグリーンデプロイメントは、本番環境（ブルー）と同一の環境（グリーン）を用意し、検証後に一度に切り替える手法です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "クラウドインフラ",
+        "minorCategory": "CI/CD",
+        "question": "カナリアリリースの主な目的はどれですか？",
+        "answers": [
+            "全ユーザーに即座に新機能を提供",
+            "一部のユーザーで新バージョンを検証",
+            "ダウンタイムの最大化",
+            "コストの増加"
+        ],
+        "correct": 1,
+        "explanation": "カナリアリリースは、新バージョンを一部のユーザーに先行公開し、問題がないか検証してから全体に展開する手法です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "クラウドインフラ",
+        "minorCategory": "モニタリング",
+        "question": "Prometheusの主な用途はどれですか？",
+        "answers": ["ログ管理", "メトリクス収集と監視", "トレーシング", "デプロイ自動化"],
+        "correct": 1,
+        "explanation": "Prometheusは、時系列データベースベースのメトリクス収集・監視システムで、クラウドネイティブアプリケーションの監視に広く使用されます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "システム設計",
+        "minorCategory": "スケーラビリティ",
+        "question": "水平スケーリング（スケールアウト）の説明として正しいものはどれですか？",
+        "answers": [
+            "サーバーのCPUやメモリを増強",
+            "サーバーの台数を増やす",
+            "データベースを1台の高性能サーバーに集約",
+            "ネットワーク帯域を削減"
+        ],
+        "correct": 1,
+        "explanation": "水平スケーリングは、サーバーの台数を増やして負荷を分散する手法です。垂直スケーリングはサーバーのスペックを上げる手法です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "システム設計",
+        "minorCategory": "スケーラビリティ",
+        "question": "ロードバランサーの主な役割はどれですか？",
+        "answers": [
+            "データの暗号化",
+            "複数サーバーへのトラフィック分散",
+            "データベースのバックアップ",
+            "ログの集約"
+        ],
+        "correct": 1,
+        "explanation": "ロードバランサーは、複数のサーバーにリクエストを分散し、負荷を均等化する役割を持ちます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "システム設計",
+        "minorCategory": "マイクロサービス",
+        "question": "マイクロサービスアーキテクチャの利点として正しくないものはどれですか？",
+        "answers": [
+            "独立したデプロイが可能",
+            "技術スタックの柔軟性",
+            "サービス間通信のオーバーヘッドがない",
+            "障害の影響範囲を限定できる"
+        ],
+        "correct": 2,
+        "explanation": "マイクロサービスはサービス間通信のオーバーヘッドが増加します。しかし、独立性、柔軟性、障害の分離などの利点があります。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "システム設計",
+        "minorCategory": "マイクロサービス",
+        "question": "サービス間通信パターンで、サービスが他のサービスを直接呼び出す方式はどれですか？",
+        "answers": ["イベント駆動", "同期的リクエスト/レスポンス", "メッセージキュー", "Pub/Sub"],
+        "correct": 1,
+        "explanation": "同期的リクエスト/レスポンスは、REST APIやgRPCを使用してサービス間で直接通信する方式です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "システム設計",
+        "minorCategory": "可用性設計",
+        "question": "フェイルオーバーとフェイルバックの説明として正しいものはどれですか？",
+        "answers": [
+            "フェイルオーバー: 障害時に予備系に切り替え、フェイルバック: 主系復旧後に戻す",
+            "フェイルオーバー: バックアップ作成、フェイルバック: リストア",
+            "フェイルオーバー: スケールアウト、フェイルバック: スケールイン",
+            "フェイルオーバー: 負荷分散、フェイルバック: 負荷集約"
+        ],
+        "correct": 0,
+        "explanation": "フェイルオーバーは障害発生時に予備系（スタンバイ）に自動切り替えすること、フェイルバックは主系復旧後に元に戻すことです。"
+    },
+    {
+        "majorCategory": "フロントエンド技術",
+        "middleCategory": "フロントエンド設計",
+        "minorCategory": "状態管理",
+        "question": "Reduxの3原則に含まれないものはどれですか？",
+        "answers": [
+            "Single source of truth",
+            "State is read-only",
+            "Changes are made with pure functions",
+            "Components must be class-based"
+        ],
+        "correct": 3,
+        "explanation": "Reduxの3原則は、単一のストア、読み取り専用の状態、純粋関数による変更です。コンポーネントの実装方法は制約されません。"
+    },
+    {
+        "majorCategory": "フロントエンド技術",
+        "middleCategory": "フロントエンド設計",
+        "minorCategory": "状態管理",
+        "question": "React Context APIの主な用途はどれですか？",
+        "answers": [
+            "コンポーネント間のスタイル共有",
+            "グローバル状態の管理とprop drillingの回避",
+            "HTTPリクエストの送信",
+            "ルーティングの管理"
+        ],
+        "correct": 1,
+        "explanation": "Context APIは、コンポーネントツリー全体でデータを共有し、深いネストでのprops渡し（prop drilling）を回避するために使用されます。"
+    },
+    {
+        "majorCategory": "フロントエンド技術",
+        "middleCategory": "フロントエンド設計",
+        "minorCategory": "コンポーネント設計",
+        "question": "Atomic Designのコンポーネント階層で最も小さい単位はどれですか？",
+        "answers": ["Molecules", "Atoms", "Organisms", "Templates"],
+        "correct": 1,
+        "explanation": "Atomic Designの階層は、Atoms（原子）が最小単位で、Molecules（分子）、Organisms（有機体）、Templates、Pagesと続きます。"
+    },
+    {
+        "majorCategory": "フロントエンド技術",
+        "middleCategory": "フロントエンド設計",
+        "minorCategory": "コンポーネント設計",
+        "question": "Presentational ComponentとContainer Componentの違いはどれですか？",
+        "answers": [
+            "Presentationalはロジック、Containerは見た目を担当",
+            "Presentationalは見た目、Containerはロジックとデータ取得を担当",
+            "両者に違いはない",
+            "Presentationalはクラス、Containerは関数コンポーネント"
+        ],
+        "correct": 1,
+        "explanation": "Presentational Componentは見た目に集中し、Container Componentはロジックやデータ取得を担当する設計パターンです。"
+    },
+    {
+        "majorCategory": "フロントエンド技術",
+        "middleCategory": "フロントエンド設計",
+        "minorCategory": "パフォーマンス",
+        "question": "React.memoの主な目的はどれですか？",
+        "answers": [
+            "コンポーネントのメモリ使用量削減",
+            "不要な再レンダリングの防止",
+            "ストレージへのデータ保存",
+            "HTTPキャッシュの管理"
+        ],
+        "correct": 1,
+        "explanation": "React.memoは、propsが変更されない限りコンポーネントの再レンダリングをスキップし、パフォーマンスを最適化します。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "ビットマップインデックスが最も効果的なケースはどれですか？",
+        "answers": [
+            "カーディナリティが非常に高い列",
+            "カーディナリティが低く、読み取り専用に近いデータ",
+            "頻繁に更新される列",
+            "主キー列"
+        ],
+        "correct": 1,
+        "explanation": "ビットマップインデックスは、性別や都道府県など値の種類が少ない（低カーディナリティ）列で、特にデータウェアハウスなど読み取り中心の環境で効果的です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "GINインデックス（Generalized Inverted Index）が適しているデータ型はどれですか？",
+        "answers": [
+            "整数型",
+            "配列型やJSONB型など複数の値を持つ型",
+            "日付型",
+            "文字列型（固定長）"
+        ],
+        "correct": 1,
+        "explanation": "GINインデックスは配列、JSONB、全文検索など、1つの行に複数の値や要素を持つデータ型に最適化されたインデックスです。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "インデックスのフィルファクター（Fill Factor）を100%未満に設定する理由はどれですか？",
+        "answers": [
+            "ストレージ容量を節約するため",
+            "将来の挿入・更新時のページ分割を減らすため",
+            "検索速度を向上させるため",
+            "インデックスのサイズを大きくするため"
+        ],
+        "correct": 1,
+        "explanation": "フィルファクターを100%未満（例：80%）にすることで、インデックスページに空き領域を確保し、データ挿入時のページ分割によるフラグメンテーションを減らせます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "インデックス最適化",
+        "question": "インデックスオンリースキャン（Index-Only Scan）が可能になる条件はどれですか？",
+        "answers": [
+            "テーブルにインデックスが1つだけ存在する",
+            "クエリで必要な全ての列がインデックスに含まれている",
+            "主キーインデックスを使用している",
+            "WHERE句がない"
+        ],
+        "correct": 1,
+        "explanation": "インデックスオンリースキャンは、クエリで参照する全ての列がインデックスに含まれている場合に可能で、テーブル本体へのアクセスを回避できます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "SELECT COUNT(*)のパフォーマンスを改善する方法として適切でないものはどれですか？",
+        "answers": [
+            "近似値で良ければ統計情報を使用",
+            "必要に応じてマテリアライズドビューやカウンターテーブルを使用",
+            "全てのテーブルをメモリに読み込む",
+            "インデックスオンリースキャンを活用"
+        ],
+        "correct": 2,
+        "explanation": "大きなテーブルを全てメモリに読み込むのは非現実的です。統計情報の利用、カウンターテーブル、インデックスオンリースキャンが実用的な最適化手法です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "サブクエリをJOINに書き換えることで得られる利点はどれですか？",
+        "answers": [
+            "常にクエリが遅くなる",
+            "オプティマイザによる最適化の機会が増える",
+            "コードの可読性が必ず低下する",
+            "メモリ使用量が必ず増加する"
+        ],
+        "correct": 1,
+        "explanation": "サブクエリをJOINに書き換えることで、オプティマイザがより効率的な実行計画を選択できる可能性が高まります。特に相関サブクエリの場合、パフォーマンス改善が顕著です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "クエリ最適化",
+        "question": "WHERE句でインデックス列に関数を適用した場合の影響はどれですか？",
+        "answers": [
+            "インデックスが使用されなくなる可能性が高い",
+            "クエリが高速化される",
+            "インデックスの効果が向上する",
+            "影響はない"
+        ],
+        "correct": 0,
+        "explanation": "WHERE UPPER(name) = 'JOHN'のように列に関数を適用すると、通常のインデックスは使用されません。関数ベースインデックスまたは計算列へのインデックスが必要です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "関数ベースインデックス（Function-Based Index）の用途はどれですか？",
+        "answers": [
+            "テーブルの容量削減",
+            "計算式や関数の結果に対する検索の高速化",
+            "データの暗号化",
+            "トランザクション分離レベルの向上"
+        ],
+        "correct": 1,
+        "explanation": "関数ベースインデックスは、UPPER(name)やDATE(created_at)など、列に関数や計算式を適用した結果にインデックスを作成し、そのような検索を高速化します。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "UNION ALLとUNIONの違いとして正しいものはどれですか？",
+        "answers": [
+            "UNION ALLは重複を除去し、UNIONは重複を許可",
+            "UNION ALLは重複を許可し、UNIONは重複を除去するためソートが発生",
+            "両者に違いはない",
+            "UNION ALLは使用できないSQL構文"
+        ],
+        "correct": 1,
+        "explanation": "UNION ALLは重複を許可し高速です。UNIONは重複除去のためソート処理が発生しコストが高くなります。重複がないことが分かっている場合はUNION ALLを使用すべきです。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "OR条件が多い検索クエリの最適化手法として適切なものはどれですか？",
+        "answers": [
+            "全てのOR条件列にインデックスを作成",
+            "UNION ALLで分割して個別にインデックスを利用",
+            "OR条件を増やす",
+            "インデックスを削除する"
+        ],
+        "correct": 1,
+        "explanation": "WHERE a = 1 OR b = 2のようなOR条件は、それぞれの条件をUNION ALLで分割することで、各条件が別々のインデックスを効率的に使用できます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "クラスタインデックス（Clustered Index）の特徴はどれですか？",
+        "answers": [
+            "テーブルに複数作成できる",
+            "テーブルに1つだけ作成でき、データの物理的な並び順を決定",
+            "インデックスとデータが別の場所に格納される",
+            "検索速度は非クラスタインデックスより常に遅い"
+        ],
+        "correct": 1,
+        "explanation": "クラスタインデックスはテーブルに1つだけ作成でき、データの物理的な配置順序を決定します。範囲検索で特に効果的ですが、更新時のコストは高くなります。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "EXISTS句とIN句の使い分けとして適切なものはどれですか？",
+        "answers": [
+            "常にINを使用すべき",
+            "サブクエリが大量の行を返す場合はEXISTSが効率的",
+            "EXISTSは廃止された構文",
+            "どちらも同じパフォーマンス"
+        ],
+        "correct": 1,
+        "explanation": "EXISTSは条件に一致する行が1つ見つかった時点で処理を終了します。サブクエリが多くの行を返す可能性がある場合、EXISTSの方が効率的です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "インデックスのセレクティビティ（選択性）が高いとはどういう状態ですか？",
+        "answers": [
+            "重複する値が多い状態",
+            "ユニークな値が多く、少数の行に絞り込める状態",
+            "インデックスのサイズが大きい状態",
+            "全ての値が同じ状態"
+        ],
+        "correct": 1,
+        "explanation": "セレクティビティが高いとは、カーディナリティが高く、検索条件で少数の行に絞り込める状態を指します。このような列へのインデックスは効果的です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "LIKE '%keyword%'のような前方一致でない検索のパフォーマンス問題を解決する方法はどれですか？",
+        "answers": [
+            "通常のB-Treeインデックスで解決できる",
+            "全文検索インデックス（Full-Text Search）を使用",
+            "インデックスを削除する",
+            "解決方法はない"
+        ],
+        "correct": 1,
+        "explanation": "LIKE '%keyword%'のような部分一致検索では通常のインデックスは使用できません。全文検索インデックス（PostgreSQLのGIN、MySQLのFULLTEXT）を使用することで効率的に検索できます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "クエリヒント（Query Hint）を使用する場合の注意点はどれですか？",
+        "answers": [
+            "常にヒントを使用すべき",
+            "データ量や分布が変わると最適でなくなる可能性があるため慎重に使用",
+            "ヒントは全てのDBMSで同じ構文",
+            "パフォーマンスに影響しない"
+        ],
+        "correct": 1,
+        "explanation": "クエリヒントでインデックスやJOIN方法を強制指定できますが、データの成長や分布変化で最適でなくなる可能性があります。オプティマイザに任せる方が長期的には良い場合が多いです。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "インデックス設計",
+        "question": "インクルードカラム（Included Columns）を持つインデックスの利点はどれですか？",
+        "answers": [
+            "インデックスのサイズが小さくなる",
+            "インデックスキーではないがSELECT句で必要な列を含めてカバリングインデックスを実現",
+            "更新性能が向上する",
+            "検索条件に使用できる"
+        ],
+        "correct": 1,
+        "explanation": "インクルードカラムは、インデックスキーには含めないが、インデックスリーフレベルに格納する列です。これによりテーブルアクセスなしでクエリを完結できます。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "ウィンドウ関数（Window Function）とGROUP BYの違いとして正しいものはどれですか？",
+        "answers": [
+            "ウィンドウ関数は行を集約せず、各行に集計結果を付加できる",
+            "GROUP BYの方が常に高速",
+            "ウィンドウ関数は使用できない",
+            "両者に違いはない"
+        ],
+        "correct": 0,
+        "explanation": "ウィンドウ関数（ROW_NUMBER、RANK、SUM() OVERなど）は各行に対して集計結果を計算できます。GROUP BYは行を集約しますが、ウィンドウ関数は元の行数を維持します。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "データベース",
+        "minorCategory": "クエリ最適化",
+        "question": "マテリアライズドビュー（Materialized View）の主な用途はどれですか？",
+        "answers": [
+            "リアルタイムデータの更新",
+            "複雑な集計クエリの結果を事前計算して保存",
+            "データの削除",
+            "トランザクション管理"
+        ],
+        "correct": 1,
+        "explanation": "マテリアライズドビューは、複雑なJOINや集計の結果を物理的に保存し、クエリパフォーマンスを向上させます。定期的なリフレッシュが必要です。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "インデックス最適化",
+        "question": "インデックススキャンとテーブルスキャンのコスト比較で考慮すべき要素はどれですか？",
+        "answers": [
+            "インデックスは常にテーブルスキャンより高速",
+            "取得する行の割合、インデックスの選択性、I/Oコスト",
+            "インデックスのサイズのみ",
+            "テーブル名の長さ"
+        ],
+        "correct": 1,
+        "explanation": "取得行が全体の10-15%を超える場合、インデックススキャンよりテーブルスキャンの方が効率的な場合があります。オプティマイザは選択性やI/Oコストを考慮して判断します。"
+    },
+    {
+        "majorCategory": "バックエンド技術",
+        "middleCategory": "DBパフォーマンス",
+        "minorCategory": "クエリ最適化",
+        "question": "クエリのバッファプール（Buffer Pool）ヒット率を改善する方法として適切でないものはどれですか？",
+        "answers": [
+            "頻繁にアクセスするデータのメモリ配分を増やす",
+            "不要なデータの読み込みを減らす（SELECT * を避ける）",
+            "全てのテーブルにインデックスを大量に作成",
+            "適切なインデックスでI/Oを削減"
+        ],
+        "correct": 2,
+        "explanation": "過剰なインデックスは更新時のオーバーヘッドを増やし、バッファプールを圧迫します。必要なデータのみを読み込み、適切なインデックスでI/Oを削減することが重要です。"
+    }
 ]
