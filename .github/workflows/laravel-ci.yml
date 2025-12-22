@@ -33,7 +33,7 @@ jobs:
         with:
           php-version: '8.2'
           extensions: mbstring, dom, fileinfo, mysql
-          coverage: none
+          coverage: xdebug
 
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
@@ -47,5 +47,5 @@ jobs:
       - name: Run Laravel Pint (Code Formatter)
         run: ./vendor/bin/pint --test
 
-      - name: Run PHPUnit tests
-        run: php artisan test
+      - name: Run PHPUnit tests with coverage
+        run: php artisan test --coverage --min=80
