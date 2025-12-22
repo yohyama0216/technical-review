@@ -22,3 +22,30 @@ HTML、JavaScript、CSSのみで作成された技術面接対策のクイズア
 - CSS3（Flexbox、Grid）
 - Vanilla JavaScript（ES6+）
 - LocalStorage API
+
+## 開発環境
+
+### コード品質管理
+
+このプロジェクトでは、コードをプッシュするたびに自動的にコード検査が実行されます。
+
+- **ESLint**: JavaScript静的解析
+- **Prettier**: コードフォーマッター
+- **Laravel Pint**: PHP/Laravelコードフォーマッター
+- **PHPUnit**: ユニットテスト
+
+詳細は [CI/CD_SETUP.md](./CI_CD_SETUP.md) をご覧ください。
+
+### セットアップ
+
+```bash
+# フロントエンド依存関係のインストール
+npm install
+
+# コードチェック
+npm run lint
+npm run format:check
+
+# コード整形
+npm run format
+```

@@ -1,0 +1,51 @@
+name: Laravel CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'technical-review-laravel/**'
+      - '.github/workflows/laravel-ci.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'technical-review-laravel/**'
+      - '.github/workflows/laravel-ci.yml'
+
+jobs:
+  laravel-checks:
+    name: Laravel Code Quality & Tests
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+
+    defaults:
+      run:
+        working-directory: technical-review-laravel
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, dom, fileinfo, mysql
+          coverage: xdebug
+
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Run Laravel Pint (Code Formatter)
+        run: ./vendor/bin/pint --test
+
+      - name: Run PHPUnit tests with coverage
+        run: php artisan test --coverage --min=80
