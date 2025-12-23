@@ -25,6 +25,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('quiz.start') ? 'active' : '' }}" href="{{ route('quiz.start') }}">
+                            <i class="bi bi-shuffle me-1"></i>ランダム問題
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ Request::routeIs('quiz.question-list') ? 'active' : '' }}" href="{{ route('quiz.question-list') }}">
                             <i class="bi bi-list-ul me-1"></i>問題一覧
                         </a>

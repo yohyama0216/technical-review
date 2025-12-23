@@ -152,17 +152,17 @@
                     @if($diffDays > 0)
                         <div class="alert alert-success mb-0">
                             <i class="bi bi-check-circle me-1"></i>
-                            目標日（{{ date('Y年m月d日', $targetDateTime) }}）まで<strong>{{ $diffDays }}日の余裕</strong>があります！現在のペースで達成可能です。
+                            <strong>目標日（{{ date('Y年m月d日', $targetDateTime) }}）</strong>まで<strong class="text-success">{{ $diffDays }}日の余裕</strong>があります！現在のペースで達成可能です。
                         </div>
                     @elseif($diffDays < 0)
                         <div class="alert alert-warning mb-0">
                             <i class="bi bi-exclamation-triangle me-1"></i>
-                            現在のペースでは目標日（{{ date('Y年m月d日', $targetDateTime) }}）より<strong>{{ abs($diffDays) }}日遅れる</strong>見込みです。学習ペースを上げる必要があります。
+                            現在のペースでは<strong>目標日（{{ date('Y年m月d日', $targetDateTime) }}）</strong>より<strong class="text-danger">{{ abs($diffDays) }}日遅れる</strong>見込みです。学習ペースを上げる必要があります。
                         </div>
                     @else
                         <div class="alert alert-info mb-0">
                             <i class="bi bi-info-circle me-1"></i>
-                            完了予定日が目標日（{{ date('Y年m月d日', $targetDateTime) }}）とぴったり一致しています！
+                            完了予定日が<strong>目標日（{{ date('Y年m月d日', $targetDateTime) }}）</strong>とぴったり一致しています！
                         </div>
                     @endif
                 </div>

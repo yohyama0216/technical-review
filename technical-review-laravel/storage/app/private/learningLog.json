@@ -16,7 +16,7 @@
             "completed": false
         },
         "46": {
-            "correctCount": 1,
+            "correctCount": 2,
             "incorrectCount": 0,
             "completed": false
         },
@@ -49,6 +49,31 @@
             "correctCount": 1,
             "incorrectCount": 0,
             "completed": false
+        },
+        "86": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "7": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "36": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "91": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "65": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
         }
     },
     "dailyHistory": {
@@ -63,7 +88,7 @@
             "completed": 0
         },
         "2025-12-23": {
-            "correct": 3,
+            "correct": 9,
             "incorrect": 0,
             "completed": 0
         }
