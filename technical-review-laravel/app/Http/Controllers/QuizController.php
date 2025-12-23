@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\QuestionService;
 use App\Services\StatisticsService;
+use App\Services\SettingsService;
 use App\ViewModels\IndexViewModel;
 use App\ViewModels\QuestionListViewModel;
 use App\ViewModels\StatsViewModel;
@@ -17,11 +18,13 @@ class QuizController extends Controller
 {
     private QuestionService $questionService;
     private StatisticsService $statisticsService;
+    private SettingsService $settingsService;
 
-    public function __construct(QuestionService $questionService, StatisticsService $statisticsService)
+    public function __construct(QuestionService $questionService, StatisticsService $statisticsService, SettingsService $settingsService)
     {
         $this->questionService = $questionService;
         $this->statisticsService = $statisticsService;
+        $this->settingsService = $settingsService;
     }
 
     /**
@@ -110,8 +113,9 @@ class QuizController extends Controller
         $dailyHistory = $this->statisticsService->getDailyHistoryWithCumulative();
         $totalQuestions = $this->questionService->getTotalQuestionCount();
         $forecast = $this->statisticsService->getCompletionForecast($totalQuestions);
+        $targetDate = $this->settingsService->getTargetDate();
 
-        $viewModel = new StatsViewModel($cumulativeStats, $dailyHistory, $totalQuestions, $forecast);
+        $viewModel = new StatsViewModel($cumulativeStats, $dailyHistory, $totalQuestions, $forecast, $targetDate);
         return view('quiz.stats', $viewModel->toArray());
     }
 
@@ -120,8 +124,20 @@ class QuizController extends Controller
      */
     public function settings(): View
     {
-        $viewModel = new SettingsViewModel();
+        $targetDate = $this->settingsService->getTargetDate();
+        $viewModel = new SettingsViewModel($targetDate);
         return view('quiz.settings', $viewModel->toArray());
+    }
+
+    /**
+     * Save settings
+     */
+    public function saveSettings(Request $request)
+    {
+        $targetDate = $request->input('target_date');
+        $this->settingsService->setTargetDate($targetDate);
+        
+        return redirect()->route('quiz.settings')->with('success', '設定を保存しました');
     }
 
     /**

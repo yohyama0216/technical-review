@@ -24,12 +24,14 @@ class StatsViewModel extends ViewModel
     public array $chartDailyIncorrect;
     public array $chartDailyLearning;
     public ?array $forecast;
+    public ?string $targetDate;
 
     public function __construct(
         array $cumulativeStats,
         array $dailyHistory,
         int $totalQuestions,
-        ?array $forecast = null
+        ?array $forecast = null,
+        ?string $targetDate = null
     ) {
         $this->pageTitle = '統計';
         $this->appName = '資格対策アプリ';
@@ -53,6 +55,7 @@ class StatsViewModel extends ViewModel
             : 0;
         
         $this->forecast = $forecast;
+        $this->targetDate = $targetDate;
         $this->dailyHistory = $dailyHistory;
         
         // Prepare chart data

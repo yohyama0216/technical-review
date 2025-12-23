@@ -191,43 +191,49 @@ class StatisticsService
     {
         $stats = $this->getStatistics();
         $dailyHistory = $stats['dailyHistory'] ?? [];
+        $questionStats = $stats['questionStats'] ?? [];
         
         if (empty($dailyHistory)) {
             return null;
         }
         
-        // 完了済み問題数を計算
-        $questionStats = $stats['questionStats'] ?? [];
-        $completedCount = 0;
+        // 完了基準: correctCount > 2 かつ correctCount - incorrectCount > 0
+        // つまり各問題を完了させるには最低3回正解が必要
+        $minCorrectForCompletion = 3;
+        
+        // 現在の総正解数を計算
+        $totalCorrect = 0;
         foreach ($questionStats as $stat) {
-            if ($stat['completed'] ?? false) {
-                $completedCount++;
-            }
+            $totalCorrect += $stat['correctCount'] ?? 0;
         }
         
-        $remainingQuestions = $totalQuestions - $completedCount;
+        // 全問題を完了させるのに必要な総正解数
+        $requiredTotalCorrect = $totalQuestions * $minCorrectForCompletion;
         
-        if ($remainingQuestions <= 0) {
+        // 残り必要な正解数
+        $remainingCorrectNeeded = $requiredTotalCorrect - $totalCorrect;
+        
+        if ($remainingCorrectNeeded <= 0) {
             return [
                 'isCompleted' => true,
-                'remainingQuestions' => 0,
+                'remainingCorrect' => 0,
                 'estimatedDays' => 0,
                 'estimatedDate' => null,
-                'averageDailyCompleted' => 0,
+                'averageDailyCorrect' => 0,
             ];
         }
         
-        // 最近7日間のデータから平均学習ペースを計算
+        // 最近7日間のデータから平均正解数を計算
         ksort($dailyHistory);
         $recentDays = array_slice($dailyHistory, -7, 7, true);
         
-        $totalCompletedInPeriod = 0;
+        $totalCorrectInPeriod = 0;
         $daysWithActivity = 0;
         
         foreach ($recentDays as $data) {
-            $dailyCompleted = $data['completed'] ?? 0;
-            if ($dailyCompleted > 0) {
-                $totalCompletedInPeriod += $dailyCompleted;
+            $dailyCorrect = $data['correct'] ?? 0;
+            if ($dailyCorrect > 0) {
+                $totalCorrectInPeriod += $dailyCorrect;
                 $daysWithActivity++;
             }
         }
@@ -237,21 +243,23 @@ class StatisticsService
             return null;
         }
         
-        // 平均日次完了数を計算（学習した日のみの平均）
-        $averageDailyCompleted = $totalCompletedInPeriod / $daysWithActivity;
+        // 平均日次正解数を計算（学習した日のみの平均）
+        $averageDailyCorrect = $totalCorrectInPeriod / $daysWithActivity;
         
         // 完了までの推定日数を計算
-        $estimatedDays = ceil($remainingQuestions / $averageDailyCompleted);
+        $estimatedDays = ceil($remainingCorrectNeeded / $averageDailyCorrect);
         
         // 完了予定日を計算
         $estimatedDate = date('Y-m-d', strtotime("+{$estimatedDays} days"));
         
         return [
             'isCompleted' => false,
-            'remainingQuestions' => $remainingQuestions,
+            'remainingCorrect' => (int) $remainingCorrectNeeded,
+            'requiredTotalCorrect' => $requiredTotalCorrect,
+            'currentTotalCorrect' => $totalCorrect,
             'estimatedDays' => (int) $estimatedDays,
             'estimatedDate' => $estimatedDate,
-            'averageDailyCompleted' => round($averageDailyCompleted, 1),
+            'averageDailyCorrect' => round($averageDailyCorrect, 1),
             'analyzedDays' => count($recentDays),
             'daysWithActivity' => $daysWithActivity,
         ];

@@ -118,12 +118,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <small class="text-muted">残り問題数</small>
-                            <h4 class="mb-0">{{ $forecast['remainingQuestions'] }} 問</h4>
+                            <small class="text-muted">残り必要な正解数</small>
+                            <h4 class="mb-0">{{ $forecast['remainingCorrect'] }} 回</h4>
+                            <small class="text-muted">（現在 {{ $forecast['currentTotalCorrect'] }} / {{ $forecast['requiredTotalCorrect'] }} 回）</small>
                         </div>
                         <div class="mb-3">
-                            <small class="text-muted">平均学習ペース（最近{{ $forecast['analyzedDays'] }}日間、学習日{{ $forecast['daysWithActivity'] }}日）</small>
-                            <h4 class="mb-0">1日 {{ $forecast['averageDailyCompleted'] }} 問完了</h4>
+                            <small class="text-muted">平均正解ペース（最近{{ $forecast['analyzedDays'] }}日間、学習日{{ $forecast['daysWithActivity'] }}日）</small>
+                            <h4 class="mb-0">1日 {{ $forecast['averageDailyCorrect'] }} 回正解</h4>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -138,15 +139,41 @@
                     </div>
                 </div>
                 <div class="alert alert-info mb-0 mt-3">
-                    <small><i class="bi bi-info-circle me-1"></i>この予測は最近の学習ペースに基づいています。実際の完了日は学習ペースによって変動します。</small>
+                    <small><i class="bi bi-info-circle me-1"></i>この予測は最近の正解ペースに基づいています。各問題を完了させるには3回以上正解し、かつ正解数が不正解数を上回る必要があります。</small>
                 </div>
+                @if($targetDate)
+                <div class="mt-3 pt-3 border-top">
+                    <h6 class="mb-2">目標日との比較</h6>
+                    @php
+                        $targetDateTime = strtotime($targetDate);
+                        $estimatedDateTime = strtotime($forecast['estimatedDate']);
+                        $diffDays = (int) (($targetDateTime - $estimatedDateTime) / 86400);
+                    @endphp
+                    @if($diffDays > 0)
+                        <div class="alert alert-success mb-0">
+                            <i class="bi bi-check-circle me-1"></i>
+                            目標日（{{ date('Y年m月d日', $targetDateTime) }}）まで<strong>{{ $diffDays }}日の余裕</strong>があります！現在のペースで達成可能です。
+                        </div>
+                    @elseif($diffDays < 0)
+                        <div class="alert alert-warning mb-0">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            現在のペースでは目標日（{{ date('Y年m月d日', $targetDateTime) }}）より<strong>{{ abs($diffDays) }}日遅れる</strong>見込みです。学習ペースを上げる必要があります。
+                        </div>
+                    @else
+                        <div class="alert alert-info mb-0">
+                            <i class="bi bi-info-circle me-1"></i>
+                            完了予定日が目標日（{{ date('Y年m月d日', $targetDateTime) }}）とぴったり一致しています！
+                        </div>
+                    @endif
+                </div>
+                @endif
             </div>
         </div>
         @elseif($forecast && $forecast['isCompleted'])
         <div class="card shadow-sm mb-4 border-success">
             <div class="card-body text-center">
                 <i class="bi bi-trophy-fill text-success fs-1"></i>
-                <h4 class="mt-3 text-success">🎉 おめでとうございます！全問題を完了しました！</h4>
+                <h4 class="mt-3 text-success">🎉 おめでとうございます！全問題を完了するのに十分な正解数に達しました！</h4>
             </div>
         </div>
         @endif

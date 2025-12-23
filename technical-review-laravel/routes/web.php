@@ -10,6 +10,7 @@ Route::get('/quiz/start/{id}', [QuizController::class, 'startQuizById'])->name('
 Route::get('/question-list', [QuizController::class, 'questionList'])->name('quiz.question-list');
 Route::get('/stats', [QuizController::class, 'stats'])->name('quiz.stats');
 Route::get('/settings', [QuizController::class, 'settings'])->name('quiz.settings');
+Route::post('/settings', [QuizController::class, 'saveSettings'])->name('quiz.settings.save');
 
 // API routes
 Route::prefix('api')->group(function () {
