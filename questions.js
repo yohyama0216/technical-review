@@ -1038,6 +1038,21 @@ const quizData = [
     {
         majorCategory: 'バックエンド技術',
         middleCategory: 'API設計',
+        minorCategory: 'エラーハンドリング',
+        question: 'APIでのエラーモニタリングで追跡すべき重要なメトリクスはどれですか？',
+        answers: [
+            'コード行数',
+            'エラー率、エラー種別、レスポンス時間、影響を受けたユーザー数',
+            'サーバーの色',
+            '開発者の数',
+        ],
+        correct: 1,
+        explanation:
+            'エラー率、エラーの種類、レスポンス時間、影響範囲などを追跡することで、問題の早期発見と対応が可能になります。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
         minorCategory: 'バージョニング',
         question: 'API バージョニングの方法として一般的でないものはどれですか？',
         answers: [
@@ -1049,6 +1064,286 @@ const quizData = [
         correct: 3,
         explanation:
             'リクエストボディにバージョンを含める方法は一般的ではありません。URLパス、ヘッダー、クエリパラメータが主流です。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'セマンティックバージョニング（Semantic Versioning）の形式はどれですか？',
+        answers: ['MAJOR.MINOR', 'MAJOR.MINOR.PATCH', 'VERSION.RELEASE', 'V1.V2.V3.V4'],
+        correct: 1,
+        explanation:
+            'セマンティックバージョニングはMAJOR.MINOR.PATCH形式で、破壊的変更、機能追加、バグ修正をそれぞれ区別します。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'URLパスにバージョンを含める方式（/v1/users）の利点はどれですか？',
+        answers: [
+            'セキュリティが高い',
+            '明示的で分かりやすく、ブラウザで直接テスト可能',
+            '常に最新バージョンを使用',
+            'サーバー負荷が低い',
+        ],
+        correct: 1,
+        explanation:
+            'URLパスにバージョンを含める方式は、最も明示的でブラウザのアドレスバーやcURLで簡単にテストでき、広く採用されています。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'HTTPヘッダーでバージョンを指定する方法の例はどれですか？',
+        answers: [
+            'Content-Type: application/json',
+            'Accept: application/vnd.api+json;version=2',
+            'Authorization: Bearer token',
+            'User-Agent: Chrome',
+        ],
+        correct: 1,
+        explanation:
+            'Acceptヘッダーにバージョン情報を含めることで、コンテンツネゴシエーションの一部としてバージョンを指定できます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'APIの後方互換性を保つことが重要な理由はどれですか？',
+        answers: [
+            'パフォーマンス向上',
+            '既存のクライアントが引き続き動作する',
+            'セキュリティ強化',
+            'ストレージ削減',
+        ],
+        correct: 1,
+        explanation:
+            '後方互換性により、既存のクライアントがAPIの新バージョンでも動作し続けるため、段階的な移行が可能になります。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: '破壊的変更（Breaking Change）の例として適切なものはどれですか？',
+        answers: [
+            '新しいオプショナルフィールドの追加',
+            '既存フィールドの削除や型変更',
+            'バグ修正',
+            '新しいエンドポイントの追加',
+        ],
+        correct: 1,
+        explanation:
+            '既存フィールドの削除や型変更は、既存クライアントを壊す可能性があるため破壊的変更です。メジャーバージョンアップが必要です。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'APIバージョンの非推奨（Deprecation）を通知する方法として適切なものはどれですか？',
+        answers: [
+            '予告なく削除',
+            'Deprecationヘッダーと十分な移行期間の提供',
+            'エラーを返す',
+            '何もしない',
+        ],
+        correct: 1,
+        explanation:
+            'Deprecationヘッダーで非推奨を通知し、Sunset  ヘッダーで廃止予定日を示すことで、クライアントに移行の準備時間を与えます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'マイクロバージョニング（例：v1.2.3）の.PATCH部分を上げるべき変更はどれですか？',
+        answers: [
+            '新機能の追加',
+            'バグ修正や軽微な改善',
+            '破壊的変更',
+            'アーキテクチャの全面刷新',
+        ],
+        correct: 1,
+        explanation:
+            'PATCHバージョンは、後方互換性のあるバグ修正や軽微な改善で上げます。機能追加はMINOR、破壊的変更はMAJORです。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'APIバージョン管理でサンセットポリシー（Sunset Policy）とは何ですか？',
+        answers: [
+            'API使用時間帯の制限',
+            '古いバージョンの廃止計画と期限',
+            'レート制限',
+            'セキュリティポリシー',
+        ],
+        correct: 1,
+        explanation:
+            'サンセットポリシーは、古いAPIバージョンをいつ廃止するかを明確にし、クライアントに移行のための十分な時間を提供する計画です。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'カナリアリリースとAPIバージョニングの関係で正しいものはどれですか？',
+        answers: [
+            '無関係',
+            '新バージョンを一部ユーザーで先行テスト可能',
+            'バージョニングの代替手段',
+            'セキュリティ機能',
+        ],
+        correct: 1,
+        explanation:
+            'カナリアリリースにより、新しいAPIバージョンを一部のユーザーやトラフィックで先行テストし、問題を早期発見できます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'APIバージョンのデフォルト動作として推奨されるものはどれですか？',
+        answers: [
+            'バージョン未指定時はエラー',
+            '最新の安定バージョンまたは明示的なデフォルトバージョンを使用',
+            'ランダムなバージョンを使用',
+            '最も古いバージョンを使用',
+        ],
+        correct: 1,
+        explanation:
+            'バージョン未指定時の動作を明確に定義し、通常は最新の安定バージョンまたは特定のデフォルトバージョンを使用します。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'Content Negotiationを使ったバージョニングの利点はどれですか？',
+        answers: [
+            'URLが変わらない',
+            'セキュリティが高い',
+            'パフォーマンスが良い',
+            'データベースが不要',
+        ],
+        correct: 0,
+        explanation:
+            'Content Negotiationでは、URLを変えずにAcceptヘッダーでバージョンを指定できるため、URLの一貫性を保てます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'APIバージョン管理でのチェンジログ（Changelog）の重要性はどれですか？',
+        answers: [
+            '不要',
+            'バージョン間の変更内容を明確に伝え、移行を支援',
+            'セキュリティ目的のみ',
+            'パフォーマンス測定',
+        ],
+        correct: 1,
+        explanation:
+            'チェンジログにより、各バージョンでの変更内容、追加機能、破壊的変更を明確に伝え、開発者の移行作業を支援します。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'GraphQL APIのバージョニング戦略として推奨されるものはどれですか？',
+        answers: [
+            '従来のREST同様のバージョニング',
+            'スキーマの進化とフィールドの非推奨化で対応',
+            'バージョン管理しない',
+            '毎日新バージョン',
+        ],
+        correct: 1,
+        explanation:
+            'GraphQLでは、スキーマの進化的設計と@deprecatedディレクティブを使用し、明示的なバージョニングを避けることが推奨されます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'APIバージョンをクエリパラメータで指定する方式（/users?version=2）の欠点はどれですか？',
+        answers: [
+            '技術的に不可能',
+            'キャッシュやルーティングが複雑になる可能性',
+            'セキュリティリスクが高い',
+            'パフォーマンスが極端に悪い',
+        ],
+        correct: 1,
+        explanation:
+            'クエリパラメータ方式は、HTTPキャッシュやCDNのルーティングが同じURLでバージョンごとに異なるため複雑になる場合があります。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'マイクロサービスアーキテクチャでのAPIバージョニング戦略として重要なことはどれですか？',
+        answers: [
+            '全サービスを同時にバージョンアップ',
+            '各サービスが独立してバージョン管理し、下位互換性を保つ',
+            'バージョン管理しない',
+            '中央集権的な管理のみ',
+        ],
+        correct: 1,
+        explanation:
+            'マイクロサービスでは、各サービスが独立してバージョン管理できるよう、下位互換性を保ちつつ進化させることが重要です。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'APIバージョンの同時サポート数を決定する際の考慮事項はどれですか？',
+        answers: [
+            '無限にサポート',
+            'メンテナンスコストとユーザーニーズのバランス',
+            '常に1バージョンのみ',
+            'ランダムに決定',
+        ],
+        correct: 1,
+        explanation:
+            '多くのバージョンを同時サポートするとメンテナンスコストが増加するため、ユーザーのニーズと移行状況を考慮して決定します。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'APIバージョニングドキュメントに含めるべき情報として適切でないものはどれですか？',
+        answers: [
+            'バージョン間の変更内容',
+            '移行ガイド',
+            'サーバーの管理者パスワード',
+            '非推奨機能の一覧',
+        ],
+        correct: 2,
+        explanation:
+            'バージョニングドキュメントには、変更内容、移行ガイド、非推奨機能などを含めますが、機密情報は含めません。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'Blue-Green DeploymentとAPIバージョニングの関係で正しいものはどれですか？',
+        answers: [
+            '無関係',
+            '新バージョンのリスクを低減し、即座にロールバック可能',
+            'バージョニングの代替',
+            'セキュリティ機能',
+        ],
+        correct: 1,
+        explanation:
+            'Blue-Green Deploymentにより、新バージョンを本番と同じ環境でテストし、問題があれば即座に旧バージョンにロールバックできます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'API設計',
+        minorCategory: 'バージョニング',
+        question: 'APIバージョンの統合テストで重要なことはどれですか？',
+        answers: [
+            'テストは不要',
+            '複数バージョン間の互換性と各バージョンの独立した動作を確認',
+            '最新バージョンのみテスト',
+            'ランダムにテスト',
+        ],
+        correct: 1,
+        explanation:
+            '各バージョンが正しく動作し、バージョン間で予期しない相互作用がないことを確認することが重要です。',
     },
 
     // Frontend Technology -> App Performance Category
