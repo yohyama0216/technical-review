@@ -185,6 +185,79 @@ class StatisticsService
     }
 
     /**
+     * Get completion forecast based on recent learning pace
+     */
+    public function getCompletionForecast(int $totalQuestions): ?array
+    {
+        $stats = $this->getStatistics();
+        $dailyHistory = $stats['dailyHistory'] ?? [];
+        
+        if (empty($dailyHistory)) {
+            return null;
+        }
+        
+        // 完了済み問題数を計算
+        $questionStats = $stats['questionStats'] ?? [];
+        $completedCount = 0;
+        foreach ($questionStats as $stat) {
+            if ($stat['completed'] ?? false) {
+                $completedCount++;
+            }
+        }
+        
+        $remainingQuestions = $totalQuestions - $completedCount;
+        
+        if ($remainingQuestions <= 0) {
+            return [
+                'isCompleted' => true,
+                'remainingQuestions' => 0,
+                'estimatedDays' => 0,
+                'estimatedDate' => null,
+                'averageDailyCompleted' => 0,
+            ];
+        }
+        
+        // 最近7日間のデータから平均学習ペースを計算
+        ksort($dailyHistory);
+        $recentDays = array_slice($dailyHistory, -7, 7, true);
+        
+        $totalCompletedInPeriod = 0;
+        $daysWithActivity = 0;
+        
+        foreach ($recentDays as $data) {
+            $dailyCompleted = $data['completed'] ?? 0;
+            if ($dailyCompleted > 0) {
+                $totalCompletedInPeriod += $dailyCompleted;
+                $daysWithActivity++;
+            }
+        }
+        
+        // 学習日がない場合は予測不可
+        if ($daysWithActivity === 0) {
+            return null;
+        }
+        
+        // 平均日次完了数を計算（学習した日のみの平均）
+        $averageDailyCompleted = $totalCompletedInPeriod / $daysWithActivity;
+        
+        // 完了までの推定日数を計算
+        $estimatedDays = ceil($remainingQuestions / $averageDailyCompleted);
+        
+        // 完了予定日を計算
+        $estimatedDate = date('Y-m-d', strtotime("+{$estimatedDays} days"));
+        
+        return [
+            'isCompleted' => false,
+            'remainingQuestions' => $remainingQuestions,
+            'estimatedDays' => (int) $estimatedDays,
+            'estimatedDate' => $estimatedDate,
+            'averageDailyCompleted' => round($averageDailyCompleted, 1),
+            'analyzedDays' => count($recentDays),
+            'daysWithActivity' => $daysWithActivity,
+        ];
+    }
+
+    /**
      * Reset all statistics
      */
     public function resetStatistics(): void

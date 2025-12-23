@@ -107,6 +107,49 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Completion Forecast -->
+        @if($forecast && !$forecast['isCompleted'])
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0"><i class="bi bi-calendar-check me-2"></i>学習完了予測</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <small class="text-muted">残り問題数</small>
+                            <h4 class="mb-0">{{ $forecast['remainingQuestions'] }} 問</h4>
+                        </div>
+                        <div class="mb-3">
+                            <small class="text-muted">平均学習ペース（最近{{ $forecast['analyzedDays'] }}日間、学習日{{ $forecast['daysWithActivity'] }}日）</small>
+                            <h4 class="mb-0">1日 {{ $forecast['averageDailyCompleted'] }} 問完了</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <small class="text-muted">完了までの推定日数</small>
+                            <h4 class="mb-0 text-primary">約 {{ $forecast['estimatedDays'] }} 日</h4>
+                        </div>
+                        <div class="mb-3">
+                            <small class="text-muted">完了予定日</small>
+                            <h4 class="mb-0 text-success">{{ date('Y年m月d日', strtotime($forecast['estimatedDate'])) }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info mb-0 mt-3">
+                    <small><i class="bi bi-info-circle me-1"></i>この予測は最近の学習ペースに基づいています。実際の完了日は学習ペースによって変動します。</small>
+                </div>
+            </div>
+        </div>
+        @elseif($forecast && $forecast['isCompleted'])
+        <div class="card shadow-sm mb-4 border-success">
+            <div class="card-body text-center">
+                <i class="bi bi-trophy-fill text-success fs-1"></i>
+                <h4 class="mt-3 text-success">🎉 おめでとうございます！全問題を完了しました！</h4>
+            </div>
+        </div>
+        @endif
 
         <!-- Daily Study Chart -->
         <div class="card shadow-sm mb-4">

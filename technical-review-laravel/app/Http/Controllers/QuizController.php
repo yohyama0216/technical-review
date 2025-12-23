@@ -107,8 +107,9 @@ class QuizController extends Controller
         $cumulativeStats = $this->statisticsService->getCumulativeStats();
         $dailyHistory = $this->statisticsService->getDailyHistoryWithCumulative();
         $totalQuestions = $this->questionService->getTotalQuestionCount();
+        $forecast = $this->statisticsService->getCompletionForecast($totalQuestions);
 
-        $viewModel = new StatsViewModel($cumulativeStats, $dailyHistory, $totalQuestions);
+        $viewModel = new StatsViewModel($cumulativeStats, $dailyHistory, $totalQuestions, $forecast);
         return view('quiz.stats', $viewModel->toArray());
     }
 
