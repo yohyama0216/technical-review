@@ -13,9 +13,9 @@ class ViewModelTest extends TestCase
 {
     public function test_index_view_model_to_array(): void
     {
-        $viewModel = new IndexViewModel();
+        $viewModel = new IndexViewModel;
         $array = $viewModel->toArray();
-        
+
         $this->assertIsArray($array);
         $this->assertArrayHasKey('pageTitle', $array);
         $this->assertArrayHasKey('appName', $array);
@@ -25,7 +25,7 @@ class ViewModelTest extends TestCase
     {
         $viewModel = new QuestionListViewModel([], '', 'all', [], 'technical');
         $array = $viewModel->toArray();
-        
+
         $this->assertIsArray($array);
         $this->assertArrayHasKey('questions', $array);
         $this->assertArrayHasKey('searchText', $array);
@@ -42,10 +42,10 @@ class ViewModelTest extends TestCase
             'answers' => ['A', 'B', 'C', 'D'],
             'correctAnswer' => 0,
         ];
-        
+
         $viewModel = new QuizViewModel($question);
         $array = $viewModel->toArray();
-        
+
         $this->assertIsArray($array);
         $this->assertArrayHasKey('question', $array);
         $this->assertArrayHasKey('pageTitle', $array);
@@ -55,7 +55,7 @@ class ViewModelTest extends TestCase
     {
         $viewModel = new SettingsViewModel('technical', ['technical' => 'Technical'], '2025-12-31');
         $array = $viewModel->toArray();
-        
+
         $this->assertIsArray($array);
         $this->assertArrayHasKey('currentCategory', $array);
         $this->assertArrayHasKey('availableCategories', $array);
@@ -73,13 +73,13 @@ class ViewModelTest extends TestCase
             'answeredQuestionsCount' => 5,
             'unansweredQuestions' => 5,
         ];
-        
+
         $dailyHistory = [];
         $totalQuestions = 10;
-        
+
         $viewModel = new StatsViewModel($cumulativeStats, $dailyHistory, $totalQuestions);
         $array = $viewModel->toArray();
-        
+
         $this->assertIsArray($array);
         $this->assertArrayHasKey('totalCorrect', $array);
         $this->assertArrayHasKey('totalIncorrect', $array);

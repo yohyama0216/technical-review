@@ -45,7 +45,7 @@ class QuizControllerTest extends TestCase
         $response = $this->post(route('quiz.settings.save'), [
             'category' => 'technical',
         ]);
-        
+
         $response->assertRedirect();
         $response->assertSessionHas('success');
     }
@@ -54,11 +54,11 @@ class QuizControllerTest extends TestCase
     {
         // Start a quiz first to get a question
         $this->get(route('quiz.start'));
-        
+
         $response = $this->postJson(route('quiz.submit'), [
             'answer' => 0,
         ]);
-        
+
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'isCorrect',
@@ -71,7 +71,7 @@ class QuizControllerTest extends TestCase
     public function test_get_next_question_returns_json(): void
     {
         $response = $this->getJson(route('quiz.next'));
-        
+
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'id',

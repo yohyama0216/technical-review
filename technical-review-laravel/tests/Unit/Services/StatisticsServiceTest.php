@@ -58,7 +58,7 @@ class StatisticsServiceTest extends TestCase
         $statsBefore = $this->statisticsService->getStatistics();
         $this->statisticsService->recordAnswer(1, true);
         $statsAfter = $this->statisticsService->getStatistics();
-        
+
         $this->assertIsArray($statsAfter);
         $this->assertArrayHasKey('questionStats', $statsAfter);
     }

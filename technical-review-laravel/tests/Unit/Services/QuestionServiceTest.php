@@ -3,7 +3,6 @@
 namespace Tests\Unit\Services;
 
 use App\Services\QuestionService;
-use App\Services\StatisticsService;
 use Tests\TestCase;
 
 class QuestionServiceTest extends TestCase

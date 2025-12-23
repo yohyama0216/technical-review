@@ -40,12 +40,12 @@ class SettingsServiceTest extends TestCase
     {
         $originalCategory = $this->settingsService->getCurrentCategory();
         $newCategory = $originalCategory === 'technical' ? 'vocabulary' : 'technical';
-        
+
         $this->settingsService->setCurrentCategory($newCategory);
         $currentCategory = $this->settingsService->getCurrentCategory();
-        
+
         $this->assertEquals($newCategory, $currentCategory);
-        
+
         // Restore original
         $this->settingsService->setCurrentCategory($originalCategory);
     }
@@ -61,7 +61,7 @@ class SettingsServiceTest extends TestCase
         $date = '2025-12-31';
         $this->settingsService->setTargetDate($date);
         $retrievedDate = $this->settingsService->getTargetDate();
-        
+
         $this->assertEquals($date, $retrievedDate);
     }
 }
