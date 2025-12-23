@@ -12,13 +12,9 @@ parameters:
     # Level 5-6: Recommended for most projects (good balance)
     # Level 7-9: Very strict, may require significant refactoring
     level: 6
+    
     # Ignore vendor and generated files
     excludePaths:
         - vendor/
         - storage/
         - bootstrap/cache/
-    
-    # Additional checks for better code quality
-    checkMissingIterableValueType: true
-    checkGenericClassInNonGenericObjectType: false
-    reportUnmatchedIgnoredErrors: false
