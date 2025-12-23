@@ -48,6 +48,10 @@ class StatisticsServiceTest extends TestCase
 
     public function test_get_completion_forecast_returns_array(): void
     {
+        // Add some statistics first
+        $this->statisticsService->recordAnswer(1, true);
+        $this->statisticsService->recordAnswer(2, true);
+
         $forecast = $this->statisticsService->getCompletionForecast(100);
         $this->assertIsArray($forecast);
         $this->assertArrayHasKey('isCompleted', $forecast);

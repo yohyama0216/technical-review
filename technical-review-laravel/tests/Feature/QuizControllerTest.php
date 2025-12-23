@@ -55,7 +55,7 @@ class QuizControllerTest extends TestCase
         // Start a quiz first to get a question
         $this->get(route('quiz.start'));
 
-        $response = $this->postJson(route('quiz.submit'), [
+        $response = $this->postJson(route('api.quiz.answer'), [
             'answer' => 0,
         ]);
 
@@ -70,7 +70,7 @@ class QuizControllerTest extends TestCase
 
     public function test_get_next_question_returns_json(): void
     {
-        $response = $this->getJson(route('quiz.next'));
+        $response = $this->getJson(route('api.quiz.next'));
 
         $response->assertStatus(200);
         $response->assertJsonStructure([

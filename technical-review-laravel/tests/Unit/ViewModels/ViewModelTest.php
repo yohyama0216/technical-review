@@ -53,7 +53,7 @@ class ViewModelTest extends TestCase
 
     public function test_settings_view_model_to_array(): void
     {
-        $viewModel = new SettingsViewModel('technical', ['technical' => 'Technical'], '2025-12-31');
+        $viewModel = new SettingsViewModel('2025-12-31', 'technical', ['technical' => 'Technical']);
         $array = $viewModel->toArray();
 
         $this->assertIsArray($array);
