@@ -880,5 +880,400 @@
         ],
         "correct": 2,
         "explanation": "過剰なインデックスは更新時のオーバーヘッドを増やし、バッファプールを圧迫します。必要なデータのみを読み込み、適切なインデックスでI/Oを削減することが重要です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "コンピューティング",
+        "question": "大規模なバッチ処理ワークロードを最もコスト効率良く実行するAWSサービスの組み合わせはどれですか？",
+        "answers": [
+            "EC2オンデマンドインスタンス",
+            "EC2スポットインスタンスとAWS Batch",
+            "Lambda関数",
+            "Fargate"
+        ],
+        "correct": 1,
+        "explanation": "AWS Batchはスポットインスタンスを活用でき、最大90%のコスト削減が可能です。バッチ処理は中断に強いため、スポットインスタンスに適しています。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "ストレージ",
+        "question": "S3でデータの耐久性を最大化しながらコストを最適化するライフサイクルポリシーの設計として最適なものはどれですか？",
+        "answers": [
+            "すべてのデータをS3 Standardに保存",
+            "30日後にS3 Standard-IA、90日後にS3 Glacier、1年後にS3 Glacier Deep Archiveに移行",
+            "すべてのデータを即座にS3 One Zone-IAに保存",
+            "データを定期的に削除"
+        ],
+        "correct": 1,
+        "explanation": "アクセス頻度に応じた段階的な移行により、耐久性を維持しながらコストを最適化できます。すべてのS3ストレージクラスは99.999999999%の耐久性を提供します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "ネットワーク",
+        "question": "複数のVPC間でプライベート通信を実現し、スケーラブルな接続を提供するAWSサービスはどれですか？",
+        "answers": [
+            "VPCピアリング",
+            "AWS Transit Gateway",
+            "インターネットゲートウェイ",
+            "NAT Gateway"
+        ],
+        "correct": 1,
+        "explanation": "Transit Gatewayは複数のVPCとオンプレミスネットワークを接続するハブとして機能し、ピアリングよりもスケーラブルな接続を提供します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "データベース",
+        "question": "グローバルに分散したアプリケーションで、読み取りレイテンシを最小化するRDSの機能はどれですか？",
+        "answers": ["マルチAZ配置", "Aurora Global Database", "RDSプロキシ", "リードレプリカのみ"],
+        "correct": 1,
+        "explanation": "Aurora Global Databaseは、複数のリージョンにまたがるレプリケーションを提供し、世界中のユーザーに対して低レイテンシの読み取りアクセスを実現します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "セキュリティ",
+        "question": "機密データをS3に保存する際、暗号化とアクセス制御のベストプラクティスとして正しいものはどれですか？",
+        "answers": [
+            "パブリックアクセスを許可してIAMで制御",
+            "SSE-KMSで暗号化し、バケットポリシーとIAMポリシーで最小権限アクセスを実装",
+            "暗号化なしでバケットポリシーのみ使用",
+            "すべてのユーザーに読み取り権限を付与"
+        ],
+        "correct": 1,
+        "explanation": "SSE-KMSは暗号化キーの管理とアクセスログを提供し、バケットポリシーとIAMポリシーの組み合わせで細かいアクセス制御が可能です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "ハイブリッドクラウド",
+        "question": "オンプレミスとAWS間で低レイテンシの専用ネットワーク接続を確立するサービスはどれですか？",
+        "answers": ["VPN接続", "AWS Direct Connect", "Internet Gateway", "AWS PrivateLink"],
+        "correct": 1,
+        "explanation": "Direct Connectは専用の物理接続を提供し、インターネット経由のVPNよりも安定した低レイテンシと高帯域幅を実現します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "高可用性",
+        "question": "マルチリージョンでのアプリケーション配信と自動フェイルオーバーを実現するAWSサービスの組み合わせはどれですか？",
+        "answers": [
+            "CloudFrontとS3のみ",
+            "Route 53のヘルスチェックとフェイルオーバールーティング、CloudFront",
+            "ELBのみ",
+            "Lambda@Edge"
+        ],
+        "correct": 1,
+        "explanation": "Route 53のヘルスチェックとフェイルオーバールーティングにより、障害発生時に自動的にトラフィックを正常なリージョンにルーティングできます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "サーバーレス",
+        "question": "Lambda関数の実行時間が15分を超える処理を実装する必要がある場合、最適なアーキテクチャはどれですか？",
+        "answers": [
+            "複数のLambda関数を順次実行",
+            "AWS Step FunctionsでECS FargateタスクまたはLambda関数を組み合わせる",
+            "Lambda関数の制限を解除する",
+            "EC2インスタンスのみ使用"
+        ],
+        "correct": 1,
+        "explanation": "Lambdaの最大実行時間は15分です。それを超える処理にはStep Functionsでワークフローを管理し、必要に応じてFargateタスクを使用します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "コスト最適化",
+        "question": "予測可能な長期的なワークロードのEC2コストを最大限削減する購入オプションはどれですか？",
+        "answers": [
+            "オンデマンドインスタンス",
+            "リザーブドインスタンス（3年間、全額前払い）",
+            "スポットインスタンス",
+            "Savings Plans（1年間）"
+        ],
+        "correct": 1,
+        "explanation": "3年間の全額前払いリザーブドインスタンスは最大72%の割引を提供し、予測可能なワークロードに最もコスト効率的です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "データ転送",
+        "question": "数百テラバイトのデータをAWSに移行する最も効率的な方法はどれですか？",
+        "answers": [
+            "Direct Connect経由でS3に転送",
+            "AWS Snowball EdgeまたはSnowmobile",
+            "インターネット経由でS3に直接アップロード",
+            "FTP転送"
+        ],
+        "correct": 1,
+        "explanation": "大量データの移行にはSnowballデバイスを使用することで、ネットワーク帯域幅の制限を回避し、コストと時間を削減できます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "コンテナ",
+        "question": "ECSでマイクロサービスアーキテクチャを実装する際、サービス間通信の検出を簡素化する機能はどれですか？",
+        "answers": [
+            "Classic Load Balancer",
+            "AWS Cloud Mapとサービスディスカバリー",
+            "Route 53のみ",
+            "固定IPアドレス"
+        ],
+        "correct": 1,
+        "explanation": "AWS Cloud Mapはサービスディスカバリーを提供し、動的に変化するマイクロサービスの検出と接続を簡素化します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "監視",
+        "question": "複数のAWSアカウントとリージョンにわたるログとメトリクスを集中管理する最適な方法はどれですか？",
+        "answers": [
+            "各アカウントで個別にCloudWatchを使用",
+            "CloudWatch Logs統合、CloudWatch cross-account observability、およびAWS Organizations",
+            "サードパーティツールのみ",
+            "S3にログを手動でコピー"
+        ],
+        "correct": 1,
+        "explanation": "CloudWatchのクロスアカウント機能とOrganizationsの統合により、複数アカウントのログとメトリクスを一元的に管理できます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "データベース",
+        "question": "DynamoDBで大量の読み取りトラフィックを処理しながらコストを最適化する方法はどれですか？",
+        "answers": [
+            "プロビジョニングされた容量を最大に設定",
+            "DAX（DynamoDB Accelerator）とオートスケーリングを使用",
+            "すべてのデータをオンデマンドモードで読み取り",
+            "読み取りキャパシティを固定"
+        ],
+        "correct": 1,
+        "explanation": "DAXはマイクロ秒単位のレスポンスを提供するインメモリキャッシュで、読み取り負荷を軽減し、オートスケーリングでコストを最適化できます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "災害復旧",
+        "question": "RPO（目標復旧時点）が数分、RTO（目標復旧時間）が1時間以内の要件に最適なDR戦略はどれですか？",
+        "answers": [
+            "バックアップとリストア",
+            "パイロットライトまたはウォームスタンバイ",
+            "マルチサイトアクティブ/アクティブ",
+            "何もしない"
+        ],
+        "correct": 1,
+        "explanation": "ウォームスタンバイは最小構成のシステムを常時稼働させ、障害時にスケールアップします。RPO/RTOの要件を満たしながらコスト効率的です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "API管理",
+        "question": "API Gatewayで認証と認可を実装する際、最もセキュアで柔軟な方法はどれですか？",
+        "answers": [
+            "APIキーのみ使用",
+            "Amazon Cognito User PoolsまたはLambdaオーソライザー",
+            "認証なし",
+            "Basic認証"
+        ],
+        "correct": 1,
+        "explanation": "Cognito User Poolsは完全なユーザー管理を提供し、Lambdaオーソライザーはカスタム認証ロジックを実装できます。両者はOAuthとJWTをサポートします。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "メッセージング",
+        "question": "順序保証が必要なメッセージ処理システムを実装する際、最適なAWSサービスはどれですか？",
+        "answers": [
+            "標準SQSキュー",
+            "SQS FIFOキューまたはKinesis Data Streams",
+            "SNSトピック",
+            "S3イベント通知"
+        ],
+        "correct": 1,
+        "explanation": "SQS FIFOキューは厳密な順序保証を提供し、Kinesis Data Streamsはパーティションキー単位での順序保証とより高いスループットを提供します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "分析",
+        "question": "リアルタイムストリーミングデータの分析と可視化を実装する最適なアーキテクチャはどれですか？",
+        "answers": [
+            "S3とAthena",
+            "Kinesis Data Streams、Kinesis Data Analytics、QuickSight",
+            "RDSとTableau",
+            "DynamoDBとExcel"
+        ],
+        "correct": 1,
+        "explanation": "Kinesis Data Streamsでデータを収集し、Kinesis Data Analyticsでリアルタイム分析を実行、QuickSightで可視化する統合ソリューションが最適です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "マイグレーション",
+        "question": "Oracle DatabaseからAurora PostgreSQLへの移行で、ダウンタイムを最小化する方法はどれですか？",
+        "answers": [
+            "エクスポート/インポート",
+            "AWS Database Migration Service（DMS）の継続的レプリケーション",
+            "データベースのバックアップとリストア",
+            "手動でのデータコピー"
+        ],
+        "correct": 1,
+        "explanation": "DMSは継続的レプリケーションをサポートし、ソースDBを稼働させたまま移行できます。Schema Conversion Toolと組み合わせて使用します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "セキュリティ",
+        "question": "AWS環境全体のセキュリティコンプライアンスを継続的に監視・評価するサービスはどれですか？",
+        "answers": [
+            "CloudWatch",
+            "AWS Security Hub、AWS Config、Amazon GuardDuty",
+            "IAMのみ",
+            "VPCフローログ"
+        ],
+        "correct": 1,
+        "explanation": "Security Hubはセキュリティ状態を統合的に表示、Configはリソース設定を監査、GuardDutyは脅威を検出します。これらの組み合わせが包括的です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "機械学習",
+        "question": "機械学習モデルのトレーニングと推論を大規模に実行するAWSサービスはどれですか？",
+        "answers": ["Lambda", "Amazon SageMaker", "EC2のみ", "EMR"],
+        "correct": 1,
+        "explanation": "SageMakerは、モデルの構築、トレーニング、デプロイのための完全マネージド型サービスで、自動スケーリングと最適化されたインフラを提供します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "ネットワーク",
+        "question": "VPC内のリソースがインターネットにアクセスできないようにしつつ、AWS サービス（S3、DynamoDBなど）にはアクセスさせる方法はどれですか？",
+        "answers": [
+            "Internet Gatewayを使用",
+            "VPCエンドポイント（Gateway/Interface）を使用",
+            "NAT Gatewayを使用",
+            "Direct Connectを使用"
+        ],
+        "correct": 1,
+        "explanation": "VPCエンドポイントは、インターネットゲートウェイやNATを経由せずにAWSサービスにプライベート接続を提供し、セキュリティとコストを最適化します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "DevOps",
+        "question": "マルチアカウント環境でCI/CDパイプラインを実装し、異なるアカウントにデプロイする最適な方法はどれですか？",
+        "answers": [
+            "各アカウントで個別のパイプライン",
+            "AWS CodePipelineとクロスアカウントIAMロール",
+            "手動デプロイ",
+            "サードパーティツールのみ"
+        ],
+        "correct": 1,
+        "explanation": "CodePipelineはクロスアカウントデプロイをサポートし、IAMロールを使用して異なるアカウントへの安全なデプロイを実現できます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "ストレージ",
+        "question": "複数のEC2インスタンス間でファイルシステムを共有する必要がある場合、最適なストレージサービスはどれですか？",
+        "answers": ["Amazon EBS", "Amazon EFS（Elastic File System）", "Instance Store", "S3"],
+        "correct": 1,
+        "explanation": "EFSは複数のEC2インスタンスから同時にアクセス可能なフルマネージド型NFSファイルシステムで、自動的にスケーリングします。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "コンプライアンス",
+        "question": "GDPR要件に準拠してEU内のユーザーデータを保存・処理する際の考慮事項として正しいものはどれですか？",
+        "answers": [
+            "すべてのデータをUS Eastリージョンに保存",
+            "EUリージョンを使用し、データレジデンシー要件を満たし、暗号化と適切なアクセス制御を実装",
+            "暗号化は不要",
+            "データの保存場所は無関係"
+        ],
+        "correct": 1,
+        "explanation": "GDPRはデータレジデンシー、暗号化、アクセス制御、データ削除権などを要求します。EUリージョンの使用と適切なセキュリティ対策が必要です。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "パフォーマンス",
+        "question": "グローバルユーザー向けの動的コンテンツ配信で、レイテンシを最小化するための最適な構成はどれですか？",
+        "answers": [
+            "単一リージョンのEC2",
+            "CloudFrontとLambda@Edge、複数リージョンのオリジン",
+            "S3のみ",
+            "Route 53のみ"
+        ],
+        "correct": 1,
+        "explanation": "CloudFrontのエッジロケーションとLambda@Edgeで動的コンテンツを処理し、複数リージョンのオリジンで地理的に分散したユーザーに低レイテンシを提供できます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "自動化",
+        "question": "数百のAWSアカウントの初期設定と継続的なガバナンスを自動化する最適なサービスはどれですか？",
+        "answers": [
+            "手動設定",
+            "AWS Control TowerとAWS Organizations",
+            "CloudFormationのみ",
+            "Lambda関数"
+        ],
+        "correct": 1,
+        "explanation": "Control Towerはマルチアカウント環境のセットアップと管理を自動化し、Organizationsと統合してガバナンスとコンプライアンスを強制します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "アーキテクチャ",
+        "question": "疎結合なマイクロサービスアーキテクチャを実装する際、サービス間通信に最適なパターンはどれですか？",
+        "answers": [
+            "直接HTTPリクエスト",
+            "SQS/SNSを使用した非同期メッセージング、またはEventBridge",
+            "共有データベース",
+            "ファイルベースの通信"
+        ],
+        "correct": 1,
+        "explanation": "SQS/SNS/EventBridgeを使用した非同期メッセージングは、サービス間の疎結合を実現し、スケーラビリティと耐障害性を向上させます。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "データ保護",
+        "question": "S3バケットの削除保護とバージョン管理を組み合わせた最強のデータ保護戦略はどれですか？",
+        "answers": [
+            "バージョニングのみ有効化",
+            "MFA Delete、バージョニング、オブジェクトロック、クロスリージョンレプリケーション",
+            "バケットポリシーのみ",
+            "定期的な手動バックアップ"
+        ],
+        "correct": 1,
+        "explanation": "MFA Deleteは削除に多要素認証を要求し、バージョニングで履歴を保持、オブジェクトロックで不変性を保証、CRRで地理的冗長性を実現します。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "コスト管理",
+        "question": "AWS環境のコストを可視化し、異常なコスト増加を検出する最適なツールの組み合わせはどれですか？",
+        "answers": [
+            "請求書の手動確認のみ",
+            "AWS Cost Explorer、AWS Budgets、Cost Anomaly Detection",
+            "CloudWatchのみ",
+            "サードパーティツールのみ"
+        ],
+        "correct": 1,
+        "explanation": "Cost Explorerでコストを分析、Budgetsでしきい値アラートを設定、Cost Anomaly Detectionで機械学習による異常検出を行います。"
+    },
+    {
+        "majorCategory": "インフラ・運用",
+        "middleCategory": "AWS",
+        "minorCategory": "ビッグデータ",
+        "question": "ペタバイト規模のデータウェアハウスを構築し、複雑なクエリを高速実行するAWSサービスはどれですか？",
+        "answers": ["RDS", "Amazon Redshift", "DynamoDB", "Aurora"],
+        "correct": 1,
+        "explanation": "Redshiftは列指向ストレージと並列処理により、ペタバイト規模のデータに対する複雑な分析クエリを高速実行できるデータウェアハウスサービスです。"
     }
 ]
