@@ -1,3 +1,7 @@
 *
 !.gitignore
-!learningLog.json
+!settings.json
+!technical/
+!technical/**
+!vocabulary/
+!vocabulary/**
