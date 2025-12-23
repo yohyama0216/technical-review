@@ -74,9 +74,11 @@ class QuizControllerTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
-            'id',
-            'question',
-            'answers',
+            'question' => [
+                'id',
+                'question',
+                'answers',
+            ],
         ]);
     }
 }
