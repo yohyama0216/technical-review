@@ -34,11 +34,42 @@
     - Laravel標準のコーディングスタイルに準拠
     - 実行コマンド: `./vendor/bin/pint --test`
 
-2. **PHPUnit** - ユニットテスト & コードカバレッジ
+2. **Composer Audit** - セキュリティ脆弱性チェック
+    - Composerに組み込み済みの機能
+    - 既知のセキュリティ脆弱性を持つ依存関係を検出
+    - 実行コマンド: `composer audit`
+
+3. **Larastan (PHPStan)** - 静的解析ツール
+    - 設定ファイル: `technical-review-laravel/phpstan.neon`
+    - 型エラー、未定義変数、到達不能コードなどを検出
+    - 解析レベル: 6（推奨レベル - 厳格さと実用性のバランス）
+    - 実行コマンド: `./vendor/bin/phpstan analyse`
+
+4. **PHPUnit** - ユニットテスト & コードカバレッジ
     - 設定ファイル: `technical-review-laravel/phpunit.xml`
     - コードカバレッジレポート生成（分岐網羅を含む）
     - 最低カバレッジ: 80%
     - 実行コマンド: `php artisan test --coverage`
+
+#### 📌 ツール選定の理由
+
+**Larastan (PHPStan) を選んだ理由：**
+- 型安全性の向上：実行前にバグを検出
+- Laravel専用の最適化：Eloquent、Facades、Containerなどに対応
+- コミュニティで広く使われているスタンダードツール
+- 段階的に導入可能（レベル0〜9）
+
+**Composer Audit を選んだ理由：**
+- 追加インストール不要（Composer組み込み機能）
+- セキュリティ脆弱性の早期発見
+- GitHub Advisory Databaseとの連携
+- CI/CDでの自動実行に最適
+
+**その他の候補について：**
+- ❌ **PHPMD (PHP Mess Detector)**: PHPStanで大部分がカバーされ、重複が多い
+- ❌ **PHP_CodeSniffer**: Laravel Pintで十分カバーされている
+- ✅ **Laravel Pint**: PSR-12準拠、Laravel標準で十分
+- ✅ **PHPUnit**: Laravel標準のテストフレームワーク
 
 ## 🚀 ローカルでの実行方法
 
@@ -85,6 +116,15 @@ php artisan key:generate
 # Laravel Pintでコード整形
 ./vendor/bin/pint
 
+# Composer Auditでセキュリティ脆弱性チェック
+composer audit
+
+# Larastan (PHPStan)で静的解析実行
+./vendor/bin/phpstan analyse
+
+# メモリ制限を増やして実行（大規模プロジェクト向け）
+./vendor/bin/phpstan analyse --memory-limit=2G
+
 # PHPUnitでテスト実行
 php artisan test
 
@@ -119,20 +159,23 @@ php artisan test --coverage --min=80
 - [ ] `npm run lint` が成功する
 - [ ] `npm run format:check` が成功する
 - [ ] `cd technical-review-laravel && ./vendor/bin/pint --test` が成功する
+- [ ] `cd technical-review-laravel && composer audit` が成功する
+- [ ] `cd technical-review-laravel && ./vendor/bin/phpstan analyse` が成功する
 - [ ] `cd technical-review-laravel && php artisan test` が成功する
 
 ## 🔧 設定ファイル一覧
 
-| ファイル                               | 用途                 |
-| -------------------------------------- | -------------------- |
-| `.eslintrc.json`                       | ESLint設定           |
-| `.prettierrc.json`                     | Prettier設定         |
-| `.eslintignore`                        | ESLint除外ファイル   |
-| `.prettierignore`                      | Prettier除外ファイル |
-| `technical-review-laravel/pint.json`   | Laravel Pint設定     |
-| `technical-review-laravel/phpunit.xml` | PHPUnit設定          |
-| `.github/workflows/frontend-ci.yml`    | フロントエンドCI設定 |
-| `.github/workflows/laravel-ci.yml`     | LaravelCI設定        |
+| ファイル                                  | 用途                 |
+| ----------------------------------------- | -------------------- |
+| `.eslintrc.json`                          | ESLint設定           |
+| `.prettierrc.json`                        | Prettier設定         |
+| `.eslintignore`                           | ESLint除外ファイル   |
+| `.prettierignore`                         | Prettier除外ファイル |
+| `technical-review-laravel/pint.json`      | Laravel Pint設定     |
+| `technical-review-laravel/phpstan.neon`   | PHPStan設定          |
+| `technical-review-laravel/phpunit.xml`    | PHPUnit設定          |
+| `.github/workflows/frontend-ci.yml`       | フロントエンドCI設定 |
+| `.github/workflows/laravel-ci.yml`        | LaravelCI設定        |
 
 ## 🎯 コーディング規約
 
@@ -153,5 +196,8 @@ php artisan test --coverage --min=80
 - [ESLint Documentation](https://eslint.org/docs/latest/)
 - [Prettier Documentation](https://prettier.io/docs/en/)
 - [Laravel Pint Documentation](https://laravel.com/docs/pint)
+- [PHPStan Documentation](https://phpstan.org/user-guide/getting-started)
+- [Larastan Documentation](https://github.com/larastan/larastan)
 - [PHPUnit Documentation](https://phpunit.de/documentation.html)
+- [Composer Audit](https://getcomposer.org/doc/03-cli.md#audit)
 - [GitHub Actions Documentation](https://docs.github.com/ja/actions)
