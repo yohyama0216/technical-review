@@ -152,11 +152,7 @@ class QuestionService
         
         foreach ($keywords as $keyword) {
             $count = $this->questions->filter(function ($question) use ($keyword) {
-                return stripos($question['question'], $keyword) !== false ||
-                       stripos($question['explanation'] ?? '', $keyword) !== false ||
-                       collect($question['answers'] ?? [])->contains(function ($answer) use ($keyword) {
-                           return stripos($answer, $keyword) !== false;
-                       });
+                return stripos($question['question'], $keyword) !== false;
             })->count();
             
             if ($count > 0) {

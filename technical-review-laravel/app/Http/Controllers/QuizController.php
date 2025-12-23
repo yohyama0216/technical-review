@@ -85,7 +85,9 @@ class QuizController extends Controller
                 'テスト', '単体テスト', '結合テスト', 'CI/CD',
                 'Git', 'Docker', 'デプロイ', 'バックアップ',
                 '非同期', 'マイクロサービス', 'ログ', 'モニタリング',
-                'エラー', 'バリデーション', 'リファクタリング', 'レビュー'
+                'エラー', 'バリデーション', 'リファクタリング', 'レビュー',
+                'EC2', 'RDS', 'ALB', 'ELB', 'CloudFront', 'S3', 'EBS', 'EFS',
+                'Athena', 'Kinesis', 'Lambda'
             ];
             return $this->questionService->getKeywordCounts($keywords);
         });
