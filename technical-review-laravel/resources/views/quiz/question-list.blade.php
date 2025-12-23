@@ -11,19 +11,31 @@
             <p class="text-muted">カテゴリを選択して問題を絞り込めます</p>
         </div>
         
-        <!-- Quick Keyword Search -->
+        <!-- Quick Keyword Search / Category Counts -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
-                <h6 class="mb-3"><i class="bi bi-tags me-2"></i>よく検索されるキーワード</h6>
-                <div class="d-flex flex-wrap gap-2">
-                    @foreach($keywordCounts as $keyword => $count)
-                        <a href="{{ route('quiz.question-list', ['search' => $keyword]) }}" 
-                           class="btn btn-sm {{ $searchText === $keyword ? 'btn-primary' : 'btn-outline-primary' }}">
-                            <i class="bi bi-search me-1"></i>{{ $keyword }}
-                            <span class="badge {{ $searchText === $keyword ? 'bg-light text-dark' : 'bg-primary' }} ms-1">{{ $count }}</span>
-                        </a>
-                    @endforeach
-                </div>
+                @if($currentCategory === 'vocabulary')
+                    <h6 class="mb-3"><i class="bi bi-bookmark me-2"></i>カテゴリ別問題数</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach($keywordCounts as $category => $count)
+                            <span class="btn btn-sm btn-outline-secondary" style="cursor: default;">
+                                <i class="bi bi-folder me-1"></i>{{ $category }}
+                                <span class="badge bg-secondary ms-1">{{ $count }}</span>
+                            </span>
+                        @endforeach
+                    </div>
+                @else
+                    <h6 class="mb-3"><i class="bi bi-tags me-2"></i>よく検索されるキーワード</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        @foreach($keywordCounts as $keyword => $count)
+                            <a href="{{ route('quiz.question-list', ['search' => $keyword]) }}" 
+                               class="btn btn-sm {{ $searchText === $keyword ? 'btn-primary' : 'btn-outline-primary' }}">
+                                <i class="bi bi-search me-1"></i>{{ $keyword }}
+                                <span class="badge {{ $searchText === $keyword ? 'bg-light text-dark' : 'bg-primary' }} ms-1">{{ $count }}</span>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
         

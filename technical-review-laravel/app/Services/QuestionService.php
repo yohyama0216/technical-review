@@ -7,10 +7,20 @@ use Illuminate\Support\Collection;
 class QuestionService
 {
     private Collection $questions;
+    private StatisticsService $statisticsService;
 
-    public function __construct()
+    public function __construct(StatisticsService $statisticsService)
     {
+        $this->statisticsService = $statisticsService;
         $this->loadQuestions();
+    }
+
+    /**
+     * Get current category
+     */
+    private function getCurrentCategory(): string
+    {
+        return $this->statisticsService->getCurrentCategory();
     }
 
     /**
@@ -18,7 +28,8 @@ class QuestionService
      */
     private function loadQuestions(): void
     {
-        $jsonPath = app_path('Data/questions.json');
+        $category = $this->getCurrentCategory();
+        $jsonPath = app_path("Data/{$category}/questions.json");
         
         if (!file_exists($jsonPath)) {
             $this->questions = collect([]);

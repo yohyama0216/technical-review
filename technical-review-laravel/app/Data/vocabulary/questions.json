@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "question": "implement",
+        "answers": ["実装する", "削除する", "修正する", "テストする"],
+        "correctAnswer": 0,
+        "explanation": "implementは「実装する」という意味です。プログラムやシステムに機能を組み込むことを指します。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 2,
+        "question": "accomplish",
+        "answers": ["達成する", "延期する", "計画する", "拒否する"],
+        "correctAnswer": 0,
+        "explanation": "accomplishは「達成する、成し遂げる」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 3,
+        "question": "allocate",
+        "answers": ["割り当てる", "削除する", "承認する", "請求する"],
+        "correctAnswer": 0,
+        "explanation": "allocateは「割り当てる、配分する」という意味です。資源や予算などを分配する際に使われます。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 4,
+        "question": "substantially",
+        "answers": ["大幅に", "わずかに", "徐々に", "完全に"],
+        "correctAnswer": 0,
+        "explanation": "substantiallyは「大幅に、実質的に」という意味の副詞です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 5,
+        "question": "authenticate",
+        "answers": ["認証する", "承認する", "暗号化する", "復号化する"],
+        "correctAnswer": 0,
+        "explanation": "authenticateは「認証する」という意味で、ユーザーの身元を確認するプロセスです。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 6,
+        "question": "comprehensive",
+        "answers": ["包括的な", "限定的な", "簡潔な", "複雑な"],
+        "correctAnswer": 0,
+        "explanation": "comprehensiveは「包括的な、総合的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 7,
+        "question": "merge",
+        "answers": ["統合する", "分割する", "削除する", "複製する"],
+        "correctAnswer": 0,
+        "explanation": "mergeは「統合する、合併する」という意味で、企業の合併などにも使われます。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 8,
+        "question": "facilitate",
+        "answers": ["促進する", "妨げる", "延期する", "禁止する"],
+        "correctAnswer": 0,
+        "explanation": "facilitateは「促進する、容易にする」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 9,
+        "question": "procurement",
+        "answers": ["調達", "販売", "製造", "配送"],
+        "correctAnswer": 0,
+        "explanation": "procurementは「調達、購買」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 10,
+        "question": "comply",
+        "answers": ["従う、遵守する", "拒否する", "変更する", "承認する"],
+        "correctAnswer": 0,
+        "explanation": "complyは「従う、遵守する」という意味で、comply with rulesで「規則に従う」となります。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 11,
+        "question": "deploy",
+        "answers": ["配置する", "削除する", "ダウンロードする", "保存する"],
+        "correctAnswer": 0,
+        "explanation": "deployは「配置する、展開する」という意味で、ITではアプリケーションを本番環境に展開する、ビジネスでは人員を配置するなどの意味で使われます。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 12,
+        "question": "tentative",
+        "answers": ["暫定的な", "確定的な", "永久的な", "公式な"],
+        "correctAnswer": 0,
+        "explanation": "tentativeは「暫定的な、仮の」という意味です。tentative scheduleで「仮のスケジュール」となります。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 13,
+        "question": "obsolete",
+        "answers": ["時代遅れの", "最新の", "人気の", "必要な"],
+        "correctAnswer": 0,
+        "explanation": "obsoleteは「時代遅れの、廃れた」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 14,
+        "question": "streamline",
+        "answers": ["合理化する", "複雑にする", "拡大する", "中止する"],
+        "correctAnswer": 0,
+        "explanation": "streamlineは「合理化する、効率化する」という意味です。業務プロセスの改善などに使われます。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 15,
+        "question": "elaborate",
+        "answers": ["詳しく述べる", "要約する", "省略する", "否定する"],
+        "correctAnswer": 0,
+        "explanation": "elaborateは「詳しく述べる、詳細に説明する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    }
+]

@@ -6,18 +6,44 @@ use Illuminate\Support\Facades\Storage;
 
 class StatisticsService
 {
-    private const LEARNING_LOG_FILE = 'learningLog.json';
+    private const LEARNING_LOG_FILE_PATTERN = '%s/learningLog.json';
+
+    /**
+     * Get current category from the main learningLog file or return default
+     */
+    public function getCurrentCategory(): string
+    {
+        // Read from settings.json to avoid circular dependency
+        if (Storage::exists('settings.json')) {
+            $content = Storage::get('settings.json');
+            $data = json_decode($content, true);
+            if (isset($data['currentCategory'])) {
+                return $data['currentCategory'];
+            }
+        }
+        return 'technical';
+    }
+
+    /**
+     * Get learning log file path for current category
+     */
+    private function getLearningLogFile(): string
+    {
+        $category = $this->getCurrentCategory();
+        return sprintf(self::LEARNING_LOG_FILE_PATTERN, $category);
+    }
 
     /**
      * Get all statistics data
      */
     public function getStatistics(): array
     {
-        if (!Storage::exists(self::LEARNING_LOG_FILE)) {
+        $file = $this->getLearningLogFile();
+        if (!Storage::exists($file)) {
             return $this->getDefaultStatistics();
         }
 
-        $content = Storage::get(self::LEARNING_LOG_FILE);
+        $content = Storage::get($file);
         $data = json_decode($content, true);
 
         return $data ?? $this->getDefaultStatistics();
@@ -31,6 +57,8 @@ class StatisticsService
         return [
             'questionStats' => [],
             'dailyHistory' => [],
+            'targetDate' => null,
+            'currentCategory' => 'technical',
         ];
     }
 
@@ -39,7 +67,8 @@ class StatisticsService
      */
     public function saveStatistics(array $data): void
     {
-        Storage::put(self::LEARNING_LOG_FILE, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        $file = $this->getLearningLogFile();
+        Storage::put($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
 
     /**
@@ -270,6 +299,26 @@ class StatisticsService
      */
     public function resetStatistics(): void
     {
-        Storage::delete(self::LEARNING_LOG_FILE);
+        $file = $this->getLearningLogFile();
+        Storage::delete($file);
+    }
+
+    /**
+     * Get target date
+     */
+    public function getTargetDate(): ?string
+    {
+        $stats = $this->getStatistics();
+        return $stats['targetDate'] ?? null;
+    }
+
+    /**
+     * Set target date
+     */
+    public function setTargetDate(?string $date): void
+    {
+        $stats = $this->getStatistics();
+        $stats['targetDate'] = $date;
+        $this->saveStatistics($stats);
     }
 }

@@ -16,6 +16,32 @@
     </div>
     @endif
 
+    <!-- Category Selection Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white">
+            <h5 class="mb-0"><i class="bi bi-collection me-2"></i>出題カテゴリ</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ route('quiz.settings.save') }}">
+                @csrf
+                <div class="mb-3">
+                    <label for="category" class="form-label">学習カテゴリを選択</label>
+                    <select id="category" name="category" class="form-select">
+                        @foreach($availableCategories as $key => $label)
+                            <option value="{{ $key }}" {{ $currentCategory === $key ? 'selected' : '' }}>
+                                {{ $label }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="form-text">選択したカテゴリの問題が出題されます。カテゴリごとに学習履歴と統計が管理されます。</div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save me-2"></i>保存
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Target Date Settings Card -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-white">

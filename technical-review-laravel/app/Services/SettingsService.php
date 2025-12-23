@@ -7,38 +7,51 @@ use Illuminate\Support\Facades\Storage;
 class SettingsService
 {
     private const SETTINGS_FILE = 'settings.json';
+    private StatisticsService $statisticsService;
+
+    public function __construct(StatisticsService $statisticsService)
+    {
+        $this->statisticsService = $statisticsService;
+    }
+
+    /**
+     * Get all settings from settings.json
+     */
+    private function getSettingsData(): array
+    {
+        if (!Storage::exists(self::SETTINGS_FILE)) {
+            return [
+                'currentCategory' => 'technical',
+                'targetDate' => null,
+            ];
+        }
+
+        $content = Storage::get(self::SETTINGS_FILE);
+        $data = json_decode($content, true);
+
+        return $data ?? [
+            'currentCategory' => 'technical',
+            'targetDate' => null,
+        ];
+    }
+
+    /**
+     * Save settings to settings.json
+     */
+    private function saveSettingsData(array $data): void
+    {
+        Storage::put(self::SETTINGS_FILE, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    }
 
     /**
      * Get all settings
      */
     public function getSettings(): array
     {
-        if (!Storage::exists(self::SETTINGS_FILE)) {
-            return $this->getDefaultSettings();
-        }
-
-        $content = Storage::get(self::SETTINGS_FILE);
-        $data = json_decode($content, true);
-
-        return $data ?? $this->getDefaultSettings();
-    }
-
-    /**
-     * Get default settings
-     */
-    private function getDefaultSettings(): array
-    {
         return [
-            'targetDate' => null,
+            'targetDate' => $this->getTargetDate(),
+            'currentCategory' => $this->getCurrentCategory(),
         ];
-    }
-
-    /**
-     * Save settings
-     */
-    public function saveSettings(array $settings): void
-    {
-        Storage::put(self::SETTINGS_FILE, json_encode($settings, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
 
     /**
@@ -46,7 +59,13 @@ class SettingsService
      */
     public function getTargetDate(): ?string
     {
-        $settings = $this->getSettings();
+        // Try category-specific learningLog first, then settings.json
+        $categoryTargetDate = $this->statisticsService->getTargetDate();
+        if ($categoryTargetDate) {
+            return $categoryTargetDate;
+        }
+        
+        $settings = $this->getSettingsData();
         return $settings['targetDate'] ?? null;
     }
 
@@ -55,8 +74,36 @@ class SettingsService
      */
     public function setTargetDate(?string $date): void
     {
-        $settings = $this->getSettings();
-        $settings['targetDate'] = $date;
-        $this->saveSettings($settings);
+        $this->statisticsService->setTargetDate($date);
+    }
+
+    /**
+     * Get current category
+     */
+    public function getCurrentCategory(): string
+    {
+        $settings = $this->getSettingsData();
+        return $settings['currentCategory'] ?? 'technical';
+    }
+
+    /**
+     * Set current category
+     */
+    public function setCurrentCategory(string $category): void
+    {
+        $settings = $this->getSettingsData();
+        $settings['currentCategory'] = $category;
+        $this->saveSettingsData($settings);
+    }
+
+    /**
+     * Get available categories
+     */
+    public function getAvailableCategories(): array
+    {
+        return [
+            'technical' => '技術面接',
+            'vocabulary' => '英単語',
+        ];
     }
 }

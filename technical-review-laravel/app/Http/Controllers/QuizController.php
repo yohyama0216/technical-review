@@ -77,29 +77,43 @@ class QuizController extends Controller
             return true;
         })->values()->toArray();
 
-        // Get keyword search counts (cached for 1 hour)
-        $keywordCounts = Cache::remember('keyword_search_counts', 3600, function () {
-            $keywords = [
-                'API', 'REST', 'HTTP', 'HTTPS', 'JSON', 'XML',
-                'SQL', 'データベース', 'インデックス', 'トランザクション', '正規化',
-                'セキュリティ', '認証', '認可', 'OAuth', 'JWT', 'Cookie', 'Session',
-                'CORS', 'CSRF', 'XSS', 'インジェクション', '暗号化', 'SSL',
-                'キャッシュ', 'パフォーマンス', 'スケーリング', 'ロードバランサ',
-                'テスト', '単体テスト', '結合テスト', 'CI/CD',
-                'Git', 'Docker', 'デプロイ', 'バックアップ',
-                '非同期', 'マイクロサービス', 'ログ', 'モニタリング',
-                'エラー', 'バリデーション', 'リファクタリング', 'レビュー',
-                'EC2', 'RDS', 'ALB', 'ELB', 'CloudFront', 'S3', 'EBS', 'EFS',
-                'Athena', 'Kinesis', 'Lambda'
-            ];
-            return $this->questionService->getKeywordCounts($keywords);
-        });
+        // Get current category
+        $currentCategory = $this->statisticsService->getCurrentCategory();
+
+        // Get keyword/category counts based on category
+        if ($currentCategory === 'vocabulary') {
+            // For vocabulary, show category counts (TOEIC levels)
+            $categoryCounts = $questionsWithStats->groupBy('middleCategory')
+                ->map(fn($group) => $group->count())
+                ->sortKeys()
+                ->toArray();
+            $keywordCounts = $categoryCounts;
+        } else {
+            // For technical, show keyword counts (cached for 1 hour)
+            $keywordCounts = Cache::remember('keyword_search_counts', 3600, function () {
+                $keywords = [
+                    'API', 'REST', 'HTTP', 'HTTPS', 'JSON', 'XML',
+                    'SQL', 'データベース', 'インデックス', 'トランザクション', '正規化',
+                    'セキュリティ', '認証', '認可', 'OAuth', 'JWT', 'Cookie', 'Session',
+                    'CORS', 'CSRF', 'XSS', 'インジェクション', '暗号化', 'SSL',
+                    'キャッシュ', 'パフォーマンス', 'スケーリング', 'ロードバランサ',
+                    'テスト', '単体テスト', '結合テスト', 'CI/CD',
+                    'Git', 'Docker', 'デプロイ', 'バックアップ',
+                    '非同期', 'マイクロサービス', 'ログ', 'モニタリング',
+                    'エラー', 'バリデーション', 'リファクタリング', 'レビュー',
+                    'EC2', 'RDS', 'ALB', 'ELB', 'CloudFront', 'S3', 'EBS', 'EFS',
+                    'Athena', 'Kinesis', 'Lambda'
+                ];
+                return $this->questionService->getKeywordCounts($keywords);
+            });
+        }
 
         $viewModel = new QuestionListViewModel(
             $filteredQuestions,
             $searchText,
             $statusFilter,
-            $keywordCounts
+            $keywordCounts,
+            $currentCategory
         );
         return view('quiz.question-list', $viewModel->toArray());
     }
@@ -125,7 +139,9 @@ class QuizController extends Controller
     public function settings(): View
     {
         $targetDate = $this->settingsService->getTargetDate();
-        $viewModel = new SettingsViewModel($targetDate);
+        $currentCategory = $this->settingsService->getCurrentCategory();
+        $availableCategories = $this->settingsService->getAvailableCategories();
+        $viewModel = new SettingsViewModel($targetDate, $currentCategory, $availableCategories);
         return view('quiz.settings', $viewModel->toArray());
     }
 
@@ -135,7 +151,13 @@ class QuizController extends Controller
     public function saveSettings(Request $request)
     {
         $targetDate = $request->input('target_date');
+        $category = $request->input('category');
+        
         $this->settingsService->setTargetDate($targetDate);
+        
+        if ($category) {
+            $this->settingsService->setCurrentCategory($category);
+        }
         
         return redirect()->route('quiz.settings')->with('success', '設定を保存しました');
     }
