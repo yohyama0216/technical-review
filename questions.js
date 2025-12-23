@@ -1992,6 +1992,126 @@ const quizData = [
     },
     {
         majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
+        minorCategory: 'インデックス設計',
+        question: '一意制約（UNIQUE制約）とユニークインデックスの関係はどれですか？',
+        answers: [
+            '全く無関係',
+            '一意制約は内部的にユニークインデックスで実装される',
+            'ユニークインデックスの方が遅い',
+            '一意制約はインデックスを使用しない',
+        ],
+        correct: 1,
+        explanation:
+            '多くのRDBMSでは、一意制約は内部的にユニークインデックスとして実装されるため、重複チェックと高速検索の両方が実現されます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
+        minorCategory: 'インデックス設計',
+        question: '外部キー制約のある列にインデックスを作成する理由はどれですか？',
+        answers: [
+            '必須ではないが、JOIN性能と参照整合性チェックの高速化のため',
+            '外部キーには自動的にインデックスが作成される（全DBMS）',
+            'インデックスは不要',
+            'セキュリティ向上のため',
+        ],
+        correct: 0,
+        explanation:
+            '外部キー列にインデックスがないと、JOINやCASCADE削除時のパフォーマンスが低下します。PostgreSQLなど一部のDBMSでは自動作成されませんが、作成が推奨されます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
+        minorCategory: 'インデックス設計',
+        question: 'インデックスの統計情報を更新する必要がある理由はどれですか？',
+        answers: [
+            'セキュリティ強化',
+            'オプティマイザが正確な実行計画を立てるため',
+            'ストレージ削減',
+            'バックアップのため',
+        ],
+        correct: 1,
+        explanation:
+            'インデックスの統計情報（カーディナリティ、データ分布等）が古いと、オプティマイザが非効率な実行計画を選択する可能性があります。定期的な更新が重要です。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
+        minorCategory: 'インデックス設計',
+        question: 'NULL値を含む列のインデックス動作で正しいものはどれですか？',
+        answers: [
+            'NULLはインデックスに含まれない（全DBMS）',
+            'DBMSによって動作が異なり、一部はNULLを含む',
+            'NULLは常にインデックスに含まれる',
+            'NULLは検索できない',
+        ],
+        correct: 1,
+        explanation:
+            'Oracle等一部のDBMSではNULLはB-Treeインデックスに含まれませんが、PostgreSQLやMySQLでは含まれます。DBMS固有の動作を理解することが重要です。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
+        minorCategory: 'インデックス設計',
+        question: '降順インデックス（Descending Index）が有用なケースはどれですか？',
+        answers: [
+            '常に昇順より高速',
+            'ORDER BY DESC句での検索やソート',
+            'セキュリティ向上',
+            '使用されない',
+        ],
+        correct: 1,
+        explanation:
+            '降順インデックスは、ORDER BY column DESC での検索やソートを高速化します。複合インデックスで列ごとに異なるソート順が必要な場合にも有用です。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
+        minorCategory: 'インデックス設計',
+        question: 'インデックスのブロッキングファクター（Blocking Factor）が高いことの意味はどれですか？',
+        answers: [
+            'パフォーマンスが悪い',
+            '1ブロックに多くのインデックスエントリが格納され、I/O効率が良い',
+            'インデックスが使用されない',
+            'セキュリティが高い',
+        ],
+        correct: 1,
+        explanation:
+            'ブロッキングファクターが高いと、1回のI/Oで多くのインデックスエントリを読み込めるため、ディスクI/Oが削減され、パフォーマンスが向上します。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
+        minorCategory: 'インデックス設計',
+        question: 'インデックスのリーフノードのチェーン構造の利点はどれですか？',
+        answers: [
+            'ランダムアクセスの高速化',
+            '範囲検索でリーフノード間を効率的にスキャン可能',
+            'ストレージ削減',
+            'セキュリティ向上',
+        ],
+        correct: 1,
+        explanation:
+            'B-Treeインデックスのリーフノードは通常双方向リンクリストで接続されており、範囲検索時にリーフノードを順次スキャンできます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
+        middleCategory: 'データベース',
+        minorCategory: 'インデックス設計',
+        question: 'インデックスのキー圧縮（Key Compression）の目的はどれですか？',
+        answers: [
+            'セキュリティ強化',
+            'インデックスサイズを削減しメモリ効率とキャッシュヒット率を向上',
+            'クエリ速度の低下',
+            'データの暗号化',
+        ],
+        correct: 1,
+        explanation:
+            'インデックスのキー圧縮により、共通のプレフィックスを共有することでストレージを節約し、より多くのインデックスエントリをメモリにキャッシュできます。',
+    },
+    {
+        majorCategory: 'バックエンド技術',
         middleCategory: 'DBパフォーマンス',
         minorCategory: 'クエリ最適化',
         question: 'ウィンドウ関数（Window Function）とGROUP BYの違いとして正しいものはどれですか？',
