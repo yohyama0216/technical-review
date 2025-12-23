@@ -115,6 +115,23 @@
                 <h5 class="mb-0"><i class="bi bi-calendar-check me-2"></i>学習完了予測</h5>
             </div>
             <div class="card-body">
+                <!-- Target Date Settings -->
+                <div class="mb-4 pb-3 border-bottom">
+                    <form method="POST" action="{{ route('quiz.settings.save') }}" class="row g-3 align-items-end">
+                        @csrf
+                        <div class="col-md-8">
+                            <label for="target_date" class="form-label"><i class="bi bi-calendar-event me-2"></i>完了目標日</label>
+                            <input type="date" id="target_date" name="target_date" class="form-control" 
+                                   value="{{ $targetDate }}">
+                            <div class="form-text">全問題を完了させたい目標日を設定してください。</div>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-save me-2"></i>目標日を保存
+                            </button>
+                        </div>
+                    </form>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">

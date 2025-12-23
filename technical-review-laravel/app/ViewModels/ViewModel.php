@@ -8,8 +8,6 @@ abstract class ViewModel implements Arrayable
 {
     /**
      * Convert the view model to an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {

@@ -5,6 +5,7 @@ namespace App\ViewModels;
 class IndexViewModel extends ViewModel
 {
     public string $pageTitle;
+
     public string $appName;
 
     public function __construct()

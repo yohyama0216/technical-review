@@ -5,11 +5,17 @@ namespace App\ViewModels;
 class QuestionListViewModel extends ViewModel
 {
     public string $pageTitle;
+
     public string $appName;
+
     public array $questions;
+
     public string $searchText;
+
     public string $statusFilter;
+
     public array $keywordCounts;
+
     public string $currentCategory;
 
     public function __construct(

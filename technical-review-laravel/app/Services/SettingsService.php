@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 class SettingsService
 {
     private const SETTINGS_FILE = 'settings.json';
+
     private StatisticsService $statisticsService;
 
     public function __construct(StatisticsService $statisticsService)
@@ -19,7 +20,7 @@ class SettingsService
      */
     private function getSettingsData(): array
     {
-        if (!Storage::exists(self::SETTINGS_FILE)) {
+        if (! Storage::exists(self::SETTINGS_FILE)) {
             return [
                 'currentCategory' => 'technical',
                 'targetDate' => null,
@@ -64,8 +65,9 @@ class SettingsService
         if ($categoryTargetDate) {
             return $categoryTargetDate;
         }
-        
+
         $settings = $this->getSettingsData();
+
         return $settings['targetDate'] ?? null;
     }
 
@@ -83,6 +85,7 @@ class SettingsService
     public function getCurrentCategory(): string
     {
         $settings = $this->getSettingsData();
+
         return $settings['currentCategory'] ?? 'technical';
     }
 

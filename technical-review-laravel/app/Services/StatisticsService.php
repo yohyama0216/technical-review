@@ -21,6 +21,7 @@ class StatisticsService
                 return $data['currentCategory'];
             }
         }
+
         return 'technical';
     }
 
@@ -30,6 +31,7 @@ class StatisticsService
     private function getLearningLogFile(): string
     {
         $category = $this->getCurrentCategory();
+
         return sprintf(self::LEARNING_LOG_FILE_PATTERN, $category);
     }
 
@@ -39,7 +41,7 @@ class StatisticsService
     public function getStatistics(): array
     {
         $file = $this->getLearningLogFile();
-        if (!Storage::exists($file)) {
+        if (! Storage::exists($file)) {
             return $this->getDefaultStatistics();
         }
 
@@ -80,7 +82,7 @@ class StatisticsService
         $today = date('Y-m-d');
 
         // Update question stats
-        if (!isset($stats['questionStats'][$questionId])) {
+        if (! isset($stats['questionStats'][$questionId])) {
             $stats['questionStats'][$questionId] = [
                 'correctCount' => 0,
                 'incorrectCount' => 0,
@@ -100,7 +102,7 @@ class StatisticsService
         $stats['questionStats'][$questionId]['completed'] = ($correctCount > 2) && (($correctCount - $incorrectCount) > 0);
 
         // Update daily history
-        if (!isset($stats['dailyHistory'][$today])) {
+        if (! isset($stats['dailyHistory'][$today])) {
             $stats['dailyHistory'][$today] = [
                 'correct' => 0,
                 'incorrect' => 0,
@@ -139,12 +141,12 @@ class StatisticsService
         foreach ($questionStats as $stat) {
             $totalCorrect += $stat['correctCount'] ?? 0;
             $totalIncorrect += $stat['incorrectCount'] ?? 0;
-            
+
             // 完了（正解した）問題数
             if ($stat['completed'] ?? false) {
                 $completedCount++;
             }
-            
+
             // 回答済み（正解でも不正解でも回答した）問題数
             if (($stat['correctCount'] ?? 0) > 0 || ($stat['incorrectCount'] ?? 0) > 0) {
                 $answeredCount++;
@@ -201,6 +203,7 @@ class StatisticsService
     public function getQuestionStats(int $questionId): ?array
     {
         $stats = $this->getStatistics();
+
         return $stats['questionStats'][$questionId] ?? null;
     }
 
@@ -210,6 +213,7 @@ class StatisticsService
     public function isQuestionCompleted(int $questionId): bool
     {
         $stat = $this->getQuestionStats($questionId);
+
         return $stat['completed'] ?? false;
     }
 
@@ -221,27 +225,27 @@ class StatisticsService
         $stats = $this->getStatistics();
         $dailyHistory = $stats['dailyHistory'] ?? [];
         $questionStats = $stats['questionStats'] ?? [];
-        
+
         if (empty($dailyHistory)) {
             return null;
         }
-        
+
         // 完了基準: correctCount > 2 かつ correctCount - incorrectCount > 0
         // つまり各問題を完了させるには最低3回正解が必要
         $minCorrectForCompletion = 3;
-        
+
         // 現在の総正解数を計算
         $totalCorrect = 0;
         foreach ($questionStats as $stat) {
             $totalCorrect += $stat['correctCount'] ?? 0;
         }
-        
+
         // 全問題を完了させるのに必要な総正解数
         $requiredTotalCorrect = $totalQuestions * $minCorrectForCompletion;
-        
+
         // 残り必要な正解数
         $remainingCorrectNeeded = $requiredTotalCorrect - $totalCorrect;
-        
+
         if ($remainingCorrectNeeded <= 0) {
             return [
                 'isCompleted' => true,
@@ -251,14 +255,14 @@ class StatisticsService
                 'averageDailyCorrect' => 0,
             ];
         }
-        
+
         // 最近7日間のデータから平均正解数を計算
         ksort($dailyHistory);
         $recentDays = array_slice($dailyHistory, -7, 7, true);
-        
+
         $totalCorrectInPeriod = 0;
         $daysWithActivity = 0;
-        
+
         foreach ($recentDays as $data) {
             $dailyCorrect = $data['correct'] ?? 0;
             if ($dailyCorrect > 0) {
@@ -266,21 +270,21 @@ class StatisticsService
                 $daysWithActivity++;
             }
         }
-        
+
         // 学習日がない場合は予測不可
         if ($daysWithActivity === 0) {
             return null;
         }
-        
+
         // 平均日次正解数を計算（学習した日のみの平均）
         $averageDailyCorrect = $totalCorrectInPeriod / $daysWithActivity;
-        
+
         // 完了までの推定日数を計算
         $estimatedDays = ceil($remainingCorrectNeeded / $averageDailyCorrect);
-        
+
         // 完了予定日を計算
         $estimatedDate = date('Y-m-d', strtotime("+{$estimatedDays} days"));
-        
+
         return [
             'isCompleted' => false,
             'remainingCorrect' => (int) $remainingCorrectNeeded,
@@ -309,6 +313,7 @@ class StatisticsService
     public function getTargetDate(): ?string
     {
         $stats = $this->getStatistics();
+
         return $stats['targetDate'] ?? null;
     }
 

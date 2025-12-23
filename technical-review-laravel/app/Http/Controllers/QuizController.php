@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Services\QuestionService;
-use App\Services\StatisticsService;
 use App\Services\SettingsService;
+use App\Services\StatisticsService;
 use App\ViewModels\IndexViewModel;
 use App\ViewModels\QuestionListViewModel;
-use App\ViewModels\StatsViewModel;
 use App\ViewModels\SettingsViewModel;
-use Illuminate\Http\Request;
+use App\ViewModels\StatsViewModel;
 use Illuminate\Http\JsonResponse;
-use Illuminate\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\View\View;
 
 class QuizController extends Controller
 {
     private QuestionService $questionService;
+
     private StatisticsService $statisticsService;
+
     private SettingsService $settingsService;
 
     public function __construct(QuestionService $questionService, StatisticsService $statisticsService, SettingsService $settingsService)
@@ -32,7 +34,8 @@ class QuizController extends Controller
      */
     public function index(): View
     {
-        $viewModel = new IndexViewModel();
+        $viewModel = new IndexViewModel;
+
         return view('quiz.index', $viewModel->toArray());
     }
 
@@ -47,6 +50,7 @@ class QuizController extends Controller
         // Add stats to questions
         $questionsWithStats = $allQuestions->map(function ($question) use ($stats) {
             $questionStat = $stats['questionStats'][$question['id']] ?? null;
+
             return array_merge($question, [
                 'correctCount' => $questionStat['correctCount'] ?? 0,
                 'incorrectCount' => $questionStat['incorrectCount'] ?? 0,
@@ -69,9 +73,15 @@ class QuizController extends Controller
                 $hasAnswered = $question['correctCount'] > 0 || $question['incorrectCount'] > 0;
                 $isCompleted = $question['completed'];
 
-                if ($statusFilter === 'completed' && !$isCompleted) return false;
-                if ($statusFilter === 'answered' && (!$hasAnswered || $isCompleted)) return false;
-                if ($statusFilter === 'unanswered' && $hasAnswered) return false;
+                if ($statusFilter === 'completed' && ! $isCompleted) {
+                    return false;
+                }
+                if ($statusFilter === 'answered' && (! $hasAnswered || $isCompleted)) {
+                    return false;
+                }
+                if ($statusFilter === 'unanswered' && $hasAnswered) {
+                    return false;
+                }
             }
 
             return true;
@@ -84,7 +94,7 @@ class QuizController extends Controller
         if ($currentCategory === 'vocabulary') {
             // For vocabulary, show category counts (TOEIC levels)
             $categoryCounts = $questionsWithStats->groupBy('middleCategory')
-                ->map(fn($group) => $group->count())
+                ->map(fn ($group) => $group->count())
                 ->sortKeys()
                 ->toArray();
             $keywordCounts = $categoryCounts;
@@ -102,8 +112,9 @@ class QuizController extends Controller
                     '非同期', 'マイクロサービス', 'ログ', 'モニタリング',
                     'エラー', 'バリデーション', 'リファクタリング', 'レビュー',
                     'EC2', 'RDS', 'ALB', 'ELB', 'CloudFront', 'S3', 'EBS', 'EFS',
-                    'Athena', 'Kinesis', 'Lambda'
+                    'Athena', 'Kinesis', 'Lambda',
                 ];
+
                 return $this->questionService->getKeywordCounts($keywords);
             });
         }
@@ -115,6 +126,7 @@ class QuizController extends Controller
             $keywordCounts,
             $currentCategory
         );
+
         return view('quiz.question-list', $viewModel->toArray());
     }
 
@@ -130,6 +142,7 @@ class QuizController extends Controller
         $targetDate = $this->settingsService->getTargetDate();
 
         $viewModel = new StatsViewModel($cumulativeStats, $dailyHistory, $totalQuestions, $forecast, $targetDate);
+
         return view('quiz.stats', $viewModel->toArray());
     }
 
@@ -142,6 +155,7 @@ class QuizController extends Controller
         $currentCategory = $this->settingsService->getCurrentCategory();
         $availableCategories = $this->settingsService->getAvailableCategories();
         $viewModel = new SettingsViewModel($targetDate, $currentCategory, $availableCategories);
+
         return view('quiz.settings', $viewModel->toArray());
     }
 
@@ -152,14 +166,16 @@ class QuizController extends Controller
     {
         $targetDate = $request->input('target_date');
         $category = $request->input('category');
-        
+
         $this->settingsService->setTargetDate($targetDate);
-        
+
         if ($category) {
             $this->settingsService->setCurrentCategory($category);
+
+            return redirect()->route('quiz.index')->with('success', 'カテゴリを変更しました');
         }
-        
-        return redirect()->route('quiz.settings')->with('success', '設定を保存しました');
+
+        return redirect()->route('quiz.stats')->with('success', '目標日を保存しました');
     }
 
     /**
@@ -168,8 +184,8 @@ class QuizController extends Controller
     public function startQuiz(Request $request): View
     {
         $question = $this->questionService->getRandomQuestion();
-        
-        if (!$question) {
+
+        if (! $question) {
             return redirect()->route('quiz.index')->with('error', '問題が見つかりません');
         }
 
@@ -178,6 +194,7 @@ class QuizController extends Controller
         $request->session()->forget('quiz_result');
 
         $viewModel = new \App\ViewModels\QuizViewModel($question);
+
         return view('quiz.quiz', $viewModel->toArray());
     }
 
@@ -187,8 +204,8 @@ class QuizController extends Controller
     public function startQuizById(Request $request, int $id): View
     {
         $question = $this->questionService->getQuestionById($id);
-        
-        if (!$question) {
+
+        if (! $question) {
             return redirect()->route('quiz.question-list')->with('error', '問題が見つかりません');
         }
 
@@ -197,6 +214,7 @@ class QuizController extends Controller
         $request->session()->forget('quiz_result');
 
         $viewModel = new \App\ViewModels\QuizViewModel($question);
+
         return view('quiz.quiz', $viewModel->toArray());
     }
 
@@ -206,8 +224,8 @@ class QuizController extends Controller
     public function submitQuizAnswer(Request $request): JsonResponse
     {
         $currentQuestion = $request->session()->get('current_question');
-        
-        if (!$currentQuestion) {
+
+        if (! $currentQuestion) {
             return response()->json(['error' => '問題が見つかりません'], 404);
         }
 
@@ -231,8 +249,8 @@ class QuizController extends Controller
     public function getNextQuestion(Request $request): JsonResponse
     {
         $nextQuestion = $this->questionService->getRandomQuestion();
-        
-        if (!$nextQuestion) {
+
+        if (! $nextQuestion) {
             return response()->json(['error' => '問題が見つかりません'], 404);
         }
 
@@ -249,6 +267,7 @@ class QuizController extends Controller
     public function resetStatistics(): JsonResponse
     {
         $this->statisticsService->resetStatistics();
+
         return response()->json(['message' => '統計データをリセットしました']);
     }
 }

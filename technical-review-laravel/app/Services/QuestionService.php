@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 class QuestionService
 {
     private Collection $questions;
+
     private StatisticsService $statisticsService;
 
     public function __construct(StatisticsService $statisticsService)
@@ -30,22 +31,24 @@ class QuestionService
     {
         $category = $this->getCurrentCategory();
         $jsonPath = app_path("Data/{$category}/questions.json");
-        
-        if (!file_exists($jsonPath)) {
+
+        if (! file_exists($jsonPath)) {
             $this->questions = collect([]);
+
             return;
         }
 
         $jsonContent = file_get_contents($jsonPath);
         $data = json_decode($jsonContent, true);
-        
+
         // Add ID to each question (using array index)
-        $questionsWithId = array_map(function($question, $index) {
+        $questionsWithId = array_map(function ($question, $index) {
             $question['id'] = $index + 1;
             $question['correctAnswer'] = $question['correct'] ?? 0;
+
             return $question;
         }, $data, array_keys($data));
-        
+
         $this->questions = collect($questionsWithId);
     }
 
@@ -138,7 +141,7 @@ class QuestionService
         ?string $minorCategory = null
     ): ?array {
         $filtered = $this->getFilteredQuestions($majorCategory, $middleCategory, $minorCategory);
-        
+
         if ($filtered->isEmpty()) {
             return null;
         }
@@ -160,17 +163,17 @@ class QuestionService
     public function getKeywordCounts(array $keywords): array
     {
         $counts = [];
-        
+
         foreach ($keywords as $keyword) {
             $count = $this->questions->filter(function ($question) use ($keyword) {
                 return stripos($question['question'], $keyword) !== false;
             })->count();
-            
+
             if ($count > 0) {
                 $counts[$keyword] = $count;
             }
         }
-        
+
         return $counts;
     }
 }

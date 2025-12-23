@@ -5,7 +5,9 @@ namespace App\ViewModels;
 class QuizViewModel extends ViewModel
 {
     public string $pageTitle;
+
     public string $appName;
+
     public ?array $question;
 
     public function __construct(

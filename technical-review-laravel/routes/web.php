@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
+use Illuminate\Support\Facades\Route;
 
 // Page routes
 Route::get('/', [QuizController::class, 'index'])->name('quiz.index');
@@ -18,4 +18,3 @@ Route::prefix('api')->group(function () {
     Route::get('/quiz/next', [QuizController::class, 'getNextQuestion'])->name('api.quiz.next');
     Route::post('/statistics/reset', [QuizController::class, 'resetStatistics'])->name('api.statistics.reset');
 });
-

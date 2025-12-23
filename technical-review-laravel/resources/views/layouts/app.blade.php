@@ -16,8 +16,16 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container-fluid">
+            @php
+                $currentCategory = app(\App\Services\StatisticsService::class)->getCurrentCategory();
+                $categoryNames = [
+                    'technical' => '技術面接',
+                    'vocabulary' => '英単語'
+                ];
+                $categoryName = $categoryNames[$currentCategory] ?? '技術面接';
+            @endphp
             <a class="navbar-brand fw-bold" href="{{ route('quiz.index') }}">
-                <i class="bi bi-mortarboard-fill me-2"></i>{{ $appName }}
+                <i class="bi bi-mortarboard-fill me-2"></i>{{ $appName }}（{{ $categoryName }}）
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -39,10 +47,34 @@
                             <i class="bi bi-graph-up me-1"></i>統計
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('quiz.settings') ? 'active' : '' }}" href="{{ route('quiz.settings') }}">
-                            <i class="bi bi-gear me-1"></i>設定
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" 
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-collection me-1"></i>カテゴリ
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="categoryDropdown">
+                            @php
+                                $currentCategory = app(\App\Services\StatisticsService::class)->getCurrentCategory();
+                                $categories = [
+                                    'technical' => '💻 技術面接',
+                                    'vocabulary' => '📚 英単語 (TOEIC)'
+                                ];
+                            @endphp
+                            @foreach($categories as $key => $label)
+                                <li>
+                                    <form method="POST" action="{{ route('quiz.settings.save') }}" class="d-inline">
+                                        @csrf
+                                        <input type="hidden" name="category" value="{{ $key }}">
+                                        <button type="submit" class="dropdown-item {{ $currentCategory === $key ? 'active' : '' }}">
+                                            {{ $label }}
+                                            @if($currentCategory === $key)
+                                                <i class="bi bi-check-circle-fill ms-2"></i>
+                                            @endif
+                                        </button>
+                                    </form>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
                 </ul>
             </div>
