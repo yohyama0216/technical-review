@@ -47,5 +47,11 @@ jobs:
       - name: Run Laravel Pint (Code Formatter)
         run: ./vendor/bin/pint --test
 
+      - name: Run Composer Audit (Security Vulnerabilities)
+        run: composer audit
+
+      - name: Run Larastan (PHPStan Static Analysis)
+        run: ./vendor/bin/phpstan analyse --memory-limit=2G
+
       - name: Run PHPUnit tests with coverage
         run: php artisan test --coverage --min=80
