@@ -25,6 +25,9 @@ vendor/bin/pint --test
 # PSR-12準拠チェック
 vendor/bin/phpcs
 
+# Psalm静的解析（セキュリティ含む）
+vendor/bin/psalm
+
 # 静的解析（レベル7）
 vendor/bin/phpstan analyse --level=7
 
@@ -55,6 +58,7 @@ php artisan test --coverage
 
 - **Laravel Pint**: すべてパス
 - **PHPCS (PSR-12)**: すべてパス
+- **Psalm**: レベル5、0エラー
 - **PHPStan Level 7**: 0エラー
 - **PHPMD**: 警告のみ許容
 - **PHP Insights**: Code 90%+, Complexity 90%+, Architecture 90%+
@@ -70,6 +74,12 @@ php artisan test --coverage
 - PSR-12コーディング規約の厳格なチェック
 - phpcbfで自動修正可能
 
+### Psalm
+- 型チェックとセキュリティ分析
+- SQLインジェクション、XSS等の検出
+- PHPStanより厳格な型チェック
+- レベル5（バランス型）で実行
+
 ### PHPStan (Larastan)
 - 型エラー、未定義変数、到達不能コードを検出
 - レベル7で高品質な静的解析
@@ -81,3 +91,21 @@ php artisan test --coverage
 ### PHP Insights
 - 総合的なコード品質スコア
 - 複数の観点から品質を評価
+
+## 導入を見送ったツール
+
+### PHPCPD (Copy/Paste Detector)
+**見送り理由:**
+- 依存関係の競合により、現在のPHP 8.2環境でのインストールに失敗
+- PHPCPD 6.x系はPHP 7.3用、7.x系はまだ安定版がリリースされていない（開発版のみ）
+- Composer依存関係の解決が困難（amphp/ampのバージョン競合）
+
+**代替手段:**
+- **Psalm**: 重複コードの一部を検出可能
+- **PHPStan**: 未使用コードや重複ロジックを間接的に検出
+- **PHP Insights**: 複雑度分析で重複コードの兆候を検出
+- 手動: IDE（PhpStorm等）の重複検出機能を使用
+
+**将来の対応:**
+- PHPCPD 7.xの安定版リリース後に再検討
+- または、PHAR版の直接ダウンロードによる導入を検討

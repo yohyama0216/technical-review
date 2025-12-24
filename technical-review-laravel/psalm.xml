@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="5"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="false"
+>
+    <projectFiles>
+        <directory name="app"/>
+        <directory name="tests"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+            <directory name="storage"/>
+            <directory name="bootstrap/cache"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <plugins>
+        <!-- Laravel plugin for better Laravel support -->
+    </plugins>
+
+    <issueHandlers>
+        <LessSpecificReturnType errorLevel="info"/>
+        <DeprecatedMethod errorLevel="info"/>
+        <MissingClosureReturnType errorLevel="info"/>
+        <MissingReturnType errorLevel="info"/>
+        <MissingPropertyType errorLevel="info"/>
+        <InvalidDocblock errorLevel="info"/>
+        <MissingConstructor errorLevel="info"/>
+        <MissingClosureParamType errorLevel="info"/>
+        <MissingParamType errorLevel="info"/>
+        <DocblockTypeContradiction errorLevel="info"/>
+        <RedundantConditionGivenDocblockType errorLevel="info"/>
+        
+        <!-- Suppress common Laravel false positives -->
+        <UndefinedMagicMethod errorLevel="suppress"/>
+        <UndefinedMagicPropertyFetch errorLevel="suppress"/>
+    </issueHandlers>
+</psalm>
