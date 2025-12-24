@@ -11,7 +11,7 @@
             "completed": false
         },
         "2": {
-            "correctCount": 3,
+            "correctCount": 4,
             "incorrectCount": 0,
             "completed": true
         },
@@ -111,13 +111,18 @@
             "completed": false
         },
         "1": {
-            "correctCount": 4,
+            "correctCount": 6,
             "incorrectCount": 0,
             "completed": true
         },
         "21": {
             "correctCount": 0,
             "incorrectCount": 2,
+            "completed": false
+        },
+        "6": {
+            "correctCount": 0,
+            "incorrectCount": 1,
             "completed": false
         }
     },
@@ -138,8 +143,8 @@
             "completed": 0
         },
         "2025-12-24": {
-            "correct": 7,
-            "incorrect": 3,
+            "correct": 10,
+            "incorrect": 4,
             "completed": 2
         }
     },

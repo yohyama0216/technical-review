@@ -26,6 +26,110 @@ class StatisticsService
     }
 
     /**
+     * Calculate total correct count from question stats
+     *
+     * @param  array<int|string, array<string, mixed>>  $questionStats
+     */
+    private function calculateTotalCorrectCount(array $questionStats): int
+    {
+        $totalCorrect = 0;
+        foreach ($questionStats as $stat) {
+            $totalCorrect += $stat['correctCount'] ?? 0;
+        }
+
+        return $totalCorrect;
+    }
+
+    /**
+     * Build forecast result for completed learning
+     *
+     * @return array<string, mixed>
+     */
+    private function buildCompletedForecast(): array
+    {
+        return [
+            'isCompleted' => true,
+            'remainingCorrect' => 0,
+            'estimatedDays' => 0,
+            'estimatedDate' => null,
+            'averageDailyCorrect' => 0,
+        ];
+    }
+
+    /**
+     * Calculate recent learning statistics
+     *
+     * @param  array<string, array<string, mixed>>  $dailyHistory
+     * @return array<string, mixed>
+     */
+    private function calculateRecentLearningStats(array $dailyHistory): array
+    {
+        ksort($dailyHistory);
+        $recentDays = array_slice($dailyHistory, -7, 7, true);
+
+        $totalCorrectInPeriod = 0;
+        $daysWithActivity = 0;
+
+        foreach ($recentDays as $data) {
+            $dailyCorrect = $data['correct'] ?? 0;
+            if ($dailyCorrect > 0) {
+                $totalCorrectInPeriod += $dailyCorrect;
+                $daysWithActivity++;
+            }
+        }
+
+        $averageDailyCorrect = $daysWithActivity > 0
+            ? $totalCorrectInPeriod / $daysWithActivity
+            : 0;
+
+        return [
+            'averageDailyCorrect' => $averageDailyCorrect,
+            'daysWithActivity' => $daysWithActivity,
+            'analyzedDays' => count($recentDays),
+        ];
+    }
+
+    /**
+     * Calculate estimated completion date
+     */
+    private function calculateEstimatedDate(float $estimatedDays): string
+    {
+        $timestamp = strtotime("+{$estimatedDays} days");
+        if ($timestamp === false) {
+            throw new \RuntimeException('Failed to calculate estimated date');
+        }
+
+        return date('Y-m-d', $timestamp);
+    }
+
+    /**
+     * Build forecast result array
+     *
+     * @param  array<string, mixed>  $recentStats
+     * @return array<string, mixed>
+     */
+    private function buildForecastResult(
+        float $remainingCorrectNeeded,
+        int $requiredTotalCorrect,
+        int $totalCorrect,
+        float $estimatedDays,
+        string $estimatedDate,
+        array $recentStats
+    ): array {
+        return [
+            'isCompleted' => false,
+            'remainingCorrect' => (int) $remainingCorrectNeeded,
+            'requiredTotalCorrect' => $requiredTotalCorrect,
+            'currentTotalCorrect' => $totalCorrect,
+            'estimatedDays' => (int) $estimatedDays,
+            'estimatedDate' => $estimatedDate,
+            'averageDailyCorrect' => round($recentStats['averageDailyCorrect'], 1),
+            'analyzedDays' => $recentStats['analyzedDays'],
+            'daysWithActivity' => $recentStats['daysWithActivity'],
+        ];
+    }
+
+    /**
      * Get learning log file path for current category
      */
     private function getLearningLogFile(): string
@@ -183,32 +287,44 @@ class StatisticsService
     {
         $stats = $this->getStatistics();
         $dailyHistory = $stats['dailyHistory'] ?? [];
-
-        // Sort by date
         ksort($dailyHistory);
 
+        $cumulatives = ['correct' => 0, 'incorrect' => 0, 'learning' => 0];
         $result = [];
-        $cumulativeCorrect = 0;
-        $cumulativeIncorrect = 0;
-        $cumulativeLearning = 0;
 
         foreach ($dailyHistory as $date => $data) {
-            $cumulativeCorrect += $data['correct'] ?? 0;
-            $cumulativeIncorrect += $data['incorrect'] ?? 0;
-            $cumulativeLearning += ($data['correct'] ?? 0) + ($data['incorrect'] ?? 0);
-
-            $result[] = [
-                'date' => $date,
-                'dailyCorrect' => $data['correct'] ?? 0,
-                'dailyIncorrect' => $data['incorrect'] ?? 0,
-                'dailyLearning' => ($data['correct'] ?? 0) + ($data['incorrect'] ?? 0),
-                'cumulativeCorrect' => $cumulativeCorrect,
-                'cumulativeIncorrect' => $cumulativeIncorrect,
-                'cumulativeLearning' => $cumulativeLearning,
-            ];
+            $result[] = $this->buildDailyHistoryRow($date, $data, $cumulatives);
         }
 
         return $result;
+    }
+
+    /**
+     * Build a single daily history row with cumulative data
+     *
+     * @param  array<string, int>  $data
+     * @param  array<string, int>  $cumulatives
+     * @return array<string, mixed>
+     */
+    private function buildDailyHistoryRow(string $date, array $data, array &$cumulatives): array
+    {
+        $dailyCorrect = $data['correct'] ?? 0;
+        $dailyIncorrect = $data['incorrect'] ?? 0;
+        $dailyLearning = $dailyCorrect + $dailyIncorrect;
+
+        $cumulatives['correct'] += $dailyCorrect;
+        $cumulatives['incorrect'] += $dailyIncorrect;
+        $cumulatives['learning'] += $dailyLearning;
+
+        return [
+            'date' => $date,
+            'dailyCorrect' => $dailyCorrect,
+            'dailyIncorrect' => $dailyIncorrect,
+            'dailyLearning' => $dailyLearning,
+            'cumulativeCorrect' => $cumulatives['correct'],
+            'cumulativeIncorrect' => $cumulatives['incorrect'],
+            'cumulativeLearning' => $cumulatives['learning'],
+        ];
     }
 
     /**
@@ -248,76 +364,31 @@ class StatisticsService
             return null;
         }
 
-        // 完了基準: correctCount > 2 かつ correctCount - incorrectCount > 0
-        // つまり各問題を完了させるには最低3回正解が必要
-        $minCorrectForCompletion = 3;
-
-        // 現在の総正解数を計算
-        $totalCorrect = 0;
-        foreach ($questionStats as $stat) {
-            $totalCorrect += $stat['correctCount'] ?? 0;
-        }
-
-        // 全問題を完了させるのに必要な総正解数
-        $requiredTotalCorrect = $totalQuestions * $minCorrectForCompletion;
-
-        // 残り必要な正解数
+        $totalCorrect = $this->calculateTotalCorrectCount($questionStats);
+        $requiredTotalCorrect = $totalQuestions * 3; // 3 correct answers per question
         $remainingCorrectNeeded = $requiredTotalCorrect - $totalCorrect;
 
         if ($remainingCorrectNeeded <= 0) {
-            return [
-                'isCompleted' => true,
-                'remainingCorrect' => 0,
-                'estimatedDays' => 0,
-                'estimatedDate' => null,
-                'averageDailyCorrect' => 0,
-            ];
+            return $this->buildCompletedForecast();
         }
 
-        // 最近7日間のデータから平均正解数を計算
-        ksort($dailyHistory);
-        $recentDays = array_slice($dailyHistory, -7, 7, true);
+        $recentStats = $this->calculateRecentLearningStats($dailyHistory);
 
-        $totalCorrectInPeriod = 0;
-        $daysWithActivity = 0;
-
-        foreach ($recentDays as $data) {
-            $dailyCorrect = $data['correct'] ?? 0;
-            if ($dailyCorrect > 0) {
-                $totalCorrectInPeriod += $dailyCorrect;
-                $daysWithActivity++;
-            }
-        }
-
-        // 学習日がない場合は予測不可
-        if ($daysWithActivity === 0) {
+        if ($recentStats['daysWithActivity'] === 0) {
             return null;
         }
 
-        // 平均日次正解数を計算（学習した日のみの平均）
-        $averageDailyCorrect = $totalCorrectInPeriod / $daysWithActivity;
+        $estimatedDays = ceil($remainingCorrectNeeded / $recentStats['averageDailyCorrect']);
+        $estimatedDate = $this->calculateEstimatedDate($estimatedDays);
 
-        // 完了までの推定日数を計算
-        $estimatedDays = ceil($remainingCorrectNeeded / $averageDailyCorrect);
-
-        // 完了予定日を計算
-        $timestamp = strtotime("+{$estimatedDays} days");
-        if ($timestamp === false) {
-            throw new \RuntimeException('Failed to calculate estimated date');
-        }
-        $estimatedDate = date('Y-m-d', $timestamp);
-
-        return [
-            'isCompleted' => false,
-            'remainingCorrect' => (int) $remainingCorrectNeeded,
-            'requiredTotalCorrect' => $requiredTotalCorrect,
-            'currentTotalCorrect' => $totalCorrect,
-            'estimatedDays' => (int) $estimatedDays,
-            'estimatedDate' => $estimatedDate,
-            'averageDailyCorrect' => round($averageDailyCorrect, 1),
-            'analyzedDays' => count($recentDays),
-            'daysWithActivity' => $daysWithActivity,
-        ];
+        return $this->buildForecastResult(
+            $remainingCorrectNeeded,
+            $requiredTotalCorrect,
+            $totalCorrect,
+            $estimatedDays,
+            $estimatedDate,
+            $recentStats
+        );
     }
 
     /**
