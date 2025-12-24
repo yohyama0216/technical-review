@@ -50,6 +50,9 @@ jobs:
       - name: Run PHPCS (PSR-12 Coding Standards)
         run: ./vendor/bin/phpcs
 
+      - name: Run Psalm (Static Analysis & Security)
+        run: ./vendor/bin/psalm --show-info=false --no-progress
+
       - name: Run Composer Audit (Security Vulnerabilities)
         run: composer audit
 
