@@ -37,6 +37,8 @@ class StatisticsService
 
     /**
      * Get all statistics data
+     *
+     * @return array<string, mixed>
      */
     public function getStatistics(): array
     {
@@ -53,6 +55,8 @@ class StatisticsService
 
     /**
      * Get default statistics structure
+     *
+     * @return array<string, mixed>
      */
     private function getDefaultStatistics(): array
     {
@@ -66,11 +70,17 @@ class StatisticsService
 
     /**
      * Save statistics data
+     *
+     * @param  array<string, mixed>  $data
      */
     public function saveStatistics(array $data): void
     {
         $file = $this->getLearningLogFile();
-        Storage::put($file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        if ($json === false) {
+            throw new \RuntimeException('Failed to encode statistics data to JSON');
+        }
+        Storage::put($file, $json);
     }
 
     /**
@@ -127,6 +137,8 @@ class StatisticsService
 
     /**
      * Get cumulative statistics
+     *
+     * @return array<string, mixed>
      */
     public function getCumulativeStats(): array
     {
@@ -164,6 +176,8 @@ class StatisticsService
 
     /**
      * Get daily history with cumulative data
+     *
+     * @return array<int, array<string, mixed>>
      */
     public function getDailyHistoryWithCumulative(): array
     {
@@ -199,6 +213,8 @@ class StatisticsService
 
     /**
      * Get question statistics
+     *
+     * @return array<string, mixed>|null
      */
     public function getQuestionStats(int $questionId): ?array
     {
@@ -219,6 +235,8 @@ class StatisticsService
 
     /**
      * Get completion forecast based on recent learning pace
+     *
+     * @return array<string, mixed>|null
      */
     public function getCompletionForecast(int $totalQuestions): ?array
     {
@@ -283,7 +301,11 @@ class StatisticsService
         $estimatedDays = ceil($remainingCorrectNeeded / $averageDailyCorrect);
 
         // 完了予定日を計算
-        $estimatedDate = date('Y-m-d', strtotime("+{$estimatedDays} days"));
+        $timestamp = strtotime("+{$estimatedDays} days");
+        if ($timestamp === false) {
+            throw new \RuntimeException('Failed to calculate estimated date');
+        }
+        $estimatedDate = date('Y-m-d', $timestamp);
 
         return [
             'isCompleted' => false,

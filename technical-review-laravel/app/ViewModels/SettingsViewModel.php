@@ -12,8 +12,12 @@ class SettingsViewModel extends ViewModel
 
     public string $currentCategory;
 
+    /** @var array<string, string> */
     public array $availableCategories;
 
+    /**
+     * @param  array<string, string>  $availableCategories
+     */
     public function __construct(?string $targetDate = null, string $currentCategory = 'technical', array $availableCategories = [])
     {
         $this->pageTitle = '設定';

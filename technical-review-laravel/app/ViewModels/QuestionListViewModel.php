@@ -8,16 +8,22 @@ class QuestionListViewModel extends ViewModel
 
     public string $appName;
 
+    /** @var array<int, array<string, mixed>> */
     public array $questions;
 
     public string $searchText;
 
     public string $statusFilter;
 
+    /** @var array<string, int> */
     public array $keywordCounts;
 
     public string $currentCategory;
 
+    /**
+     * @param  array<int, array<string, mixed>>  $questions
+     * @param  array<string, int>  $keywordCounts
+     */
     public function __construct(
         array $questions = [],
         string $searchText = '',

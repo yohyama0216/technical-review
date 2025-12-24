@@ -26,26 +26,40 @@ class StatsViewModel extends ViewModel
 
     public int $unansweredPercentage;
 
+    /** @var array<int, array<string, mixed>> */
     public array $dailyHistory;
 
+    /** @var array<int, string> */
     public array $chartLabels;
 
+    /** @var array<int, int> */
     public array $chartCumulativeLearning;
 
+    /** @var array<int, int> */
     public array $chartCumulativeCorrect;
 
+    /** @var array<int, int> */
     public array $chartCumulativeIncorrect;
 
+    /** @var array<int, int> */
     public array $chartDailyCorrect;
 
+    /** @var array<int, int> */
     public array $chartDailyIncorrect;
 
+    /** @var array<int, int> */
     public array $chartDailyLearning;
 
+    /** @var array<string, mixed>|null */
     public ?array $forecast;
 
     public ?string $targetDate;
 
+    /**
+     * @param  array<string, mixed>  $cumulativeStats
+     * @param  array<int, array<string, mixed>>  $dailyHistory
+     * @param  array<string, mixed>|null  $forecast
+     */
     public function __construct(
         array $cumulativeStats,
         array $dailyHistory,

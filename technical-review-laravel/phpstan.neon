@@ -9,7 +9,7 @@ parameters:
     
     # Level 0 is the least strict, allowing gradual improvement
     # Start with level 0 and gradually increase
-    level: 0
+    level: 7
     
     # Ignore vendor and generated files
     excludePaths:

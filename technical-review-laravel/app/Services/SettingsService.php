@@ -17,6 +17,8 @@ class SettingsService
 
     /**
      * Get all settings from settings.json
+     *
+     * @return array<string, mixed>
      */
     private function getSettingsData(): array
     {
@@ -38,14 +40,22 @@ class SettingsService
 
     /**
      * Save settings to settings.json
+     *
+     * @param  array<string, mixed>  $data
      */
     private function saveSettingsData(array $data): void
     {
-        Storage::put(self::SETTINGS_FILE, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        if ($json === false) {
+            throw new \RuntimeException('Failed to encode settings data to JSON');
+        }
+        Storage::put(self::SETTINGS_FILE, $json);
     }
 
     /**
      * Get all settings
+     *
+     * @return array<string, mixed>
      */
     public function getSettings(): array
     {
@@ -101,6 +111,8 @@ class SettingsService
 
     /**
      * Get available categories
+     *
+     * @return array<string, string>
      */
     public function getAvailableCategories(): array
     {

@@ -10,6 +10,7 @@ use App\ViewModels\QuestionListViewModel;
 use App\ViewModels\SettingsViewModel;
 use App\ViewModels\StatsViewModel;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
@@ -162,7 +163,7 @@ class QuizController extends Controller
     /**
      * Save settings
      */
-    public function saveSettings(Request $request)
+    public function saveSettings(Request $request): RedirectResponse
     {
         $targetDate = $request->input('target_date');
         $category = $request->input('category');
@@ -181,7 +182,7 @@ class QuizController extends Controller
     /**
      * Start a new quiz with random question
      */
-    public function startQuiz(Request $request): View
+    public function startQuiz(Request $request): View|RedirectResponse
     {
         $question = $this->questionService->getRandomQuestion();
 
@@ -201,7 +202,7 @@ class QuizController extends Controller
     /**
      * Start quiz with specific question by ID
      */
-    public function startQuizById(Request $request, int $id): View
+    public function startQuizById(Request $request, int $id): View|RedirectResponse
     {
         $question = $this->questionService->getQuestionById($id);
 

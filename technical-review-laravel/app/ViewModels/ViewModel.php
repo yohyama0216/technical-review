@@ -4,6 +4,9 @@ namespace App\ViewModels;
 
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * @implements Arrayable<string, mixed>
+ */
 abstract class ViewModel implements Arrayable
 {
     /**

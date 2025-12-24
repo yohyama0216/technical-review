@@ -11,9 +11,9 @@
             "completed": false
         },
         "2": {
-            "correctCount": 1,
+            "correctCount": 3,
             "incorrectCount": 0,
-            "completed": false
+            "completed": true
         },
         "46": {
             "correctCount": 2,
@@ -104,6 +104,21 @@
             "correctCount": 1,
             "incorrectCount": 0,
             "completed": false
+        },
+        "85": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "1": {
+            "correctCount": 4,
+            "incorrectCount": 0,
+            "completed": true
+        },
+        "21": {
+            "correctCount": 0,
+            "incorrectCount": 2,
+            "completed": false
         }
     },
     "dailyHistory": {
@@ -123,9 +138,9 @@
             "completed": 0
         },
         "2025-12-24": {
-            "correct": 1,
-            "incorrect": 0,
-            "completed": 0
+            "correct": 7,
+            "incorrect": 3,
+            "completed": 2
         }
     },
     "targetDate": null,

@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 
 class QuestionService
 {
+    /** @var Collection<int, array<string, mixed>> */
     private Collection $questions;
 
     private StatisticsService $statisticsService;
@@ -39,7 +40,19 @@ class QuestionService
         }
 
         $jsonContent = file_get_contents($jsonPath);
+        if ($jsonContent === false) {
+            $this->questions = collect([]);
+
+            return;
+        }
+
         $data = json_decode($jsonContent, true);
+
+        if (! is_array($data)) {
+            $this->questions = collect([]);
+
+            return;
+        }
 
         // Add ID to each question (using array index)
         $questionsWithId = array_map(function ($question, $index) {
@@ -54,6 +67,8 @@ class QuestionService
 
     /**
      * Get all questions
+     *
+     * @return Collection<int, array<string, mixed>>
      */
     public function getAllQuestions(): Collection
     {
@@ -62,6 +77,8 @@ class QuestionService
 
     /**
      * Get question by ID
+     *
+     * @return array<string, mixed>|null
      */
     public function getQuestionById(int $id): ?array
     {
@@ -70,6 +87,8 @@ class QuestionService
 
     /**
      * Get all major categories
+     *
+     * @return array<int, string>
      */
     public function getMajorCategories(): array
     {
@@ -82,6 +101,8 @@ class QuestionService
 
     /**
      * Get middle categories by major category
+     *
+     * @return array<int, string>
      */
     public function getMiddleCategories(string $majorCategory): array
     {
@@ -95,6 +116,8 @@ class QuestionService
 
     /**
      * Get minor categories by major and middle category
+     *
+     * @return array<int, string>
      */
     public function getMinorCategories(string $majorCategory, string $middleCategory): array
     {
@@ -109,6 +132,8 @@ class QuestionService
 
     /**
      * Get filtered questions
+     *
+     * @return Collection<int, array<string, mixed>>
      */
     public function getFilteredQuestions(
         ?string $majorCategory = null,
@@ -134,6 +159,8 @@ class QuestionService
 
     /**
      * Get random question from filtered set
+     *
+     * @return array<string, mixed>|null
      */
     public function getRandomQuestion(
         ?string $majorCategory = null,
@@ -159,6 +186,9 @@ class QuestionService
 
     /**
      * Get keyword search counts
+     *
+     * @param  array<int, string>  $keywords
+     * @return array<string, int>
      */
     public function getKeywordCounts(array $keywords): array
     {

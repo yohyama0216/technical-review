@@ -8,8 +8,12 @@ class QuizViewModel extends ViewModel
 
     public string $appName;
 
+    /** @var array<string, mixed>|null */
     public ?array $question;
 
+    /**
+     * @param  array<string, mixed>|null  $question
+     */
     public function __construct(
         ?array $question = null,
     ) {
