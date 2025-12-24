@@ -47,78 +47,14 @@ class QuizController extends Controller
     {
         $allQuestions = $this->questionService->getAllQuestions();
         $stats = $this->statisticsService->getStatistics();
+        $questionsWithStats = $this->addStatsToQuestions($allQuestions, $stats);
 
-        // Add stats to questions
-        $questionsWithStats = $allQuestions->map(function ($question) use ($stats) {
-            $questionStat = $stats['questionStats'][$question['id']] ?? null;
-
-            return array_merge($question, [
-                'correctCount' => $questionStat['correctCount'] ?? 0,
-                'incorrectCount' => $questionStat['incorrectCount'] ?? 0,
-                'completed' => $questionStat['completed'] ?? false,
-            ]);
-        });
-
-        // Apply filters
         $searchText = $request->query('search', '');
         $statusFilter = $request->query('status', 'all');
+        $filteredQuestions = $this->filterQuestions($questionsWithStats, $searchText, $statusFilter);
 
-        $filteredQuestions = $questionsWithStats->filter(function ($question) use ($searchText, $statusFilter) {
-            // Search filter
-            if ($searchText && stripos($question['question'], $searchText) === false) {
-                return false;
-            }
-
-            // Status filter
-            if ($statusFilter !== 'all') {
-                $hasAnswered = $question['correctCount'] > 0 || $question['incorrectCount'] > 0;
-                $isCompleted = $question['completed'];
-
-                if ($statusFilter === 'completed' && ! $isCompleted) {
-                    return false;
-                }
-                if ($statusFilter === 'answered' && (! $hasAnswered || $isCompleted)) {
-                    return false;
-                }
-                if ($statusFilter === 'unanswered' && $hasAnswered) {
-                    return false;
-                }
-            }
-
-            return true;
-        })->values()->toArray();
-
-        // Get current category
         $currentCategory = $this->statisticsService->getCurrentCategory();
-
-        // Get keyword/category counts based on category
-        if ($currentCategory === 'vocabulary') {
-            // For vocabulary, show category counts (TOEIC levels)
-            $categoryCounts = $questionsWithStats->groupBy('middleCategory')
-                ->map(fn ($group) => $group->count())
-                ->sortKeys()
-                ->toArray();
-            $keywordCounts = $categoryCounts;
-        } else {
-            // For technical, show keyword counts (cached for 1 hour)
-            $keywordCounts = Cache::remember('keyword_search_counts', 3600, function () {
-                $keywords = [
-                    'API', 'REST', 'HTTP', 'HTTPS', 'JSON', 'XML',
-                    'SQL', 'データベース', 'インデックス', 'トランザクション', '正規化',
-                    'セキュリティ', '認証', '認可', 'OAuth', 'JWT', 'Cookie', 'Session',
-                    'CORS', 'CSRF', 'XSS', 'インジェクション', '暗号化', 'SSL',
-                    'キャッシュ', 'パフォーマンス', 'スケーリング', 'ロードバランサ',
-                    'テスト', '単体テスト', '結合テスト', 'CI/CD',
-                    'Git', 'Docker', 'デプロイ', 'バックアップ',
-                    '非同期', 'マイクロサービス', 'ログ', 'モニタリング',
-                    'エラー', 'バリデーション', 'リファクタリング', 'レビュー',
-                    'EC2', 'RDS', 'ALB', 'ELB', 'CloudFront', 'S3', 'EBS', 'EFS',
-                    'Athena', 'Kinesis', 'Lambda',
-                ];
-
-                return $this->questionService->getKeywordCounts($keywords);
-            });
-        }
+        $keywordCounts = $this->getKeywordCounts($currentCategory, $questionsWithStats);
 
         $viewModel = new QuestionListViewModel(
             $filteredQuestions,
@@ -129,6 +65,99 @@ class QuizController extends Controller
         );
 
         return view('quiz.question-list', $viewModel->toArray());
+    }
+
+    /**
+     * Add statistics to questions
+     *
+     * @param  \Illuminate\Support\Collection  $questions
+     * @param  array<string, mixed>  $stats
+     * @return \Illuminate\Support\Collection
+     */
+    private function addStatsToQuestions($questions, array $stats)
+    {
+        return $questions->map(function ($question) use ($stats) {
+            $questionStat = $stats['questionStats'][$question['id']] ?? null;
+
+            return array_merge($question, [
+                'correctCount' => $questionStat['correctCount'] ?? 0,
+                'incorrectCount' => $questionStat['incorrectCount'] ?? 0,
+                'completed' => $questionStat['completed'] ?? false,
+            ]);
+        });
+    }
+
+    /**
+     * Filter questions by search text and status
+     *
+     * @param  \Illuminate\Support\Collection  $questions
+     * @return array<int, array<string, mixed>>
+     */
+    private function filterQuestions($questions, string $searchText, string $statusFilter): array
+    {
+        return $questions->filter(function ($question) use ($searchText, $statusFilter) {
+            if ($searchText && stripos($question['question'], $searchText) === false) {
+                return false;
+            }
+
+            if ($statusFilter === 'all') {
+                return true;
+            }
+
+            return $this->matchesStatusFilter($question, $statusFilter);
+        })->values()->toArray();
+    }
+
+    /**
+     * Check if question matches status filter
+     *
+     * @param  array<string, mixed>  $question
+     */
+    private function matchesStatusFilter(array $question, string $statusFilter): bool
+    {
+        $hasAnswered = $question['correctCount'] > 0 || $question['incorrectCount'] > 0;
+        $isCompleted = $question['completed'];
+
+        return match ($statusFilter) {
+            'completed' => $isCompleted,
+            'answered' => $hasAnswered && ! $isCompleted,
+            'unanswered' => ! $hasAnswered,
+            default => true,
+        };
+    }
+
+    /**
+     * Get keyword counts based on category
+     *
+     * @param  \Illuminate\Support\Collection  $questions
+     * @return array<string, int>
+     */
+    private function getKeywordCounts(string $category, $questions): array
+    {
+        if ($category === 'vocabulary') {
+            return $questions->groupBy('middleCategory')
+                ->map(fn ($group) => $group->count())
+                ->sortKeys()
+                ->toArray();
+        }
+
+        return Cache::remember('keyword_search_counts', 3600, function () {
+            $keywords = [
+                'API', 'REST', 'HTTP', 'HTTPS', 'JSON', 'XML',
+                'SQL', 'データベース', 'インデックス', 'トランザクション', '正規化',
+                'セキュリティ', '認証', '認可', 'OAuth', 'JWT', 'Cookie', 'Session',
+                'CORS', 'CSRF', 'XSS', 'インジェクション', '暗号化', 'SSL',
+                'キャッシュ', 'パフォーマンス', 'スケーリング', 'ロードバランサ',
+                'テスト', '単体テスト', '結合テスト', 'CI/CD',
+                'Git', 'Docker', 'デプロイ', 'バックアップ',
+                '非同期', 'マイクロサービス', 'ログ', 'モニタリング',
+                'エラー', 'バリデーション', 'リファクタリング', 'レビュー',
+                'EC2', 'RDS', 'ALB', 'ELB', 'CloudFront', 'S3', 'EBS', 'EFS',
+                'Athena', 'Kinesis', 'Lambda',
+            ];
+
+            return $this->questionService->getKeywordCounts($keywords);
+        });
     }
 
     /**

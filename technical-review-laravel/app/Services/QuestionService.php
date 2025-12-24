@@ -39,30 +39,47 @@ class QuestionService
             return;
         }
 
-        $jsonContent = file_get_contents($jsonPath);
-        if ($jsonContent === false) {
+        $jsonContent = $this->readJsonFile($jsonPath);
+        if ($jsonContent === null) {
             $this->questions = collect([]);
 
             return;
+        }
+
+        $this->questions = collect($this->addIdsToQuestions($jsonContent));
+    }
+
+    /**
+     * Read and decode JSON file
+     *
+     * @return array<int, array<string, mixed>>|null
+     */
+    private function readJsonFile(string $path): ?array
+    {
+        $jsonContent = file_get_contents($path);
+        if ($jsonContent === false) {
+            return null;
         }
 
         $data = json_decode($jsonContent, true);
 
-        if (! is_array($data)) {
-            $this->questions = collect([]);
+        return is_array($data) ? $data : null;
+    }
 
-            return;
-        }
-
-        // Add ID to each question (using array index)
-        $questionsWithId = array_map(function ($question, $index) {
+    /**
+     * Add IDs to questions
+     *
+     * @param  array<int, array<string, mixed>>  $questions
+     * @return array<int, array<string, mixed>>
+     */
+    private function addIdsToQuestions(array $questions): array
+    {
+        return array_map(function ($question, $index) {
             $question['id'] = $index + 1;
             $question['correctAnswer'] = $question['correct'] ?? 0;
 
             return $question;
-        }, $data, array_keys($data));
-
-        $this->questions = collect($questionsWithId);
+        }, $questions, array_keys($questions));
     }
 
     /**

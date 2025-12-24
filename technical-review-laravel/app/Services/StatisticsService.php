@@ -195,7 +195,19 @@ class StatisticsService
         $stats = $this->getStatistics();
         $today = date('Y-m-d');
 
-        // Update question stats
+        $this->updateQuestionStats($stats, $questionId, $isCorrect);
+        $this->updateDailyHistory($stats, $today, $isCorrect);
+
+        $this->saveStatistics($stats);
+    }
+
+    /**
+     * Update question statistics
+     *
+     * @param  array<string, mixed>  $stats
+     */
+    private function updateQuestionStats(array &$stats, int $questionId, bool $isCorrect): void
+    {
         if (! isset($stats['questionStats'][$questionId])) {
             $stats['questionStats'][$questionId] = [
                 'correctCount' => 0,
@@ -210,12 +222,18 @@ class StatisticsService
             $stats['questionStats'][$questionId]['incorrectCount']++;
         }
 
-        // 正解数が3回以上かつ不正解数を上回っている場合のみ完了
         $correctCount = $stats['questionStats'][$questionId]['correctCount'];
         $incorrectCount = $stats['questionStats'][$questionId]['incorrectCount'];
         $stats['questionStats'][$questionId]['completed'] = ($correctCount > 2) && (($correctCount - $incorrectCount) > 0);
+    }
 
-        // Update daily history
+    /**
+     * Update daily history statistics
+     *
+     * @param  array<string, mixed>  $stats
+     */
+    private function updateDailyHistory(array &$stats, string $today, bool $isCorrect): void
+    {
         if (! isset($stats['dailyHistory'][$today])) {
             $stats['dailyHistory'][$today] = [
                 'correct' => 0,
@@ -230,13 +248,8 @@ class StatisticsService
             $stats['dailyHistory'][$today]['incorrect']++;
         }
 
-        // Count unique completed questions for the day
-        $completedToday = array_filter($stats['questionStats'], function ($stat) {
-            return $stat['completed'] ?? false;
-        });
+        $completedToday = array_filter($stats['questionStats'], fn ($stat) => $stat['completed'] ?? false);
         $stats['dailyHistory'][$today]['completed'] = count($completedToday);
-
-        $this->saveStatistics($stats);
     }
 
     /**

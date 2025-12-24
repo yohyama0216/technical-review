@@ -19,7 +19,10 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "nunomaduro/phpinsights": "^2.13",
-        "phpunit/phpunit": "^11.5.3"
+        "phpmd/phpmd": "^2.15",
+        "phpunit/phpunit": "^11.5.3",
+        "qossmic/deptrac": "*",
+        "rector/rector": "2.0"
     },
     "autoload": {
         "psr-4": {
