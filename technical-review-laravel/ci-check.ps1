@@ -8,7 +8,7 @@ Write-Host "========================================`n" -ForegroundColor Cyan
 $ErrorCount = 0
 
 # 1. Laravel Pint
-Write-Host "[1/5] Running Laravel Pint..." -ForegroundColor Yellow
+Write-Host "[1/6] Running Laravel Pint..." -ForegroundColor Yellow
 vendor/bin/pint --test
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ Pint: PASSED" -ForegroundColor Green
@@ -17,8 +17,18 @@ if ($LASTEXITCODE -eq 0) {
     $ErrorCount++
 }
 
-# 2. PHPStan
-Write-Host "`n[2/5] Running PHPStan Level 7..." -ForegroundColor Yellow
+# 2. PHPCS
+Write-Host "\n[2/6] Running PHP_CodeSniffer (PSR-12)..." -ForegroundColor Yellow
+vendor/bin/phpcs
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "✅ PHPCS: PASSED" -ForegroundColor Green
+} else {
+    Write-Host "❌ PHPCS: FAILED" -ForegroundColor Red
+    $ErrorCount++
+}
+
+# 3. PHPStan
+Write-Host "\n[3/6] Running PHPStan Level 7..." -ForegroundColor Yellow
 vendor/bin/phpstan analyse --level=7 --memory-limit=512M --no-progress
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ PHPStan: PASSED" -ForegroundColor Green
@@ -27,8 +37,8 @@ if ($LASTEXITCODE -eq 0) {
     $ErrorCount++
 }
 
-# 3. PHPMD
-Write-Host "`n[3/5] Running PHPMD..." -ForegroundColor Yellow
+# 4. PHPMD
+Write-Host "\n[4/6] Running PHPMD..." -ForegroundColor Yellow
 vendor/bin/phpmd app/ text phpmd.xml
 if ($LASTEXITCODE -eq 0 -or $LASTEXITCODE -eq 2) {
     Write-Host "✅ PHPMD: PASSED (or warnings only)" -ForegroundColor Green
@@ -36,8 +46,8 @@ if ($LASTEXITCODE -eq 0 -or $LASTEXITCODE -eq 2) {
     Write-Host "⚠️  PHPMD: WARNINGS FOUND" -ForegroundColor Yellow
 }
 
-# 4. PHP Insights
-Write-Host "`n[4/5] Running PHP Insights..." -ForegroundColor Yellow
+# 5. PHP Insights
+Write-Host "\n[5/6] Running PHP Insights..." -ForegroundColor Yellow
 php artisan insights --no-interaction --format=console --min-quality=90 --min-complexity=90 --min-architecture=90 --min-style=85
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ PHP Insights: PASSED" -ForegroundColor Green
@@ -46,8 +56,8 @@ if ($LASTEXITCODE -eq 0) {
     $ErrorCount++
 }
 
-# 5. PHPUnit Tests
-Write-Host "`n[5/5] Running PHPUnit Tests..." -ForegroundColor Yellow
+# 6. PHPUnit Tests
+Write-Host "\n[6/6] Running PHPUnit Tests..." -ForegroundColor Yellow
 php artisan test
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ Tests: PASSED" -ForegroundColor Green
