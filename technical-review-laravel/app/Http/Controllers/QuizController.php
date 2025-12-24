@@ -7,6 +7,7 @@ use App\Services\SettingsService;
 use App\Services\StatisticsService;
 use App\ViewModels\IndexViewModel;
 use App\ViewModels\QuestionListViewModel;
+use App\ViewModels\QuizViewModel;
 use App\ViewModels\SettingsViewModel;
 use App\ViewModels\StatsViewModel;
 use Illuminate\Http\JsonResponse;
@@ -70,9 +71,9 @@ class QuizController extends Controller
     /**
      * Add statistics to questions
      *
-     * @param  \Illuminate\Support\Collection  $questions
+     * @param  \Illuminate\Support\Collection<int, array<string, mixed>>  $questions
      * @param  array<string, mixed>  $stats
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Support\Collection<int, non-empty-array<string, mixed>>
      */
     private function addStatsToQuestions($questions, array $stats)
     {
@@ -90,7 +91,7 @@ class QuizController extends Controller
     /**
      * Filter questions by search text and status
      *
-     * @param  \Illuminate\Support\Collection  $questions
+     * @param  \Illuminate\Support\Collection<int, non-empty-array<string, mixed>>  $questions
      * @return array<int, array<string, mixed>>
      */
     private function filterQuestions($questions, string $searchText, string $statusFilter): array
@@ -129,7 +130,7 @@ class QuizController extends Controller
     /**
      * Get keyword counts based on category
      *
-     * @param  \Illuminate\Support\Collection  $questions
+     * @param  \Illuminate\Support\Collection<int, non-empty-array<string, mixed>>  $questions
      * @return array<string, int>
      */
     private function getKeywordCounts(string $category, $questions): array
@@ -223,7 +224,7 @@ class QuizController extends Controller
         $request->session()->put('current_question', $question);
         $request->session()->forget('quiz_result');
 
-        $viewModel = new \App\ViewModels\QuizViewModel($question);
+        $viewModel = new QuizViewModel($question);
 
         return view('quiz.quiz', $viewModel->toArray());
     }
@@ -243,7 +244,7 @@ class QuizController extends Controller
         $request->session()->put('current_question', $question);
         $request->session()->forget('quiz_result');
 
-        $viewModel = new \App\ViewModels\QuizViewModel($question);
+        $viewModel = new QuizViewModel($question);
 
         return view('quiz.quiz', $viewModel->toArray());
     }

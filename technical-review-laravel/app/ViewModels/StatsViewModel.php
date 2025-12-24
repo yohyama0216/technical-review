@@ -29,26 +29,8 @@ class StatsViewModel extends ViewModel
     /** @var array<int, array<string, mixed>> */
     public array $dailyHistory;
 
-    /** @var array<int, string> */
-    public array $chartLabels;
-
-    /** @var array<int, int> */
-    public array $chartCumulativeLearning;
-
-    /** @var array<int, int> */
-    public array $chartCumulativeCorrect;
-
-    /** @var array<int, int> */
-    public array $chartCumulativeIncorrect;
-
-    /** @var array<int, int> */
-    public array $chartDailyCorrect;
-
-    /** @var array<int, int> */
-    public array $chartDailyIncorrect;
-
-    /** @var array<int, int> */
-    public array $chartDailyLearning;
+    /** @var array<string, array<int, int|string>> */
+    public array $chartData;
 
     /** @var array<string, mixed>|null */
     public ?array $forecast;
@@ -70,6 +52,20 @@ class StatsViewModel extends ViewModel
         $this->pageTitle = '統計';
         $this->appName = '資格対策アプリ';
 
+        $this->setCumulativeStats($cumulativeStats, $totalQuestions);
+        $this->forecast = $forecast;
+        $this->targetDate = $targetDate;
+        $this->dailyHistory = $dailyHistory;
+        $this->prepareChartData($dailyHistory);
+    }
+
+    /**
+     * Set cumulative statistics
+     *
+     * @param  array<string, mixed>  $cumulativeStats
+     */
+    private function setCumulativeStats(array $cumulativeStats, int $totalQuestions): void
+    {
         $this->totalCorrect = $cumulativeStats['totalCorrect'];
         $this->totalIncorrect = $cumulativeStats['totalIncorrect'];
         $this->totalLearning = $cumulativeStats['totalLearning'];
@@ -77,28 +73,34 @@ class StatsViewModel extends ViewModel
         $this->answeredQuestionsCount = $cumulativeStats['answeredQuestionsCount'];
         $this->totalQuestions = $totalQuestions;
 
-        // 未回答問題数 = 総問題数 - 回答済み問題数（正解でも不正解でも回答した問題）
-        $answeredQuestionsCount = $cumulativeStats['answeredQuestionsCount'] ?? 0;
-        $this->unansweredQuestions = $totalQuestions - $answeredQuestionsCount;
+        $this->unansweredQuestions = $totalQuestions - $this->answeredQuestionsCount;
+        $this->completedPercentage = $this->calculatePercentage($this->completedQuestions, $totalQuestions);
+        $this->unansweredPercentage = $this->calculatePercentage($this->unansweredQuestions, $totalQuestions);
+    }
 
-        $this->completedPercentage = $totalQuestions > 0
-            ? (int) round(($cumulativeStats['completedQuestions'] / $totalQuestions) * 100)
-            : 0;
-        $this->unansweredPercentage = $totalQuestions > 0
-            ? (int) round(($this->unansweredQuestions / $totalQuestions) * 100)
-            : 0;
+    /**
+     * Calculate percentage
+     */
+    private function calculatePercentage(int $value, int $total): int
+    {
+        return $total > 0 ? (int) round(($value / $total) * 100) : 0;
+    }
 
-        $this->forecast = $forecast;
-        $this->targetDate = $targetDate;
-        $this->dailyHistory = $dailyHistory;
-
-        // Prepare chart data
-        $this->chartLabels = array_column($dailyHistory, 'date');
-        $this->chartCumulativeLearning = array_column($dailyHistory, 'cumulativeLearning');
-        $this->chartCumulativeCorrect = array_column($dailyHistory, 'cumulativeCorrect');
-        $this->chartCumulativeIncorrect = array_column($dailyHistory, 'cumulativeIncorrect');
-        $this->chartDailyCorrect = array_column($dailyHistory, 'dailyCorrect');
-        $this->chartDailyIncorrect = array_column($dailyHistory, 'dailyIncorrect');
-        $this->chartDailyLearning = array_column($dailyHistory, 'dailyLearning');
+    /**
+     * Prepare chart data from daily history
+     *
+     * @param  array<int, array<string, mixed>>  $dailyHistory
+     */
+    private function prepareChartData(array $dailyHistory): void
+    {
+        $this->chartData = [
+            'labels' => array_column($dailyHistory, 'date'),
+            'cumulativeLearning' => array_column($dailyHistory, 'cumulativeLearning'),
+            'cumulativeCorrect' => array_column($dailyHistory, 'cumulativeCorrect'),
+            'cumulativeIncorrect' => array_column($dailyHistory, 'cumulativeIncorrect'),
+            'dailyCorrect' => array_column($dailyHistory, 'dailyCorrect'),
+            'dailyIncorrect' => array_column($dailyHistory, 'dailyIncorrect'),
+            'dailyLearning' => array_column($dailyHistory, 'dailyLearning'),
+        ];
     }
 }

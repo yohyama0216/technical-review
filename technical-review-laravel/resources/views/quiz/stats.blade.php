@@ -212,15 +212,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script>
         // Chart data from PHP
-        const chartData = {
-            labels: @json($chartLabels),
-            cumulativeLearning: @json($chartCumulativeLearning),
-            cumulativeCorrect: @json($chartCumulativeCorrect),
-            cumulativeIncorrect: @json($chartCumulativeIncorrect),
-            dailyCorrect: @json($chartDailyCorrect),
-            dailyIncorrect: @json($chartDailyIncorrect),
-            dailyLearning: @json($chartDailyLearning)
-        };
+        const chartData = @json($chartData);
 
         // Initialize chart
         let statsChart = null;

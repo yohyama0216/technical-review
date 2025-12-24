@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
+use RuntimeException;
 
 class SettingsService
 {
@@ -47,7 +48,7 @@ class SettingsService
     {
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         if ($json === false) {
-            throw new \RuntimeException('Failed to encode settings data to JSON');
+            throw new RuntimeException('Failed to encode settings data to JSON');
         }
         Storage::put(self::SETTINGS_FILE, $json);
     }

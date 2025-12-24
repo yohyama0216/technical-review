@@ -11,7 +11,7 @@
             "completed": false
         },
         "2": {
-            "correctCount": 8,
+            "correctCount": 12,
             "incorrectCount": 0,
             "completed": true
         },
@@ -92,7 +92,7 @@
         },
         "8": {
             "correctCount": 0,
-            "incorrectCount": 1,
+            "incorrectCount": 2,
             "completed": false
         },
         "25": {
@@ -111,7 +111,7 @@
             "completed": false
         },
         "1": {
-            "correctCount": 14,
+            "correctCount": 22,
             "incorrectCount": 0,
             "completed": true
         },
@@ -144,6 +144,21 @@
             "correctCount": 0,
             "incorrectCount": 1,
             "completed": false
+        },
+        "34": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "74": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "50": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
         }
     },
     "dailyHistory": {
@@ -163,8 +178,8 @@
             "completed": 0
         },
         "2025-12-24": {
-            "correct": 22,
-            "incorrect": 8,
+            "correct": 34,
+            "incorrect": 12,
             "completed": 2
         }
     },

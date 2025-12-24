@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
+use RuntimeException;
 
 class StatisticsService
 {
@@ -96,7 +97,7 @@ class StatisticsService
     {
         $timestamp = strtotime("+{$estimatedDays} days");
         if ($timestamp === false) {
-            throw new \RuntimeException('Failed to calculate estimated date');
+            throw new RuntimeException('Failed to calculate estimated date');
         }
 
         return date('Y-m-d', $timestamp);
@@ -182,7 +183,7 @@ class StatisticsService
         $file = $this->getLearningLogFile();
         $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         if ($json === false) {
-            throw new \RuntimeException('Failed to encode statistics data to JSON');
+            throw new RuntimeException('Failed to encode statistics data to JSON');
         }
         Storage::put($file, $json);
     }
@@ -262,6 +263,25 @@ class StatisticsService
         $stats = $this->getStatistics();
         $questionStats = $stats['questionStats'] ?? [];
 
+        $counts = $this->calculateQuestionCounts($questionStats);
+
+        return [
+            'totalCorrect' => $counts['totalCorrect'],
+            'totalIncorrect' => $counts['totalIncorrect'],
+            'totalLearning' => $counts['totalCorrect'] + $counts['totalIncorrect'],
+            'completedQuestions' => $counts['completedCount'],
+            'answeredQuestionsCount' => $counts['answeredCount'],
+        ];
+    }
+
+    /**
+     * Calculate question counts from stats
+     *
+     * @param  array<int|string, array<string, mixed>>  $questionStats
+     * @return array<string, int>
+     */
+    private function calculateQuestionCounts(array $questionStats): array
+    {
         $totalCorrect = 0;
         $totalIncorrect = 0;
         $completedCount = 0;
@@ -271,12 +291,10 @@ class StatisticsService
             $totalCorrect += $stat['correctCount'] ?? 0;
             $totalIncorrect += $stat['incorrectCount'] ?? 0;
 
-            // 完了（正解した）問題数
             if ($stat['completed'] ?? false) {
                 $completedCount++;
             }
 
-            // 回答済み（正解でも不正解でも回答した）問題数
             if (($stat['correctCount'] ?? 0) > 0 || ($stat['incorrectCount'] ?? 0) > 0) {
                 $answeredCount++;
             }
@@ -285,9 +303,8 @@ class StatisticsService
         return [
             'totalCorrect' => $totalCorrect,
             'totalIncorrect' => $totalIncorrect,
-            'totalLearning' => $totalCorrect + $totalIncorrect, // 累計学習数（総回答数）
-            'completedQuestions' => $completedCount, // 1回以上正解した問題数
-            'answeredQuestionsCount' => $answeredCount, // 1回以上回答した問題数
+            'completedCount' => $completedCount,
+            'answeredCount' => $answeredCount,
         ];
     }
 
@@ -377,27 +394,54 @@ class StatisticsService
             return null;
         }
 
-        $totalCorrect = $this->calculateTotalCorrectCount($questionStats);
-        $requiredTotalCorrect = $totalQuestions * 3; // 3 correct answers per question
-        $remainingCorrectNeeded = $requiredTotalCorrect - $totalCorrect;
-
-        if ($remainingCorrectNeeded <= 0) {
+        $forecastData = $this->prepareForecastData($questionStats, $totalQuestions);
+        if ($forecastData['remainingCorrectNeeded'] <= 0) {
             return $this->buildCompletedForecast();
         }
 
         $recentStats = $this->calculateRecentLearningStats($dailyHistory);
-
         if ($recentStats['daysWithActivity'] === 0) {
             return null;
         }
 
-        $estimatedDays = ceil($remainingCorrectNeeded / $recentStats['averageDailyCorrect']);
+        return $this->buildForecastWithEstimation($forecastData, $recentStats);
+    }
+
+    /**
+     * Prepare forecast data
+     *
+     * @param  array<int|string, array<string, mixed>>  $questionStats
+     * @return array<string, int>
+     */
+    private function prepareForecastData(array $questionStats, int $totalQuestions): array
+    {
+        $totalCorrect = $this->calculateTotalCorrectCount($questionStats);
+        $requiredTotalCorrect = $totalQuestions * 3;
+        $remainingCorrectNeeded = $requiredTotalCorrect - $totalCorrect;
+
+        return [
+            'totalCorrect' => $totalCorrect,
+            'requiredTotalCorrect' => $requiredTotalCorrect,
+            'remainingCorrectNeeded' => $remainingCorrectNeeded,
+        ];
+    }
+
+    /**
+     * Build forecast with estimation
+     *
+     * @param  array<string, int>  $forecastData
+     * @param  array<string, mixed>  $recentStats
+     * @return array<string, mixed>
+     */
+    private function buildForecastWithEstimation(array $forecastData, array $recentStats): array
+    {
+        $estimatedDays = ceil($forecastData['remainingCorrectNeeded'] / $recentStats['averageDailyCorrect']);
         $estimatedDate = $this->calculateEstimatedDate($estimatedDays);
 
         return $this->buildForecastResult(
-            $remainingCorrectNeeded,
-            $requiredTotalCorrect,
-            $totalCorrect,
+            $forecastData['remainingCorrectNeeded'],
+            $forecastData['requiredTotalCorrect'],
+            $forecastData['totalCorrect'],
             $estimatedDays,
             $estimatedDate,
             $recentStats

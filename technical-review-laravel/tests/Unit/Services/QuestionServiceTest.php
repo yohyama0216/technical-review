@@ -9,6 +9,7 @@ class QuestionServiceTest extends TestCase
 {
     private QuestionService $questionService;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();

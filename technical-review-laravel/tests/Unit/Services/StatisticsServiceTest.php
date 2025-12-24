@@ -9,6 +9,7 @@ class StatisticsServiceTest extends TestCase
 {
     private StatisticsService $statisticsService;
 
+    #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
