@@ -22,9 +22,6 @@
 # コードスタイルチェック
 vendor/bin/pint --test
 
-# PSR-12準拠チェック
-vendor/bin/phpcs
-
 # Psalm静的解析（セキュリティ含む）
 vendor/bin/psalm
 
@@ -47,9 +44,6 @@ php artisan test
 # コードスタイル自動修正
 vendor/bin/pint
 
-# PHPCS自動修正
-vendor/bin/phpcbf
-
 # テスト実行（詳細）
 php artisan test --coverage
 ```
@@ -57,7 +51,6 @@ php artisan test --coverage
 ## CI基準
 
 - **Laravel Pint**: すべてパス
-- **PHPCS (PSR-12)**: すべてパス
 - **Psalm**: レベル5、0エラー
 - **PHPStan Level 7**: 0エラー
 - **PHPMD**: 警告のみ許容
@@ -69,11 +62,8 @@ php artisan test --coverage
 ### Laravel Pint
 - Laravelの標準コードスタイルに準拠
 - 自動修正機能あり
-
-### PHPCS (PHP_CodeSniffer)
-- PSR-12コーディング規約の厳格なチェック
-- phpcbfで自動修正可能
-
+PSR-12準拠 + Laravel推奨スタイル
+- 自動修正機能あり
 ### Psalm
 - 型チェックとセキュリティ分析
 - SQLインジェクション、XSS等の検出

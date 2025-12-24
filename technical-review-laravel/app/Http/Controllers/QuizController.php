@@ -36,7 +36,7 @@ class QuizController extends Controller
      */
     public function index(): View
     {
-        $viewModel = new IndexViewModel();
+        $viewModel = new IndexViewModel;
 
         return view('quiz.index', $viewModel->toArray());
     }

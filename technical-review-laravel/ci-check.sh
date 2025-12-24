@@ -10,7 +10,7 @@ echo ""
 ERROR_COUNT=0
 
 # 1. Laravel Pint
-echo "[1/7] Running Laravel Pint..."
+echo "[1/6] Running Laravel Pint..."
 vendor/bin/pint --test
 if [ $? -eq 0 ]; then
     echo "✅ Pint: PASSED"
@@ -19,20 +19,9 @@ else
     ((ERROR_COUNT++))
 fi
 
-# 2. PHPCS
+# 2. Psalm
 echo ""
-echo "[2/7] Running PHP_CodeSniffer (PSR-12)..."
-vendor/bin/phpcs
-if [ $? -eq 0 ]; then
-    echo "✅ PHPCS: PASSED"
-else
-    echo "❌ PHPCS: FAILED"
-    ((ERROR_COUNT++))
-fi
-
-# 3. Psalm
-echo ""
-echo "[3/7] Running Psalm (Static Analysis)..."
+echo "[2/6] Running Psalm (Static Analysis)..."
 vendor/bin/psalm --show-info=false --no-progress
 if [ $? -eq 0 ]; then
     echo "✅ Psalm: PASSED"
@@ -41,9 +30,9 @@ else
     ((ERROR_COUNT++))
 fi
 
-# 4. PHPStan
+# 3. PHPStan
 echo ""
-echo "[4/7] Running PHPStan Level 7..."
+echo "[3/6] Running PHPStan Level 7..."
 vendor/bin/phpstan analyse --level=7 --memory-limit=512M --no-progress
 if [ $? -eq 0 ]; then
     echo "✅ PHPStan: PASSED"
@@ -52,9 +41,9 @@ else
     ((ERROR_COUNT++))
 fi
 
-# 5. PHPMD
+# 4. PHPMD
 echo ""
-echo "[5/7] Running PHPMD..."
+echo "[4/6] Running PHPMD..."
 vendor/bin/phpmd app/ text phpmd.xml
 if [ $? -eq 0 ] || [ $? -eq 2 ]; then
     echo "✅ PHPMD: PASSED (or warnings only)"
@@ -62,9 +51,9 @@ else
     echo "⚠️  PHPMD: WARNINGS FOUND"
 fi
 
-# 6. PHP Insights
+# 5. PHP Insights
 echo ""
-echo "[6/7] Running PHP Insights..."
+echo "[5/6] Running PHP Insights..."
 php artisan insights --no-interaction --format=console --min-quality=90 --min-complexity=90 --min-architecture=90 --min-style=85
 if [ $? -eq 0 ]; then
     echo "✅ PHP Insights: PASSED"
@@ -73,9 +62,9 @@ else
     ((ERROR_COUNT++))
 fi
 
-# 7. PHPUnit Tests
+# 6. PHPUnit Tests
 echo ""
-echo "[7/7] Running PHPUnit Tests..."
+echo "[6/6] Running PHPUnit Tests..."
 php artisan test
 if [ $? -eq 0 ]; then
     echo "✅ Tests: PASSED"

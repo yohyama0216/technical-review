@@ -13,7 +13,7 @@ class ViewModelTest extends TestCase
 {
     public function test_index_view_model_to_array(): void
     {
-        $viewModel = new IndexViewModel();
+        $viewModel = new IndexViewModel;
         $array = $viewModel->toArray();
 
         $this->assertIsArray($array);
