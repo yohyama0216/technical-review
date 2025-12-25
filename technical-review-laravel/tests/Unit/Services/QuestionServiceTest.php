@@ -68,4 +68,57 @@ class QuestionServiceTest extends TestCase
         $counts = $this->questionService->getKeywordCounts($keywords);
         $this->assertIsArray($counts);
     }
+
+    public function test_get_major_categories_returns_unique_list(): void
+    {
+        $categories = $this->questionService->getMajorCategories();
+        $this->assertIsArray($categories);
+        $this->assertEquals($categories, array_unique($categories));
+    }
+
+    public function test_get_middle_categories_returns_array(): void
+    {
+        $majorCategories = $this->questionService->getMajorCategories();
+        if (! empty($majorCategories)) {
+            $middleCategories = $this->questionService->getMiddleCategories($majorCategories[0]);
+            $this->assertIsArray($middleCategories);
+        } else {
+            $this->markTestSkipped('No major categories available');
+        }
+    }
+
+    public function test_get_minor_categories_returns_array(): void
+    {
+        $majorCategories = $this->questionService->getMajorCategories();
+        if (! empty($majorCategories)) {
+            $middleCategories = $this->questionService->getMiddleCategories($majorCategories[0]);
+            if (! empty($middleCategories)) {
+                $minorCategories = $this->questionService->getMinorCategories($majorCategories[0], $middleCategories[0]);
+                $this->assertIsArray($minorCategories);
+            } else {
+                $this->markTestSkipped('No middle categories available');
+            }
+        } else {
+            $this->markTestSkipped('No major categories available');
+        }
+    }
+
+    public function test_get_question_by_id_returns_null_for_invalid_id(): void
+    {
+        $question = $this->questionService->getQuestionById(999999);
+        $this->assertNull($question);
+    }
+
+    public function test_get_total_question_count_is_non_negative(): void
+    {
+        $count = $this->questionService->getTotalQuestionCount();
+        $this->assertGreaterThanOrEqual(0, $count);
+    }
+
+    public function test_get_keyword_counts_with_empty_array(): void
+    {
+        $counts = $this->questionService->getKeywordCounts([]);
+        $this->assertIsArray($counts);
+        $this->assertEmpty($counts);
+    }
 }
