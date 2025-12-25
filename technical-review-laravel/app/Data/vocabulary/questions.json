@@ -5353,5 +5353,5150 @@
         "majorCategory": "Vocabulary",
         "middleCategory": "TOEIC 900+",
         "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 358,
+        "question": "password",
+        "answers": [
+            "パスワード",
+            "追加する",
+            "バックアップする",
+            "変換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "passwordは「パスワード」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 359,
+        "question": "username",
+        "answers": [
+            "ユーザー名",
+            "復元する",
+            "移動する",
+            "検索する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "usernameは「ユーザー名」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 360,
+        "question": "login",
+        "answers": [
+            "ログイン",
+            "置換する",
+            "フォーマットする",
+            "インポートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "loginは「ログイン」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 361,
+        "question": "logout",
+        "answers": [
+            "ログアウト",
+            "置換する",
+            "移動する",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "logoutは「ログアウト」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 362,
+        "question": "email",
+        "answers": [
+            "電子メール",
+            "バックアップする",
+            "検索する",
+            "フィルターする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "emailは「電子メール」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 363,
+        "question": "attachment",
+        "answers": [
+            "添付ファイル",
+            "フォーマットする",
+            "ビルドする",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "attachmentは「添付ファイル」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 364,
+        "question": "folder",
+        "answers": [
+            "フォルダ",
+            "プッシュする",
+            "フォーマットする",
+            "ビルドする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "folderは「フォルダ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 365,
+        "question": "document",
+        "answers": [
+            "文書",
+            "移動する",
+            "フォーマットする",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "documentは「文書」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 366,
+        "question": "spreadsheet",
+        "answers": [
+            "表計算",
+            "フィルターする",
+            "フォーマットする",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "spreadsheetは「表計算」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 367,
+        "question": "presentation",
+        "answers": [
+            "プレゼンテーション",
+            "プッシュする",
+            "置換する",
+            "ソートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "presentationは「プレゼンテーション」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 368,
+        "question": "template",
+        "answers": [
+            "テンプレート",
+            "フィルターする",
+            "移動する",
+            "フォーマットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "templateは「テンプレート」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 369,
+        "question": "format",
+        "answers": [
+            "形式",
+            "非表示する",
+            "復元する",
+            "プルする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "formatは「形式」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 370,
+        "question": "print",
+        "answers": [
+            "印刷する",
+            "テストする",
+            "削除する",
+            "ソートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "printは「印刷する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 371,
+        "question": "scan",
+        "answers": [
+            "スキャンする",
+            "削除する",
+            "フィルターする",
+            "追加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "scanは「スキャンする」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 372,
+        "question": "copy",
+        "answers": [
+            "コピーする",
+            "置換する",
+            "修正する",
+            "表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "copyは「コピーする」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 373,
+        "question": "paste",
+        "answers": [
+            "貼り付ける",
+            "複製する",
+            "エクスポートする",
+            "復元する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "pasteは「貼り付ける」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 374,
+        "question": "cut",
+        "answers": [
+            "切り取る",
+            "ソートする",
+            "追加する",
+            "プッシュする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "cutは「切り取る」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 375,
+        "question": "undo",
+        "answers": [
+            "元に戻す",
+            "変換する",
+            "移動する",
+            "ソートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "undoは「元に戻す」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 376,
+        "question": "redo",
+        "answers": [
+            "やり直す",
+            "追加する",
+            "修正する",
+            "バックアップする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "redoは「やり直す」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 377,
+        "question": "save",
+        "answers": [
+            "保存する",
+            "表示する",
+            "追加する",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "saveは「保存する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 378,
+        "question": "open",
+        "answers": [
+            "開く",
+            "変換する",
+            "検索する",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "openは「開く」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 379,
+        "question": "close",
+        "answers": [
+            "閉じる",
+            "エクスポートする",
+            "フォーマットする",
+            "検索する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "closeは「閉じる」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 380,
+        "question": "delete",
+        "answers": [
+            "削除する",
+            "インポートする",
+            "複製する",
+            "保存する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "deleteは「削除する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 381,
+        "question": "create",
+        "answers": [
+            "作成する",
+            "復元する",
+            "追加する",
+            "表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "createは「作成する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 382,
+        "question": "edit",
+        "answers": [
+            "編集する",
+            "表示する",
+            "複製する",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "editは「編集する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 383,
+        "question": "view",
+        "answers": [
+            "表示する",
+            "プッシュする",
+            "複製する",
+            "バックアップする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "viewは「表示する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 384,
+        "question": "search",
+        "answers": [
+            "検索する",
+            "復元する",
+            "表示する",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "searchは「検索する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 385,
+        "question": "replace",
+        "answers": [
+            "置換する",
+            "プルする",
+            "表示する",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "replaceは「置換する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 386,
+        "question": "font",
+        "answers": [
+            "フォント",
+            "マージする",
+            "非表示する",
+            "修正する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "fontは「フォント」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 387,
+        "question": "size",
+        "answers": [
+            "サイズ",
+            "ソートする",
+            "復元する",
+            "変換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "sizeは「サイズ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 388,
+        "question": "color",
+        "answers": [
+            "色",
+            "置換する",
+            "マージする",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "colorは「色」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 389,
+        "question": "bold",
+        "answers": [
+            "太字",
+            "追加する",
+            "修正する",
+            "フォーマットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "boldは「太字」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 390,
+        "question": "italic",
+        "answers": [
+            "斜体",
+            "複製する",
+            "プルする",
+            "変換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "italicは「斜体」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 391,
+        "question": "underline",
+        "answers": [
+            "下線",
+            "フォーマットする",
+            "プルする",
+            "表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "underlineは「下線」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 392,
+        "question": "align",
+        "answers": [
+            "整列する",
+            "非表示する",
+            "リセットする",
+            "デプロイする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "alignは「整列する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 393,
+        "question": "indent",
+        "answers": [
+            "字下げ",
+            "表示する",
+            "削除する",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "indentは「字下げ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 394,
+        "question": "bullet",
+        "answers": [
+            "箇条書き",
+            "表示する",
+            "検索する",
+            "ビルドする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "bulletは「箇条書き」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 395,
+        "question": "number",
+        "answers": [
+            "番号",
+            "フィルターする",
+            "削除する",
+            "デプロイする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "numberは「番号」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 396,
+        "question": "table",
+        "answers": [
+            "表",
+            "表示する",
+            "バックアップする",
+            "テストする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "tableは「表」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 397,
+        "question": "chart",
+        "answers": [
+            "グラフ",
+            "移動する",
+            "置換する",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "chartは「グラフ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 398,
+        "question": "image",
+        "answers": [
+            "画像",
+            "デプロイする",
+            "追加する",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "imageは「画像」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 399,
+        "question": "video",
+        "answers": [
+            "動画",
+            "非表示する",
+            "変換する",
+            "デプロイする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "videoは「動画」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 400,
+        "question": "audio",
+        "answers": [
+            "音声",
+            "削除する",
+            "検索する",
+            "表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "audioは「音声」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 401,
+        "question": "link",
+        "answers": [
+            "リンク",
+            "エクスポートする",
+            "表示する",
+            "置換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "linkは「リンク」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 402,
+        "question": "bookmark",
+        "answers": [
+            "ブックマーク",
+            "バックアップする",
+            "削除する",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "bookmarkは「ブックマーク」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 403,
+        "question": "refresh",
+        "answers": [
+            "更新する",
+            "復元する",
+            "削除する",
+            "ソートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "refreshは「更新する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 404,
+        "question": "reload",
+        "answers": [
+            "再読み込みする",
+            "表示する",
+            "保存する",
+            "ソートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "reloadは「再読み込みする」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 405,
+        "question": "browser",
+        "answers": [
+            "ブラウザ",
+            "削除する",
+            "修正する",
+            "検索する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "browserは「ブラウザ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 406,
+        "question": "tab",
+        "answers": [
+            "タブ",
+            "修正する",
+            "保存する",
+            "フィルターする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "tabは「タブ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 407,
+        "question": "available",
+        "answers": [
+            "利用可能な",
+            "増加する",
+            "改善する",
+            "分割する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "availableは「利用可能な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 408,
+        "question": "arrange",
+        "answers": [
+            "手配する",
+            "強化する",
+            "更新する",
+            "変更する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "arrangeは「手配する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 409,
+        "question": "request",
+        "answers": [
+            "要求する",
+            "確認する",
+            "保留する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "requestは「要求する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 410,
+        "question": "response",
+        "answers": [
+            "返答",
+            "保留する",
+            "記録する",
+            "分割する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "responseは「返答」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 411,
+        "question": "matter",
+        "answers": [
+            "問題",
+            "収集する",
+            "却下する",
+            "強化する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "matterは「問題」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 412,
+        "question": "concern",
+        "answers": [
+            "懸念",
+            "分析する",
+            "統合する",
+            "受理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "concernは「懸念」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 413,
+        "question": "issue",
+        "answers": [
+            "課題",
+            "削除する",
+            "維持する",
+            "削減する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "issueは「課題」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 414,
+        "question": "problem",
+        "answers": [
+            "問題",
+            "配布する",
+            "拒否する",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "problemは「問題」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 415,
+        "question": "solution",
+        "answers": [
+            "解決策",
+            "延期する",
+            "削除する",
+            "促進する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "solutionは「解決策」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 416,
+        "question": "option",
+        "answers": [
+            "選択肢",
+            "保留する",
+            "更新する",
+            "報告する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "optionは「選択肢」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 417,
+        "question": "alternative",
+        "answers": [
+            "代替案",
+            "提出する",
+            "収集する",
+            "保留する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "alternativeは「代替案」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 418,
+        "question": "decision",
+        "answers": [
+            "決定",
+            "調整する",
+            "分割する",
+            "記録する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "decisionは「決定」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 419,
+        "question": "choice",
+        "answers": [
+            "選択",
+            "転送する",
+            "保留する",
+            "拒否する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "choiceは「選択」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 420,
+        "question": "select",
+        "answers": [
+            "選ぶ",
+            "転送する",
+            "削減する",
+            "維持する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "selectは「選ぶ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 421,
+        "question": "prefer",
+        "answers": [
+            "好む",
+            "維持する",
+            "統合する",
+            "確認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "preferは「好む」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 422,
+        "question": "recommend",
+        "answers": [
+            "推薦する",
+            "変更する",
+            "配布する",
+            "整理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "recommendは「推薦する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 423,
+        "question": "suggest",
+        "answers": [
+            "提案する",
+            "統合する",
+            "確認する",
+            "保留する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "suggestは「提案する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 424,
+        "question": "advise",
+        "answers": [
+            "助言する",
+            "分析する",
+            "改善する",
+            "評価する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "adviseは「助言する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 425,
+        "question": "inform",
+        "answers": [
+            "知らせる",
+            "受理する",
+            "拒否する",
+            "分割する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "informは「知らせる」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 426,
+        "question": "notify",
+        "answers": [
+            "通知する",
+            "記録する",
+            "強化する",
+            "延期する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "notifyは「通知する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 427,
+        "question": "remind",
+        "answers": [
+            "思い出させる",
+            "統合する",
+            "促進する",
+            "整理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "remindは「思い出させる」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 428,
+        "question": "announce",
+        "answers": [
+            "発表する",
+            "改善する",
+            "配布する",
+            "統合する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "announceは「発表する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 429,
+        "question": "declare",
+        "answers": [
+            "宣言する",
+            "転送する",
+            "整理する",
+            "変更する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "declareは「宣言する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 430,
+        "question": "state",
+        "answers": [
+            "述べる",
+            "削減する",
+            "報告する",
+            "配布する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "stateは「述べる」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 431,
+        "question": "mention",
+        "answers": [
+            "言及する",
+            "変更する",
+            "分析する",
+            "確認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "mentionは「言及する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 432,
+        "question": "refer",
+        "answers": [
+            "参照する",
+            "報告する",
+            "分析する",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "referは「参照する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 433,
+        "question": "indicate",
+        "answers": [
+            "示す",
+            "評価する",
+            "削除する",
+            "収集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "indicateは「示す」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 434,
+        "question": "demonstrate",
+        "answers": [
+            "実証する",
+            "延期する",
+            "転送する",
+            "提出する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "demonstrateは「実証する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 435,
+        "question": "prove",
+        "answers": [
+            "証明する",
+            "受理する",
+            "整理する",
+            "増加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "proveは「証明する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 436,
+        "question": "show",
+        "answers": [
+            "示す",
+            "増加する",
+            "削減する",
+            "編集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "showは「示す」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 437,
+        "question": "display",
+        "answers": [
+            "表示する",
+            "編集する",
+            "調整する",
+            "提出する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "displayは「表示する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 438,
+        "question": "present",
+        "answers": [
+            "提示する",
+            "延期する",
+            "改善する",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "presentは「提示する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 439,
+        "question": "submit",
+        "answers": [
+            "提出する",
+            "分析する",
+            "強化する",
+            "編集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "submitは「提出する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 440,
+        "question": "provide",
+        "answers": [
+            "提供する",
+            "増加する",
+            "収集する",
+            "更新する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "provideは「提供する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 441,
+        "question": "offer",
+        "answers": [
+            "提供する",
+            "維持する",
+            "提出する",
+            "受理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "offerは「提供する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 442,
+        "question": "supply",
+        "answers": [
+            "供給する",
+            "改善する",
+            "延期する",
+            "報告する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "supplyは「供給する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 443,
+        "question": "send",
+        "answers": [
+            "送る",
+            "分割する",
+            "更新する",
+            "評価する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "sendは「送る」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 444,
+        "question": "forward",
+        "answers": [
+            "転送する",
+            "変更する",
+            "調整する",
+            "評価する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "forwardは「転送する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 445,
+        "question": "attach",
+        "answers": [
+            "添付する",
+            "変更する",
+            "維持する",
+            "報告する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "attachは「添付する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 446,
+        "question": "include",
+        "answers": [
+            "含める",
+            "促進する",
+            "編集する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "includeは「含める」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 447,
+        "question": "contain",
+        "answers": [
+            "含む",
+            "保留する",
+            "分割する",
+            "収集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "containは「含む」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 448,
+        "question": "consist",
+        "answers": [
+            "構成される",
+            "削減する",
+            "分割する",
+            "統合する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "consistは「構成される」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 449,
+        "question": "comprise",
+        "answers": [
+            "構成する",
+            "編集する",
+            "確認する",
+            "承認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "compriseは「構成する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 450,
+        "question": "involve",
+        "answers": [
+            "関係する",
+            "分割する",
+            "維持する",
+            "収集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "involveは「関係する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 451,
+        "question": "require",
+        "answers": [
+            "必要とする",
+            "受理する",
+            "削除する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "requireは「必要とする」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 452,
+        "question": "need",
+        "answers": [
+            "必要とする",
+            "増加する",
+            "配布する",
+            "延期する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "needは「必要とする」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 453,
+        "question": "demand",
+        "answers": [
+            "要求する",
+            "承認する",
+            "統合する",
+            "維持する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "demandは「要求する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 454,
+        "question": "expect",
+        "answers": [
+            "期待する",
+            "更新する",
+            "受理する",
+            "促進する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "expectは「期待する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 600+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 455,
+        "question": "software",
+        "answers": [
+            "ソフトウェア",
+            "エクスポートする",
+            "フィルターする",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "softwareは「ソフトウェア」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 456,
+        "question": "hardware",
+        "answers": [
+            "ハードウェア",
+            "移動する",
+            "フィルターする",
+            "ビルドする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "hardwareは「ハードウェア」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 457,
+        "question": "application",
+        "answers": [
+            "アプリケーション",
+            "ソートする",
+            "マージする",
+            "追加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "applicationは「アプリケーション」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 458,
+        "question": "operating",
+        "answers": [
+            "操作",
+            "ソートする",
+            "復元する",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "operatingは「操作」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 459,
+        "question": "system",
+        "answers": [
+            "システム",
+            "フォーマットする",
+            "保存する",
+            "ビルドする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "systemは「システム」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 460,
+        "question": "platform",
+        "answers": [
+            "プラットフォーム",
+            "移動する",
+            "非表示する",
+            "表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "platformは「プラットフォーム」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 461,
+        "question": "device",
+        "answers": [
+            "デバイス",
+            "バックアップする",
+            "フィルターする",
+            "検索する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "deviceは「デバイス」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 462,
+        "question": "component",
+        "answers": [
+            "コンポーネント",
+            "移動する",
+            "複製する",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "componentは「コンポーネント」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 463,
+        "question": "feature",
+        "answers": [
+            "機能",
+            "復元する",
+            "マージする",
+            "フィルターする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "featureは「機能」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 464,
+        "question": "capability",
+        "answers": [
+            "能力",
+            "ビルドする",
+            "保存する",
+            "プルする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "capabilityは「能力」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 465,
+        "question": "performance",
+        "answers": [
+            "性能",
+            "検索する",
+            "復元する",
+            "プルする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "performanceは「性能」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 466,
+        "question": "efficiency",
+        "answers": [
+            "効率",
+            "非表示する",
+            "ビルドする",
+            "変換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "efficiencyは「効率」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 467,
+        "question": "productivity",
+        "answers": [
+            "生産性",
+            "マージする",
+            "テストする",
+            "インポートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "productivityは「生産性」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 468,
+        "question": "workflow",
+        "answers": [
+            "ワークフロー",
+            "バックアップする",
+            "検索する",
+            "フォーマットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "workflowは「ワークフロー」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 469,
+        "question": "automation",
+        "answers": [
+            "自動化",
+            "追加する",
+            "移動する",
+            "テストする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "automationは「自動化」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 470,
+        "question": "integration",
+        "answers": [
+            "統合",
+            "変換する",
+            "表示する",
+            "エクスポートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "integrationは「統合」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 471,
+        "question": "compatibility",
+        "answers": [
+            "互換性",
+            "削除する",
+            "追加する",
+            "マージする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "compatibilityは「互換性」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 472,
+        "question": "configuration",
+        "answers": [
+            "構成",
+            "バックアップする",
+            "デプロイする",
+            "保存する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "configurationは「構成」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 473,
+        "question": "customization",
+        "answers": [
+            "カスタマイズ",
+            "プルする",
+            "エクスポートする",
+            "非表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "customizationは「カスタマイズ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 474,
+        "question": "implementation",
+        "answers": [
+            "実装",
+            "リセットする",
+            "フィルターする",
+            "表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "implementationは「実装」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 475,
+        "question": "deployment",
+        "answers": [
+            "展開",
+            "追加する",
+            "非表示する",
+            "ソートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "deploymentは「展開」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 476,
+        "question": "maintenance",
+        "answers": [
+            "保守",
+            "プッシュする",
+            "エクスポートする",
+            "置換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "maintenanceは「保守」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 477,
+        "question": "upgrade",
+        "answers": [
+            "アップグレード",
+            "修正する",
+            "複製する",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "upgradeは「アップグレード」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 478,
+        "question": "patch",
+        "answers": [
+            "パッチ",
+            "マージする",
+            "表示する",
+            "ビルドする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "patchは「パッチ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 479,
+        "question": "release",
+        "answers": [
+            "リリース",
+            "削除する",
+            "検索する",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "releaseは「リリース」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 480,
+        "question": "launch",
+        "answers": [
+            "開始",
+            "リセットする",
+            "デプロイする",
+            "インポートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "launchは「開始」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 481,
+        "question": "rollout",
+        "answers": [
+            "展開",
+            "変換する",
+            "複製する",
+            "修正する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "rolloutは「展開」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 482,
+        "question": "testing",
+        "answers": [
+            "テスト",
+            "デプロイする",
+            "フォーマットする",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "testingは「テスト」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 483,
+        "question": "verification",
+        "answers": [
+            "検証",
+            "バックアップする",
+            "デプロイする",
+            "保存する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "verificationは「検証」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 484,
+        "question": "validation",
+        "answers": [
+            "妥当性確認",
+            "エクスポートする",
+            "フォーマットする",
+            "プルする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "validationは「妥当性確認」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 485,
+        "question": "debugging",
+        "answers": [
+            "デバッグ",
+            "インポートする",
+            "修正する",
+            "バックアップする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "debuggingは「デバッグ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 486,
+        "question": "troubleshooting",
+        "answers": [
+            "トラブルシューティング",
+            "プッシュする",
+            "変換する",
+            "フォーマットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "troubleshootingは「トラブルシューティング」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 487,
+        "question": "diagnosis",
+        "answers": [
+            "診断",
+            "保存する",
+            "復元する",
+            "修正する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "diagnosisは「診断」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 488,
+        "question": "resolution",
+        "answers": [
+            "解決",
+            "追加する",
+            "プッシュする",
+            "エクスポートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "resolutionは「解決」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 489,
+        "question": "recovery",
+        "answers": [
+            "復旧",
+            "ソートする",
+            "プッシュする",
+            "追加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "recoveryは「復旧」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 490,
+        "question": "restoration",
+        "answers": [
+            "復元",
+            "追加する",
+            "テストする",
+            "復元する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "restorationは「復元」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 491,
+        "question": "archiving",
+        "answers": [
+            "アーカイブ",
+            "変換する",
+            "保存する",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "archivingは「アーカイブ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 492,
+        "question": "migration",
+        "answers": [
+            "移行",
+            "検索する",
+            "複製する",
+            "復元する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "migrationは「移行」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 493,
+        "question": "conversion",
+        "answers": [
+            "変換",
+            "リセットする",
+            "検索する",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "conversionは「変換」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 494,
+        "question": "encryption",
+        "answers": [
+            "暗号化",
+            "追加する",
+            "変換する",
+            "非表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "encryptionは「暗号化」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 495,
+        "question": "decryption",
+        "answers": [
+            "復号化",
+            "バックアップする",
+            "修正する",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "decryptionは「復号化」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 496,
+        "question": "authentication",
+        "answers": [
+            "認証",
+            "プッシュする",
+            "デプロイする",
+            "変換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "authenticationは「認証」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 497,
+        "question": "authorization",
+        "answers": [
+            "認可",
+            "リセットする",
+            "デプロイする",
+            "変換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "authorizationは「認可」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 498,
+        "question": "permission",
+        "answers": [
+            "許可",
+            "置換する",
+            "複製する",
+            "検索する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "permissionは「許可」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 499,
+        "question": "access",
+        "answers": [
+            "アクセス",
+            "復元する",
+            "変換する",
+            "マージする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "accessは「アクセス」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 500,
+        "question": "security",
+        "answers": [
+            "セキュリティ",
+            "フィルターする",
+            "エクスポートする",
+            "修正する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "securityは「セキュリティ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 501,
+        "question": "vulnerability",
+        "answers": [
+            "脆弱性",
+            "表示する",
+            "ビルドする",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "vulnerabilityは「脆弱性」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 502,
+        "question": "threat",
+        "answers": [
+            "脅威",
+            "プルする",
+            "修正する",
+            "表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "threatは「脅威」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 503,
+        "question": "protection",
+        "answers": [
+            "保護",
+            "テストする",
+            "削除する",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "protectionは「保護」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 504,
+        "question": "antivirus",
+        "answers": [
+            "アンチウイルス",
+            "移動する",
+            "修正する",
+            "置換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "antivirusは「アンチウイルス」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 505,
+        "question": "significant",
+        "answers": [
+            "重要な",
+            "更新する",
+            "削除する",
+            "調整する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "significantは「重要な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 506,
+        "question": "substantial",
+        "answers": [
+            "かなりの",
+            "拒否する",
+            "編集する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "substantialは「かなりの」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 507,
+        "question": "considerable",
+        "answers": [
+            "相当な",
+            "分析する",
+            "分割する",
+            "測定する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "considerableは「相当な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 508,
+        "question": "essential",
+        "answers": [
+            "不可欠な",
+            "強化する",
+            "提出する",
+            "記録する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "essentialは「不可欠な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 509,
+        "question": "crucial",
+        "answers": [
+            "重要な",
+            "整理する",
+            "保留する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "crucialは「重要な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 510,
+        "question": "vital",
+        "answers": [
+            "極めて重要な",
+            "報告する",
+            "分析する",
+            "促進する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "vitalは「極めて重要な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 511,
+        "question": "critical",
+        "answers": [
+            "決定的な",
+            "収集する",
+            "測定する",
+            "拒否する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "criticalは「決定的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 512,
+        "question": "fundamental",
+        "answers": [
+            "基本的な",
+            "確認する",
+            "提出する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "fundamentalは「基本的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 513,
+        "question": "primary",
+        "answers": [
+            "主要な",
+            "却下する",
+            "延期する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "primaryは「主要な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 514,
+        "question": "principal",
+        "answers": [
+            "主要な",
+            "転送する",
+            "収集する",
+            "編集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "principalは「主要な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 515,
+        "question": "major",
+        "answers": [
+            "主要な",
+            "調整する",
+            "確認する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "majorは「主要な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 516,
+        "question": "minor",
+        "answers": [
+            "小さな",
+            "転送する",
+            "報告する",
+            "統合する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "minorは「小さな」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 517,
+        "question": "secondary",
+        "answers": [
+            "二次的な",
+            "分割する",
+            "測定する",
+            "促進する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "secondaryは「二次的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 518,
+        "question": "additional",
+        "answers": [
+            "追加の",
+            "拒否する",
+            "整理する",
+            "承認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "additionalは「追加の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 519,
+        "question": "supplementary",
+        "answers": [
+            "補足的な",
+            "変更する",
+            "削除する",
+            "増加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "supplementaryは「補足的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 520,
+        "question": "complementary",
+        "answers": [
+            "補完的な",
+            "増加する",
+            "却下する",
+            "測定する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "complementaryは「補完的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 521,
+        "question": "optional",
+        "answers": [
+            "任意の",
+            "測定する",
+            "評価する",
+            "増加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "optionalは「任意の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 522,
+        "question": "mandatory",
+        "answers": [
+            "義務的な",
+            "削除する",
+            "確認する",
+            "記録する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "mandatoryは「義務的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 523,
+        "question": "compulsory",
+        "answers": [
+            "強制的な",
+            "報告する",
+            "提出する",
+            "編集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "compulsoryは「強制的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 524,
+        "question": "required",
+        "answers": [
+            "必須の",
+            "変更する",
+            "記録する",
+            "保留する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "requiredは「必須の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 525,
+        "question": "necessary",
+        "answers": [
+            "必要な",
+            "調整する",
+            "承認する",
+            "拒否する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "necessaryは「必要な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 526,
+        "question": "indispensable",
+        "answers": [
+            "欠かせない",
+            "削除する",
+            "維持する",
+            "提出する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "indispensableは「欠かせない」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 527,
+        "question": "valuable",
+        "answers": [
+            "価値のある",
+            "分析する",
+            "記録する",
+            "提出する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "valuableは「価値のある」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 528,
+        "question": "beneficial",
+        "answers": [
+            "有益な",
+            "分割する",
+            "分析する",
+            "受理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "beneficialは「有益な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 529,
+        "question": "advantageous",
+        "answers": [
+            "有利な",
+            "承認する",
+            "促進する",
+            "削減する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "advantageousは「有利な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 530,
+        "question": "favorable",
+        "answers": [
+            "好ましい",
+            "削除する",
+            "維持する",
+            "更新する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "favorableは「好ましい」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 531,
+        "question": "positive",
+        "answers": [
+            "肯定的な",
+            "統合する",
+            "測定する",
+            "維持する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "positiveは「肯定的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 532,
+        "question": "negative",
+        "answers": [
+            "否定的な",
+            "却下する",
+            "調整する",
+            "保留する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "negativeは「否定的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 533,
+        "question": "adverse",
+        "answers": [
+            "不利な",
+            "分析する",
+            "収集する",
+            "報告する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "adverseは「不利な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 534,
+        "question": "unfavorable",
+        "answers": [
+            "不利な",
+            "整理する",
+            "報告する",
+            "保留する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "unfavorableは「不利な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 535,
+        "question": "detrimental",
+        "answers": [
+            "有害な",
+            "収集する",
+            "提出する",
+            "承認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "detrimentalは「有害な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 536,
+        "question": "harmful",
+        "answers": [
+            "有害な",
+            "延期する",
+            "測定する",
+            "促進する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "harmfulは「有害な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 537,
+        "question": "damaging",
+        "answers": [
+            "損害を与える",
+            "増加する",
+            "分析する",
+            "記録する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "damagingは「損害を与える」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 538,
+        "question": "destructive",
+        "answers": [
+            "破壊的な",
+            "分析する",
+            "配布する",
+            "統合する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "destructiveは「破壊的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 539,
+        "question": "productive",
+        "answers": [
+            "生産的な",
+            "改善する",
+            "整理する",
+            "拒否する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "productiveは「生産的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 540,
+        "question": "effective",
+        "answers": [
+            "効果的な",
+            "増加する",
+            "評価する",
+            "承認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "effectiveは「効果的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 541,
+        "question": "efficient",
+        "answers": [
+            "効率的な",
+            "受理する",
+            "統合する",
+            "変更する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "efficientは「効率的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 542,
+        "question": "successful",
+        "answers": [
+            "成功した",
+            "保留する",
+            "拒否する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "successfulは「成功した」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 543,
+        "question": "profitable",
+        "answers": [
+            "収益性のある",
+            "更新する",
+            "促進する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "profitableは「収益性のある」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 544,
+        "question": "viable",
+        "answers": [
+            "実行可能な",
+            "増加する",
+            "分割する",
+            "整理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "viableは「実行可能な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 545,
+        "question": "feasible",
+        "answers": [
+            "実現可能な",
+            "確認する",
+            "変更する",
+            "提出する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "feasibleは「実現可能な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 546,
+        "question": "practical",
+        "answers": [
+            "実用的な",
+            "保留する",
+            "拒否する",
+            "更新する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "practicalは「実用的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 547,
+        "question": "realistic",
+        "answers": [
+            "現実的な",
+            "強化する",
+            "拒否する",
+            "調整する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "realisticは「現実的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 548,
+        "question": "reasonable",
+        "answers": [
+            "合理的な",
+            "測定する",
+            "削除する",
+            "受理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "reasonableは「合理的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 549,
+        "question": "appropriate",
+        "answers": [
+            "適切な",
+            "承認する",
+            "改善する",
+            "受理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "appropriateは「適切な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 550,
+        "question": "suitable",
+        "answers": [
+            "適した",
+            "改善する",
+            "保留する",
+            "収集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "suitableは「適した」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 551,
+        "question": "adequate",
+        "answers": [
+            "十分な",
+            "削減する",
+            "改善する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "adequateは「十分な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 552,
+        "question": "sufficient",
+        "answers": [
+            "十分な",
+            "統合する",
+            "保留する",
+            "促進する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "sufficientは「十分な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 553,
+        "question": "insufficient",
+        "answers": [
+            "不十分な",
+            "分析する",
+            "延期する",
+            "受理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "insufficientは「不十分な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 554,
+        "question": "infrastructure",
+        "answers": [
+            "インフラストラクチャ",
+            "マージする",
+            "デプロイする",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "infrastructureは「インフラストラクチャ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 555,
+        "question": "architecture",
+        "answers": [
+            "アーキテクチャ",
+            "ソートする",
+            "置換する",
+            "マージする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "architectureは「アーキテクチャ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 556,
+        "question": "methodology",
+        "answers": [
+            "方法論",
+            "変換する",
+            "非表示する",
+            "ビルドする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "methodologyは「方法論」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 557,
+        "question": "paradigm",
+        "answers": [
+            "パラダイム",
+            "プルする",
+            "保存する",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "paradigmは「パラダイム」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 558,
+        "question": "gateway",
+        "answers": [
+            "ゲートウェイ",
+            "表示する",
+            "プッシュする",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "gatewayは「ゲートウェイ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 559,
+        "question": "proxy",
+        "answers": [
+            "プロキシ",
+            "復元する",
+            "エクスポートする",
+            "表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "proxyは「プロキシ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 560,
+        "question": "buffer",
+        "answers": [
+            "バッファ",
+            "プッシュする",
+            "追加する",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "bufferは「バッファ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 561,
+        "question": "queue",
+        "answers": [
+            "キュー",
+            "ソートする",
+            "復元する",
+            "バックアップする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "queueは「キュー」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 562,
+        "question": "stack",
+        "answers": [
+            "スタック",
+            "削除する",
+            "フォーマットする",
+            "プルする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "stackは「スタック」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 563,
+        "question": "heap",
+        "answers": [
+            "ヒープ",
+            "表示する",
+            "修正する",
+            "デプロイする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "heapは「ヒープ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 564,
+        "question": "pointer",
+        "answers": [
+            "ポインタ",
+            "ビルドする",
+            "表示する",
+            "プッシュする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "pointerは「ポインタ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 565,
+        "question": "reference",
+        "answers": [
+            "参照",
+            "エクスポートする",
+            "追加する",
+            "ソートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "referenceは「参照」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 566,
+        "question": "instance",
+        "answers": [
+            "インスタンス",
+            "ビルドする",
+            "追加する",
+            "変換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "instanceは「インスタンス」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 567,
+        "question": "object",
+        "answers": [
+            "オブジェクト",
+            "プルする",
+            "バックアップする",
+            "エクスポートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "objectは「オブジェクト」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 568,
+        "question": "class",
+        "answers": [
+            "クラス",
+            "リセットする",
+            "プッシュする",
+            "復元する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "classは「クラス」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 569,
+        "question": "method",
+        "answers": [
+            "メソッド",
+            "追加する",
+            "フォーマットする",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "methodは「メソッド」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 570,
+        "question": "property",
+        "answers": [
+            "プロパティ",
+            "バックアップする",
+            "移動する",
+            "フォーマットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "propertyは「プロパティ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 571,
+        "question": "attribute",
+        "answers": [
+            "属性",
+            "複製する",
+            "フィルターする",
+            "ビルドする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "attributeは「属性」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 572,
+        "question": "value",
+        "answers": [
+            "値",
+            "復元する",
+            "検索する",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "valueは「値」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 573,
+        "question": "constant",
+        "answers": [
+            "定数",
+            "プッシュする",
+            "変換する",
+            "インポートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "constantは「定数」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 574,
+        "question": "expression",
+        "answers": [
+            "式",
+            "修正する",
+            "移動する",
+            "復元する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "expressionは「式」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 575,
+        "question": "statement",
+        "answers": [
+            "文",
+            "ビルドする",
+            "複製する",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "statementは「文」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 576,
+        "question": "declaration",
+        "answers": [
+            "宣言",
+            "ソートする",
+            "インポートする",
+            "移動する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "declarationは「宣言」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 577,
+        "question": "definition",
+        "answers": [
+            "定義",
+            "プッシュする",
+            "デプロイする",
+            "フィルターする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "definitionは「定義」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 578,
+        "question": "specification",
+        "answers": [
+            "仕様",
+            "デプロイする",
+            "テストする",
+            "修正する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "specificationは「仕様」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 579,
+        "question": "documentation",
+        "answers": [
+            "ドキュメント",
+            "マージする",
+            "複製する",
+            "保存する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "documentationは「ドキュメント」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 580,
+        "question": "annotation",
+        "answers": [
+            "注釈",
+            "修正する",
+            "表示する",
+            "追加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "annotationは「注釈」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 581,
+        "question": "comment",
+        "answers": [
+            "コメント",
+            "削除する",
+            "マージする",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "commentは「コメント」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 582,
+        "question": "description",
+        "answers": [
+            "説明",
+            "検索する",
+            "表示する",
+            "プルする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "descriptionは「説明」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 583,
+        "question": "instruction",
+        "answers": [
+            "命令",
+            "復元する",
+            "プルする",
+            "保存する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "instructionは「命令」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 584,
+        "question": "operation",
+        "answers": [
+            "操作",
+            "複製する",
+            "修正する",
+            "置換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "operationは「操作」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 585,
+        "question": "procedure",
+        "answers": [
+            "手順",
+            "テストする",
+            "ソートする",
+            "非表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "procedureは「手順」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 586,
+        "question": "routine",
+        "answers": [
+            "ルーチン",
+            "削除する",
+            "複製する",
+            "ビルドする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "routineは「ルーチン」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 587,
+        "question": "subroutine",
+        "answers": [
+            "サブルーチン",
+            "置換する",
+            "追加する",
+            "プルする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "subroutineは「サブルーチン」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 588,
+        "question": "callback",
+        "answers": [
+            "コールバック",
+            "非表示する",
+            "保存する",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "callbackは「コールバック」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 589,
+        "question": "event",
+        "answers": [
+            "イベント",
+            "プルする",
+            "非表示する",
+            "置換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "eventは「イベント」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 590,
+        "question": "handler",
+        "answers": [
+            "ハンドラ",
+            "ビルドする",
+            "複製する",
+            "表示する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "handlerは「ハンドラ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 591,
+        "question": "listener",
+        "answers": [
+            "リスナー",
+            "マージする",
+            "検索する",
+            "複製する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "listenerは「リスナー」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 592,
+        "question": "trigger",
+        "answers": [
+            "トリガー",
+            "エクスポートする",
+            "移動する",
+            "インポートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "triggerは「トリガー」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 593,
+        "question": "action",
+        "answers": [
+            "アクション",
+            "プッシュする",
+            "追加する",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "actionは「アクション」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 594,
+        "question": "message",
+        "answers": [
+            "メッセージ",
+            "追加する",
+            "マージする",
+            "フォーマットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "messageは「メッセージ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 595,
+        "question": "notification",
+        "answers": [
+            "通知",
+            "検索する",
+            "保存する",
+            "プッシュする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "notificationは「通知」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 596,
+        "question": "alert",
+        "answers": [
+            "アラート",
+            "復元する",
+            "フィルターする",
+            "追加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "alertは「アラート」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 597,
+        "question": "warning",
+        "answers": [
+            "警告",
+            "非表示する",
+            "表示する",
+            "ビルドする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "warningは「警告」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 598,
+        "question": "error",
+        "answers": [
+            "エラー",
+            "保存する",
+            "バックアップする",
+            "テストする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "errorは「エラー」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 599,
+        "question": "exception",
+        "answers": [
+            "例外",
+            "非表示する",
+            "表示する",
+            "フィルターする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "exceptionは「例外」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 600,
+        "question": "fault",
+        "answers": [
+            "障害",
+            "ソートする",
+            "フィルターする",
+            "インポートする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "faultは「障害」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 601,
+        "question": "failure",
+        "answers": [
+            "失敗",
+            "デプロイする",
+            "エクスポートする",
+            "リセットする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "failureは「失敗」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 602,
+        "question": "crash",
+        "answers": [
+            "クラッシュ",
+            "フィルターする",
+            "プッシュする",
+            "修正する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "crashは「クラッシュ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 603,
+        "question": "bug",
+        "answers": [
+            "バグ",
+            "修正する",
+            "マージする",
+            "置換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "bugは「バグ」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 604,
+        "question": "defect",
+        "answers": [
+            "欠陥",
+            "検索する",
+            "変換する",
+            "置換する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "defectは「欠陥」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 605,
+        "question": "illustrate",
+        "answers": [
+            "説明する",
+            "分析する",
+            "収集する",
+            "改善する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "illustrateは「説明する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 606,
+        "question": "exemplify",
+        "answers": [
+            "例証する",
+            "更新する",
+            "配布する",
+            "提出する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "exemplifyは「例証する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 607,
+        "question": "clarify",
+        "answers": [
+            "明確にする",
+            "収集する",
+            "報告する",
+            "承認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "clarifyは「明確にする」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 608,
+        "question": "specify",
+        "answers": [
+            "明示する",
+            "削除する",
+            "促進する",
+            "保留する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "specifyは「明示する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 609,
+        "question": "identify",
+        "answers": [
+            "特定する",
+            "調整する",
+            "更新する",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "identifyは「特定する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 610,
+        "question": "distinguish",
+        "answers": [
+            "区別する",
+            "転送する",
+            "統合する",
+            "承認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "distinguishは「区別する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 611,
+        "question": "differentiate",
+        "answers": [
+            "差別化する",
+            "保留する",
+            "削除する",
+            "更新する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "differentiateは「差別化する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 612,
+        "question": "compare",
+        "answers": [
+            "比較する",
+            "更新する",
+            "改善する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "compareは「比較する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 613,
+        "question": "contrast",
+        "answers": [
+            "対比する",
+            "更新する",
+            "強化する",
+            "記録する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "contrastは「対比する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 614,
+        "question": "correlate",
+        "answers": [
+            "相関させる",
+            "記録する",
+            "維持する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "correlateは「相関させる」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 615,
+        "question": "associate",
+        "answers": [
+            "関連付ける",
+            "削減する",
+            "維持する",
+            "改善する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "associateは「関連付ける」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 616,
+        "question": "categorize",
+        "answers": [
+            "分類する",
+            "更新する",
+            "促進する",
+            "収集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "categorizeは「分類する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 617,
+        "question": "classify",
+        "answers": [
+            "分類する",
+            "改善する",
+            "増加する",
+            "配布する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "classifyは「分類する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 618,
+        "question": "organize",
+        "answers": [
+            "組織する",
+            "促進する",
+            "改善する",
+            "調整する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "organizeは「組織する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 619,
+        "question": "structure",
+        "answers": [
+            "構造化する",
+            "更新する",
+            "測定する",
+            "強化する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "structureは「構造化する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 620,
+        "question": "standardize",
+        "answers": [
+            "標準化する",
+            "報告する",
+            "記録する",
+            "統合する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "standardizeは「標準化する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 621,
+        "question": "normalize",
+        "answers": [
+            "正規化する",
+            "確認する",
+            "拒否する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "normalizeは「正規化する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 622,
+        "question": "regulate",
+        "answers": [
+            "規制する",
+            "報告する",
+            "編集する",
+            "変更する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "regulateは「規制する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 623,
+        "question": "control",
+        "answers": [
+            "管理する",
+            "保留する",
+            "改善する",
+            "分析する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "controlは「管理する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 624,
+        "question": "oversee",
+        "answers": [
+            "監督する",
+            "改善する",
+            "削除する",
+            "確認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "overseeは「監督する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 625,
+        "question": "manage",
+        "answers": [
+            "管理する",
+            "承認する",
+            "却下する",
+            "報告する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "manageは「管理する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 626,
+        "question": "administer",
+        "answers": [
+            "管理する",
+            "延期する",
+            "削除する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "administerは「管理する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 627,
+        "question": "operate",
+        "answers": [
+            "運営する",
+            "配布する",
+            "確認する",
+            "提出する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "operateは「運営する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 628,
+        "question": "conduct",
+        "answers": [
+            "実施する",
+            "転送する",
+            "配布する",
+            "拒否する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "conductは「実施する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 629,
+        "question": "perform",
+        "answers": [
+            "実行する",
+            "評価する",
+            "分割する",
+            "確認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "performは「実行する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 630,
+        "question": "achieve",
+        "answers": [
+            "達成する",
+            "改善する",
+            "分析する",
+            "承認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "achieveは「達成する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 631,
+        "question": "attain",
+        "answers": [
+            "達成する",
+            "測定する",
+            "評価する",
+            "変更する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "attainは「達成する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 632,
+        "question": "realize",
+        "answers": [
+            "実現する",
+            "促進する",
+            "更新する",
+            "提出する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "realizeは「実現する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 633,
+        "question": "fulfill",
+        "answers": [
+            "履行する",
+            "削除する",
+            "分析する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "fulfillは「履行する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 634,
+        "question": "complete",
+        "answers": [
+            "完了する",
+            "拒否する",
+            "測定する",
+            "提出する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "completeは「完了する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 635,
+        "question": "finish",
+        "answers": [
+            "終える",
+            "転送する",
+            "拒否する",
+            "増加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "finishは「終える」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 636,
+        "question": "conclude",
+        "answers": [
+            "終了する",
+            "更新する",
+            "収集する",
+            "拒否する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "concludeは「終了する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 637,
+        "question": "cease",
+        "answers": [
+            "中止する",
+            "提出する",
+            "更新する",
+            "削減する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "ceaseは「中止する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 638,
+        "question": "discontinue",
+        "answers": [
+            "中止する",
+            "転送する",
+            "分析する",
+            "収集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "discontinueは「中止する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 639,
+        "question": "suspend",
+        "answers": [
+            "停止する",
+            "分析する",
+            "収集する",
+            "分割する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "suspendは「停止する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 640,
+        "question": "interrupt",
+        "answers": [
+            "中断する",
+            "評価する",
+            "転送する",
+            "記録する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "interruptは「中断する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 641,
+        "question": "delay",
+        "answers": [
+            "遅らせる",
+            "改善する",
+            "承認する",
+            "強化する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "delayは「遅らせる」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 642,
+        "question": "accelerate",
+        "answers": [
+            "加速する",
+            "統合する",
+            "強化する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "accelerateは「加速する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 643,
+        "question": "expedite",
+        "answers": [
+            "迅速化する",
+            "変更する",
+            "記録する",
+            "改善する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "expediteは「迅速化する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 644,
+        "question": "enable",
+        "answers": [
+            "可能にする",
+            "調整する",
+            "更新する",
+            "削減する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "enableは「可能にする」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 645,
+        "question": "permit",
+        "answers": [
+            "許可する",
+            "分析する",
+            "更新する",
+            "編集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "permitは「許可する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 646,
+        "question": "allow",
+        "answers": [
+            "許可する",
+            "強化する",
+            "延期する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "allowは「許可する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 647,
+        "question": "ambiguous",
+        "answers": [
+            "曖昧な",
+            "編集する",
+            "分析する",
+            "変更する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "ambiguousは「曖昧な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 648,
+        "question": "explicit",
+        "answers": [
+            "明示的な",
+            "確認する",
+            "評価する",
+            "整理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "explicitは「明示的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 649,
+        "question": "implicit",
+        "answers": [
+            "暗黙の",
+            "確認する",
+            "変更する",
+            "配布する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "implicitは「暗黙の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 650,
+        "question": "inherent",
+        "answers": [
+            "固有の",
+            "却下する",
+            "変更する",
+            "編集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "inherentは「固有の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 651,
+        "question": "intrinsic",
+        "answers": [
+            "本質的な",
+            "更新する",
+            "増加する",
+            "削減する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "intrinsicは「本質的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 652,
+        "question": "extrinsic",
+        "answers": [
+            "外的な",
+            "統合する",
+            "転送する",
+            "収集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "extrinsicは「外的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 653,
+        "question": "extensive",
+        "answers": [
+            "広範な",
+            "分割する",
+            "保留する",
+            "増加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "extensiveは「広範な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 654,
+        "question": "thorough",
+        "answers": [
+            "徹底的な",
+            "提出する",
+            "転送する",
+            "評価する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "thoroughは「徹底的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 655,
+        "question": "meticulous",
+        "answers": [
+            "細心の",
+            "調整する",
+            "整理する",
+            "編集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "meticulousは「細心の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 656,
+        "question": "rigorous",
+        "answers": [
+            "厳格な",
+            "促進する",
+            "測定する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "rigorousは「厳格な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 657,
+        "question": "precise",
+        "answers": [
+            "正確な",
+            "転送する",
+            "増加する",
+            "更新する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "preciseは「正確な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 658,
+        "question": "accurate",
+        "answers": [
+            "正確な",
+            "測定する",
+            "削除する",
+            "配布する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "accurateは「正確な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 659,
+        "question": "exact",
+        "answers": [
+            "正確な",
+            "分析する",
+            "延期する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "exactは「正確な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 660,
+        "question": "approximate",
+        "answers": [
+            "おおよその",
+            "保留する",
+            "分割する",
+            "削減する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "approximateは「おおよその」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 661,
+        "question": "preliminary",
+        "answers": [
+            "予備的な",
+            "延期する",
+            "増加する",
+            "受理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "preliminaryは「予備的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 662,
+        "question": "provisional",
+        "answers": [
+            "仮の",
+            "統合する",
+            "確認する",
+            "維持する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "provisionalは「仮の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 663,
+        "question": "temporary",
+        "answers": [
+            "一時的な",
+            "転送する",
+            "維持する",
+            "編集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "temporaryは「一時的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 664,
+        "question": "permanent",
+        "answers": [
+            "永久的な",
+            "整理する",
+            "分割する",
+            "増加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "permanentは「永久的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 665,
+        "question": "perpetual",
+        "answers": [
+            "永続的な",
+            "収集する",
+            "記録する",
+            "却下する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "perpetualは「永続的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 666,
+        "question": "continuous",
+        "answers": [
+            "継続的な",
+            "維持する",
+            "編集する",
+            "延期する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "continuousは「継続的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 667,
+        "question": "intermittent",
+        "answers": [
+            "断続的な",
+            "報告する",
+            "記録する",
+            "維持する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "intermittentは「断続的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 668,
+        "question": "sporadic",
+        "answers": [
+            "散発的な",
+            "転送する",
+            "改善する",
+            "分析する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "sporadicは「散発的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 669,
+        "question": "frequent",
+        "answers": [
+            "頻繁な",
+            "分析する",
+            "更新する",
+            "受理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "frequentは「頻繁な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 670,
+        "question": "occasional",
+        "answers": [
+            "時折の",
+            "転送する",
+            "却下する",
+            "促進する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "occasionalは「時折の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 671,
+        "question": "rare",
+        "answers": [
+            "まれな",
+            "削減する",
+            "削除する",
+            "保留する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "rareは「まれな」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 672,
+        "question": "unprecedented",
+        "answers": [
+            "前例のない",
+            "転送する",
+            "報告する",
+            "変更する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "unprecedentedは「前例のない」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 673,
+        "question": "exceptional",
+        "answers": [
+            "例外的な",
+            "拒否する",
+            "保留する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "exceptionalは「例外的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 674,
+        "question": "remarkable",
+        "answers": [
+            "注目すべき",
+            "編集する",
+            "配布する",
+            "報告する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "remarkableは「注目すべき」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 675,
+        "question": "notable",
+        "answers": [
+            "注目に値する",
+            "測定する",
+            "削除する",
+            "拒否する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "notableは「注目に値する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 676,
+        "question": "trivial",
+        "answers": [
+            "些細な",
+            "却下する",
+            "収集する",
+            "分割する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "trivialは「些細な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 677,
+        "question": "negligible",
+        "answers": [
+            "無視できる",
+            "編集する",
+            "測定する",
+            "配布する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "negligibleは「無視できる」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 678,
+        "question": "marginal",
+        "answers": [
+            "わずかな",
+            "収集する",
+            "記録する",
+            "変更する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "marginalは「わずかな」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 679,
+        "question": "incremental",
+        "answers": [
+            "漸増的な",
+            "強化する",
+            "更新する",
+            "増加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "incrementalは「漸増的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 680,
+        "question": "gradual",
+        "answers": [
+            "段階的な",
+            "配布する",
+            "削除する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "gradualは「段階的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 681,
+        "question": "abrupt",
+        "answers": [
+            "突然の",
+            "削減する",
+            "記録する",
+            "受理する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "abruptは「突然の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 682,
+        "question": "immediate",
+        "answers": [
+            "即座の",
+            "維持する",
+            "収集する",
+            "転送する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "immediateは「即座の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 683,
+        "question": "instantaneous",
+        "answers": [
+            "瞬時の",
+            "削除する",
+            "確認する",
+            "承認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "instantaneousは「瞬時の」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 684,
+        "question": "prompt",
+        "answers": [
+            "迅速な",
+            "報告する",
+            "配布する",
+            "確認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "promptは「迅速な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 685,
+        "question": "swift",
+        "answers": [
+            "素早い",
+            "収集する",
+            "分割する",
+            "承認する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "swiftは「素早い」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 686,
+        "question": "rapid",
+        "answers": [
+            "急速な",
+            "拒否する",
+            "削減する",
+            "促進する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "rapidは「急速な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 687,
+        "question": "slow",
+        "answers": [
+            "遅い",
+            "提出する",
+            "配布する",
+            "調整する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "slowは「遅い」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 688,
+        "question": "deliberate",
+        "answers": [
+            "慎重な",
+            "報告する",
+            "促進する",
+            "削減する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "deliberateは「慎重な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 689,
+        "question": "cautious",
+        "answers": [
+            "用心深い",
+            "分割する",
+            "削減する",
+            "保留する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "cautiousは「用心深い」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 690,
+        "question": "prudent",
+        "answers": [
+            "賢明な",
+            "配布する",
+            "収集する",
+            "変更する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "prudentは「賢明な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 691,
+        "question": "judicious",
+        "answers": [
+            "賢明な",
+            "整理する",
+            "保留する",
+            "削減する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "judiciousは「賢明な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 692,
+        "question": "rational",
+        "answers": [
+            "合理的な",
+            "転送する",
+            "促進する",
+            "削除する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "rationalは「合理的な」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 693,
+        "question": "malware",
+        "answers": [
+            "マルウェア",
+            "エクスポートする",
+            "変換する",
+            "プルする"
+        ],
+        "correctAnswer": 0,
+        "explanation": "malwareは「マルウェア」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 700+",
+        "minorCategory": "IT用語"
+    },
+    {
+        "id": 694,
+        "question": "prohibit",
+        "answers": [
+            "禁止する",
+            "編集する",
+            "拒否する",
+            "促進する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "prohibitは「禁止する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 695,
+        "question": "restrict",
+        "answers": [
+            "制限する",
+            "承認する",
+            "改善する",
+            "保留する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "restrictは「制限する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 696,
+        "question": "limit",
+        "answers": [
+            "制限する",
+            "却下する",
+            "改善する",
+            "増加する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "limitは「制限する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 697,
+        "question": "constrain",
+        "answers": [
+            "制約する",
+            "確認する",
+            "変更する",
+            "延期する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "constrainは「制約する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 698,
+        "question": "confine",
+        "answers": [
+            "限定する",
+            "更新する",
+            "承認する",
+            "編集する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "confineは「限定する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 699,
+        "question": "bound",
+        "answers": [
+            "制限する",
+            "却下する",
+            "削除する",
+            "削減する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "boundは「制限する」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 800+",
+        "minorCategory": "ビジネス一般"
+    },
+    {
+        "id": 700,
+        "question": "coherent",
+        "answers": [
+            "首尾一貫した",
+            "保留する",
+            "調整する",
+            "拒否する"
+        ],
+        "correctAnswer": 0,
+        "explanation": "coherentは「首尾一貫した」という意味です。",
+        "majorCategory": "Vocabulary",
+        "middleCategory": "TOEIC 900+",
+        "minorCategory": "ビジネス一般"
     }
 ]
