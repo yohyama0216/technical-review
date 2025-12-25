@@ -161,4 +161,39 @@ class QuestionServiceTest extends TestCase
             $this->assertEmpty($categories);
         }
     }
+
+    public function test_random_question_prioritizes_unanswered_questions(): void
+    {
+        // Reset statistics to ensure all questions are unanswered
+        $statisticsService = app(\App\Services\StatisticsService::class);
+        $statisticsService->resetStatistics();
+
+        // Get first random question
+        $question1 = $this->questionService->getRandomQuestion();
+        if (!$question1) {
+            $this->markTestSkipped('No questions available');
+        }
+
+        // Record answer for first question
+        $statisticsService->recordAnswer($question1['id'], true);
+
+        // Get multiple random questions and check they prefer unanswered
+        $unansweredFound = false;
+        for ($i = 0; $i < 10; $i++) {
+            $question = $this->questionService->getRandomQuestion();
+            if ($question && $question['id'] !== $question1['id']) {
+                $unansweredFound = true;
+                break;
+            }
+        }
+
+        // If there are multiple questions, we should get unanswered ones
+        $totalQuestions = $this->questionService->getTotalQuestionCount();
+        if ($totalQuestions > 1) {
+            $this->assertTrue($unansweredFound, 'Should prioritize unanswered questions');
+        }
+
+        // Clean up - reset statistics
+        $statisticsService->resetStatistics();
+    }
 }

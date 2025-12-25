@@ -220,6 +220,9 @@ class QuizController extends Controller
             return redirect()->route('quiz.index')->with('error', '問題が見つかりません');
         }
 
+        // Shuffle answers
+        $question = $this->shuffleAnswers($question);
+
         // Store question in session
         $request->session()->put('current_question', $question);
         $request->session()->forget('quiz_result');
@@ -239,6 +242,9 @@ class QuizController extends Controller
         if (! $question) {
             return redirect()->route('quiz.question-list')->with('error', '問題が見つかりません');
         }
+
+        // Shuffle answers
+        $question = $this->shuffleAnswers($question);
 
         // Store question in session
         $request->session()->put('current_question', $question);
@@ -261,14 +267,14 @@ class QuizController extends Controller
         }
 
         $userAnswer = (int) $request->input('answer');
-        $isCorrect = $userAnswer === $currentQuestion['correctAnswer'];
+        $isCorrect = $userAnswer === $currentQuestion['correct'];
 
         // Record the answer in learningLog.json
         $this->statisticsService->recordAnswer($currentQuestion['id'], $isCorrect);
 
         return response()->json([
             'isCorrect' => $isCorrect,
-            'correctAnswer' => $currentQuestion['correctAnswer'],
+            'correctAnswer' => $currentQuestion['correct'],
             'explanation' => $currentQuestion['explanation'] ?? '',
             'answers' => $currentQuestion['answers'],
         ]);
@@ -285,6 +291,9 @@ class QuizController extends Controller
             return response()->json(['error' => '問題が見つかりません'], 404);
         }
 
+        // Shuffle answers
+        $nextQuestion = $this->shuffleAnswers($nextQuestion);
+
         $request->session()->put('current_question', $nextQuestion);
 
         return response()->json([
@@ -300,5 +309,38 @@ class QuizController extends Controller
         $this->statisticsService->resetStatistics();
 
         return response()->json(['message' => '統計データをリセットしました']);
+    }
+
+    /**
+     * Shuffle answers array and update correct answer index
+     *
+     * @param  array<string, mixed>  $question
+     * @return array<string, mixed>
+     */
+    private function shuffleAnswers(array $question): array
+    {
+        $answers = $question['answers'];
+        // Support both 'correct' and 'correctAnswer' keys
+        $correctAnswer = $question['correct'] ?? $question['correctAnswer'] ?? 0;
+
+        // Create array with indices
+        $indices = range(0, count($answers) - 1);
+        shuffle($indices);
+
+        // Shuffle answers
+        $shuffledAnswers = [];
+        foreach ($indices as $index) {
+            $shuffledAnswers[] = $answers[$index];
+        }
+
+        // Find new correct answer index
+        $newCorrectIndex = array_search($correctAnswer, $indices);
+
+        $question['answers'] = $shuffledAnswers;
+        $question['correct'] = $newCorrectIndex;
+        // Remove old correctAnswer key if it exists
+        unset($question['correctAnswer']);
+
+        return $question;
     }
 }

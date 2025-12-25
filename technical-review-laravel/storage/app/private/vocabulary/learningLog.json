@@ -1,7 +1,7 @@
 {
     "questionStats": {
         "1": {
-            "correctCount": 3,
+            "correctCount": 4,
             "incorrectCount": 0,
             "completed": true
         },
@@ -19,6 +19,141 @@
             "correctCount": 2,
             "incorrectCount": 0,
             "completed": false
+        },
+        "14": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "4": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "83": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "33": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "221": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "24": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "662": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "661": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "657": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "500": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "257": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "144": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "111": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "679": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "215": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "449": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "451": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "318": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "673": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "611": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "609": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "273": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "53": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "137": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "681": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "683": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "327": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
         }
     },
     "dailyHistory": {
@@ -26,8 +161,13 @@
             "correct": 7,
             "incorrect": 0,
             "completed": 1
+        },
+        "2025-12-25": {
+            "correct": 24,
+            "incorrect": 4,
+            "completed": 1
         }
     },
-    "targetDate": null,
+    "targetDate": "2026-01-10",
     "currentCategory": "technical"
 }

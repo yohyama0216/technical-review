@@ -76,7 +76,6 @@ class QuestionService
     {
         return array_map(function ($question, $index) {
             $question['id'] = $index + 1;
-            $question['correctAnswer'] = $question['correct'] ?? 0;
 
             return $question;
         }, $questions, array_keys($questions));
@@ -190,6 +189,24 @@ class QuestionService
             return null;
         }
 
+        // Get statistics to prioritize unanswered questions
+        $stats = $this->statisticsService->getStatistics();
+        $questionStats = $stats['questionStats'] ?? [];
+
+        // Separate unanswered and answered questions
+        $unansweredQuestions = $filtered->filter(function ($question) use ($questionStats) {
+            $questionId = $question['id'];
+            return !isset($questionStats[$questionId]) || 
+                   ($questionStats[$questionId]['correctCount'] == 0 && 
+                    $questionStats[$questionId]['incorrectCount'] == 0);
+        });
+
+        // Prioritize unanswered questions
+        if ($unansweredQuestions->isNotEmpty()) {
+            return $unansweredQuestions->random();
+        }
+
+        // If all questions have been answered, return any random question
         return $filtered->random();
     }
 
