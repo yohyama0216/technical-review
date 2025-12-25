@@ -72,7 +72,7 @@ class StatisticsServiceTest extends TestCase
     {
         $this->statisticsService->recordAnswer(1, true);
         $stats = $this->statisticsService->getQuestionStats(1);
-        
+
         $this->assertIsArray($stats);
         $this->assertArrayHasKey('correctCount', $stats);
         $this->assertArrayHasKey('incorrectCount', $stats);
@@ -105,7 +105,7 @@ class StatisticsServiceTest extends TestCase
     {
         $questionId = 54321;
         $this->statisticsService->recordAnswer($questionId, false);
-        
+
         $stats = $this->statisticsService->getQuestionStats($questionId);
         $this->assertNotNull($stats);
         $this->assertGreaterThan(0, $stats['incorrectCount']);
@@ -115,7 +115,7 @@ class StatisticsServiceTest extends TestCase
     {
         // Reset stats to ensure no history
         $this->statisticsService->resetStatistics();
-        
+
         $forecast = $this->statisticsService->getCompletionForecast(100);
         $this->assertNull($forecast);
     }
@@ -124,7 +124,7 @@ class StatisticsServiceTest extends TestCase
     {
         $this->statisticsService->recordAnswer(1, true);
         $this->statisticsService->resetStatistics();
-        
+
         $stats = $this->statisticsService->getStatistics();
         $this->assertEmpty($stats['questionStats']);
         $this->assertEmpty($stats['dailyHistory']);
@@ -133,7 +133,7 @@ class StatisticsServiceTest extends TestCase
     public function test_get_statistics_has_required_structure(): void
     {
         $stats = $this->statisticsService->getStatistics();
-        
+
         $this->assertArrayHasKey('questionStats', $stats);
         $this->assertArrayHasKey('dailyHistory', $stats);
         $this->assertIsArray($stats['questionStats']);
@@ -143,7 +143,7 @@ class StatisticsServiceTest extends TestCase
     public function test_get_cumulative_stats_has_all_fields(): void
     {
         $stats = $this->statisticsService->getCumulativeStats();
-        
+
         $this->assertArrayHasKey('totalCorrect', $stats);
         $this->assertArrayHasKey('totalIncorrect', $stats);
         $this->assertArrayHasKey('totalLearning', $stats);
@@ -154,13 +154,13 @@ class StatisticsServiceTest extends TestCase
     public function test_record_multiple_answers_for_same_question(): void
     {
         $questionId = 99;
-        
+
         $this->statisticsService->recordAnswer($questionId, false);
         $this->statisticsService->recordAnswer($questionId, true);
         $this->statisticsService->recordAnswer($questionId, true);
-        
+
         $stats = $this->statisticsService->getQuestionStats($questionId);
-        
+
         $this->assertNotNull($stats);
         $this->assertEquals(2, $stats['correctCount']);
         $this->assertEquals(1, $stats['incorrectCount']);
@@ -169,12 +169,12 @@ class StatisticsServiceTest extends TestCase
     public function test_get_daily_history_returns_chronological_order(): void
     {
         $history = $this->statisticsService->getDailyHistoryWithCumulative();
-        
+
         if (count($history) > 1) {
             $dates = array_column($history, 'date');
             $sortedDates = $dates;
             sort($sortedDates);
-            
+
             $this->assertEquals($sortedDates, $dates);
         } else {
             $this->assertTrue(true);
@@ -187,9 +187,9 @@ class StatisticsServiceTest extends TestCase
         for ($i = 1; $i <= 5; $i++) {
             $this->statisticsService->recordAnswer($i, true);
         }
-        
+
         $forecast = $this->statisticsService->getCompletionForecast(100);
-        
+
         if ($forecast !== null) {
             $this->assertArrayHasKey('isCompleted', $forecast);
             $this->assertArrayHasKey('remainingCorrect', $forecast);
@@ -204,7 +204,7 @@ class StatisticsServiceTest extends TestCase
     {
         $targetDate = '2026-01-01';
         $this->statisticsService->setTargetDate($targetDate);
-        
+
         $retrievedDate = $this->statisticsService->getTargetDate();
         $this->assertEquals($targetDate, $retrievedDate);
     }

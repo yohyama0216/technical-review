@@ -132,7 +132,7 @@ class QuestionServiceTest extends TestCase
     {
         $question1 = $this->questionService->getRandomQuestion();
         $question2 = $this->questionService->getRandomQuestion();
-        
+
         // May return null if no questions, both should be same type
         $this->assertEquals(gettype($question1), gettype($question2));
     }
@@ -154,7 +154,7 @@ class QuestionServiceTest extends TestCase
     {
         $questions = $this->questionService->getAllQuestions();
         $categories = $this->questionService->getMajorCategories();
-        
+
         if ($questions->isNotEmpty()) {
             $this->assertNotEmpty($categories);
         } else {

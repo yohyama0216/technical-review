@@ -98,14 +98,14 @@ class ViewModelTest extends TestCase
 
     public function test_index_view_model_has_correct_page_title(): void
     {
-        $viewModel = new IndexViewModel();
+        $viewModel = new IndexViewModel;
         $this->assertEquals('ホーム', $viewModel->pageTitle);
         $this->assertEquals('資格対策アプリ', $viewModel->appName);
     }
 
     public function test_question_list_view_model_with_empty_data(): void
     {
-        $viewModel = new QuestionListViewModel();
+        $viewModel = new QuestionListViewModel;
         $array = $viewModel->toArray();
 
         $this->assertEmpty($array['questions']);
@@ -176,10 +176,10 @@ class ViewModelTest extends TestCase
     public function test_all_view_models_have_common_properties(): void
     {
         $viewModels = [
-            new IndexViewModel(),
-            new QuestionListViewModel(),
-            new QuizViewModel(),
-            new SettingsViewModel(),
+            new IndexViewModel,
+            new QuestionListViewModel,
+            new QuizViewModel,
+            new SettingsViewModel,
             new StatsViewModel(
                 ['totalCorrect' => 0, 'totalIncorrect' => 0, 'totalLearning' => 0, 'completedQuestions' => 0, 'answeredQuestionsCount' => 0],
                 [],

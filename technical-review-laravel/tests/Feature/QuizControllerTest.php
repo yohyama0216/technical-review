@@ -154,12 +154,12 @@ class QuizControllerTest extends TestCase
     {
         // Start quiz first
         $this->get(route('quiz.start'));
-        
+
         // Get the current question from session to know correct answer
         $response = $this->postJson(route('api.quiz.answer'), [
             'answer' => 0,
         ]);
-        
+
         $response->assertStatus(200);
         $response->assertJsonStructure(['isCorrect', 'correctAnswer', 'explanation', 'answers']);
     }
@@ -170,7 +170,7 @@ class QuizControllerTest extends TestCase
             'search' => 'test',
             'status' => 'unanswered',
         ]));
-        
+
         $response->assertStatus(200);
         $response->assertViewIs('quiz.question-list');
     }
@@ -178,7 +178,7 @@ class QuizControllerTest extends TestCase
     public function test_stats_page_contains_required_data(): void
     {
         $response = $this->get(route('quiz.stats'));
-        
+
         $response->assertStatus(200);
         $response->assertViewHas('totalCorrect');
         $response->assertViewHas('totalQuestions');
@@ -188,7 +188,7 @@ class QuizControllerTest extends TestCase
     public function test_settings_page_shows_current_values(): void
     {
         $response = $this->get(route('quiz.settings'));
-        
+
         $response->assertStatus(200);
         $response->assertViewHas('currentCategory');
         $response->assertViewHas('availableCategories');
@@ -197,7 +197,7 @@ class QuizControllerTest extends TestCase
     public function test_start_quiz_creates_session_data(): void
     {
         $response = $this->get(route('quiz.start'));
-        
+
         $response->assertStatus(200);
         $response->assertSessionHas('current_question');
     }
@@ -205,7 +205,7 @@ class QuizControllerTest extends TestCase
     public function test_get_next_question_updates_session(): void
     {
         $response = $this->getJson(route('api.quiz.next'));
-        
+
         $response->assertStatus(200);
         $this->assertNotNull(session('current_question'));
     }
@@ -216,7 +216,7 @@ class QuizControllerTest extends TestCase
             'category' => 'technical',
             'target_date' => '2025-12-31',
         ]);
-        
+
         $response->assertRedirect();
         $response->assertSessionHas('success');
     }
@@ -224,7 +224,7 @@ class QuizControllerTest extends TestCase
     public function test_question_list_default_filter_shows_all(): void
     {
         $response = $this->get(route('quiz.question-list'));
-        
+
         $response->assertStatus(200);
         $response->assertViewHas('statusFilter', 'all');
     }
@@ -232,7 +232,7 @@ class QuizControllerTest extends TestCase
     public function test_index_page_has_required_view_data(): void
     {
         $response = $this->get(route('quiz.index'));
-        
+
         $response->assertStatus(200);
         $response->assertViewHas('pageTitle');
         $response->assertViewHas('appName');

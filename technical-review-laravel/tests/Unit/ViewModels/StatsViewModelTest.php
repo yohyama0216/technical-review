@@ -16,9 +16,9 @@ class StatsViewModelTest extends TestCase
             'completedQuestions' => 10,
             'answeredQuestionsCount' => 20,
         ];
-        
+
         $viewModel = new StatsViewModel($cumulativeStats, [], 100);
-        
+
         $this->assertEquals(10, $viewModel->completedPercentage);
         $this->assertEquals(80, $viewModel->unansweredPercentage);
     }
@@ -32,9 +32,9 @@ class StatsViewModelTest extends TestCase
             'completedQuestions' => 0,
             'answeredQuestionsCount' => 0,
         ];
-        
+
         $viewModel = new StatsViewModel($cumulativeStats, [], 0);
-        
+
         $this->assertEquals(0, $viewModel->completedPercentage);
         $this->assertEquals(0, $viewModel->unansweredPercentage);
     }
@@ -45,7 +45,7 @@ class StatsViewModelTest extends TestCase
             ['date' => '2025-12-01', 'cumulativeLearning' => 10, 'cumulativeCorrect' => 8, 'cumulativeIncorrect' => 2],
             ['date' => '2025-12-02', 'cumulativeLearning' => 15, 'cumulativeCorrect' => 12, 'cumulativeIncorrect' => 3],
         ];
-        
+
         $cumulativeStats = [
             'totalCorrect' => 12,
             'totalIncorrect' => 3,
@@ -53,9 +53,9 @@ class StatsViewModelTest extends TestCase
             'completedQuestions' => 5,
             'answeredQuestionsCount' => 10,
         ];
-        
+
         $viewModel = new StatsViewModel($cumulativeStats, $dailyHistory, 100);
-        
+
         $this->assertIsArray($viewModel->chartData);
         $this->assertArrayHasKey('labels', $viewModel->chartData);
         $this->assertArrayHasKey('cumulativeLearning', $viewModel->chartData);
@@ -71,9 +71,9 @@ class StatsViewModelTest extends TestCase
             'completedQuestions' => 0,
             'answeredQuestionsCount' => 0,
         ];
-        
+
         $viewModel = new StatsViewModel($cumulativeStats, [], 100, null);
-        
+
         $this->assertNull($viewModel->forecast);
     }
 
@@ -85,7 +85,7 @@ class StatsViewModelTest extends TestCase
             'estimatedDays' => 30,
             'averageDailyCorrect' => 3.33,
         ];
-        
+
         $cumulativeStats = [
             'totalCorrect' => 50,
             'totalIncorrect' => 10,
@@ -93,9 +93,9 @@ class StatsViewModelTest extends TestCase
             'completedQuestions' => 20,
             'answeredQuestionsCount' => 30,
         ];
-        
+
         $viewModel = new StatsViewModel($cumulativeStats, [], 100, $forecast);
-        
+
         $this->assertIsArray($viewModel->forecast);
         $this->assertEquals(false, $viewModel->forecast['isCompleted']);
     }
@@ -109,10 +109,10 @@ class StatsViewModelTest extends TestCase
             'completedQuestions' => 8,
             'answeredQuestionsCount' => 15,
         ];
-        
+
         $viewModel = new StatsViewModel($cumulativeStats, [], 100);
         $array = $viewModel->toArray();
-        
+
         $this->assertArrayHasKey('totalCorrect', $array);
         $this->assertArrayHasKey('totalIncorrect', $array);
         $this->assertArrayHasKey('completedPercentage', $array);
