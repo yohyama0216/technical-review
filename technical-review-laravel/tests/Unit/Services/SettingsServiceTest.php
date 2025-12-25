@@ -65,4 +65,31 @@ class SettingsServiceTest extends TestCase
 
         $this->assertEquals($date, $retrievedDate);
     }
+
+    public function test_settings_persist_after_multiple_changes(): void
+    {
+        $this->settingsService->setCurrentCategory('technical');
+        $this->settingsService->setTargetDate('2025-12-25');
+        
+        $settings = $this->settingsService->getSettings();
+        
+        $this->assertEquals('technical', $settings['currentCategory']);
+        $this->assertEquals('2025-12-25', $settings['targetDate']);
+    }
+
+    public function test_set_target_date_accepts_null(): void
+    {
+        $this->settingsService->setTargetDate(null);
+        $targetDate = $this->settingsService->getTargetDate();
+        
+        $this->assertNull($targetDate);
+    }
+
+    public function test_get_settings_contains_required_keys(): void
+    {
+        $settings = $this->settingsService->getSettings();
+        
+        $this->assertArrayHasKey('currentCategory', $settings);
+        $this->assertArrayHasKey('targetDate', $settings);
+    }
 }

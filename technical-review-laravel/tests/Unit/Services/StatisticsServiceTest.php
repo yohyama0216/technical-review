@@ -129,4 +129,83 @@ class StatisticsServiceTest extends TestCase
         $this->assertEmpty($stats['questionStats']);
         $this->assertEmpty($stats['dailyHistory']);
     }
+
+    public function test_get_statistics_has_required_structure(): void
+    {
+        $stats = $this->statisticsService->getStatistics();
+        
+        $this->assertArrayHasKey('questionStats', $stats);
+        $this->assertArrayHasKey('dailyHistory', $stats);
+        $this->assertIsArray($stats['questionStats']);
+        $this->assertIsArray($stats['dailyHistory']);
+    }
+
+    public function test_get_cumulative_stats_has_all_fields(): void
+    {
+        $stats = $this->statisticsService->getCumulativeStats();
+        
+        $this->assertArrayHasKey('totalCorrect', $stats);
+        $this->assertArrayHasKey('totalIncorrect', $stats);
+        $this->assertArrayHasKey('totalLearning', $stats);
+        $this->assertArrayHasKey('completedQuestions', $stats);
+        $this->assertArrayHasKey('answeredQuestionsCount', $stats);
+    }
+
+    public function test_record_multiple_answers_for_same_question(): void
+    {
+        $questionId = 99;
+        
+        $this->statisticsService->recordAnswer($questionId, false);
+        $this->statisticsService->recordAnswer($questionId, true);
+        $this->statisticsService->recordAnswer($questionId, true);
+        
+        $stats = $this->statisticsService->getQuestionStats($questionId);
+        
+        $this->assertNotNull($stats);
+        $this->assertEquals(2, $stats['correctCount']);
+        $this->assertEquals(1, $stats['incorrectCount']);
+    }
+
+    public function test_get_daily_history_returns_chronological_order(): void
+    {
+        $history = $this->statisticsService->getDailyHistoryWithCumulative();
+        
+        if (count($history) > 1) {
+            $dates = array_column($history, 'date');
+            $sortedDates = $dates;
+            sort($sortedDates);
+            
+            $this->assertEquals($sortedDates, $dates);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    public function test_get_completion_forecast_with_sufficient_data(): void
+    {
+        // Record some answers to generate history
+        for ($i = 1; $i <= 5; $i++) {
+            $this->statisticsService->recordAnswer($i, true);
+        }
+        
+        $forecast = $this->statisticsService->getCompletionForecast(100);
+        
+        if ($forecast !== null) {
+            $this->assertArrayHasKey('isCompleted', $forecast);
+            $this->assertArrayHasKey('remainingCorrect', $forecast);
+            $this->assertArrayHasKey('estimatedDays', $forecast);
+            $this->assertArrayHasKey('averageDailyCorrect', $forecast);
+        } else {
+            $this->assertTrue(true);
+        }
+    }
+
+    public function test_set_and_get_target_date(): void
+    {
+        $targetDate = '2026-01-01';
+        $this->statisticsService->setTargetDate($targetDate);
+        
+        $retrievedDate = $this->statisticsService->getTargetDate();
+        $this->assertEquals($targetDate, $retrievedDate);
+    }
 }

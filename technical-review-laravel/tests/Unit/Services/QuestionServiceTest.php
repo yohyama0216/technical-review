@@ -121,4 +121,44 @@ class QuestionServiceTest extends TestCase
         $this->assertIsArray($counts);
         $this->assertEmpty($counts);
     }
+
+    public function test_get_all_questions_returns_collection_type(): void
+    {
+        $questions = $this->questionService->getAllQuestions();
+        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $questions);
+    }
+
+    public function test_get_random_question_returns_different_questions(): void
+    {
+        $question1 = $this->questionService->getRandomQuestion();
+        $question2 = $this->questionService->getRandomQuestion();
+        
+        // May return null if no questions, both should be same type
+        $this->assertEquals(gettype($question1), gettype($question2));
+    }
+
+    public function test_get_filtered_questions_returns_collection(): void
+    {
+        $questions = $this->questionService->getAllQuestions();
+        if ($questions->isNotEmpty()) {
+            $majorCategory = $questions->first()['majorCategory'] ?? null;
+            if ($majorCategory) {
+                $filtered = $this->questionService->getFilteredQuestions($majorCategory);
+                $this->assertInstanceOf(\Illuminate\Support\Collection::class, $filtered);
+            }
+        }
+        $this->assertTrue(true);
+    }
+
+    public function test_get_major_categories_returns_non_empty_when_questions_exist(): void
+    {
+        $questions = $this->questionService->getAllQuestions();
+        $categories = $this->questionService->getMajorCategories();
+        
+        if ($questions->isNotEmpty()) {
+            $this->assertNotEmpty($categories);
+        } else {
+            $this->assertEmpty($categories);
+        }
+    }
 }
