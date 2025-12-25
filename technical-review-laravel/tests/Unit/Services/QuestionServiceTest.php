@@ -170,7 +170,7 @@ class QuestionServiceTest extends TestCase
 
         // Get first random question
         $question1 = $this->questionService->getRandomQuestion();
-        if (!$question1) {
+        if (! $question1) {
             $this->markTestSkipped('No questions available');
         }
 
