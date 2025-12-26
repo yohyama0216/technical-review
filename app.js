@@ -424,12 +424,6 @@ function loadQuestion() {
         questionText.textContent = question.question;
     }
 
-    // Clear and hide explanation
-    const existingExplanation = document.getElementById('explanationBox');
-    if (existingExplanation) {
-        existingExplanation.remove();
-    }
-
     // Shuffle answers
     shuffledAnswers = question.answers.map((text, index) => ({
         text: text,
@@ -514,17 +508,17 @@ function preRenderExplanation(question) {
     const quizContent = document.querySelector('.quiz-content');
     if (!quizContent) return;
 
-    // Create explanation box with both states pre-rendered (hidden initially)
+    // Reuse existing explanation box or create new one
     let explanationBox = document.getElementById('explanationBox');
     if (!explanationBox) {
         explanationBox = document.createElement('div');
         explanationBox.id = 'explanationBox';
         explanationBox.className = 'alert mt-3';
-        explanationBox.style.display = 'none';
         quizContent.appendChild(explanationBox);
     }
 
-    // Pre-render content structure (will be updated with correct state when answer is selected)
+    // Hide and update content for the new question
+    explanationBox.style.display = 'none';
     explanationBox.innerHTML = `
         <div class="explanation-result"></div>
         <div class="explanation-text">
