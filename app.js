@@ -182,6 +182,18 @@ window.addEventListener('beforeunload', () => {
     flushPendingData();
 });
 
+// Additional safeguard: flush on visibility change (e.g., tab switch, minimize)
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+        flushPendingData();
+    }
+});
+
+// Additional safeguard: flush on page hide (more reliable than beforeunload)
+window.addEventListener('pagehide', () => {
+    flushPendingData();
+});
+
 function setupEventListeners() {
     document.getElementById('randomQuestionBtn')?.addEventListener('click', startRandomQuestion);
     document.getElementById('backToMajorBtn')?.addEventListener('click', showMajorCategoryScreen);
@@ -667,9 +679,11 @@ function flushPendingData() {
     // Save pending data to localStorage
     if (pendingDailyHistory !== null) {
         localStorage.setItem('dailyHistory', JSON.stringify(pendingDailyHistory));
+        pendingDailyHistory = null; // Reset to prevent stale data
     }
     if (pendingAnswerStats !== null) {
         localStorage.setItem('questionAnswerStats', JSON.stringify(pendingAnswerStats));
+        pendingAnswerStats = null; // Reset to prevent stale data
     }
 }
 
