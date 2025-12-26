@@ -39,6 +39,9 @@ let currentQuestionIndex = 0;
 let selectedAnswer = null;
 let quizResults = [];
 let shuffledAnswers = [];
+// Temporary storage for pending localStorage updates (performance optimization)
+let pendingAnswerStats = null;
+let pendingDailyHistory = null;
 
 // ==================== DOM ELEMENTS ====================
 
@@ -174,6 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Flush pending data before page unload
+window.addEventListener('beforeunload', () => {
+    flushPendingData();
+});
+
 function setupEventListeners() {
     document.getElementById('randomQuestionBtn')?.addEventListener('click', startRandomQuestion);
     document.getElementById('backToMajorBtn')?.addEventListener('click', showMajorCategoryScreen);
@@ -236,6 +244,9 @@ function showMajorCategoryScreen() {
 }
 
 function returnToQuestionList() {
+    // Flush any pending data before navigating away
+    flushPendingData();
+    
     // Check if we're on the question list page
     if (window.location.pathname.includes('question-list.html')) {
         showScreen(questionListScreen);
@@ -488,11 +499,10 @@ function selectAnswer(index, _btn) {
     if (submitBtn) submitBtn.classList.add('d-none');
     showExplanation(question, isCorrect);
 
-    // Save to daily history
-    saveDailyHistory(isCorrect);
-
-    // Increment answer count for this question
-    incrementQuestionAnswerCount(question, isCorrect);
+    // Store answer data in memory (not localStorage yet - performance optimization)
+    // This will be saved when moving to next question
+    updatePendingDailyHistory(isCorrect);
+    updatePendingAnswerStats(question, isCorrect);
 
     // Show next question button
     if (nextQuestionBtn) nextQuestionBtn.classList.remove('d-none');
@@ -545,6 +555,8 @@ function saveQuizResults() {
 }
 
 function finishQuiz() {
+    // Flush pending data to localStorage before finishing
+    flushPendingData();
     saveQuizResults();
     showResultScreen();
 }
@@ -614,6 +626,53 @@ function showReview() {
 
 // ==================== QUESTION ANSWER TRACKING ====================
 
+function updatePendingDailyHistory(isCorrect) {
+    // Initialize pending daily history from localStorage if not already loaded
+    if (pendingDailyHistory === null) {
+        pendingDailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    }
+
+    const today = new Date().toISOString().split('T')[0];
+    if (!pendingDailyHistory[today]) {
+        pendingDailyHistory[today] = { correct: 0, incorrect: 0, total: 0 };
+    }
+
+    pendingDailyHistory[today].total++;
+    if (isCorrect) {
+        pendingDailyHistory[today].correct++;
+    } else {
+        pendingDailyHistory[today].incorrect++;
+    }
+}
+
+function updatePendingAnswerStats(question, isCorrect) {
+    // Initialize pending answer stats from localStorage if not already loaded
+    if (pendingAnswerStats === null) {
+        pendingAnswerStats = JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
+    }
+
+    const questionId = getQuestionId(question);
+    if (!pendingAnswerStats[questionId]) {
+        pendingAnswerStats[questionId] = { correct: 0, incorrect: 0 };
+    }
+
+    if (isCorrect) {
+        pendingAnswerStats[questionId].correct++;
+    } else {
+        pendingAnswerStats[questionId].incorrect++;
+    }
+}
+
+function flushPendingData() {
+    // Save pending data to localStorage
+    if (pendingDailyHistory !== null) {
+        localStorage.setItem('dailyHistory', JSON.stringify(pendingDailyHistory));
+    }
+    if (pendingAnswerStats !== null) {
+        localStorage.setItem('questionAnswerStats', JSON.stringify(pendingAnswerStats));
+    }
+}
+
 function getQuestionId(question) {
     // Use the question's index in quizData array for a stable identifier
     const index = quizData.indexOf(question);
@@ -624,33 +683,22 @@ function getQuestionId(question) {
     return `q_${index}`;
 }
 
-function incrementQuestionAnswerCount(question, isCorrect) {
-    const questionId = getQuestionId(question);
-    const answerStats = JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
-
-    if (!answerStats[questionId]) {
-        answerStats[questionId] = { correct: 0, incorrect: 0 };
-    }
-
-    if (isCorrect) {
-        answerStats[questionId].correct++;
-    } else {
-        answerStats[questionId].incorrect++;
-    }
-
-    localStorage.setItem('questionAnswerStats', JSON.stringify(answerStats));
-}
-
 function getQuestionAnswerCount(question) {
     const questionId = getQuestionId(question);
-    const answerStats = JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
+    // Use pending data if available, otherwise read from localStorage
+    const answerStats = pendingAnswerStats !== null 
+        ? pendingAnswerStats 
+        : JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
     const stats = answerStats[questionId] || { correct: 0, incorrect: 0 };
     return stats.correct + stats.incorrect;
 }
 
 function getQuestionAnswerStats(question) {
     const questionId = getQuestionId(question);
-    let answerStats = JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
+    // Use pending data if available, otherwise read from localStorage
+    let answerStats = pendingAnswerStats !== null 
+        ? pendingAnswerStats 
+        : JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
 
     // Migration: Convert old questionAnswerCounts to questionAnswerStats
     if (!answerStats[questionId]) {
@@ -690,6 +738,9 @@ function selectNextRandomQuestion() {
 }
 
 function goToNextQuestion() {
+    // Flush pending data to localStorage before loading next question
+    flushPendingData();
+
     // Select next question randomly from questions with fewer answers
     const nextQuestion = selectNextRandomQuestion();
 
@@ -728,23 +779,6 @@ function saveQuizResult(majorCat, middleCat, minorCat, correct, total) {
     localStorage.setItem('quizResults', JSON.stringify(results));
 }
 
-function saveDailyHistory(isCorrect) {
-    const today = new Date().toISOString().split('T')[0];
-    const history = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
-
-    if (!history[today]) {
-        history[today] = { correct: 0, incorrect: 0, total: 0 };
-    }
-
-    history[today].total++;
-    if (isCorrect) {
-        history[today].correct++;
-    } else {
-        history[today].incorrect++;
-    }
-
-    localStorage.setItem('dailyHistory', JSON.stringify(history));
-}
 
 function loadStatistics() {
     const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
@@ -758,8 +792,10 @@ function loadStatistics() {
         totalIncorrect += stats.incorrect;
     });
 
-    // Get daily history for charts
-    const dailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    // Get daily history for charts (use pending data if available)
+    const dailyHistory = pendingDailyHistory !== null 
+        ? pendingDailyHistory 
+        : JSON.parse(localStorage.getItem('dailyHistory') || '{}');
 
     // Calculate question statistics
     let completedCount = 0;
