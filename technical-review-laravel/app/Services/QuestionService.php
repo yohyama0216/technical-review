@@ -196,8 +196,9 @@ class QuestionService
         // Separate unanswered and answered questions
         $unansweredQuestions = $filtered->filter(function ($question) use ($questionStats) {
             $questionId = $question['id'];
-            return !isset($questionStats[$questionId]) || 
-                   ($questionStats[$questionId]['correctCount'] == 0 && 
+
+            return ! isset($questionStats[$questionId]) ||
+                   ($questionStats[$questionId]['correctCount'] == 0 &&
                     $questionStats[$questionId]['incorrectCount'] == 0);
         });
 

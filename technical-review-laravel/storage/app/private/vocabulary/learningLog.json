@@ -154,6 +154,126 @@
             "correctCount": 1,
             "incorrectCount": 0,
             "completed": false
+        },
+        "174": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "67": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "566": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "452": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "694": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "320": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "182": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "690": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "27": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "680": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "493": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "625": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "640": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "691": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "382": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "442": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "139": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "385": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "535": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "519": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "623": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "316": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "343": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "553": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
         }
     },
     "dailyHistory": {
@@ -165,6 +285,11 @@
         "2025-12-25": {
             "correct": 24,
             "incorrect": 4,
+            "completed": 1
+        },
+        "2025-12-26": {
+            "correct": 19,
+            "incorrect": 5,
             "completed": 1
         }
     },
