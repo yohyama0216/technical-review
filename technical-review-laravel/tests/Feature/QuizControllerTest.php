@@ -238,20 +238,15 @@ class QuizControllerTest extends TestCase
         $response->assertViewHas('appName');
     }
 
-    public function test_start_quiz_shuffles_answers(): void
+    public function test_start_quiz_returns_unshuffled_answers(): void
     {
-        // Get the same question multiple times and check if answers are shuffled
+        // Server should return original order (shuffling is done client-side)
         $response1 = $this->get(route('quiz.start'));
         $response1->assertStatus(200);
         $question1 = $response1->viewData('question');
 
-        $response2 = $this->get(route('quiz.start'));
-        $response2->assertStatus(200);
-        $question2 = $response2->viewData('question');
-
         // Both should have valid questions
         $this->assertNotNull($question1);
-        $this->assertNotNull($question2);
 
         // Check that answers array exists and has correct length
         $this->assertArrayHasKey('answers', $question1);
@@ -263,13 +258,13 @@ class QuizControllerTest extends TestCase
         $this->assertLessThan(4, $question1['correct']);
     }
 
-    public function test_start_quiz_by_id_shuffles_answers(): void
+    public function test_start_quiz_by_id_returns_same_question(): void
     {
         // Get first question ID
         $firstResponse = $this->getJson(route('api.quiz.next'));
         $questionId = $firstResponse->json('question.id');
 
-        // Load same question twice
+        // Load same question twice - should return identical data
         $response1 = $this->get(route('quiz.start.id', ['id' => $questionId]));
         $response1->assertStatus(200);
         $question1 = $response1->viewData('question');
@@ -278,25 +273,26 @@ class QuizControllerTest extends TestCase
         $response2->assertStatus(200);
         $question2 = $response2->viewData('question');
 
-        // Verify shuffling occurred
+        // Verify same question returned
         $this->assertNotNull($question1);
         $this->assertNotNull($question2);
         $this->assertEquals($questionId, $question1['id']);
         $this->assertEquals($questionId, $question2['id']);
 
-        // Verify answers are still 4 choices
+        // Verify answers are identical (not shuffled on server)
         $this->assertCount(4, $question1['answers']);
-        $this->assertCount(4, $question2['answers']);
+        $this->assertEquals($question1['answers'], $question2['answers']);
+        $this->assertEquals($question1['correct'], $question2['correct']);
     }
 
-    public function test_get_next_question_shuffles_answers(): void
+    public function test_get_next_question_returns_unshuffled_data(): void
     {
         $response = $this->getJson(route('api.quiz.next'));
 
         $response->assertStatus(200);
         $question = $response->json('question');
 
-        // Verify question has shuffled answers
+        // Verify question has unshuffled answers (client will shuffle)
         $this->assertArrayHasKey('answers', $question);
         $this->assertCount(4, $question['answers']);
         $this->assertArrayHasKey('correct', $question);
@@ -304,14 +300,14 @@ class QuizControllerTest extends TestCase
         $this->assertLessThan(4, $question['correct']);
     }
 
-    public function test_shuffled_answers_maintain_correctness(): void
+    public function test_answer_submission_works_with_client_side_validation(): void
     {
         // Start quiz
         $response = $this->get(route('quiz.start'));
         $response->assertStatus(200);
         $question = $response->viewData('question');
 
-        // Submit the correct answer
+        // Client determines correctness, server just saves
         $answerResponse = $this->postJson(route('api.quiz.answer'), [
             'answer' => $question['correct'],
             'isCorrect' => true,

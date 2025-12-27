@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class QuestionService
 {
@@ -26,27 +27,28 @@ class QuestionService
     }
 
     /**
-     * Load questions from JSON file
+     * Load questions from JSON file with caching
      */
     private function loadQuestions(): void
     {
         $category = $this->getCurrentCategory();
-        $jsonPath = app_path("Data/{$category}/questions.json");
+        $cacheKey = "questions.{$category}";
 
-        if (! file_exists($jsonPath)) {
-            $this->questions = collect([]);
+        // Cache for 1 hour (3600 seconds)
+        $this->questions = Cache::remember($cacheKey, 3600, function () use ($category) {
+            $jsonPath = app_path("Data/{$category}/questions.json");
 
-            return;
-        }
+            if (! file_exists($jsonPath)) {
+                return collect([]);
+            }
 
-        $jsonContent = $this->readJsonFile($jsonPath);
-        if ($jsonContent === null) {
-            $this->questions = collect([]);
+            $jsonContent = $this->readJsonFile($jsonPath);
+            if ($jsonContent === null) {
+                return collect([]);
+            }
 
-            return;
-        }
-
-        $this->questions = collect($this->addIdsToQuestions($jsonContent));
+            return collect($this->addIdsToQuestions($jsonContent));
+        });
     }
 
     /**
@@ -240,5 +242,25 @@ class QuestionService
         }
 
         return $counts;
+    }
+
+    /**
+     * Clear questions cache for current category
+     */
+    public function clearCache(): void
+    {
+        $category = $this->getCurrentCategory();
+        Cache::forget("questions.{$category}");
+    }
+
+    /**
+     * Clear cache for all categories
+     */
+    public function clearAllCache(): void
+    {
+        $categories = ['technical', 'vocabulary'];
+        foreach ($categories as $category) {
+            Cache::forget("questions.{$category}");
+        }
     }
 }

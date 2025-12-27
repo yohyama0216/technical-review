@@ -18,13 +18,7 @@
                 <h5 class="mb-4" id="questionText">{{ $question['question'] }}</h5>
 
                 <div class="d-grid gap-2 mb-4" id="answersContainer">
-                    @foreach($question['answers'] as $index => $answer)
-                        <button class="btn btn-outline-primary answer-btn" 
-                                data-answer="{{ $index }}"
-                                onclick="selectAnswer({{ $index }})">
-                            {{ $answer }}
-                        </button>
-                    @endforeach
+                    <!-- Answers will be inserted by JavaScript with shuffling -->
                 </div>
 
                 <!-- Explanation box (hidden initially) -->
@@ -55,12 +49,58 @@
 <script>
 let selectedAnswer = null;
 let currentQuestion = @json($question ?? null);
+let shuffledAnswers = [];
+
+// Shuffle answers on page load
+if (currentQuestion) {
+    shuffleQuestionAnswers(currentQuestion);
+    displayShuffledAnswers();
+}
+
+function shuffleQuestionAnswers(question) {
+    const answers = question.answers;
+    const correctAnswer = question.correct ?? question.correctAnswer ?? 0;
+    
+    // Create array with original indices
+    const indices = Array.from({length: answers.length}, (_, i) => i);
+    
+    // Fisher-Yates shuffle
+    for (let i = indices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    
+    // Create shuffled answers with original index tracking
+    shuffledAnswers = indices.map((originalIndex, displayIndex) => ({
+        text: answers[originalIndex],
+        originalIndex: originalIndex,
+        displayIndex: displayIndex
+    }));
+    
+    // Update correct answer to new position
+    currentQuestion.shuffledCorrect = shuffledAnswers.findIndex(a => a.originalIndex === correctAnswer);
+}
+
+function displayShuffledAnswers() {
+    const container = document.getElementById('answersContainer');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    shuffledAnswers.forEach((answer, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-outline-primary answer-btn';
+        btn.dataset.answer = index;
+        btn.textContent = answer.text;
+        btn.onclick = () => selectAnswer(index);
+        container.appendChild(btn);
+    });
+}
 
 function selectAnswer(answerIndex) {
     if (selectedAnswer !== null) return; // Already answered
     
     selectedAnswer = answerIndex;
-    const correctAnswer = currentQuestion.correct;
+    const correctAnswer = currentQuestion.shuffledCorrect;
     const isCorrect = answerIndex === correctAnswer;
     
     // Disable all buttons
@@ -106,12 +146,13 @@ function showResult(isCorrect, correctAnswer, userAnswer) {
     // Show explanation
     const explanationBox = document.getElementById('explanationBox');
     explanationBox.className = `alert ${isCorrect ? 'alert-success' : 'alert-danger'}`;
+    const correctAnswerText = shuffledAnswers[correctAnswer].text;
     explanationBox.innerHTML = `
         <div class="mb-2">
             <strong>${isCorrect ? '✓ 正解！' : '✗ 不正解'}</strong>
         </div>
         ${currentQuestion.explanation ? `<div class="mb-2"><strong>解説:</strong> ${currentQuestion.explanation}</div>` : ''}
-        <div><strong>正解:</strong> ${currentQuestion.answers[correctAnswer]}</div>
+        <div><strong>正解:</strong> ${correctAnswerText}</div>
     `;
     explanationBox.classList.remove('d-none');
     
@@ -143,6 +184,9 @@ function displayQuestion(question) {
     selectedAnswer = null;
     currentQuestion = question;
     
+    // Shuffle answers for new question
+    shuffleQuestionAnswers(question);
+    
     // Update breadcrumb
     document.querySelector('.breadcrumb').innerHTML = `
         <li class="breadcrumb-item">${question.majorCategory}</li>
@@ -153,17 +197,8 @@ function displayQuestion(question) {
     // Update question text
     document.getElementById('questionText').textContent = question.question;
     
-    // Update answers
-    const answersContainer = document.getElementById('answersContainer');
-    answersContainer.innerHTML = '';
-    question.answers.forEach((answer, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'btn btn-outline-primary answer-btn';
-        btn.dataset.answer = index;
-        btn.textContent = answer;
-        btn.onclick = () => selectAnswer(index);
-        answersContainer.appendChild(btn);
-    });
+    // Display shuffled answers
+    displayShuffledAnswers();
     
     // Hide explanation and next button
     document.getElementById('explanationBox').classList.add('d-none');
