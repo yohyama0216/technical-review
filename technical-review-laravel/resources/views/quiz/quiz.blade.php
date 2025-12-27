@@ -54,40 +54,41 @@
 @push('scripts')
 <script>
 let selectedAnswer = null;
-let currentAnswers = @json($question['answers'] ?? []);
+let currentQuestion = @json($question ?? null);
 
 function selectAnswer(answerIndex) {
     if (selectedAnswer !== null) return; // Already answered
     
     selectedAnswer = answerIndex;
+    const correctAnswer = currentQuestion.correct;
+    const isCorrect = answerIndex === correctAnswer;
     
     // Disable all buttons
     document.querySelectorAll('.answer-btn').forEach(btn => {
         btn.disabled = true;
     });
     
-    // Submit answer via Ajax
+    // Show result immediately
+    showResult(isCorrect, correctAnswer, answerIndex);
+    
+    // Save answer to server in background
     fetch('/api/quiz/answer', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
         },
-        body: JSON.stringify({ answer: answerIndex })
-    })
-    .then(response => response.json())
-    .then(data => {
-        showResult(data, answerIndex);
+        body: JSON.stringify({ 
+            answer: answerIndex,
+            isCorrect: isCorrect 
+        })
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('エラーが発生しました');
+        console.error('Error saving answer:', error);
     });
 }
 
-function showResult(data, userAnswer) {
-    const isCorrect = data.isCorrect;
-    const correctAnswer = data.correctAnswer;
+function showResult(isCorrect, correctAnswer, userAnswer) {
     
     // Update button colors
     document.querySelectorAll('.answer-btn').forEach((btn, index) => {
@@ -109,8 +110,8 @@ function showResult(data, userAnswer) {
         <div class="mb-2">
             <strong>${isCorrect ? '✓ 正解！' : '✗ 不正解'}</strong>
         </div>
-        ${data.explanation ? `<div class="mb-2"><strong>解説:</strong> ${data.explanation}</div>` : ''}
-        <div><strong>正解:</strong> ${data.answers[correctAnswer]}</div>
+        ${currentQuestion.explanation ? `<div class="mb-2"><strong>解説:</strong> ${currentQuestion.explanation}</div>` : ''}
+        <div><strong>正解:</strong> ${currentQuestion.answers[correctAnswer]}</div>
     `;
     explanationBox.classList.remove('d-none');
     
@@ -140,7 +141,7 @@ function loadNextQuestion() {
 
 function displayQuestion(question) {
     selectedAnswer = null;
-    currentAnswers = question.answers;
+    currentQuestion = question;
     
     // Update breadcrumb
     document.querySelector('.breadcrumb').innerHTML = `

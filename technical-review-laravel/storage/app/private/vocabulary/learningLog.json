@@ -274,6 +274,21 @@
             "correctCount": 1,
             "incorrectCount": 0,
             "completed": false
+        },
+        "109": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "349": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "128": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
         }
     },
     "dailyHistory": {
@@ -290,6 +305,11 @@
         "2025-12-26": {
             "correct": 19,
             "incorrect": 5,
+            "completed": 1
+        },
+        "2025-12-27": {
+            "correct": 2,
+            "incorrect": 1,
             "completed": 1
         }
     },

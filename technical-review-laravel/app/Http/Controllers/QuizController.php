@@ -256,7 +256,7 @@ class QuizController extends Controller
     }
 
     /**
-     * Submit answer and return result as JSON
+     * Submit answer and save result (判定はクライアント側で実施済み)
      */
     public function submitQuizAnswer(Request $request): JsonResponse
     {
@@ -266,17 +266,15 @@ class QuizController extends Controller
             return response()->json(['error' => '問題が見つかりません'], 404);
         }
 
-        $userAnswer = (int) $request->input('answer');
-        $isCorrect = $userAnswer === $currentQuestion['correct'];
+        // クライアント側で判定済みの結果を受け取る
+        $isCorrect = (bool) $request->input('isCorrect');
 
         // Record the answer in learningLog.json
         $this->statisticsService->recordAnswer($currentQuestion['id'], $isCorrect);
 
         return response()->json([
-            'isCorrect' => $isCorrect,
-            'correctAnswer' => $currentQuestion['correct'],
-            'explanation' => $currentQuestion['explanation'] ?? '',
-            'answers' => $currentQuestion['answers'],
+            'success' => true,
+            'message' => '回答を保存しました',
         ]);
     }
 

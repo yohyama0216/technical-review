@@ -57,14 +57,13 @@ class QuizControllerTest extends TestCase
 
         $response = $this->postJson(route('api.quiz.answer'), [
             'answer' => 0,
+            'isCorrect' => true,
         ]);
 
         $response->assertStatus(200);
         $response->assertJsonStructure([
-            'isCorrect',
-            'correctAnswer',
-            'explanation',
-            'answers',
+            'success',
+            'message',
         ]);
     }
 
@@ -158,10 +157,11 @@ class QuizControllerTest extends TestCase
         // Get the current question from session to know correct answer
         $response = $this->postJson(route('api.quiz.answer'), [
             'answer' => 0,
+            'isCorrect' => true,
         ]);
 
         $response->assertStatus(200);
-        $response->assertJsonStructure(['isCorrect', 'correctAnswer', 'explanation', 'answers']);
+        $response->assertJsonStructure(['success', 'message']);
     }
 
     public function test_question_list_with_multiple_filters(): void
@@ -314,9 +314,10 @@ class QuizControllerTest extends TestCase
         // Submit the correct answer
         $answerResponse = $this->postJson(route('api.quiz.answer'), [
             'answer' => $question['correct'],
+            'isCorrect' => true,
         ]);
 
         $answerResponse->assertStatus(200);
-        $answerResponse->assertJson(['isCorrect' => true]);
+        $answerResponse->assertJson(['success' => true]);
     }
 }
