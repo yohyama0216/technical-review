@@ -120,6 +120,7 @@ class SettingsService
         return [
             'technical' => '技術面接',
             'vocabulary' => '英単語',
+            'python' => 'Python資格',
         ];
     }
 }

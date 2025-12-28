@@ -20,7 +20,8 @@
                 $currentGenre = app(\App\Services\StatisticsService::class)->getCurrentGenre();
                 $genreNames = [
                     'technical' => '技術面接',
-                    'vocabulary' => '英単語'
+                    'vocabulary' => '英単語',
+                    'python' => 'Python資格'
                 ];
                 $genreName = $genreNames[$currentGenre] ?? '技術面接';
             @endphp
@@ -57,7 +58,8 @@
                                 $currentGenre = app(\App\Services\StatisticsService::class)->getCurrentGenre();
                                 $categories = [
                                     'technical' => '💻 技術面接',
-                                    'vocabulary' => '📚 英単語 (TOEIC)'
+                                    'vocabulary' => '📚 英単語 (TOEIC)',
+                                    'python' => '🐍 Python資格'
                                 ];
                             @endphp
                             @foreach($categories as $key => $label)

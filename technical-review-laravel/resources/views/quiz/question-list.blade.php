@@ -14,14 +14,15 @@
         <!-- Quick Keyword Search / Category Counts -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
-                @if($currentGenre === 'vocabulary')
+                @if($currentGenre === 'vocabulary' || $currentGenre === 'python')
                     <h6 class="mb-3"><i class="bi bi-bookmark me-2"></i>カテゴリ別問題数</h6>
                     <div class="d-flex flex-wrap gap-2">
                         @foreach($keywordCounts as $category => $count)
-                            <span class="btn btn-sm btn-outline-secondary" style="cursor: default;">
+                            <a href="{{ route('quiz.question-list', ['search' => $category]) }}" 
+                               class="btn btn-sm {{ $searchText === $category ? 'btn-primary' : 'btn-outline-primary' }}">
                                 <i class="bi bi-folder me-1"></i>{{ $category }}
-                                <span class="badge bg-secondary ms-1">{{ $count }}</span>
-                            </span>
+                                <span class="badge {{ $searchText === $category ? 'bg-light text-dark' : 'bg-primary' }} ms-1">{{ $count }}</span>
+                            </a>
                         @endforeach
                     </div>
                 @else

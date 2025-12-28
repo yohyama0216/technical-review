@@ -135,7 +135,7 @@ class QuizController extends Controller
      */
     private function getKeywordCounts(string $genre, $questions): array
     {
-        if ($genre === 'vocabulary') {
+        if ($genre === 'vocabulary' || $genre === 'python') {
             return $questions->groupBy('middleCategory')
                 ->map(fn ($group) => $group->count())
                 ->sortKeys()

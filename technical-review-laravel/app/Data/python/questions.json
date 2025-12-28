@@ -1,0 +1,422 @@
+[
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "データ型とオブジェクト",
+        "minorCategory": "数値型",
+        "question": "Pythonで整数を表す型はどれですか？",
+        "answers": [
+            "int",
+            "integer",
+            "num",
+            "number"
+        ],
+        "correct": 0,
+        "explanation": "Pythonでは整数型をintで表します。intは任意精度の整数を扱えます。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "データ型とオブジェクト",
+        "minorCategory": "文字列",
+        "question": "文字列のスライシング s[1:4] の結果、取得できる要素のインデックスはどれですか？",
+        "answers": [
+            "インデックス1, 2, 3",
+            "インデックス1, 2, 3, 4",
+            "インデックス0, 1, 2, 3",
+            "インデックス2, 3, 4"
+        ],
+        "correct": 0,
+        "explanation": "Pythonのスライシングは [start:end] で、startは含み、endは含みません。したがって s[1:4] はインデックス1, 2, 3の要素を取得します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "データ型とオブジェクト",
+        "minorCategory": "リスト",
+        "question": "リストに要素を追加するメソッドはどれですか？",
+        "answers": [
+            "append()",
+            "add()",
+            "push()",
+            "insert_last()"
+        ],
+        "correct": 0,
+        "explanation": "Pythonのリストに要素を末尾に追加するには append() メソッドを使用します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "データ型とオブジェクト",
+        "minorCategory": "辞書",
+        "question": "辞書のキーとして使用できないデータ型はどれですか？",
+        "answers": [
+            "リスト",
+            "文字列",
+            "タプル",
+            "整数"
+        ],
+        "correct": 0,
+        "explanation": "辞書のキーにはハッシュ可能（immutable）なオブジェクトのみ使用できます。リストはミュータブルなのでキーにできません。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "制御構文",
+        "minorCategory": "条件分岐",
+        "question": "Pythonで複数の条件を「または」で結合する演算子はどれですか？",
+        "answers": [
+            "or",
+            "||",
+            "OR",
+            "|"
+        ],
+        "correct": 0,
+        "explanation": "Pythonでは論理和を表すのに 'or' キーワードを使用します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "制御構文",
+        "minorCategory": "ループ",
+        "question": "for文でループを途中で抜けるキーワードはどれですか？",
+        "answers": [
+            "break",
+            "exit",
+            "stop",
+            "quit"
+        ],
+        "correct": 0,
+        "explanation": "ループを途中で抜けるには break キーワードを使用します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "関数",
+        "minorCategory": "関数定義",
+        "question": "関数を定義するキーワードはどれですか？",
+        "answers": [
+            "def",
+            "function",
+            "func",
+            "define"
+        ],
+        "correct": 0,
+        "explanation": "Pythonでは def キーワードを使って関数を定義します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "関数",
+        "minorCategory": "引数",
+        "question": "キーワード引数として関数を呼び出す正しい構文はどれですか？",
+        "answers": [
+            "func(name='太郎', age=20)",
+            "func(name:='太郎', age:=20)",
+            "func('太郎'=name, 20=age)",
+            "func(name<-'太郎', age<-20)"
+        ],
+        "correct": 0,
+        "explanation": "キーワード引数は 引数名=値 の形式で指定します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "モジュールとパッケージ",
+        "minorCategory": "import文",
+        "question": "モジュールをインポートして別名をつける構文はどれですか？",
+        "answers": [
+            "import numpy as np",
+            "import numpy = np",
+            "from numpy import as np",
+            "use numpy as np"
+        ],
+        "correct": 0,
+        "explanation": "import モジュール名 as 別名 の構文でモジュールに別名をつけることができます。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定基礎試験",
+        "middleCategory": "例外処理",
+        "minorCategory": "try-except",
+        "question": "例外をキャッチするために使用するキーワードはどれですか？",
+        "answers": [
+            "except",
+            "catch",
+            "error",
+            "handle"
+        ],
+        "correct": 0,
+        "explanation": "Pythonでは except キーワードを使って例外をキャッチします。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "NumPy",
+        "minorCategory": "配列操作",
+        "question": "NumPy配列を作成する関数はどれですか？",
+        "answers": [
+            "np.array()",
+            "np.create()",
+            "np.make_array()",
+            "np.new_array()"
+        ],
+        "correct": 0,
+        "explanation": "NumPyでは np.array() 関数を使って配列（ndarray）を作成します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "NumPy",
+        "minorCategory": "配列の形状",
+        "question": "NumPy配列の形状を取得する属性はどれですか？",
+        "answers": [
+            "shape",
+            "size",
+            "dimensions",
+            "length"
+        ],
+        "correct": 0,
+        "explanation": "NumPy配列の形状（各次元の要素数）は shape 属性で取得できます。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "pandas",
+        "minorCategory": "DataFrame",
+        "question": "pandasでCSVファイルを読み込む関数はどれですか？",
+        "answers": [
+            "pd.read_csv()",
+            "pd.load_csv()",
+            "pd.import_csv()",
+            "pd.open_csv()"
+        ],
+        "correct": 0,
+        "explanation": "pandasでは pd.read_csv() 関数を使ってCSVファイルをDataFrameとして読み込みます。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "pandas",
+        "minorCategory": "データ選択",
+        "question": "DataFrameから特定の列を選択する方法として正しいのはどれですか？",
+        "answers": [
+            "df['column_name']",
+            "df.get('column_name')",
+            "df.select('column_name')",
+            "df.column('column_name')"
+        ],
+        "correct": 0,
+        "explanation": "DataFrameから列を選択するには df['列名'] または df.列名 を使用します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "Matplotlib",
+        "minorCategory": "グラフ描画",
+        "question": "Matplotlibで折れ線グラフを描画する関数はどれですか？",
+        "answers": [
+            "plt.plot()",
+            "plt.line()",
+            "plt.graph()",
+            "plt.draw()"
+        ],
+        "correct": 0,
+        "explanation": "Matplotlibでは plt.plot() 関数を使って折れ線グラフを描画します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "データ前処理",
+        "minorCategory": "欠損値処理",
+        "question": "pandasで欠損値を削除するメソッドはどれですか？",
+        "answers": [
+            "dropna()",
+            "remove_na()",
+            "delete_null()",
+            "clean_missing()"
+        ],
+        "correct": 0,
+        "explanation": "pandasでは dropna() メソッドを使って欠損値を含む行または列を削除できます。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "統計処理",
+        "minorCategory": "基本統計量",
+        "question": "pandasで基本統計量を一度に表示するメソッドはどれですか？",
+        "answers": [
+            "describe()",
+            "summary()",
+            "statistics()",
+            "info()"
+        ],
+        "correct": 0,
+        "explanation": "describe() メソッドは平均、標準偏差、最小値、最大値などの基本統計量を一度に表示します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "データ変換",
+        "minorCategory": "グループ化",
+        "question": "pandasでデータをグループ化するメソッドはどれですか？",
+        "answers": [
+            "groupby()",
+            "group()",
+            "aggregate()",
+            "cluster()"
+        ],
+        "correct": 0,
+        "explanation": "groupby() メソッドを使用してデータをグループ化し、集計処理を行います。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "NumPy",
+        "minorCategory": "数学関数",
+        "question": "NumPyで配列の平均を計算する関数はどれですか？",
+        "answers": [
+            "np.mean()",
+            "np.average()",
+            "np.avg()",
+            "np.median()"
+        ],
+        "correct": 0,
+        "explanation": "np.mean() 関数で配列の平均値を計算します。np.average() も使えますが、mean() が一般的です。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定データ分析試験",
+        "middleCategory": "Matplotlib",
+        "minorCategory": "グラフ設定",
+        "question": "Matplotlibでグラフにタイトルを設定する関数はどれですか？",
+        "answers": [
+            "plt.title()",
+            "plt.set_title()",
+            "plt.heading()",
+            "plt.caption()"
+        ],
+        "correct": 0,
+        "explanation": "plt.title() 関数を使ってグラフのタイトルを設定します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "Webスクレイピング",
+        "minorCategory": "BeautifulSoup",
+        "question": "BeautifulSoupでHTMLをパースする際に使用するパーサーとして推奨されるのはどれですか？",
+        "answers": [
+            "html.parser",
+            "xml.parser",
+            "dom.parser",
+            "web.parser"
+        ],
+        "correct": 0,
+        "explanation": "html.parser は標準ライブラリに含まれ、追加のインストールが不要な推奨パーサーです。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "Webスクレイピング",
+        "minorCategory": "requests",
+        "question": "requestsライブラリでHTTPのGETリクエストを送る関数はどれですか？",
+        "answers": [
+            "requests.get()",
+            "requests.fetch()",
+            "requests.retrieve()",
+            "requests.download()"
+        ],
+        "correct": 0,
+        "explanation": "requests.get() 関数でHTTP GETリクエストを送信し、レスポンスを取得します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "Web開発",
+        "minorCategory": "Flask",
+        "question": "Flaskでルーティングを定義するデコレータはどれですか？",
+        "answers": [
+            "@app.route()",
+            "@app.path()",
+            "@app.url()",
+            "@app.endpoint()"
+        ],
+        "correct": 0,
+        "explanation": "@app.route() デコレータを使ってURLパターンとビュー関数を紐付けます。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "Web開発",
+        "minorCategory": "Django",
+        "question": "Djangoで新しいアプリケーションを作成するコマンドはどれですか？",
+        "answers": [
+            "python manage.py startapp",
+            "python manage.py createapp",
+            "python manage.py newapp",
+            "python manage.py makeapp"
+        ],
+        "correct": 0,
+        "explanation": "python manage.py startapp アプリ名 で新しいDjangoアプリケーションを作成します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "データベース",
+        "minorCategory": "SQLAlchemy",
+        "question": "SQLAlchemyでデータベースセッションを作成するために使用するクラスはどれですか？",
+        "answers": [
+            "Session",
+            "Connection",
+            "Database",
+            "Query"
+        ],
+        "correct": 0,
+        "explanation": "SQLAlchemyでは Session クラスを使ってデータベースとのセッションを管理します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "非同期処理",
+        "minorCategory": "asyncio",
+        "question": "非同期関数を定義するキーワードはどれですか？",
+        "answers": [
+            "async def",
+            "await def",
+            "async function",
+            "coroutine def"
+        ],
+        "correct": 0,
+        "explanation": "async def キーワードを使って非同期関数（コルーチン）を定義します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "テスト",
+        "minorCategory": "unittest",
+        "question": "unittestでテストクラスが継承すべき基底クラスはどれですか？",
+        "answers": [
+            "unittest.TestCase",
+            "unittest.Test",
+            "unittest.Suite",
+            "unittest.Runner"
+        ],
+        "correct": 0,
+        "explanation": "unittest.TestCase を継承してテストクラスを作成します。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "テスト",
+        "minorCategory": "pytest",
+        "question": "pytestでテスト関数の命名規則として正しいのはどれですか？",
+        "answers": [
+            "test_で始まる",
+            "_testで終わる",
+            "Testで始まる",
+            "check_で始まる"
+        ],
+        "correct": 0,
+        "explanation": "pytestではtest_で始まる関数名、またはTest始まるクラス名がテストとして認識されます。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "パッケージ管理",
+        "minorCategory": "pip",
+        "question": "pipでパッケージをインストールするコマンドはどれですか？",
+        "answers": [
+            "pip install package_name",
+            "pip add package_name",
+            "pip get package_name",
+            "pip download package_name"
+        ],
+        "correct": 0,
+        "explanation": "pip install パッケージ名 でPyPIからパッケージをインストールします。"
+    },
+    {
+        "majorCategory": "Python3エンジニア認定実践試験",
+        "middleCategory": "仮想環境",
+        "minorCategory": "venv",
+        "question": "venvで仮想環境を作成するコマンドはどれですか？",
+        "answers": [
+            "python -m venv env_name",
+            "python -m virtualenv env_name",
+            "python --venv env_name",
+            "python create-venv env_name"
+        ],
+        "correct": 0,
+        "explanation": "python -m venv 環境名 で仮想環境を作成します。venvはPython 3.3以降に標準搭載されています。"
+    }
+]

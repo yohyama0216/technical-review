@@ -478,6 +478,6 @@
             "completed": 1
         }
     },
-    "targetDate": "2026-01-10",
+    "targetDate": null,
     "currentCategory": "technical"
 }
