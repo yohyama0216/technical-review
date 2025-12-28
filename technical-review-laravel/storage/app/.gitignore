@@ -1,3 +1,7 @@
 *
 !public/
 !.gitignore
+!private/
+private/*
+!private/*/
+!private/*/learningLog.json
