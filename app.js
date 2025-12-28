@@ -21,6 +21,23 @@ function getCategories() {
     return categories;
 }
 
+function createCategoryCard(categoryName, index, colClass = 'col-md-4') {
+    const col = document.createElement('div');
+    col.className = colClass;
+
+    const card = document.createElement('div');
+    card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
+
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body text-center';
+    cardBody.innerHTML = `<h5 class="mb-0">${categoryName}</h5>`;
+
+    card.appendChild(cardBody);
+    col.appendChild(card);
+
+    return { col, card };
+}
+
 function getQuestionsByCategory(majorCat, middleCat, minorCat) {
     return quizData.filter(
         q =>
@@ -39,6 +56,58 @@ let currentQuestionIndex = 0;
 let selectedAnswer = null;
 let quizResults = [];
 let shuffledAnswers = [];
+
+// ==================== LOCALSTORAGE HELPERS ====================
+
+function getLocalStorageItem(key, defaultValue = {}) {
+    return JSON.parse(localStorage.getItem(key) || JSON.stringify(defaultValue));
+}
+
+function setLocalStorageItem(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+// ==================== UTILITY HELPERS ====================
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function updateProgressBar(element, current, total) {
+    if (!element) return;
+    const progress = ((current + 1) / total) * 100;
+    element.style.width = `${progress}%`;
+    element.setAttribute('aria-valuenow', progress);
+}
+
+function setProgressBarPercentage(element, percentage) {
+    if (!element) return;
+    element.style.width = `${percentage}%`;
+    element.setAttribute('aria-valuenow', percentage);
+}
+
+function styleAnswerButtons(question, selectedAnswer, shuffledAnswers) {
+    const answerButtons = document.querySelectorAll('.answer-btn');
+    const isCorrect = selectedAnswer === question.correct;
+
+    answerButtons.forEach((button, displayIndex) => {
+        button.classList.add('disabled');
+        const originalIndex = shuffledAnswers[displayIndex].originalIndex;
+
+        if (originalIndex === question.correct) {
+            button.classList.remove('btn-outline-primary');
+            button.classList.add('correct');
+        } else if (originalIndex === selectedAnswer && !isCorrect) {
+            button.classList.remove('btn-outline-primary');
+            button.classList.add('incorrect');
+        }
+    });
+}
 
 // ==================== DOM ELEMENTS ====================
 
@@ -106,7 +175,7 @@ function migrateOldData() {
             stats[key] = { correct: value, incorrect: 0 };
         }
 
-        localStorage.setItem('questionAnswerStats', JSON.stringify(stats));
+        setLocalStorageItem('questionAnswerStats', stats);
         console.log('Migrated old answer counts to new stats format');
     }
 }
@@ -231,6 +300,18 @@ function showScreen(screenToShow) {
     }
 }
 
+function navigateToPage(pageName, screen, initCallback) {
+    // Navigate to page if not already there
+    if (!window.location.pathname.includes(pageName)) {
+        window.location.href = pageName;
+        return;
+    }
+    showScreen(screen);
+    if (initCallback) {
+        initCallback();
+    }
+}
+
 function showMajorCategoryScreen() {
     showScreen(majorCategoryScreen);
 }
@@ -255,24 +336,14 @@ function startRandomQuestion() {
 }
 
 function showQuestionListScreen() {
-    // Navigate to question list page if not already there
-    if (!window.location.pathname.includes('question-list.html')) {
-        window.location.href = 'question-list.html';
-        return;
-    }
-    showScreen(questionListScreen);
-    initializeQuestionListFilters();
-    updateQuestionList();
+    navigateToPage('question-list.html', questionListScreen, () => {
+        initializeQuestionListFilters();
+        updateQuestionList();
+    });
 }
 
 function showStatsScreen() {
-    // Navigate to stats page if not already there
-    if (!window.location.pathname.includes('stats.html')) {
-        window.location.href = 'stats.html';
-        return;
-    }
-    showScreen(statsScreen);
-    loadStatistics();
+    navigateToPage('stats.html', statsScreen, loadStatistics);
 }
 
 // ==================== MAJOR CATEGORY ====================
@@ -285,18 +356,7 @@ function setupMajorCategories() {
 
     const majorCats = Object.keys(categories);
     majorCats.forEach((category, index) => {
-        const col = document.createElement('div');
-        col.className = 'col-md-4';
-
-        const card = document.createElement('div');
-        card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
-
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body text-center';
-        cardBody.innerHTML = `<h5 class="mb-0">${category}</h5>`;
-
-        card.appendChild(cardBody);
-        col.appendChild(card);
+        const { col, card } = createCategoryCard(category, index);
         card.addEventListener('click', () => showMiddleCategories(category));
         majorCategoryButtons.appendChild(col);
     });
@@ -313,18 +373,7 @@ function showMiddleCategories(majorCat) {
     middleCategoryButtons.innerHTML = '';
 
     middleCats.forEach((middleCat, index) => {
-        const col = document.createElement('div');
-        col.className = 'col-md-4';
-
-        const card = document.createElement('div');
-        card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
-
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body text-center';
-        cardBody.innerHTML = `<h5 class="mb-0">${middleCat}</h5>`;
-
-        card.appendChild(cardBody);
-        col.appendChild(card);
+        const { col, card } = createCategoryCard(middleCat, index);
         card.addEventListener('click', () => showMinorCategories(majorCat, middleCat));
         middleCategoryButtons.appendChild(col);
     });
@@ -344,18 +393,7 @@ function showMinorCategories(majorCat, middleCat) {
     minorCategoryButtons.innerHTML = '';
 
     minorCats.forEach((minorCat, index) => {
-        const col = document.createElement('div');
-        col.className = 'col-md-6';
-
-        const card = document.createElement('div');
-        card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
-
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body text-center';
-        cardBody.innerHTML = `<h5 class="mb-0">${minorCat}</h5>`;
-
-        card.appendChild(cardBody);
-        col.appendChild(card);
+        const { col, card } = createCategoryCard(minorCat, index, 'col-md-6');
         card.addEventListener('click', () => startQuiz(majorCat, middleCat, minorCat));
         minorCategoryButtons.appendChild(col);
     });
@@ -413,11 +451,7 @@ function loadQuestion() {
     }
 
     // Update progress
-    if (progressFill) {
-        const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
-        progressFill.style.width = `${progress}%`;
-        progressFill.setAttribute('aria-valuenow', progress);
-    }
+    updateProgressBar(progressFill, currentQuestionIndex, currentQuestions.length);
 
     // Show question
     if (questionText) {
@@ -431,15 +465,11 @@ function loadQuestion() {
     }
 
     // Shuffle answers
-    shuffledAnswers = question.answers.map((text, index) => ({
+    const answersWithIndex = question.answers.map((text, index) => ({
         text: text,
         originalIndex: index,
     }));
-
-    for (let i = shuffledAnswers.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffledAnswers[i], shuffledAnswers[j]] = [shuffledAnswers[j], shuffledAnswers[i]];
-    }
+    shuffledAnswers = shuffleArray(answersWithIndex);
 
     // Display answers
     if (answersContainer) {
@@ -448,7 +478,7 @@ function loadQuestion() {
             const btn = document.createElement('button');
             btn.className = 'btn btn-outline-primary answer-btn';
             btn.textContent = answerObj.text;
-            btn.addEventListener('click', () => selectAnswer(answerObj.originalIndex, btn));
+            btn.addEventListener('click', () => selectAnswer(answerObj.originalIndex));
             answersContainer.appendChild(btn);
         });
     }
@@ -457,7 +487,7 @@ function loadQuestion() {
     if (nextQuestionBtn) nextQuestionBtn.classList.add('d-none');
 }
 
-function selectAnswer(index, _btn) {
+function selectAnswer(index) {
     if (selectedAnswer !== null) return;
 
     selectedAnswer = index;
@@ -470,20 +500,8 @@ function selectAnswer(index, _btn) {
         correct: isCorrect,
     });
 
-    // Show correct/incorrect
-    const answerButtons = document.querySelectorAll('.answer-btn');
-    answerButtons.forEach((button, displayIndex) => {
-        button.classList.add('disabled');
-        const originalIndex = shuffledAnswers[displayIndex].originalIndex;
-
-        if (originalIndex === question.correct) {
-            button.classList.remove('btn-outline-primary');
-            button.classList.add('correct');
-        } else if (originalIndex === selectedAnswer && !isCorrect) {
-            button.classList.remove('btn-outline-primary');
-            button.classList.add('incorrect');
-        }
-    });
+    // Style answer buttons to show correct/incorrect
+    styleAnswerButtons(question, selectedAnswer, shuffledAnswers);
 
     if (submitBtn) submitBtn.classList.add('d-none');
     showExplanation(question, isCorrect);
@@ -626,7 +644,7 @@ function getQuestionId(question) {
 
 function incrementQuestionAnswerCount(question, isCorrect) {
     const questionId = getQuestionId(question);
-    const answerStats = JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
+    const answerStats = getLocalStorageItem('questionAnswerStats');
 
     if (!answerStats[questionId]) {
         answerStats[questionId] = { correct: 0, incorrect: 0 };
@@ -638,7 +656,7 @@ function incrementQuestionAnswerCount(question, isCorrect) {
         answerStats[questionId].incorrect++;
     }
 
-    localStorage.setItem('questionAnswerStats', JSON.stringify(answerStats));
+    setLocalStorageItem('questionAnswerStats', answerStats);
 }
 
 function getQuestionAnswerCount(question) {
@@ -650,11 +668,11 @@ function getQuestionAnswerCount(question) {
 
 function getQuestionAnswerStats(question) {
     const questionId = getQuestionId(question);
-    let answerStats = JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
+    const answerStats = getLocalStorageItem('questionAnswerStats');
 
     // Migration: Convert old questionAnswerCounts to questionAnswerStats
     if (!answerStats[questionId]) {
-        const oldCounts = JSON.parse(localStorage.getItem('questionAnswerCounts') || '{}');
+        const oldCounts = getLocalStorageItem('questionAnswerCounts');
         if (oldCounts[questionId]) {
             // Assume old counts were all correct answers for backward compatibility
             answerStats[questionId] = { correct: oldCounts[questionId], incorrect: 0 };
@@ -707,7 +725,7 @@ function goToNextQuestion() {
 // ==================== STATISTICS FUNCTIONS ====================
 
 function saveQuizResult(majorCat, middleCat, minorCat, correct, total) {
-    const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
+    const results = getLocalStorageItem('quizResults');
     const key = `${majorCat}::${middleCat}::${minorCat}`;
 
     if (!results[key]) {
@@ -725,12 +743,12 @@ function saveQuizResult(majorCat, middleCat, minorCat, correct, total) {
     results[key].totalCorrect += correct;
     results[key].totalQuestions += total;
 
-    localStorage.setItem('quizResults', JSON.stringify(results));
+    setLocalStorageItem('quizResults', results);
 }
 
 function saveDailyHistory(isCorrect) {
     const today = new Date().toISOString().split('T')[0];
-    const history = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    const history = getLocalStorageItem('dailyHistory');
 
     if (!history[today]) {
         history[today] = { correct: 0, incorrect: 0, total: 0 };
@@ -743,11 +761,10 @@ function saveDailyHistory(isCorrect) {
         history[today].incorrect++;
     }
 
-    localStorage.setItem('dailyHistory', JSON.stringify(history));
+    setLocalStorageItem('dailyHistory', history);
 }
 
 function loadStatistics() {
-    const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
     // Calculate cumulative totals from question answer stats
     let totalCorrect = 0;
     let totalIncorrect = 0;
@@ -759,7 +776,7 @@ function loadStatistics() {
     });
 
     // Get daily history for charts
-    const dailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    const dailyHistory = getLocalStorageItem('dailyHistory');
 
     // Calculate question statistics
     let completedCount = 0;
@@ -813,18 +830,9 @@ function loadStatistics() {
     const unansweredCount2 = document.getElementById('unansweredCount2');
 
     if (totalQuestionsText) totalQuestionsText.textContent = totalQuestions;
-    if (completedProgress) {
-        completedProgress.style.width = `${completedPercentage}%`;
-        completedProgress.setAttribute('aria-valuenow', completedPercentage);
-    }
-    if (answeredProgress) {
-        answeredProgress.style.width = `${answeredPercentage}%`;
-        answeredProgress.setAttribute('aria-valuenow', answeredPercentage);
-    }
-    if (unansweredProgress) {
-        unansweredProgress.style.width = `${unansweredPercentage}%`;
-        unansweredProgress.setAttribute('aria-valuenow', unansweredPercentage);
-    }
+    setProgressBarPercentage(completedProgress, completedPercentage);
+    setProgressBarPercentage(answeredProgress, answeredPercentage);
+    setProgressBarPercentage(unansweredProgress, unansweredPercentage);
     if (completedProgressText) completedProgressText.textContent = `${completedPercentage}%`;
     if (answeredProgressText) answeredProgressText.textContent = `${answeredPercentage}%`;
     if (unansweredProgressText) unansweredProgressText.textContent = `${unansweredPercentage}%`;
@@ -1004,17 +1012,30 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+function generateQuestionStatsHtml(stats) {
+    const total = stats.correct + stats.incorrect;
+
+    if (total === 0) {
+        return '<div class="text-muted small">未回答</div>';
+    }
+
+    const percentage = Math.round((stats.correct / total) * 100);
+    return `
+        <div class="d-flex justify-content-between align-items-center mt-2">
+            <div>
+                <span class="badge bg-success me-1"><i class="bi bi-check-circle"></i> ${stats.correct}</span>
+                <span class="badge bg-danger me-1"><i class="bi bi-x-circle"></i> ${stats.incorrect}</span>
+                <span class="badge bg-secondary">正解率: ${percentage}%</span>
+            </div>
+        </div>
+    `;
+}
+
 function initializeQuestionListFilters() {
     const categories = getCategories();
 
     // Populate major category filter
-    majorCategoryFilter.innerHTML = '<option value="">すべて</option>';
-    Object.keys(categories).forEach(majorCat => {
-        const option = document.createElement('option');
-        option.value = majorCat;
-        option.textContent = majorCat;
-        majorCategoryFilter.appendChild(option);
-    });
+    updateCategoryFilterOptions(majorCategoryFilter, Object.keys(categories));
 
     // Reset other filters
     middleCategoryFilter.innerHTML = '<option value="">すべて</option>';
@@ -1024,33 +1045,35 @@ function initializeQuestionListFilters() {
 function updateMiddleCategoryFilter() {
     const categories = getCategories();
     const selectedMajor = majorCategoryFilter.value;
-    middleCategoryFilter.innerHTML = '<option value="">すべて</option>';
-    minorCategoryFilter.innerHTML = '<option value="">すべて</option>';
 
-    if (selectedMajor) {
-        Object.keys(categories[selectedMajor]).forEach(middleCat => {
-            const option = document.createElement('option');
-            option.value = middleCat;
-            option.textContent = middleCat;
-            middleCategoryFilter.appendChild(option);
-        });
-    }
+    updateCategoryFilterOptions(
+        middleCategoryFilter,
+        selectedMajor ? Object.keys(categories[selectedMajor]) : []
+    );
+
+    // Reset minor category filter
+    minorCategoryFilter.innerHTML = '<option value="">すべて</option>';
 }
 
 function updateMinorCategoryFilter() {
     const categories = getCategories();
     const selectedMajor = majorCategoryFilter.value;
     const selectedMiddle = middleCategoryFilter.value;
-    minorCategoryFilter.innerHTML = '<option value="">すべて</option>';
 
-    if (selectedMajor && selectedMiddle) {
-        categories[selectedMajor][selectedMiddle].forEach(minorCat => {
-            const option = document.createElement('option');
-            option.value = minorCat;
-            option.textContent = minorCat;
-            minorCategoryFilter.appendChild(option);
-        });
-    }
+    const minorCategories =
+        selectedMajor && selectedMiddle ? categories[selectedMajor][selectedMiddle] : [];
+
+    updateCategoryFilterOptions(minorCategoryFilter, minorCategories);
+}
+
+function updateCategoryFilterOptions(filterElement, options) {
+    filterElement.innerHTML = '<option value="">すべて</option>';
+    options.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.textContent = option;
+        filterElement.appendChild(optionElement);
+    });
 }
 
 function updateQuestionList() {
@@ -1115,23 +1138,7 @@ function displayQuestionList(questions) {
 
         // Get stats for this question
         const stats = getQuestionAnswerStats(question);
-        const total = stats.correct + stats.incorrect;
-        const percentage = total > 0 ? Math.round((stats.correct / total) * 100) : 0;
-
-        let statsHtml = '';
-        if (total > 0) {
-            statsHtml = `
-                <div class="d-flex justify-content-between align-items-center mt-2">
-                    <div>
-                        <span class="badge bg-success me-1"><i class="bi bi-check-circle"></i> ${stats.correct}</span>
-                        <span class="badge bg-danger me-1"><i class="bi bi-x-circle"></i> ${stats.incorrect}</span>
-                        <span class="badge bg-secondary">正解率: ${percentage}%</span>
-                    </div>
-                </div>
-            `;
-        } else {
-            statsHtml = '<div class="text-muted small">未回答</div>';
-        }
+        const statsHtml = generateQuestionStatsHtml(stats);
 
         card.innerHTML = `
             <div class="card-body">
@@ -1149,7 +1156,6 @@ function displayQuestionList(questions) {
         `;
 
         // Add click event to navigate to this question
-        // Store the question object directly to avoid inefficient lookup
         card.addEventListener('click', () => {
             startQuizFromQuestion(question);
         });
