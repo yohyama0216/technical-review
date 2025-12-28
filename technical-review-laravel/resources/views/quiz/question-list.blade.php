@@ -14,29 +14,16 @@
         <!-- Quick Keyword Search / Category Counts -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
-                @if($currentGenre === 'vocabulary' || $currentGenre === 'python')
-                    <h6 class="mb-3"><i class="bi bi-bookmark me-2"></i>カテゴリ別問題数</h6>
-                    <div class="d-flex flex-wrap gap-2">
-                        @foreach($keywordCounts as $category => $count)
-                            <a href="{{ route('quiz.question-list', ['search' => $category]) }}" 
-                               class="btn btn-sm {{ $searchText === $category ? 'btn-primary' : 'btn-outline-primary' }}">
-                                <i class="bi bi-folder me-1"></i>{{ $category }}
-                                <span class="badge {{ $searchText === $category ? 'bg-light text-dark' : 'bg-primary' }} ms-1">{{ $count }}</span>
-                            </a>
-                        @endforeach
-                    </div>
-                @else
-                    <h6 class="mb-3"><i class="bi bi-tags me-2"></i>よく検索されるキーワード</h6>
-                    <div class="d-flex flex-wrap gap-2">
-                        @foreach($keywordCounts as $keyword => $count)
-                            <a href="{{ route('quiz.question-list', ['search' => $keyword]) }}" 
-                               class="btn btn-sm {{ $searchText === $keyword ? 'btn-primary' : 'btn-outline-primary' }}">
-                                <i class="bi bi-search me-1"></i>{{ $keyword }}
-                                <span class="badge {{ $searchText === $keyword ? 'bg-light text-dark' : 'bg-primary' }} ms-1">{{ $count }}</span>
-                            </a>
-                        @endforeach
-                    </div>
-                @endif
+                <h6 class="mb-3"><i class="bi bi-bookmark me-2"></i>カテゴリ別問題数</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    @foreach($keywordCounts as $category => $count)
+                        <a href="{{ route('quiz.question-list', ['search' => $category]) }}" 
+                           class="btn btn-sm {{ $searchText === $category ? 'btn-primary' : 'btn-outline-primary' }}">
+                            <i class="bi bi-folder me-1"></i>{{ $category }}
+                            <span class="badge {{ $searchText === $category ? 'bg-light text-dark' : 'bg-primary' }} ms-1">{{ $count }}</span>
+                        </a>
+                    @endforeach
+                </div>
             </div>
         </div>
         

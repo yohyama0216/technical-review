@@ -55,7 +55,9 @@ class QuizController extends Controller
         $filteredQuestions = $this->filterQuestions($questionsWithStats, $searchText, $statusFilter);
 
         $currentGenre = $this->statisticsService->getCurrentGenre();
-        $keywordCounts = $this->getKeywordCounts($currentGenre, $questionsWithStats);
+        // For technical genre, show all categories; for others, show only filtered categories
+        $questionsForCounts = $currentGenre === 'technical' ? $questionsWithStats : $filteredQuestions;
+        $keywordCounts = $this->getKeywordCounts($currentGenre, $questionsForCounts);
 
         $viewModel = new QuestionListViewModel(
             $filteredQuestions,
@@ -97,8 +99,13 @@ class QuizController extends Controller
     private function filterQuestions($questions, string $searchText, string $statusFilter): array
     {
         return $questions->filter(function ($question) use ($searchText, $statusFilter) {
-            if ($searchText && stripos($question['question'], $searchText) === false) {
-                return false;
+            if ($searchText) {
+                $matchesQuestion = stripos($question['question'], $searchText) !== false;
+                $matchesCategory = stripos($question['middleCategory'] ?? '', $searchText) !== false;
+                
+                if (!$matchesQuestion && !$matchesCategory) {
+                    return false;
+                }
             }
 
             if ($statusFilter === 'all') {
@@ -128,37 +135,18 @@ class QuizController extends Controller
     }
 
     /**
-     * Get keyword counts based on genre
+     * Get category counts
      *
-     * @param  \Illuminate\Support\Collection<int, non-empty-array<string, mixed>>  $questions
+     * @param  \Illuminate\Support\Collection<int, non-empty-array<string, mixed>>|array<int, non-empty-array<string, mixed>>  $questions
      * @return array<string, int>
      */
     private function getKeywordCounts(string $genre, $questions): array
     {
-        if ($genre === 'vocabulary' || $genre === 'python') {
-            return $questions->groupBy('middleCategory')
-                ->map(fn ($group) => $group->count())
-                ->sortKeys()
-                ->toArray();
-        }
-
-        return Cache::remember('keyword_search_counts', 3600, function () {
-            $keywords = [
-                'API', 'REST', 'HTTP', 'HTTPS', 'JSON', 'XML',
-                'SQL', 'データベース', 'インデックス', 'トランザクション', '正規化',
-                'セキュリティ', '認証', '認可', 'OAuth', 'JWT', 'Cookie', 'Session',
-                'CORS', 'CSRF', 'XSS', 'インジェクション', '暗号化', 'SSL',
-                'キャッシュ', 'パフォーマンス', 'スケーリング', 'ロードバランサ',
-                'テスト', '単体テスト', '結合テスト', 'CI/CD',
-                'Git', 'Docker', 'デプロイ', 'バックアップ',
-                '非同期', 'マイクロサービス', 'ログ', 'モニタリング',
-                'エラー', 'バリデーション', 'リファクタリング', 'レビュー',
-                'EC2', 'RDS', 'ALB', 'ELB', 'CloudFront', 'S3', 'EBS', 'EFS',
-                'Athena', 'Kinesis', 'Lambda',
-            ];
-
-            return $this->questionService->getKeywordCounts($keywords);
-        });
+        // All genres use middleCategory for grouping
+        return collect($questions)->groupBy('middleCategory')
+            ->map(fn ($group) => $group->count())
+            ->sortKeys()
+            ->toArray();
     }
 
     /**
