@@ -21,6 +21,23 @@ function getCategories() {
     return categories;
 }
 
+function createCategoryCard(categoryName, index, colClass = 'col-md-4') {
+    const col = document.createElement('div');
+    col.className = colClass;
+
+    const card = document.createElement('div');
+    card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
+
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body text-center';
+    cardBody.innerHTML = `<h5 class="mb-0">${categoryName}</h5>`;
+
+    card.appendChild(cardBody);
+    col.appendChild(card);
+    
+    return { col, card };
+}
+
 function getQuestionsByCategory(majorCat, middleCat, minorCat) {
     return quizData.filter(
         q =>
@@ -39,6 +56,16 @@ let currentQuestionIndex = 0;
 let selectedAnswer = null;
 let quizResults = [];
 let shuffledAnswers = [];
+
+// ==================== LOCALSTORAGE HELPERS ====================
+
+function getLocalStorageItem(key, defaultValue = {}) {
+    return JSON.parse(localStorage.getItem(key) || JSON.stringify(defaultValue));
+}
+
+function setLocalStorageItem(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+}
 
 // ==================== DOM ELEMENTS ====================
 
@@ -106,7 +133,7 @@ function migrateOldData() {
             stats[key] = { correct: value, incorrect: 0 };
         }
 
-        localStorage.setItem('questionAnswerStats', JSON.stringify(stats));
+        setLocalStorageItem('questionAnswerStats', stats);
         console.log('Migrated old answer counts to new stats format');
     }
 }
@@ -285,18 +312,7 @@ function setupMajorCategories() {
 
     const majorCats = Object.keys(categories);
     majorCats.forEach((category, index) => {
-        const col = document.createElement('div');
-        col.className = 'col-md-4';
-
-        const card = document.createElement('div');
-        card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
-
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body text-center';
-        cardBody.innerHTML = `<h5 class="mb-0">${category}</h5>`;
-
-        card.appendChild(cardBody);
-        col.appendChild(card);
+        const { col, card } = createCategoryCard(category, index);
         card.addEventListener('click', () => showMiddleCategories(category));
         majorCategoryButtons.appendChild(col);
     });
@@ -313,18 +329,7 @@ function showMiddleCategories(majorCat) {
     middleCategoryButtons.innerHTML = '';
 
     middleCats.forEach((middleCat, index) => {
-        const col = document.createElement('div');
-        col.className = 'col-md-4';
-
-        const card = document.createElement('div');
-        card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
-
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body text-center';
-        cardBody.innerHTML = `<h5 class="mb-0">${middleCat}</h5>`;
-
-        card.appendChild(cardBody);
-        col.appendChild(card);
+        const { col, card } = createCategoryCard(middleCat, index);
         card.addEventListener('click', () => showMinorCategories(majorCat, middleCat));
         middleCategoryButtons.appendChild(col);
     });
@@ -344,18 +349,7 @@ function showMinorCategories(majorCat, middleCat) {
     minorCategoryButtons.innerHTML = '';
 
     minorCats.forEach((minorCat, index) => {
-        const col = document.createElement('div');
-        col.className = 'col-md-6';
-
-        const card = document.createElement('div');
-        card.className = `card category-card text-white bg-category-${(index % 9) + 1} shadow-sm`;
-
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body text-center';
-        cardBody.innerHTML = `<h5 class="mb-0">${minorCat}</h5>`;
-
-        card.appendChild(cardBody);
-        col.appendChild(card);
+        const { col, card } = createCategoryCard(minorCat, index, 'col-md-6');
         card.addEventListener('click', () => startQuiz(majorCat, middleCat, minorCat));
         minorCategoryButtons.appendChild(col);
     });
@@ -457,7 +451,7 @@ function loadQuestion() {
     if (nextQuestionBtn) nextQuestionBtn.classList.add('d-none');
 }
 
-function selectAnswer(index, _btn) {
+function selectAnswer(index) {
     if (selectedAnswer !== null) return;
 
     selectedAnswer = index;
@@ -626,7 +620,7 @@ function getQuestionId(question) {
 
 function incrementQuestionAnswerCount(question, isCorrect) {
     const questionId = getQuestionId(question);
-    const answerStats = JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
+    const answerStats = getLocalStorageItem('questionAnswerStats');
 
     if (!answerStats[questionId]) {
         answerStats[questionId] = { correct: 0, incorrect: 0 };
@@ -638,7 +632,7 @@ function incrementQuestionAnswerCount(question, isCorrect) {
         answerStats[questionId].incorrect++;
     }
 
-    localStorage.setItem('questionAnswerStats', JSON.stringify(answerStats));
+    setLocalStorageItem('questionAnswerStats', answerStats);
 }
 
 function getQuestionAnswerCount(question) {
@@ -650,11 +644,11 @@ function getQuestionAnswerCount(question) {
 
 function getQuestionAnswerStats(question) {
     const questionId = getQuestionId(question);
-    let answerStats = JSON.parse(localStorage.getItem('questionAnswerStats') || '{}');
+    const answerStats = getLocalStorageItem('questionAnswerStats');
 
     // Migration: Convert old questionAnswerCounts to questionAnswerStats
     if (!answerStats[questionId]) {
-        const oldCounts = JSON.parse(localStorage.getItem('questionAnswerCounts') || '{}');
+        const oldCounts = getLocalStorageItem('questionAnswerCounts');
         if (oldCounts[questionId]) {
             // Assume old counts were all correct answers for backward compatibility
             answerStats[questionId] = { correct: oldCounts[questionId], incorrect: 0 };
@@ -707,7 +701,7 @@ function goToNextQuestion() {
 // ==================== STATISTICS FUNCTIONS ====================
 
 function saveQuizResult(majorCat, middleCat, minorCat, correct, total) {
-    const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
+    const results = getLocalStorageItem('quizResults');
     const key = `${majorCat}::${middleCat}::${minorCat}`;
 
     if (!results[key]) {
@@ -725,12 +719,12 @@ function saveQuizResult(majorCat, middleCat, minorCat, correct, total) {
     results[key].totalCorrect += correct;
     results[key].totalQuestions += total;
 
-    localStorage.setItem('quizResults', JSON.stringify(results));
+    setLocalStorageItem('quizResults', results);
 }
 
 function saveDailyHistory(isCorrect) {
     const today = new Date().toISOString().split('T')[0];
-    const history = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    const history = getLocalStorageItem('dailyHistory');
 
     if (!history[today]) {
         history[today] = { correct: 0, incorrect: 0, total: 0 };
@@ -743,11 +737,10 @@ function saveDailyHistory(isCorrect) {
         history[today].incorrect++;
     }
 
-    localStorage.setItem('dailyHistory', JSON.stringify(history));
+    setLocalStorageItem('dailyHistory', history);
 }
 
 function loadStatistics() {
-    const results = JSON.parse(localStorage.getItem('quizResults') || '{}');
     // Calculate cumulative totals from question answer stats
     let totalCorrect = 0;
     let totalIncorrect = 0;
@@ -759,7 +752,7 @@ function loadStatistics() {
     });
 
     // Get daily history for charts
-    const dailyHistory = JSON.parse(localStorage.getItem('dailyHistory') || '{}');
+    const dailyHistory = getLocalStorageItem('dailyHistory');
 
     // Calculate question statistics
     let completedCount = 0;
@@ -1008,13 +1001,7 @@ function initializeQuestionListFilters() {
     const categories = getCategories();
 
     // Populate major category filter
-    majorCategoryFilter.innerHTML = '<option value="">すべて</option>';
-    Object.keys(categories).forEach(majorCat => {
-        const option = document.createElement('option');
-        option.value = majorCat;
-        option.textContent = majorCat;
-        majorCategoryFilter.appendChild(option);
-    });
+    updateCategoryFilterOptions(majorCategoryFilter, Object.keys(categories));
 
     // Reset other filters
     middleCategoryFilter.innerHTML = '<option value="">すべて</option>';
@@ -1024,33 +1011,34 @@ function initializeQuestionListFilters() {
 function updateMiddleCategoryFilter() {
     const categories = getCategories();
     const selectedMajor = majorCategoryFilter.value;
-    middleCategoryFilter.innerHTML = '<option value="">すべて</option>';
+    
+    updateCategoryFilterOptions(middleCategoryFilter, 
+        selectedMajor ? Object.keys(categories[selectedMajor]) : []);
+    
+    // Reset minor category filter
     minorCategoryFilter.innerHTML = '<option value="">すべて</option>';
-
-    if (selectedMajor) {
-        Object.keys(categories[selectedMajor]).forEach(middleCat => {
-            const option = document.createElement('option');
-            option.value = middleCat;
-            option.textContent = middleCat;
-            middleCategoryFilter.appendChild(option);
-        });
-    }
 }
 
 function updateMinorCategoryFilter() {
     const categories = getCategories();
     const selectedMajor = majorCategoryFilter.value;
     const selectedMiddle = middleCategoryFilter.value;
-    minorCategoryFilter.innerHTML = '<option value="">すべて</option>';
+    
+    const minorCategories = (selectedMajor && selectedMiddle) 
+        ? categories[selectedMajor][selectedMiddle] 
+        : [];
+    
+    updateCategoryFilterOptions(minorCategoryFilter, minorCategories);
+}
 
-    if (selectedMajor && selectedMiddle) {
-        categories[selectedMajor][selectedMiddle].forEach(minorCat => {
-            const option = document.createElement('option');
-            option.value = minorCat;
-            option.textContent = minorCat;
-            minorCategoryFilter.appendChild(option);
-        });
-    }
+function updateCategoryFilterOptions(filterElement, options) {
+    filterElement.innerHTML = '<option value="">すべて</option>';
+    options.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.textContent = option;
+        filterElement.appendChild(optionElement);
+    });
 }
 
 function updateQuestionList() {
