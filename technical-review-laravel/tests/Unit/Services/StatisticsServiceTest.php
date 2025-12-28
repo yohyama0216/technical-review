@@ -60,7 +60,6 @@ class StatisticsServiceTest extends TestCase
 
     public function test_record_answer_updates_statistics(): void
     {
-        $statsBefore = $this->statisticsService->getStatistics();
         $this->statisticsService->recordAnswer(1, true);
         $statsAfter = $this->statisticsService->getStatistics();
 

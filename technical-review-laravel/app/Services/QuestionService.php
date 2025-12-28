@@ -191,26 +191,31 @@ class QuestionService
             return null;
         }
 
-        // Get statistics to prioritize unanswered questions
+        $unansweredQuestions = $this->getUnansweredQuestions($filtered);
+
+        return $unansweredQuestions->isNotEmpty()
+            ? $unansweredQuestions->random()
+            : $filtered->random();
+    }
+
+    /**
+     * Filter unanswered questions from collection
+     *
+     * @param  \Illuminate\Support\Collection<int, array<string, mixed>>  $questions
+     * @return \Illuminate\Support\Collection<int, array<string, mixed>>
+     */
+    private function getUnansweredQuestions($questions)
+    {
         $stats = $this->statisticsService->getStatistics();
         $questionStats = $stats['questionStats'] ?? [];
 
-        // Separate unanswered and answered questions
-        $unansweredQuestions = $filtered->filter(function ($question) use ($questionStats) {
+        return $questions->filter(function ($question) use ($questionStats) {
             $questionId = $question['id'];
 
             return ! isset($questionStats[$questionId]) ||
                    ($questionStats[$questionId]['correctCount'] == 0 &&
                     $questionStats[$questionId]['incorrectCount'] == 0);
         });
-
-        // Prioritize unanswered questions
-        if ($unansweredQuestions->isNotEmpty()) {
-            return $unansweredQuestions->random();
-        }
-
-        // If all questions have been answered, return any random question
-        return $filtered->random();
     }
 
     /**
