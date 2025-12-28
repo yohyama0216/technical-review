@@ -7,6 +7,6 @@ const quizData = [
         question: 'JavaScriptの変数宣言で使用するキーワードは？',
         answers: ['let', 'variable', 'set', 'define'],
         correct: 0,
-        explanation: 'JavaScriptではlet、const、varを使用して変数を宣言します。'
-    }
+        explanation: 'JavaScriptではlet、const、varを使用して変数を宣言します。',
+    },
 ];

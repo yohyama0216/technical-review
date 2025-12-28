@@ -54,18 +54,21 @@
 #### 📌 ツール選定の理由
 
 **Larastan (PHPStan) を選んだ理由：**
+
 - 型安全性の向上：実行前にバグを検出
 - Laravel専用の最適化：Eloquent、Facades、Containerなどに対応
 - コミュニティで広く使われているスタンダードツール
 - 段階的に導入可能（レベル0〜9）
 
 **Composer Audit を選んだ理由：**
+
 - 追加インストール不要（Composer組み込み機能）
 - セキュリティ脆弱性の早期発見
 - GitHub Advisory Databaseとの連携
 - CI/CDでの自動実行に最適
 
 **その他の候補について：**
+
 - ❌ **PHPMD (PHP Mess Detector)**: PHPStanで大部分がカバーされ、重複が多い
 - ❌ **PHP_CodeSniffer**: Laravel Pintで十分カバーされている
 - ✅ **Laravel Pint**: PSR-12準拠、Laravel標準で十分
@@ -165,17 +168,17 @@ php artisan test --coverage --min=80
 
 ## 🔧 設定ファイル一覧
 
-| ファイル                                  | 用途                 |
-| ----------------------------------------- | -------------------- |
-| `.eslintrc.json`                          | ESLint設定           |
-| `.prettierrc.json`                        | Prettier設定         |
-| `.eslintignore`                           | ESLint除外ファイル   |
-| `.prettierignore`                         | Prettier除外ファイル |
-| `technical-review-laravel/pint.json`      | Laravel Pint設定     |
-| `technical-review-laravel/phpstan.neon`   | PHPStan設定          |
-| `technical-review-laravel/phpunit.xml`    | PHPUnit設定          |
-| `.github/workflows/frontend-ci.yml`       | フロントエンドCI設定 |
-| `.github/workflows/laravel-ci.yml`        | LaravelCI設定        |
+| ファイル                                | 用途                 |
+| --------------------------------------- | -------------------- |
+| `.eslintrc.json`                        | ESLint設定           |
+| `.prettierrc.json`                      | Prettier設定         |
+| `.eslintignore`                         | ESLint除外ファイル   |
+| `.prettierignore`                       | Prettier除外ファイル |
+| `technical-review-laravel/pint.json`    | Laravel Pint設定     |
+| `technical-review-laravel/phpstan.neon` | PHPStan設定          |
+| `technical-review-laravel/phpunit.xml`  | PHPUnit設定          |
+| `.github/workflows/frontend-ci.yml`     | フロントエンドCI設定 |
+| `.github/workflows/laravel-ci.yml`      | LaravelCI設定        |
 
 ## 🎯 コーディング規約
 

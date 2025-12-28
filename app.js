@@ -34,7 +34,7 @@ function createCategoryCard(categoryName, index, colClass = 'col-md-4') {
 
     card.appendChild(cardBody);
     col.appendChild(card);
-    
+
     return { col, card };
 }
 
@@ -94,7 +94,7 @@ function setProgressBarPercentage(element, percentage) {
 function styleAnswerButtons(question, selectedAnswer, shuffledAnswers) {
     const answerButtons = document.querySelectorAll('.answer-btn');
     const isCorrect = selectedAnswer === question.correct;
-    
+
     answerButtons.forEach((button, displayIndex) => {
         button.classList.add('disabled');
         const originalIndex = shuffledAnswers[displayIndex].originalIndex;
@@ -1012,6 +1012,25 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
+function generateQuestionStatsHtml(stats) {
+    const total = stats.correct + stats.incorrect;
+
+    if (total === 0) {
+        return '<div class="text-muted small">未回答</div>';
+    }
+
+    const percentage = Math.round((stats.correct / total) * 100);
+    return `
+        <div class="d-flex justify-content-between align-items-center mt-2">
+            <div>
+                <span class="badge bg-success me-1"><i class="bi bi-check-circle"></i> ${stats.correct}</span>
+                <span class="badge bg-danger me-1"><i class="bi bi-x-circle"></i> ${stats.incorrect}</span>
+                <span class="badge bg-secondary">正解率: ${percentage}%</span>
+            </div>
+        </div>
+    `;
+}
+
 function initializeQuestionListFilters() {
     const categories = getCategories();
 
@@ -1026,10 +1045,12 @@ function initializeQuestionListFilters() {
 function updateMiddleCategoryFilter() {
     const categories = getCategories();
     const selectedMajor = majorCategoryFilter.value;
-    
-    updateCategoryFilterOptions(middleCategoryFilter, 
-        selectedMajor ? Object.keys(categories[selectedMajor]) : []);
-    
+
+    updateCategoryFilterOptions(
+        middleCategoryFilter,
+        selectedMajor ? Object.keys(categories[selectedMajor]) : []
+    );
+
     // Reset minor category filter
     minorCategoryFilter.innerHTML = '<option value="">すべて</option>';
 }
@@ -1038,11 +1059,10 @@ function updateMinorCategoryFilter() {
     const categories = getCategories();
     const selectedMajor = majorCategoryFilter.value;
     const selectedMiddle = middleCategoryFilter.value;
-    
-    const minorCategories = (selectedMajor && selectedMiddle) 
-        ? categories[selectedMajor][selectedMiddle] 
-        : [];
-    
+
+    const minorCategories =
+        selectedMajor && selectedMiddle ? categories[selectedMajor][selectedMiddle] : [];
+
     updateCategoryFilterOptions(minorCategoryFilter, minorCategories);
 }
 
@@ -1118,23 +1138,7 @@ function displayQuestionList(questions) {
 
         // Get stats for this question
         const stats = getQuestionAnswerStats(question);
-        const total = stats.correct + stats.incorrect;
-        const percentage = total > 0 ? Math.round((stats.correct / total) * 100) : 0;
-
-        let statsHtml = '';
-        if (total > 0) {
-            statsHtml = `
-                <div class="d-flex justify-content-between align-items-center mt-2">
-                    <div>
-                        <span class="badge bg-success me-1"><i class="bi bi-check-circle"></i> ${stats.correct}</span>
-                        <span class="badge bg-danger me-1"><i class="bi bi-x-circle"></i> ${stats.incorrect}</span>
-                        <span class="badge bg-secondary">正解率: ${percentage}%</span>
-                    </div>
-                </div>
-            `;
-        } else {
-            statsHtml = '<div class="text-muted small">未回答</div>';
-        }
+        const statsHtml = generateQuestionStatsHtml(stats);
 
         card.innerHTML = `
             <div class="card-body">
@@ -1152,7 +1156,6 @@ function displayQuestionList(questions) {
         `;
 
         // Add click event to navigate to this question
-        // Store the question object directly to avoid inefficient lookup
         card.addEventListener('click', () => {
             startQuizFromQuestion(question);
         });
