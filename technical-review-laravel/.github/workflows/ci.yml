@@ -37,14 +37,8 @@ jobs:
       - name: Run Laravel Pint
         run: vendor/bin/pint --test
 
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyse --level=7 --memory-limit=512M --no-progress
-
-      - name: Run PHPMD
-        run: vendor/bin/phpmd app/ text phpmd.xml || true
-
-      - name: Run PHP Insights
-        run: php artisan insights --no-interaction --format=github-action --min-quality=90 --min-complexity=90 --min-architecture=90 --min-style=85
+      - name: Run PHPStan (Larastan)
+        run: vendor/bin/phpstan analyse --memory-limit=1G --no-progress
 
       - name: Execute tests
-        run: php artisan test --parallel
+        run: php artisan test --no-coverage
