@@ -19,11 +19,11 @@ class QuestionService
     }
 
     /**
-     * Get current category
+     * Get current genre
      */
-    private function getCurrentCategory(): string
+    private function getCurrentGenre(): string
     {
-        return $this->statisticsService->getCurrentCategory();
+        return $this->statisticsService->getCurrentGenre();
     }
 
     /**
@@ -31,12 +31,12 @@ class QuestionService
      */
     private function loadQuestions(): void
     {
-        $category = $this->getCurrentCategory();
-        $cacheKey = "questions.{$category}";
+        $genre = $this->getCurrentGenre();
+        $cacheKey = "questions.{$genre}";
 
         // Cache for 1 hour (3600 seconds)
-        $this->questions = Cache::remember($cacheKey, 3600, function () use ($category) {
-            $jsonPath = app_path("Data/{$category}/questions.json");
+        $this->questions = Cache::remember($cacheKey, 3600, function () use ($genre) {
+            $jsonPath = app_path("Data/{$genre}/questions.json");
 
             if (! file_exists($jsonPath)) {
                 return collect([]);
@@ -250,22 +250,22 @@ class QuestionService
     }
 
     /**
-     * Clear questions cache for current category
+     * Clear questions cache for current genre
      */
     public function clearCache(): void
     {
-        $category = $this->getCurrentCategory();
-        Cache::forget("questions.{$category}");
+        $genre = $this->getCurrentGenre();
+        Cache::forget("questions.{$genre}");
     }
 
     /**
-     * Clear cache for all categories
+     * Clear cache for all genres
      */
     public function clearAllCache(): void
     {
-        $categories = ['technical', 'vocabulary'];
-        foreach ($categories as $category) {
-            Cache::forget("questions.{$category}");
+        $genres = ['technical', 'vocabulary'];
+        foreach ($genres as $genre) {
+            Cache::forget("questions.{$genre}");
         }
     }
 }

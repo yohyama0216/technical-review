@@ -54,15 +54,15 @@ class QuizController extends Controller
         $statusFilter = $request->query('status', 'all');
         $filteredQuestions = $this->filterQuestions($questionsWithStats, $searchText, $statusFilter);
 
-        $currentCategory = $this->statisticsService->getCurrentCategory();
-        $keywordCounts = $this->getKeywordCounts($currentCategory, $questionsWithStats);
+        $currentGenre = $this->statisticsService->getCurrentGenre();
+        $keywordCounts = $this->getKeywordCounts($currentGenre, $questionsWithStats);
 
         $viewModel = new QuestionListViewModel(
             $filteredQuestions,
             $searchText,
             $statusFilter,
             $keywordCounts,
-            $currentCategory
+            $currentGenre
         );
 
         return view('quiz.question-list', $viewModel->toArray());
@@ -128,14 +128,14 @@ class QuizController extends Controller
     }
 
     /**
-     * Get keyword counts based on category
+     * Get keyword counts based on genre
      *
      * @param  \Illuminate\Support\Collection<int, non-empty-array<string, mixed>>  $questions
      * @return array<string, int>
      */
-    private function getKeywordCounts(string $category, $questions): array
+    private function getKeywordCounts(string $genre, $questions): array
     {
-        if ($category === 'vocabulary') {
+        if ($genre === 'vocabulary') {
             return $questions->groupBy('middleCategory')
                 ->map(fn ($group) => $group->count())
                 ->sortKeys()
@@ -183,9 +183,9 @@ class QuizController extends Controller
     public function settings(): View
     {
         $targetDate = $this->settingsService->getTargetDate();
-        $currentCategory = $this->settingsService->getCurrentCategory();
-        $availableCategories = $this->settingsService->getAvailableCategories();
-        $viewModel = new SettingsViewModel($targetDate, $currentCategory, $availableCategories);
+        $currentGenre = $this->settingsService->getCurrentGenre();
+        $availableGenres = $this->settingsService->getAvailableGenres();
+        $viewModel = new SettingsViewModel($targetDate, $currentGenre, $availableGenres);
 
         return view('quiz.settings', $viewModel->toArray());
     }
@@ -196,12 +196,12 @@ class QuizController extends Controller
     public function saveSettings(Request $request): RedirectResponse
     {
         $targetDate = $request->input('target_date');
-        $category = $request->input('category');
+        $genre = $request->input('genre');
 
         $this->settingsService->setTargetDate($targetDate);
 
-        if ($category) {
-            $this->settingsService->setCurrentCategory($category);
+        if ($genre) {
+            $this->settingsService->setCurrentGenre($genre);
 
             return redirect()->route('quiz.index')->with('success', 'カテゴリを変更しました');
         }

@@ -31,7 +31,7 @@ class ViewModelTest extends TestCase
         $this->assertArrayHasKey('searchText', $array);
         $this->assertArrayHasKey('statusFilter', $array);
         $this->assertArrayHasKey('keywordCounts', $array);
-        $this->assertArrayHasKey('currentCategory', $array);
+        $this->assertArrayHasKey('currentGenre', $array);
     }
 
     public function test_quiz_view_model_to_array(): void
@@ -57,8 +57,8 @@ class ViewModelTest extends TestCase
         $array = $viewModel->toArray();
 
         $this->assertIsArray($array);
-        $this->assertArrayHasKey('currentCategory', $array);
-        $this->assertArrayHasKey('availableCategories', $array);
+        $this->assertArrayHasKey('currentGenre', $array);
+        $this->assertArrayHasKey('availableGenres', $array);
         $this->assertArrayHasKey('targetDate', $array);
     }
 
@@ -111,7 +111,7 @@ class ViewModelTest extends TestCase
         $this->assertEmpty($array['questions']);
         $this->assertEquals('all', $array['statusFilter']);
         $this->assertEquals('', $array['searchText']);
-        $this->assertEquals('technical', $array['currentCategory']);
+        $this->assertEquals('technical', $array['currentGenre']);
     }
 
     public function test_question_list_view_model_with_filters(): void
@@ -133,28 +133,28 @@ class ViewModelTest extends TestCase
         $this->assertCount(2, $viewModel->questions);
         $this->assertEquals('test search', $viewModel->searchText);
         $this->assertEquals('completed', $viewModel->statusFilter);
-        $this->assertEquals('vocabulary', $viewModel->currentCategory);
+        $this->assertEquals('vocabulary', $viewModel->currentGenre);
         $this->assertArrayHasKey('API', $viewModel->keywordCounts);
     }
 
     public function test_settings_view_model_with_null_target_date(): void
     {
-        $categories = ['technical' => 'Technical', 'vocabulary' => 'Vocabulary'];
-        $viewModel = new SettingsViewModel(null, 'technical', $categories);
+        $genres = ['technical' => 'Technical', 'vocabulary' => 'Vocabulary'];
+        $viewModel = new SettingsViewModel(null, 'technical', $genres);
 
         $this->assertNull($viewModel->targetDate);
-        $this->assertEquals('technical', $viewModel->currentCategory);
-        $this->assertCount(2, $viewModel->availableCategories);
+        $this->assertEquals('technical', $viewModel->currentGenre);
+        $this->assertCount(2, $viewModel->availableGenres);
     }
 
     public function test_settings_view_model_with_all_parameters(): void
     {
         $targetDate = '2025-12-31';
-        $categories = ['technical' => 'Technical'];
-        $viewModel = new SettingsViewModel($targetDate, 'vocabulary', $categories);
+        $genres = ['technical' => 'Technical'];
+        $viewModel = new SettingsViewModel($targetDate, 'vocabulary', $genres);
 
         $this->assertEquals($targetDate, $viewModel->targetDate);
-        $this->assertEquals('vocabulary', $viewModel->currentCategory);
+        $this->assertEquals('vocabulary', $viewModel->currentGenre);
         $this->assertEquals('設定', $viewModel->pageTitle);
     }
 

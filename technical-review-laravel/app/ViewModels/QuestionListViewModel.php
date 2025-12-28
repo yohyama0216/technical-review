@@ -18,7 +18,7 @@ class QuestionListViewModel extends ViewModel
     /** @var array<string, int> */
     public array $keywordCounts;
 
-    public string $currentCategory;
+    public string $currentGenre;
 
     /**
      * @param  array<int, array<string, mixed>>  $questions
@@ -29,7 +29,7 @@ class QuestionListViewModel extends ViewModel
         string $searchText = '',
         string $statusFilter = 'all',
         array $keywordCounts = [],
-        string $currentCategory = 'technical'
+        string $currentGenre = 'technical'
     ) {
         $this->pageTitle = '問題一覧';
         $this->appName = '資格対策アプリ';
@@ -37,6 +37,6 @@ class QuestionListViewModel extends ViewModel
         $this->searchText = $searchText;
         $this->statusFilter = $statusFilter;
         $this->keywordCounts = $keywordCounts;
-        $this->currentCategory = $currentCategory;
+        $this->currentGenre = $currentGenre;
     }
 }

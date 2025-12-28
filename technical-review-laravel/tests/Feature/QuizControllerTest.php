@@ -43,7 +43,7 @@ class QuizControllerTest extends TestCase
     public function test_save_settings_redirects_with_success(): void
     {
         $response = $this->post(route('quiz.settings.save'), [
-            'category' => 'technical',
+            'genre' => 'technical',
         ]);
 
         $response->assertRedirect();
@@ -109,17 +109,17 @@ class QuizControllerTest extends TestCase
         $response->assertJson(['error' => '問題が見つかりません']);
     }
 
-    public function test_save_settings_with_category_redirects_to_index(): void
+    public function test_save_settings_with_genre_redirects_to_index(): void
     {
         $response = $this->post(route('quiz.settings.save'), [
-            'category' => 'vocabulary',
+            'genre' => 'vocabulary',
         ]);
 
         $response->assertRedirect(route('quiz.index'));
         $response->assertSessionHas('success', 'カテゴリを変更しました');
     }
 
-    public function test_save_settings_without_category_redirects_to_stats(): void
+    public function test_save_settings_without_genre_redirects_to_stats(): void
     {
         $response = $this->post(route('quiz.settings.save'), [
             'target_date' => '2025-12-31',
@@ -190,8 +190,8 @@ class QuizControllerTest extends TestCase
         $response = $this->get(route('quiz.settings'));
 
         $response->assertStatus(200);
-        $response->assertViewHas('currentCategory');
-        $response->assertViewHas('availableCategories');
+        $response->assertViewHas('currentGenre');
+        $response->assertViewHas('availableGenres');
     }
 
     public function test_start_quiz_creates_session_data(): void
@@ -210,10 +210,10 @@ class QuizControllerTest extends TestCase
         $this->assertNotNull(session('current_question'));
     }
 
-    public function test_save_settings_with_both_category_and_date(): void
+    public function test_save_settings_with_both_genre_and_date(): void
     {
         $response = $this->post(route('quiz.settings.save'), [
-            'category' => 'technical',
+            'genre' => 'technical',
             'target_date' => '2025-12-31',
         ]);
 

@@ -25,7 +25,7 @@ class SettingsService
     {
         if (! Storage::exists(self::SETTINGS_FILE)) {
             return [
-                'currentCategory' => 'technical',
+                'currentGenre' => 'technical',
                 'targetDate' => null,
             ];
         }
@@ -34,7 +34,7 @@ class SettingsService
         $data = json_decode($content, true);
 
         return $data ?? [
-            'currentCategory' => 'technical',
+            'currentGenre' => 'technical',
             'targetDate' => null,
         ];
     }
@@ -62,7 +62,7 @@ class SettingsService
     {
         return [
             'targetDate' => $this->getTargetDate(),
-            'currentCategory' => $this->getCurrentCategory(),
+            'currentGenre' => $this->getCurrentGenre(),
         ];
     }
 
@@ -71,10 +71,10 @@ class SettingsService
      */
     public function getTargetDate(): ?string
     {
-        // Try category-specific learningLog first, then settings.json
-        $categoryTargetDate = $this->statisticsService->getTargetDate();
-        if ($categoryTargetDate) {
-            return $categoryTargetDate;
+        // Try genre-specific learningLog first, then settings.json
+        $genreTargetDate = $this->statisticsService->getTargetDate();
+        if ($genreTargetDate) {
+            return $genreTargetDate;
         }
 
         $settings = $this->getSettingsData();
@@ -91,31 +91,31 @@ class SettingsService
     }
 
     /**
-     * Get current category
+     * Get current genre
      */
-    public function getCurrentCategory(): string
+    public function getCurrentGenre(): string
     {
         $settings = $this->getSettingsData();
 
-        return $settings['currentCategory'] ?? 'technical';
+        return $settings['currentGenre'] ?? 'technical';
     }
 
     /**
-     * Set current category
+     * Set current genre
      */
-    public function setCurrentCategory(string $category): void
+    public function setCurrentGenre(string $genre): void
     {
         $settings = $this->getSettingsData();
-        $settings['currentCategory'] = $category;
+        $settings['currentGenre'] = $genre;
         $this->saveSettingsData($settings);
     }
 
     /**
-     * Get available categories
+     * Get available genres
      *
      * @return array<string, string>
      */
-    public function getAvailableCategories(): array
+    public function getAvailableGenres(): array
     {
         return [
             'technical' => '技術面接',

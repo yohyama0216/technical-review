@@ -24,11 +24,11 @@ class StatisticsServiceTest extends TestCase
         $this->assertArrayHasKey('dailyHistory', $stats);
     }
 
-    public function test_get_current_category_returns_string(): void
+    public function test_get_current_genre_returns_string(): void
     {
-        $category = $this->statisticsService->getCurrentCategory();
-        $this->assertIsString($category);
-        $this->assertContains($category, ['technical', 'vocabulary']);
+        $genre = $this->statisticsService->getCurrentGenre();
+        $this->assertIsString($genre);
+        $this->assertContains($genre, ['technical', 'vocabulary']);
     }
 
     public function test_get_cumulative_stats_returns_array(): void

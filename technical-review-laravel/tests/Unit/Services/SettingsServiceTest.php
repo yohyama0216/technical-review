@@ -22,33 +22,33 @@ class SettingsServiceTest extends TestCase
         $this->assertIsArray($settings);
     }
 
-    public function test_get_current_category_returns_string(): void
+    public function test_get_current_genre_returns_string(): void
     {
-        $category = $this->settingsService->getCurrentCategory();
-        $this->assertIsString($category);
-        $this->assertContains($category, ['technical', 'vocabulary']);
+        $genre = $this->settingsService->getCurrentGenre();
+        $this->assertIsString($genre);
+        $this->assertContains($genre, ['technical', 'vocabulary']);
     }
 
-    public function test_get_available_categories_returns_array(): void
+    public function test_get_available_genres_returns_array(): void
     {
-        $categories = $this->settingsService->getAvailableCategories();
-        $this->assertIsArray($categories);
-        $this->assertArrayHasKey('technical', $categories);
-        $this->assertArrayHasKey('vocabulary', $categories);
+        $genres = $this->settingsService->getAvailableGenres();
+        $this->assertIsArray($genres);
+        $this->assertArrayHasKey('technical', $genres);
+        $this->assertArrayHasKey('vocabulary', $genres);
     }
 
-    public function test_set_current_category_changes_category(): void
+    public function test_set_current_genre_changes_genre(): void
     {
-        $originalCategory = $this->settingsService->getCurrentCategory();
-        $newCategory = $originalCategory === 'technical' ? 'vocabulary' : 'technical';
+        $originalGenre = $this->settingsService->getCurrentGenre();
+        $newGenre = $originalGenre === 'technical' ? 'vocabulary' : 'technical';
 
-        $this->settingsService->setCurrentCategory($newCategory);
-        $currentCategory = $this->settingsService->getCurrentCategory();
+        $this->settingsService->setCurrentGenre($newGenre);
+        $currentGenre = $this->settingsService->getCurrentGenre();
 
-        $this->assertEquals($newCategory, $currentCategory);
+        $this->assertEquals($newGenre, $currentGenre);
 
         // Restore original
-        $this->settingsService->setCurrentCategory($originalCategory);
+        $this->settingsService->setCurrentGenre($originalGenre);
     }
 
     public function test_get_target_date_returns_string_or_null(): void
@@ -68,12 +68,12 @@ class SettingsServiceTest extends TestCase
 
     public function test_settings_persist_after_multiple_changes(): void
     {
-        $this->settingsService->setCurrentCategory('technical');
+        $this->settingsService->setCurrentGenre('technical');
         $this->settingsService->setTargetDate('2025-12-25');
 
         $settings = $this->settingsService->getSettings();
 
-        $this->assertEquals('technical', $settings['currentCategory']);
+        $this->assertEquals('technical', $settings['currentGenre']);
         $this->assertEquals('2025-12-25', $settings['targetDate']);
     }
 
@@ -89,7 +89,7 @@ class SettingsServiceTest extends TestCase
     {
         $settings = $this->settingsService->getSettings();
 
-        $this->assertArrayHasKey('currentCategory', $settings);
+        $this->assertArrayHasKey('currentGenre', $settings);
         $this->assertArrayHasKey('targetDate', $settings);
     }
 }

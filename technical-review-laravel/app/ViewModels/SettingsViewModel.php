@@ -10,20 +10,20 @@ class SettingsViewModel extends ViewModel
 
     public ?string $targetDate;
 
-    public string $currentCategory;
+    public string $currentGenre;
 
     /** @var array<string, string> */
-    public array $availableCategories;
+    public array $availableGenres;
 
     /**
-     * @param  array<string, string>  $availableCategories
+     * @param  array<string, string>  $availableGenres
      */
-    public function __construct(?string $targetDate = null, string $currentCategory = 'technical', array $availableCategories = [])
+    public function __construct(?string $targetDate = null, string $currentGenre = 'technical', array $availableGenres = [])
     {
         $this->pageTitle = '設定';
         $this->appName = '資格対策アプリ';
         $this->targetDate = $targetDate;
-        $this->currentCategory = $currentCategory;
-        $this->availableCategories = $availableCategories;
+        $this->currentGenre = $currentGenre;
+        $this->availableGenres = $availableGenres;
     }
 }

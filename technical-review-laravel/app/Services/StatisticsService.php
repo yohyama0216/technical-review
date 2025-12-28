@@ -10,16 +10,16 @@ class StatisticsService
     private const LEARNING_LOG_FILE_PATTERN = '%s/learningLog.json';
 
     /**
-     * Get current category from the main learningLog file or return default
+     * Get current genre from the main learningLog file or return default
      */
-    public function getCurrentCategory(): string
+    public function getCurrentGenre(): string
     {
         // Read from settings.json to avoid circular dependency
         if (Storage::exists('settings.json')) {
             $content = Storage::get('settings.json');
             $data = json_decode($content, true);
-            if (isset($data['currentCategory'])) {
-                return $data['currentCategory'];
+            if (isset($data['currentGenre'])) {
+                return $data['currentGenre'];
             }
         }
 
@@ -131,13 +131,13 @@ class StatisticsService
     }
 
     /**
-     * Get learning log file path for current category
+     * Get learning log file path for current genre
      */
     private function getLearningLogFile(): string
     {
-        $category = $this->getCurrentCategory();
+        $genre = $this->getCurrentGenre();
 
-        return sprintf(self::LEARNING_LOG_FILE_PATTERN, $category);
+        return sprintf(self::LEARNING_LOG_FILE_PATTERN, $genre);
     }
 
     /**
@@ -169,7 +169,7 @@ class StatisticsService
             'questionStats' => [],
             'dailyHistory' => [],
             'targetDate' => null,
-            'currentCategory' => 'technical',
+            'currentGenre' => 'technical',
         ];
     }
 

@@ -384,6 +384,71 @@
             "correctCount": 1,
             "incorrectCount": 0,
             "completed": false
+        },
+        "117": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "472": {
+            "correctCount": 0,
+            "incorrectCount": 1,
+            "completed": false
+        },
+        "499": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "438": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "303": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "351": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "446": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "617": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "261": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "509": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "656": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "602": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
+        },
+        "393": {
+            "correctCount": 1,
+            "incorrectCount": 0,
+            "completed": false
         }
     },
     "dailyHistory": {
@@ -405,6 +470,11 @@
         "2025-12-27": {
             "correct": 20,
             "incorrect": 2,
+            "completed": 1
+        },
+        "2025-12-28": {
+            "correct": 12,
+            "incorrect": 1,
             "completed": 1
         }
     },

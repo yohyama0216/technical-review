@@ -8,13 +8,13 @@
         </a>
         <div class="text-center mb-4">
             <h2 class="fw-bold"><i class="bi bi-list-ul me-2"></i>問題一覧</h2>
-            <p class="text-muted">カテゴリを選択して問題を絞り込めます</p>
+            <p class="text-muted">カテゴリを選択して問題を絞り込むことができます</p>
         </div>
         
         <!-- Quick Keyword Search / Category Counts -->
         <div class="card shadow-sm mb-4">
             <div class="card-body">
-                @if($currentCategory === 'vocabulary')
+                @if($currentGenre === 'vocabulary')
                     <h6 class="mb-3"><i class="bi bi-bookmark me-2"></i>カテゴリ別問題数</h6>
                     <div class="d-flex flex-wrap gap-2">
                         @foreach($keywordCounts as $category => $count)
