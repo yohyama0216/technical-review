@@ -13,7 +13,6 @@ use App\ViewModels\StatsViewModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class QuizController extends Controller
@@ -56,7 +55,7 @@ class QuizController extends Controller
 
         $currentGenre = $this->statisticsService->getCurrentGenre();
         // For technical genre, show all categories; for others, show only filtered categories
-        $questionsForCounts = $currentGenre === 'technical' ? $questionsWithStats : $filteredQuestions;
+        $questionsForCounts = $currentGenre === 'technical' ? array_values($questionsWithStats->all()) : $filteredQuestions;
         $keywordCounts = $this->getKeywordCounts($currentGenre, $questionsForCounts);
 
         $viewModel = new QuestionListViewModel(
@@ -102,8 +101,8 @@ class QuizController extends Controller
             if ($searchText) {
                 $matchesQuestion = stripos($question['question'], $searchText) !== false;
                 $matchesCategory = stripos($question['middleCategory'] ?? '', $searchText) !== false;
-                
-                if (!$matchesQuestion && !$matchesCategory) {
+
+                if (! $matchesQuestion && ! $matchesCategory) {
                     return false;
                 }
             }
@@ -113,7 +112,7 @@ class QuizController extends Controller
             }
 
             return $this->matchesStatusFilter($question, $statusFilter);
-        })->values()->toArray();
+        })->values()->all();
     }
 
     /**
@@ -137,7 +136,7 @@ class QuizController extends Controller
     /**
      * Get category counts
      *
-     * @param  \Illuminate\Support\Collection<int, non-empty-array<string, mixed>>|array<int, non-empty-array<string, mixed>>  $questions
+     * @param  array<array<string, mixed>>  $questions
      * @return array<string, int>
      */
     private function getKeywordCounts(string $genre, $questions): array

@@ -29,7 +29,7 @@ if ($LASTEXITCODE -eq 0) {
 
 # 3. PHPUnit Tests
 Write-Host "`n[3/3] Running PHPUnit Tests..." -ForegroundColor Yellow
-php artisan test
+php artisan test --no-coverage
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ Tests: PASSED" -ForegroundColor Green
 } else {
