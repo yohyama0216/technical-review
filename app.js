@@ -67,6 +67,48 @@ function setLocalStorageItem(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }
 
+// ==================== UTILITY HELPERS ====================
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function updateProgressBar(element, current, total) {
+    if (!element) return;
+    const progress = ((current + 1) / total) * 100;
+    element.style.width = `${progress}%`;
+    element.setAttribute('aria-valuenow', progress);
+}
+
+function setProgressBarPercentage(element, percentage) {
+    if (!element) return;
+    element.style.width = `${percentage}%`;
+    element.setAttribute('aria-valuenow', percentage);
+}
+
+function styleAnswerButtons(question, selectedAnswer, shuffledAnswers) {
+    const answerButtons = document.querySelectorAll('.answer-btn');
+    const isCorrect = selectedAnswer === question.correct;
+    
+    answerButtons.forEach((button, displayIndex) => {
+        button.classList.add('disabled');
+        const originalIndex = shuffledAnswers[displayIndex].originalIndex;
+
+        if (originalIndex === question.correct) {
+            button.classList.remove('btn-outline-primary');
+            button.classList.add('correct');
+        } else if (originalIndex === selectedAnswer && !isCorrect) {
+            button.classList.remove('btn-outline-primary');
+            button.classList.add('incorrect');
+        }
+    });
+}
+
 // ==================== DOM ELEMENTS ====================
 
 let majorCategoryScreen = null;
@@ -258,6 +300,18 @@ function showScreen(screenToShow) {
     }
 }
 
+function navigateToPage(pageName, screen, initCallback) {
+    // Navigate to page if not already there
+    if (!window.location.pathname.includes(pageName)) {
+        window.location.href = pageName;
+        return;
+    }
+    showScreen(screen);
+    if (initCallback) {
+        initCallback();
+    }
+}
+
 function showMajorCategoryScreen() {
     showScreen(majorCategoryScreen);
 }
@@ -282,24 +336,14 @@ function startRandomQuestion() {
 }
 
 function showQuestionListScreen() {
-    // Navigate to question list page if not already there
-    if (!window.location.pathname.includes('question-list.html')) {
-        window.location.href = 'question-list.html';
-        return;
-    }
-    showScreen(questionListScreen);
-    initializeQuestionListFilters();
-    updateQuestionList();
+    navigateToPage('question-list.html', questionListScreen, () => {
+        initializeQuestionListFilters();
+        updateQuestionList();
+    });
 }
 
 function showStatsScreen() {
-    // Navigate to stats page if not already there
-    if (!window.location.pathname.includes('stats.html')) {
-        window.location.href = 'stats.html';
-        return;
-    }
-    showScreen(statsScreen);
-    loadStatistics();
+    navigateToPage('stats.html', statsScreen, loadStatistics);
 }
 
 // ==================== MAJOR CATEGORY ====================
@@ -407,11 +451,7 @@ function loadQuestion() {
     }
 
     // Update progress
-    if (progressFill) {
-        const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
-        progressFill.style.width = `${progress}%`;
-        progressFill.setAttribute('aria-valuenow', progress);
-    }
+    updateProgressBar(progressFill, currentQuestionIndex, currentQuestions.length);
 
     // Show question
     if (questionText) {
@@ -425,15 +465,11 @@ function loadQuestion() {
     }
 
     // Shuffle answers
-    shuffledAnswers = question.answers.map((text, index) => ({
+    const answersWithIndex = question.answers.map((text, index) => ({
         text: text,
         originalIndex: index,
     }));
-
-    for (let i = shuffledAnswers.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffledAnswers[i], shuffledAnswers[j]] = [shuffledAnswers[j], shuffledAnswers[i]];
-    }
+    shuffledAnswers = shuffleArray(answersWithIndex);
 
     // Display answers
     if (answersContainer) {
@@ -442,7 +478,7 @@ function loadQuestion() {
             const btn = document.createElement('button');
             btn.className = 'btn btn-outline-primary answer-btn';
             btn.textContent = answerObj.text;
-            btn.addEventListener('click', () => selectAnswer(answerObj.originalIndex, btn));
+            btn.addEventListener('click', () => selectAnswer(answerObj.originalIndex));
             answersContainer.appendChild(btn);
         });
     }
@@ -464,20 +500,8 @@ function selectAnswer(index) {
         correct: isCorrect,
     });
 
-    // Show correct/incorrect
-    const answerButtons = document.querySelectorAll('.answer-btn');
-    answerButtons.forEach((button, displayIndex) => {
-        button.classList.add('disabled');
-        const originalIndex = shuffledAnswers[displayIndex].originalIndex;
-
-        if (originalIndex === question.correct) {
-            button.classList.remove('btn-outline-primary');
-            button.classList.add('correct');
-        } else if (originalIndex === selectedAnswer && !isCorrect) {
-            button.classList.remove('btn-outline-primary');
-            button.classList.add('incorrect');
-        }
-    });
+    // Style answer buttons to show correct/incorrect
+    styleAnswerButtons(question, selectedAnswer, shuffledAnswers);
 
     if (submitBtn) submitBtn.classList.add('d-none');
     showExplanation(question, isCorrect);
@@ -806,18 +830,9 @@ function loadStatistics() {
     const unansweredCount2 = document.getElementById('unansweredCount2');
 
     if (totalQuestionsText) totalQuestionsText.textContent = totalQuestions;
-    if (completedProgress) {
-        completedProgress.style.width = `${completedPercentage}%`;
-        completedProgress.setAttribute('aria-valuenow', completedPercentage);
-    }
-    if (answeredProgress) {
-        answeredProgress.style.width = `${answeredPercentage}%`;
-        answeredProgress.setAttribute('aria-valuenow', answeredPercentage);
-    }
-    if (unansweredProgress) {
-        unansweredProgress.style.width = `${unansweredPercentage}%`;
-        unansweredProgress.setAttribute('aria-valuenow', unansweredPercentage);
-    }
+    setProgressBarPercentage(completedProgress, completedPercentage);
+    setProgressBarPercentage(answeredProgress, answeredPercentage);
+    setProgressBarPercentage(unansweredProgress, unansweredPercentage);
     if (completedProgressText) completedProgressText.textContent = `${completedPercentage}%`;
     if (answeredProgressText) answeredProgressText.textContent = `${answeredPercentage}%`;
     if (unansweredProgressText) unansweredProgressText.textContent = `${unansweredPercentage}%`;
