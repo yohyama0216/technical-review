@@ -2801,10 +2801,10 @@ const quizData = [
         middleCategory: 'Python3エンジニア認定基礎試験',
         minorCategory: 'Python基礎文法',
         question: 'Pythonで複数の変数に同時に値を代入する構文として正しいものはどれですか？',
-        answers: ['a = b = c = 0', 'a, b, c = 1, 2, 3', 'a; b; c = 1; 2; 3', 'すべて正しい'],
-        correct: 3,
+        answers: ['a = b = c = 0', 'a, b, c = 1, 2, 3', 'どちらも正しい', 'どちらも間違い'],
+        correct: 2,
         explanation:
-            'a = b = c = 0 は連鎖代入、a, b, c = 1, 2, 3 はアンパック代入で、どちらも有効です。',
+            'a = b = c = 0 は連鎖代入、a, b, c = 1, 2, 3 はアンパック代入で、どちらも有効なPythonの構文です。',
     },
     {
         majorCategory: 'Python資格試験',
