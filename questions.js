@@ -2374,4 +2374,505 @@ const quizData = [
         explanation:
             'exacerbate は「悪化させる、激化させる」という意味です。exacerbate the problem（問題を悪化させる）のように使われます。',
     },
+
+    // Python Certification Exam Category
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonで整数と浮動小数点数を除算した結果のデータ型はどれですか？',
+        answers: ['int', 'float', 'complex', 'decimal'],
+        correct: 1,
+        explanation:
+            'Pythonでは、整数と浮動小数点数の演算結果は浮動小数点数(float)になります。例: 10 / 2 = 5.0',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonで整数の除算で商の整数部分のみを得る演算子はどれですか？',
+        answers: ['/', '//', '%', '**'],
+        correct: 1,
+        explanation:
+            '// は床除算演算子で、商の整数部分のみを返します。例: 7 // 2 = 3。/ は通常の除算、% は剰余、** はべき乗です。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonのリストとタプルの違いとして正しいものはどれですか？',
+        answers: [
+            'リストは可変、タプルは不変',
+            'タプルは可変、リストは不変',
+            '両方とも可変',
+            '両方とも不変',
+        ],
+        correct: 0,
+        explanation:
+            'リスト(list)は可変(mutable)で要素の追加・変更・削除が可能ですが、タプル(tuple)は不変(immutable)で作成後は変更できません。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonの辞書(dict)のキーとして使用できないデータ型はどれですか？',
+        answers: ['文字列(str)', 'タプル(tuple)', 'リスト(list)', '整数(int)'],
+        correct: 2,
+        explanation:
+            '辞書のキーには不変(immutable)なオブジェクトのみ使用できます。リストは可変なのでキーには使用できません。文字列、タプル、整数は不変なので使用可能です。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonで文字列の繰り返しを行う演算子はどれですか？',
+        answers: ['+', '*', '/', '**'],
+        correct: 1,
+        explanation:
+            '* 演算子を使用して文字列を繰り返すことができます。例: "Hello" * 3 = "HelloHelloHello"。+ は文字列の連結に使用されます。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '制御構造',
+        question: 'Pythonのfor文でリストの要素とインデックスを同時に取得するために使用する関数はどれですか？',
+        answers: ['range()', 'enumerate()', 'zip()', 'iter()'],
+        correct: 1,
+        explanation:
+            'enumerate()関数は、リストなどのイテラブルオブジェクトからインデックスと要素をタプルとして返します。例: for i, v in enumerate(lst):',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '制御構造',
+        question: 'Pythonのwhile文を途中で終了させるキーワードはどれですか？',
+        answers: ['break', 'continue', 'pass', 'return'],
+        correct: 0,
+        explanation:
+            'breakはループを完全に終了します。continueは現在の反復をスキップして次の反復に進みます。passは何もしません。returnは関数から値を返して終了します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '制御構造',
+        question: 'Pythonのリスト内包表記の構文として正しいものはどれですか？',
+        answers: [
+            '[x for x in range(10)]',
+            '{x for x in range(10)}',
+            '(x for x in range(10))',
+            '<x for x in range(10)>',
+        ],
+        correct: 0,
+        explanation:
+            'リスト内包表記は [式 for 変数 in イテラブル] の形式です。{}は集合内包表記、()はジェネレータ式、<>は無効な構文です。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '制御構造',
+        question: 'Pythonでelse節をループ（for、while）と組み合わせた場合の動作として正しいものはどれですか？',
+        answers: [
+            'ループが正常に完了した場合にelse節が実行される',
+            'ループでエラーが発生した場合にelse節が実行される',
+            'ループが1回も実行されなかった場合にelse節が実行される',
+            'ループがbreakで中断された場合にelse節が実行される',
+        ],
+        correct: 0,
+        explanation:
+            'ループのelse節は、ループが正常に完了した場合（breakで中断されなかった場合）に実行されます。breakで中断された場合は実行されません。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '関数とモジュール',
+        question: 'Python関数の引数でデフォルト値を持つ引数の位置として正しいものはどれですか？',
+        answers: [
+            '最初の引数のみ',
+            'デフォルト値のない引数の前',
+            'デフォルト値のない引数の後',
+            '任意の位置',
+        ],
+        correct: 2,
+        explanation:
+            'デフォルト値を持つ引数は、デフォルト値を持たない引数の後に配置する必要があります。例: def func(a, b, c=10, d=20):',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '関数とモジュール',
+        question: 'Python関数で可変長の位置引数を受け取るための記法はどれですか？',
+        answers: ['*args', '**kwargs', '&args', '@args'],
+        correct: 0,
+        explanation:
+            '*argsは可変長の位置引数をタプルとして受け取ります。**kwargsは可変長のキーワード引数を辞書として受け取ります。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '関数とモジュール',
+        question: 'Pythonのlambda式で定義できる関数の特徴として正しいものはどれですか？',
+        answers: [
+            '複数の式を含むことができる',
+            '単一の式のみを持つ無名関数',
+            'def文と完全に同じ機能を持つ',
+            'クラスのメソッドのみで使用可能',
+        ],
+        correct: 1,
+        explanation:
+            'lambda式は単一の式のみを持つ無名関数を作成します。例: lambda x: x * 2。複数の式や文は含められません。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '関数とモジュール',
+        question: 'Pythonモジュールをインポートする際、特定の関数やクラスのみをインポートする構文はどれですか？',
+        answers: [
+            'import module.function',
+            'from module import function',
+            'import function from module',
+            'module.import(function)',
+        ],
+        correct: 1,
+        explanation:
+            'from モジュール名 import 関数名 の構文で、モジュールから特定の関数やクラスのみをインポートできます。例: from math import sqrt',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '関数とモジュール',
+        question: 'Pythonで関数内のローカル変数をグローバル変数として扱うために使用するキーワードはどれですか？',
+        answers: ['global', 'nonlocal', 'static', 'public'],
+        correct: 0,
+        explanation:
+            'globalキーワードを使用すると、関数内でグローバル変数を参照・変更できます。nonlocalは外側の関数のローカル変数にアクセスします。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'クラスとオブジェクト指向',
+        question: 'Pythonのクラスでインスタンス変数を定義する場所として正しいものはどれですか？',
+        answers: [
+            'クラスの直下',
+            '__init__メソッド内でself.変数名',
+            'クラスの外',
+            'どこでも同じ',
+        ],
+        correct: 1,
+        explanation:
+            'インスタンス変数は通常、__init__メソッド内でself.変数名として定義します。クラスの直下で定義するとクラス変数になります。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'クラスとオブジェクト指向',
+        question: 'Pythonのクラスメソッドを定義するデコレータはどれですか？',
+        answers: ['@staticmethod', '@classmethod', '@property', '@abstractmethod'],
+        correct: 1,
+        explanation:
+            '@classmethodデコレータはクラスメソッドを定義します。第一引数にクラス自体(cls)を受け取ります。@staticmethodは静的メソッド、@propertyはプロパティを定義します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'クラスとオブジェクト指向',
+        question: 'Pythonでクラスの継承を行う構文として正しいものはどれですか？',
+        answers: [
+            'class Child extends Parent:',
+            'class Child(Parent):',
+            'class Child inherits Parent:',
+            'class Child : Parent',
+        ],
+        correct: 1,
+        explanation:
+            'Pythonでは class 子クラス名(親クラス名): の形式で継承を行います。複数の親クラスから継承する場合は、カンマで区切ります。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'クラスとオブジェクト指向',
+        question: 'Pythonのプライベート変数（外部からアクセスできない変数）の命名規則はどれですか？',
+        answers: [
+            '変数名の前にアンダースコア1つ(_var)',
+            '変数名の前にアンダースコア2つ(__var)',
+            '変数名の後にアンダースコア2つ(var__)',
+            'privateキーワードを使用',
+        ],
+        correct: 1,
+        explanation:
+            '変数名の前にアンダースコア2つ(__)を付けると、名前マングリングが行われプライベート変数になります。_1つは慣例的なプライベート変数です。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'クラスとオブジェクト指向',
+        question: 'Pythonの特殊メソッド__str__の役割はどれですか？',
+        answers: [
+            'オブジェクトを文字列に変換する際の表現を定義',
+            'オブジェクトを数値に変換',
+            'オブジェクトの長さを返す',
+            'オブジェクトを比較する',
+        ],
+        correct: 0,
+        explanation:
+            '__str__メソッドはstr()関数やprint()で呼ばれ、オブジェクトの文字列表現を返します。__repr__は開発者向けの表現を定義します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '標準ライブラリ',
+        question: 'Pythonで正規表現を扱うための標準ライブラリモジュールはどれですか？',
+        answers: ['regex', 're', 'regexp', 'pattern'],
+        correct: 1,
+        explanation:
+            'reモジュールはPythonで正規表現を扱うための標準ライブラリです。re.match(), re.search(), re.findall()などの関数を提供します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '標準ライブラリ',
+        question: 'Pythonで日付と時刻を扱うための標準ライブラリモジュールはどれですか？',
+        answers: ['time', 'datetime', 'calendar', 'すべて正しい'],
+        correct: 3,
+        explanation:
+            'time、datetime、calendarはすべて日付と時刻を扱う標準ライブラリです。datetimeが最も包括的で、timeは低レベル、calendarはカレンダー関連の機能を提供します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '標準ライブラリ',
+        question: 'PythonでJSON形式のデータを扱うための標準ライブラリモジュールはどれですか？',
+        answers: ['json', 'jsonlib', 'simplejson', 'jsonparser'],
+        correct: 0,
+        explanation:
+            'jsonモジュールはJSON形式のデータをエンコード/デコードする標準ライブラリです。json.dumps()でPythonオブジェクトをJSON文字列に、json.loads()でJSON文字列をPythonオブジェクトに変換します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '標準ライブラリ',
+        question: 'Pythonでランダムな値を生成するための標準ライブラリモジュールはどれですか？',
+        answers: ['rand', 'random', 'rng', 'randgen'],
+        correct: 1,
+        explanation:
+            'randomモジュールは乱数生成のための標準ライブラリです。random.random()で0-1の浮動小数点数、random.randint()で整数、random.choice()でリストから要素を選択できます。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '標準ライブラリ',
+        question: 'Pythonでコマンドライン引数を取得するために使用するモジュールはどれですか？',
+        answers: ['sys', 'os', 'argparse', 'sys と argparse 両方'],
+        correct: 3,
+        explanation:
+            'sys.argvで基本的なコマンドライン引数を取得でき、argparseモジュールで高度な引数解析ができます。両方とも標準ライブラリです。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'ファイル操作',
+        question: 'Pythonでファイルを開く際、読み込み専用モードを指定する引数はどれですか？',
+        answers: ['"r"', '"w"', '"a"', '"x"'],
+        correct: 0,
+        explanation:
+            'open()関数のモード: "r"は読み込み、"w"は書き込み（上書き）、"a"は追記、"x"は新規作成（既存ファイルがあるとエラー）です。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'ファイル操作',
+        question: 'Pythonでファイルを自動的に閉じるために推奨される構文はどれですか？',
+        answers: [
+            'try-finally構文',
+            'with文',
+            'close()メソッドを手動で呼び出す',
+            'del文',
+        ],
+        correct: 1,
+        explanation:
+            'with文を使用すると、ブロックを抜ける際に自動的にファイルが閉じられます。例: with open("file.txt") as f:',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'ファイル操作',
+        question: 'Pythonでバイナリファイルを読み込むためのモード指定はどれですか？',
+        answers: ['"r"', '"rb"', '"br"', '"binary"'],
+        correct: 1,
+        explanation:
+            'バイナリモードには"b"を追加します。"rb"はバイナリ読み込み、"wb"はバイナリ書き込みです。テキストモードがデフォルトです。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'ファイル操作',
+        question: 'Pythonでファイルの全行をリストとして読み込むメソッドはどれですか？',
+        answers: ['read()', 'readline()', 'readlines()', 'readall()'],
+        correct: 2,
+        explanation:
+            'readlines()はファイルの全行をリストとして返します。readline()は1行ずつ、read()はファイル全体を文字列として返します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'ファイル操作',
+        question: 'Pythonでディレクトリ操作やパス操作を行うための標準ライブラリモジュールはどれですか？',
+        answers: ['os', 'pathlib', 'os.path', 'すべて正しい'],
+        correct: 3,
+        explanation:
+            'os、os.path、pathlibすべてパス操作に使用できます。pathlibはオブジェクト指向的なアプローチを提供し、Python 3.4以降で推奨されています。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '例外処理',
+        question: 'Pythonで例外を捕捉するために使用するキーワードはどれですか？',
+        answers: ['catch', 'except', 'rescue', 'handle'],
+        correct: 1,
+        explanation:
+            'Pythonではtry-except構文で例外を処理します。exceptブロックで特定の例外を捕捉できます。例: except ValueError:',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '例外処理',
+        question: 'Pythonで例外が発生してもしなくても必ず実行されるブロックを指定するキーワードはどれですか？',
+        answers: ['else', 'finally', 'always', 'ensure'],
+        correct: 1,
+        explanation:
+            'finallyブロックは、例外の有無に関わらず必ず実行されます。elseブロックは例外が発生しなかった場合のみ実行されます。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '例外処理',
+        question: 'Pythonで意図的に例外を発生させるキーワードはどれですか？',
+        answers: ['throw', 'raise', 'error', 'exception'],
+        correct: 1,
+        explanation:
+            'raiseキーワードで例外を発生させます。例: raise ValueError("Invalid value")。throwはPythonでは使用されません。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '例外処理',
+        question: 'Pythonですべての例外の基底クラスはどれですか？',
+        answers: ['Exception', 'BaseException', 'Error', 'StandardError'],
+        correct: 1,
+        explanation:
+            'BaseExceptionがすべての例外の基底クラスです。Exceptionはほとんどの例外の基底クラスですが、SystemExit等はBaseExceptionから直接継承します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: '例外処理',
+        question: 'Pythonで複数の例外を1つのexceptブロックで捕捉する構文として正しいものはどれですか？',
+        answers: [
+            'except ValueError, TypeError:',
+            'except (ValueError, TypeError):',
+            'except ValueError or TypeError:',
+            'except ValueError and TypeError:',
+        ],
+        correct: 1,
+        explanation:
+            '複数の例外をタプルで指定します: except (ValueError, TypeError):。カンマ区切りだけでは古いPython 2の構文になります。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'Python基礎文法',
+        question: 'Pythonでコメントを書くための記号はどれですか？',
+        answers: ['//', '/*  */', '#', '--'],
+        correct: 2,
+        explanation:
+            '#記号以降から行末までがコメントになります。複数行のコメントには"""..."""や\'\'\'...\'\'\'を使用することもあります。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'Python基礎文法',
+        question: 'Pythonでインデントに使用することが推奨されているのはどれですか？',
+        answers: ['タブ', 'スペース4個', 'スペース2個', 'どれでも良い'],
+        correct: 1,
+        explanation:
+            'PEP 8（Pythonのスタイルガイド）では、インデントにはスペース4個を使用することが推奨されています。タブとスペースの混在は避けるべきです。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'Python基礎文法',
+        question: 'Pythonで複数の変数に同時に値を代入する構文として正しいものはどれですか？',
+        answers: ['a = b = c = 0', 'a, b, c = 1, 2, 3', 'a; b; c = 1; 2; 3', 'すべて正しい'],
+        correct: 3,
+        explanation:
+            'a = b = c = 0 は連鎖代入、a, b, c = 1, 2, 3 はアンパック代入で、どちらも有効です。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'Python基礎文法',
+        question: 'Pythonで変数の型を調べるための組み込み関数はどれですか？',
+        answers: ['typeof()', 'type()', 'gettype()', 'vartype()'],
+        correct: 1,
+        explanation: 'type()関数でオブジェクトの型を取得できます。例: type(10) は <class \'int\'>を返します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'Python基礎文法',
+        question: 'Pythonで文字列を数値に変換する組み込み関数として正しくないものはどれですか？',
+        answers: ['int()', 'float()', 'complex()', 'number()'],
+        correct: 3,
+        explanation:
+            'int()、float()、complex()は文字列を数値に変換できますが、number()は存在しません。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonのset（集合）型で使用できない演算はどれですか？',
+        answers: ['和集合 (|)', '積集合 (&)', '差集合 (-)', 'インデックスアクセス ([])'],
+        correct: 3,
+        explanation:
+            'set（集合）は順序を持たないため、インデックスでのアクセスはできません。和集合、積集合、差集合などの集合演算は可能です。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonで文字列のスライスを行う際、後ろから数えるインデックスの指定方法はどれですか？',
+        answers: ['負の数を使用', 'reverse()を使用', 'len()から引く', 'できない'],
+        correct: 0,
+        explanation:
+            '負の数を使用すると後ろから数えたインデックスになります。例: s[-1]は最後の文字、s[-2:]は最後の2文字です。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonで文字列が特定の文字列で始まるかを確認するメソッドはどれですか？',
+        answers: ['begins_with()', 'starts_with()', 'startswith()', 'start()'],
+        correct: 2,
+        explanation:
+            'startswith()メソッドで文字列が特定の文字列で始まるかを確認できます。例: "hello".startswith("he")はTrueを返します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonで辞書のすべてのキーと値のペアを取得するメソッドはどれですか？',
+        answers: ['pairs()', 'items()', 'entries()', 'elements()'],
+        correct: 1,
+        explanation:
+            'items()メソッドで辞書のすべてのキーと値のペアを(key, value)のタプルとして取得できます。keys()はキー、values()は値のみを返します。',
+    },
+    {
+        majorCategory: 'Python資格試験',
+        middleCategory: 'Python3エンジニア認定基礎試験',
+        minorCategory: 'データ型と演算',
+        question: 'Pythonでリストの末尾に要素を追加するメソッドはどれですか？',
+        answers: ['add()', 'append()', 'push()', 'insert()'],
+        correct: 1,
+        explanation:
+            'append()メソッドでリストの末尾に要素を追加します。insert()は指定位置に挿入、extend()は複数要素を追加します。',
+    },
 ];
