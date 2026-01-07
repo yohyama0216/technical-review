@@ -424,12 +424,6 @@ function loadQuestion() {
         questionText.textContent = question.question;
     }
 
-    // Clear and hide explanation
-    const existingExplanation = document.getElementById('explanationBox');
-    if (existingExplanation) {
-        existingExplanation.remove();
-    }
-
     // Shuffle answers
     shuffledAnswers = question.answers.map((text, index) => ({
         text: text,
@@ -455,6 +449,9 @@ function loadQuestion() {
 
     if (submitBtn) submitBtn.classList.add('d-none');
     if (nextQuestionBtn) nextQuestionBtn.classList.add('d-none');
+
+    // Pre-render explanation box (hidden) for instant display later
+    preRenderExplanation(question);
 }
 
 function selectAnswer(index, _btn) {
@@ -470,62 +467,85 @@ function selectAnswer(index, _btn) {
         correct: isCorrect,
     });
 
-    // Show correct/incorrect
-    const answerButtons = document.querySelectorAll('.answer-btn');
-    answerButtons.forEach((button, displayIndex) => {
-        button.classList.add('disabled');
-        const originalIndex = shuffledAnswers[displayIndex].originalIndex;
+    // Use requestAnimationFrame to batch DOM updates for smoother rendering
+    requestAnimationFrame(() => {
+        // Show correct/incorrect
+        const answerButtons = document.querySelectorAll('.answer-btn');
+        answerButtons.forEach((button, displayIndex) => {
+            button.classList.add('disabled');
+            const originalIndex = shuffledAnswers[displayIndex].originalIndex;
 
-        if (originalIndex === question.correct) {
-            button.classList.remove('btn-outline-primary');
-            button.classList.add('correct');
-        } else if (originalIndex === selectedAnswer && !isCorrect) {
-            button.classList.remove('btn-outline-primary');
-            button.classList.add('incorrect');
-        }
+            if (originalIndex === question.correct) {
+                button.classList.remove('btn-outline-primary');
+                button.classList.add('correct');
+            } else if (originalIndex === selectedAnswer && !isCorrect) {
+                button.classList.remove('btn-outline-primary');
+                button.classList.add('incorrect');
+            }
+        });
+
+        if (submitBtn) submitBtn.classList.add('d-none');
+        
+        // Show pre-rendered explanation immediately
+        showExplanation(question, isCorrect);
+
+        // Show next question button
+        if (nextQuestionBtn) nextQuestionBtn.classList.remove('d-none');
     });
 
-    if (submitBtn) submitBtn.classList.add('d-none');
-    showExplanation(question, isCorrect);
+    // Perform heavy operations asynchronously after UI update
+    setTimeout(() => {
+        // Save to daily history
+        saveDailyHistory(isCorrect);
 
-    // Save to daily history
-    saveDailyHistory(isCorrect);
-
-    // Increment answer count for this question
-    incrementQuestionAnswerCount(question, isCorrect);
-
-    // Show next question button
-    if (nextQuestionBtn) nextQuestionBtn.classList.remove('d-none');
+        // Increment answer count for this question
+        incrementQuestionAnswerCount(question, isCorrect);
+    }, 0);
 }
 
-function showExplanation(question, isCorrect) {
-    let explanationBox = document.getElementById('explanationBox');
+function preRenderExplanation(question) {
+    // Pre-render both correct and incorrect explanation states
+    const quizContent = document.querySelector('.quiz-content');
+    if (!quizContent) return;
 
+    // Reuse existing explanation box or create new one
+    let explanationBox = document.getElementById('explanationBox');
     if (!explanationBox) {
         explanationBox = document.createElement('div');
         explanationBox.id = 'explanationBox';
-        explanationBox.className =
-            'alert ' + (isCorrect ? 'alert-success' : 'alert-danger') + ' mt-3';
-        const quizContent = document.querySelector('.quiz-content');
-        if (quizContent) {
-            quizContent.appendChild(explanationBox);
-        }
+        explanationBox.className = 'alert mt-3';
+        quizContent.appendChild(explanationBox);
     }
 
-    if (explanationBox) {
-        explanationBox.innerHTML = `
-            <div class="explanation-result ${isCorrect ? 'correct-result' : 'incorrect-result'}">
-                ${isCorrect ? '✓ 正解！' : '✗ 不正解'}
-            </div>
-            <div class="explanation-text">
-                <strong>解説:</strong> ${question.explanation}
-            </div>
-            <div class="explanation-correct-answer">
-                <strong>正解:</strong> ${question.answers[question.correct]}
-            </div>
-        `;
-        explanationBox.style.display = 'block';
+    // Hide and update content for the new question
+    explanationBox.style.display = 'none';
+    explanationBox.innerHTML = `
+        <div class="explanation-result"></div>
+        <div class="explanation-text">
+            <strong>解説:</strong> ${question.explanation}
+        </div>
+        <div class="explanation-correct-answer">
+            <strong>正解:</strong> ${question.answers[question.correct]}
+        </div>
+    `;
+}
+
+function showExplanation(question, isCorrect) {
+    const explanationBox = document.getElementById('explanationBox');
+    if (!explanationBox) return;
+
+    // Update only the dynamic parts (result and styling)
+    const explanationResult = explanationBox.querySelector('.explanation-result');
+    if (explanationResult) {
+        explanationResult.textContent = isCorrect ? '✓ 正解！' : '✗ 不正解';
+        explanationResult.className = `explanation-result ${isCorrect ? 'correct-result' : 'incorrect-result'}`;
     }
+
+    // Update alert styling
+    explanationBox.className = `alert ${isCorrect ? 'alert-success' : 'alert-danger'} mt-3`;
+    
+    // Show with CSS transition
+    explanationBox.style.display = 'block';
 }
 
 //  ==================== RESULT & REVIEW ====================
